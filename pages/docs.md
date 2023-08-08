@@ -1,5 +1,5 @@
 ---
 layout: docs
-title: Материалы для книги
+title: Материалы
 permalink: /docs/
 ---
