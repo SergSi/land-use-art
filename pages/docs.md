@@ -1,5 +1,5 @@
 ---
 layout: docs
 title: Материалы
-permalink: /docs/
+permalink: land-use-art/docs/
 ---
