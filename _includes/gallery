@@ -1,0 +1,11 @@
+{% for item in page.gallery %}
+	{% cycle "add row9": "<div class='row'>", "", "" %}
+	<div class="four columns">
+		<a href="{{ site.urlimg }}{{ item.image_url }}" class="link">
+			<img class="shadow" alt="Фото" src="{{ site.urlimg }}{{ item.image_url }}" />
+			<div style="margin-top: 0.5em; margin-bottom: 1em; font-style: italic; line-height: 1.2; margin-left: -0em;" class="center">{% if item.caption %}{{ item.caption }}{% endif %}</div>
+		</a>
+	</div>
+	{% cycle "end row9": "", "", "</div>" %}
+{% endfor %}
+{% cycle 'end row9' : "", '</div>', '</div>', '</div>' %}

@@ -1,0 +1,33 @@
+title: Характер фотографии
+subtitle: Книга в процессе написания
+author: С. Ивасюк
+location: Москва
+date: true
+
+logo: /assets/img/logo.png
+
+baseurl: ""
+permalink: '/:categories/:title/'
+
+collections:
+
+# Build settings
+exclude: 
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  
+markdown: kramdown
+theme: minima
+gems:
+  - jekyll-feed
+
+urlimg: '/assets/img/'
+
+defaults:
+    scope:
+      path: ""
+      type: category
+    values:
+      toc: true
+      layout: "doc"

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include header.html %}
+  </head>
+  <body>
+    <header>
+       {% include nav.html %}
+    </header>
+    <main>
+      <article>
+        <div class="container">
+          <h1 style="padding-top: 10px; padding-bottom: 0px; margin-bottom: 0em; font-weight: 600;" class="brand center title" id="title">{{ page.title | upcase }}</h1>
+          <br>{% if page.author %}<h5 style="margin-bottom: 0; margin-top: 0;" class="center author">{{ page.author }}</h5>{% endif %}
+          {% if page.subtitle %}<h6 style="font-size: 1.2em; letter-spacing: 1px;" class="center">{{ page.subtitle }}</h6>{% endif %}
+          {% if page.year %}<h6 style="font-size: 1.2em;" class="center">{{ page.year }}</h6>{% endif %}      
+          <br>{% if page.abstract %}<h4 style="margin-top: 0; font-style: italic; font-family: 'Old Standard TT', serif;" class="center">{{ page.abstract }}<br><br></h4>{% endif %}
+        </div>
+        <div class="justify container">
+          <div id="toc">{% include toc.html html=content %}</div>
+          <div class="book">
+            {{ content }} 
+            {% if page.gallery %}{% include gallery %}{% endif %}
+            {% if page.carousel %}{% include carousel.html height="55" unit="%" duration="777" number="1" %}{% endif %}    
+          </div>
+        </div>
+      </article>
+    </main>
+    <footer>
+      {% include foot.html %}
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+
+{% assign titl = include.title %}
+{% for post in site.posts %}
+    {% if post.title == titl %}
+        <h1>{{ post.title }}</h1>
+        {{ post.content | truncatewords:140 " ..." | strip_newlines }}
+    {% endif %}
+{% endfor %}
