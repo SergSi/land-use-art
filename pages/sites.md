@@ -1,6 +1,6 @@
 ---
 layout: sites
-title: Сайты
+title: Источники
 permalink: /sites/
 ---
 

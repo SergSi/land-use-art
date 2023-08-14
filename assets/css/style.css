@@ -189,6 +189,7 @@ hr.simple {
   text-decoration: none;
 }
 
+
 .italics{
   font-style: italic;
 }
@@ -242,11 +243,12 @@ and (min-device-width : 768px)  {
     width: 100%;
   }
 
-  .tag{
+  .tag {
     width: 23%;
     margin-right:0;
   }
 }
+
 
 
 /* ============================================================ */

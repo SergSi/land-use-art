@@ -6,7 +6,7 @@ date: true
 
 logo: /assets/img/logo.png
 
-baseurl: "https://sergsi.github.io/land-use-art"
+baseurl: 
 permalink: '/:categories/:title/'
 
 collections:
