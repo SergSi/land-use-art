@@ -1,7 +1,7 @@
 <div class="articles">
 {% assign int = 1 %}
 {% for doc in site.data.docs %}
-<h2 style="margin-bottom: -1em; class="center linetitle">{{ doc.head }}</h2>
+<h2 style="margin-bottom: -0.5em" class="center linetitle">{{ doc.head }}</h2>
   {% for post in site.posts %}
     {% if post.category == doc.name %}
       {% if int == 1  %}{% cycle "add row1": "<div class='row'>", "", "" %}{% endif %}
