@@ -1,7 +1,7 @@
 <div class="articles">
 {% assign int = 1 %}
 {% for doc in site.data.docs %}
-<h2 style="margin-bottom: -0.5em" class="center linetitle">{{ doc.head }}</h2>
+<h2 style="margin-bottom: -0.3em" class="center linetitle">{{ doc.head }}</h2>
   {% for post in site.posts %}
     {% if post.category == doc.name %}
       {% if int == 1  %}{% cycle "add row1": "<div class='row'>", "", "" %}{% endif %}
@@ -13,9 +13,9 @@
       {% if int == 7  %}{% cycle "add row7": "<div class='row'>", "", "" %}{% endif %}
         <div class="four columns">
           <a href="{{ site.baseurl }}{{ post.url }}" class="link">
-          <h4 style="margin-bottom: -0.7em; line-height: 1.2; font-weight: 400">{{ post.title }}</h4>
+          <h4 style="margin-bottom: -0.5em; line-height: 1.2; font-weight: 400">{{ post.title }}</h4>
           <div style="margin-bottom: -0.5em; line-height: 1.4em;" class="left">
-            {% if post.abstract %}<h6 style="font-style: italic; margin-bottom: 0em;">{{ post.abstract | truncatewords:25 }}{% else %}{{ post.content | truncatewords:25 | strip_newlines }}{% endif %}</h6>
+            {% if post.abstract %}<h6 style="font-style: normal; margin-bottom: 0em;">{{ post.abstract | truncatewords:25 }}{% else %}{{ post.content | truncatewords:25 | strip_newlines }}{% endif %}</h6>
           </div>
           </a>
         </div>
