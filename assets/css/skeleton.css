@@ -140,13 +140,16 @@ body {
   line-height: 1.6;
   font-weight: 400;
   font-family: 'Philosopher', sans-serif;
+  font-family: 'EB Garamond', serif;
 }
+
+
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 p {
   margin-bottom: 0.15em;
-}
+ }
 
 p + p {
   text-indent: 1.2em;
