@@ -1,16 +1,8 @@
 collection: Формирование земельных участков
-
 posts:
-
 ​	-title: Первый пост
-
-​	   abstract: описание первого поста
-
-​       link: http://www.gisa.ru/
-
+​	 abstract: описание первого поста
+   link: http://www.gisa.ru/
 ​	-title: Второй пост
-
-​	   abstract: описание второго поста
-
-​       link: http://www.gisa.ru/
-
+​	 abstract: описание второго поста
+   link: http://www.gisa.ru/
