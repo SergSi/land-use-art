@@ -1,0 +1,17 @@
+<div class="articles">
+{% for post in site.data %}
+{% assign org = post[1] %}
+<h4>{{ org.collection }}</h4>  
+  <li>
+    <a href="{{ org.link }}">
+      {{ org.title }}
+      {% if org.abstract %}{{ post.abstract | truncatewords:25 }}{% endif %}
+    </a>
+  </li>
+{% endfor %}
+
+
+
+
+
+
