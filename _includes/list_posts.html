@@ -7,8 +7,8 @@
 {% for point in org.posts %}
   <a href="https://t.me/c/1929818077/{{ point.link }}" target="blank" class="link">
    <p style="line-height: 1em; font-weight: 600; margin-bottom: 0.1em;">{{ point.title }} </p>
-   <div style="margin-bottom: 0.3em; line-height: 1.4em;" class="left">
-    {% if point.sum %}<p style="font-style: italic; margin-bottom: 0.3em; line-height: 1em;">{{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</p>
+   <div style="margin-bottom: 0.3em; line-height: 1.1em;" class="left">
+    {% if point.sum %}<p style="font-style: italic; margin-bottom: 0.3em; ">{{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</p>
    </div>
   </a>
  
