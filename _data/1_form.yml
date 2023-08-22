@@ -1,5 +1,8 @@
 collection: Формирование земельных участков
 posts:
-  - title: Tom Preston-Werner
-    ​abstract: mojombo zyuj янго бомбо
+  - title: Самый первый пост
+    sum: вот текст первого поста
     link: 19
+  - title: Это второй пост
+    sum: о чем этот пост скажем мы смело
+    link: 18  

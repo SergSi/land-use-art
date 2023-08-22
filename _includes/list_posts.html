@@ -1,17 +1,16 @@
 <div class="articles">
 {% for post in site.data %}
 {% assign org = post[1] %}
-<h4>{{ org.collection }}</h4>  
-  <li>
-    <a href="https://t.me/c/1929818077/{{ org.link }}">
-      {% for nm in org.posts %}
-      {{ nm.title }} 
-      {{ nm.link }} 
-      {{ nm.​abstract }} 
-      
-      {% endfor %}
-    </a>
-  </li>
+<h2 style="margin-bottom: -0.3em" class="center linetitle">{{ org.collection }}</h2>
+<div">
+ {% for point in org.posts %}
+   <a href="https://t.me/c/1929818077/{{ org.link }}" class="link">
+   <h4 style="margin-bottom: -0.5em; line-height: 1.2; font-weight: 400">{{ point.title }} }</h4>
+   <div style="margin-bottom: -0.5em; line-height: 1.4em;" class="left">
+    {% if point.sum %}<h6 style="font-style: normal; margin-bottom: 0em;">{{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</h6>
+   </div>
+  </a>
+  {% endfor %}
 {% endfor %}
 
 
