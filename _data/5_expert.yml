@@ -1,10 +1,10 @@
-username: jekyll
-name: Jekyll
-members:
-  - name: Tom Preston-Werner
-    github: mojombo
-
-  - name: Parker Moore
-    github: parkr
+collection: Ptvktecnhjbntkmyfz 'rcgthnbpf'
+posts:
+  - title: Вот первый пример
+    sum: Первый пост
+    link: 18
+  - title: А вот уже и второй пример
+    sum: Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост Второй пост
+    link: 19
  
 

@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: Земельный вопрос
-subtitle: Содержание Telegram-канала
+title: Содержание Telegram-канала <br> "Земельный вопрос"
+subtitle: 
 permalink: /docs/
 ---
