@@ -462,6 +462,14 @@ blockquote  {
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+hr { 
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
+  height: 2px;
+  border: none;
+  background-image: linear-gradient(90deg, transparent 5%, #8f8f8f 50%, transparent 95%);
+}
+
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* Self Clearing Goodness */
