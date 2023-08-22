@@ -4,12 +4,10 @@
 <h4>{{ org.collection }}</h4>  
   <li>
     <a href="https://t.me/c/1929818077/{{ org.link }}">
-      {{ org.title }}
-      {% if org.abstract %}{{ post.abstract | truncatewords:25 }}{% endif %}
+      {% for nm in org.posts %}
+      {{ nm.title}} 
     </a>
   </li>
 {% endfor %}
-
-
 
 

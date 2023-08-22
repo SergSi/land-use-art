@@ -1,10 +1,10 @@
-collection: Землеустроительная экспертиза
-posts:
-​	-title: Первый пост
-​	 abstract: описание первого поста
-   link: 18
-​	-title: Второй пост
-​	 abstract: описание второго поста
-   link: 19
+username: jekyll
+name: Jekyll
+members:
+  - name: Tom Preston-Werner
+    github: mojombo
+
+  - name: Parker Moore
+    github: parkr
  
 

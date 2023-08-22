@@ -1,10 +1,5 @@
 collection: Формирование земельных участков
 posts:
-
-​	-title: Первый пост
-​	 abstract: описание первого
-   link: 19
-
-​	-title: Второй пост
-​	 abstract: описание второго поста
-   link: 18
+  - title: Tom Preston-Werner
+    ​abstract: mojombo
+    link: 19

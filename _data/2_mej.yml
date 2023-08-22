@@ -1,8 +1,5 @@
-collection: Межевание земель
+collection: Межевой план
 posts:
-​	-title: Первый пост
-​	 abstract: описание первого поста
-   link: 18
-​	-title: Второй пост
-​	 abstract: описание второго поста
-   link: 19
+  - title: Tom Preston-Werner
+    ​abstract: mojombo
+    link: 18

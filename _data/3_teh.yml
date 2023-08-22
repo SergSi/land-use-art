@@ -1,8 +1,9 @@
-collection: Технический план
+collection: Межевой план
 posts:
-​	-title: Первый пост
-​	 abstract: описание первого поста
+  - title: Tom Preston-Werner
+    ​abstract: Первый пост
     link: 18
-​	-title: Второй пост
-​	 abstract: описание второго поста
+  - title: Tom Preston-Werner
+    ​abstract: Второй пост
     link: 19
+
