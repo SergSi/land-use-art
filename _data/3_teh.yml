@@ -2,8 +2,7 @@ collection: Технический план
 posts:
 ​	-title: Первый пост
 ​	 abstract: описание первого поста
-    link: http://www.gisa.ru/
+    link: 18
 ​	-title: Второй пост
 ​	 abstract: описание второго поста
-    link: http://www.gisa.ru/
-
+    link: 19
