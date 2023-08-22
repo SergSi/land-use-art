@@ -5,7 +5,11 @@
   <li>
     <a href="https://t.me/c/1929818077/{{ org.link }}">
       {% for nm in org.posts %}
-      {{ nm.title}} 
+      {{ nm.title }} 
+      {{ nm.link }} 
+      {{ nm.​abstract }} 
+      
+      {% endfor %}
     </a>
   </li>
 {% endfor %}
