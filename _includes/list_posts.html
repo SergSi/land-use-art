@@ -1,11 +1,12 @@
 <div class="articles"><br>
  {% for post in site.data %}
  {% assign org = post[1] %}
-<div style="margin-bottom: 0em; margin-top: 0em"> 
+<div style="margin-bottom: 0em; margin-top: -0.5em"> 
   <h2 class="center linetitle">{{ org.collection }}</h2>
+</div>
 {% for point in org.posts %}
   <a href="{{ point.link }}" target="blank" class="link">
-   <div style="line-height: 1.5em; font-weight: 400; margin-bottom: 0.1em;">
+   <div style="line-height: 1.3em; font-weight: 500; margin-bottom: 0.1em;">
     <p>
       <b>{{ point.title }}</b>
       <em>{% if point.sum %} — {{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</em>
