@@ -7,9 +7,9 @@
   <a href="https://t.me/c/1929818077/{{ point.link }}" target="blank" class="link">
    <div style="line-height: 1em; font-weight: 600; margin-bottom: 0.1em;">
     <p>
-      {{ point.title }} 
-      
-    </div>
+      <b>{{ point.title }}</b>
+      <em><small>{% if point.sum %} — {{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</small></em>
+   </div>
   </a>
   {% endfor %}
 {% endfor %}
