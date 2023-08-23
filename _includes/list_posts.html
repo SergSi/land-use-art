@@ -1,8 +1,8 @@
 <div class="articles"><br>
  {% for post in site.data %}
  {% assign org = post[1] %}
- <div style="margin-bottom: 0em; margin-top: 0em" class="center linetitle"> 
-  <h2>{{ org.collection }}</h2>
+ <div style="margin-bottom: 0em; margin-top: 0em"> 
+  <h2 class="center linetitle">{{ org.collection }}</h2>
  </div>
 {% for point in org.posts %}
   <a href="https://t.me/c/1929818077/{{ point.link }}" target="blank" class="link">
@@ -16,5 +16,6 @@
 </div>
 {% endfor %}
 {% endfor %}
+
 
 
