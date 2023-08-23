@@ -4,11 +4,11 @@
 <div style="margin-bottom: 0em; margin-top: 0em"> 
   <h2 class="center linetitle">{{ org.collection }}</h2>
 {% for point in org.posts %}
-  <a href="https://t.me/c/1929818077/{{ point.link }}" target="blank" class="link">
-   <div style="line-height: 1em; font-weight: 600; margin-bottom: 0.1em;">
+  <a href="{{ point.link }}" target="blank" class="link">
+   <div style="line-height: 1.5em; font-weight: 400; margin-bottom: 0.1em;">
     <p>
       <b>{{ point.title }}</b>
-      <em><small>{% if point.sum %} — {{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</small></em>
+      <em>{% if point.sum %} — {{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</em>
    </div>
   </a>
   {% endfor %}
