@@ -497,7 +497,7 @@ there.
 
 /* Larger than mobile */
 @media (min-width: 400px) {
-  h2 { font-size: 2rem; }
+h1, h2, h3 { font-size: 2rem; }
 }
 
 /* Larger than phablet (also point when grid becomes active) */
