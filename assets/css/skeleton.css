@@ -497,12 +497,12 @@ there.
 
 /* Larger than mobile */
 @media (max-width: 400px) {
-h1, h2, h3 { font-size: 2rem; }
+
 }
 
 /* Larger than phablet (also point when grid becomes active) */
-@media (min-width: 550px) {
-
+@media (max-width: 550px) {
+h1, h2, h3 { font-size: 2rem; }
 }
 
 /* Larger than tablet */
