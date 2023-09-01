@@ -34,9 +34,9 @@
   max-width: 960px;
   margin: 0 auto;
   padding: 0 20px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
-
+  p { color: blue; }
 .column,
 .columns {
   width: 100%;
@@ -48,10 +48,11 @@
   .container {
     width: 85%;
     padding: 0; }
+    p { font-size: 1px; }
 }
 
 /* For devices larger than 550px */
-@media (min-width: 850px) {
+@media (min-width: 800px) {
   .book {
     padding: 5% 10% 3% 10%;
     margin-bottom: 1em;
@@ -59,12 +60,13 @@
     border-style: solid;
     border-width: 1px;
     border-color: rgba(211, 211, 211, 0.719) grey grey rgba(211, 211, 211, 0.719);
-    box-shadow: 0.1em 0.4em 0.7em 0.1em #696969; 
+    box-shadow: 0.1em 0.4em 0.7em 0.1em #696969;
     background-image: url("../img/bg2.jpg");
+
  }
-  
+
   .container {
-    width: 90%; 
+    width: 90%;
   }
   .column,
   .columns {
@@ -139,9 +141,9 @@ body {
   font-size: 2.2rem; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 500;
-  
+
   font-family: 'EB Garamond', serif;
- 
+
 }
 
 
@@ -167,7 +169,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   text-align: left;
   letter-spacing: 0.1em;
-  font-family: 'Philosopher', sans-serif; 
+  font-family: 'Philosopher', sans-serif;
 }
 
 h1 {
@@ -367,7 +369,7 @@ label > .label-body {
 ul {
   list-style: circle inside; }
 ol {
-  list-style: decimal; 
+  list-style: decimal;
 }
 ol, ul {
   padding-left: 0;
@@ -410,7 +412,7 @@ td:first-child {
 th:last-child,
 td:last-child {
   padding-right: 0; }
-  
+
 td {
  padding: 10px;
 }
@@ -462,7 +464,7 @@ blockquote  {
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-hr { 
+hr {
   height: 2px;
  }
 

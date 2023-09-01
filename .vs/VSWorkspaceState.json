@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\_data"
+    "\\pages",
+    "\\_posts"
   ],
-  "SelectedNode": "\\_data\\2_mej.yml",
+  "SelectedNode": "\\.idea",
   "PreviewInSolutionExplorer": true
 }
