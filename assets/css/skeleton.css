@@ -48,6 +48,7 @@
   .container {
     width: 85%;
     padding: 0; }
+    p { font-size: 50px; }
 }
 
 /* For devices larger than 550px */
@@ -61,7 +62,6 @@
     border-color: rgba(211, 211, 211, 0.719) grey grey rgba(211, 211, 211, 0.719);
     box-shadow: 0.1em 0.4em 0.7em 0.1em #696969;
     background-image: url("../img/bg2.jpg");
-
  }
 
   .container {
