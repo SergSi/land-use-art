@@ -124,6 +124,53 @@
   .offset-by-one-half.column,
   .offset-by-one-half.columns     { margin-left: 52%; }
 
+  /* Линии в заголовке
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .linetitle {
+     overflow: hidden;
+     text-align: center;
+  }
+
+  .linetitle:before,
+  .linetitle:after {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 50%;
+      height: 2px;
+      background-color: grey;
+      position: relative;
+  }
+
+  .linetitle:before {
+      margin-left: -100%;
+      left: -14px;
+  }
+
+  .linetitle:after {
+      margin-right: -100%;
+      right: -14px;
+  }
+
+  .with-line {
+    text-align: center;
+  }
+
+  .with-line:before,
+  .with-line:after {
+    content: "—";
+    position: relative;
+   }
+
+  .with-line:before {
+    left: -14px;
+  }
+
+  .with-line:after {
+    right: -14px;
+  }
+
 }
 
 
@@ -181,51 +228,6 @@ h4 { font-size: 2.3rem; line-height: 1.35; letter-spacing: -.01rem; }
 h5 { font-size: 2.0rem; line-height: 1.5;  letter-spacing: -.0rem; }
 h6 { font-size: 1.8rem; line-height: 1.6;  letter-spacing: 0; }
 
-/* Линии в заголовке
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.linetitle {
-   overflow: hidden;
-   text-align: center;
-}
-
-.linetitle:before,
-.linetitle:after {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 50%;
-    height: 2px;
-    background-color: grey;
-    position: relative;
-}
-
-.linetitle:before {
-    margin-left: -100%;
-    left: -14px;
-}
-
-.linetitle:after {
-    margin-right: -100%;
-    right: -14px;
-}
-
-.with-line {
-  text-align: center;
-}
-
-.with-line:before,
-.with-line:after {
-  content: "—";
-  position: relative;
- }
-
-.with-line:before {
-  left: -14px;
-}
-
-.with-line:after {
-  right: -14px;
-}
 
 p {
   margin-top: 0;
@@ -502,7 +504,7 @@ there.
 
 /* Larger than phablet (also point when grid becomes active) */
 @media (max-width: 550px) {
-h1, h2, h3 { font-size: 2rem; }
+
 }
 
 /* Larger than tablet */
