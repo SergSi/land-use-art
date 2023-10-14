@@ -6,8 +6,7 @@
 </div>
 {% for point in org.posts %}
   <a href="{{ point.link }}" target="blank" class="link">
-   <div style="line-height: 1.3em; font-weight: 500; margin-bottom: 0.1em;">
-    <p>
+   <div style="line-height: 1.2em; font-weight: 500; margin-bottom: 0.1em;">
       <b>{{ point.title }}</b>
       <em>{% if point.sum %} — {{ point.sum | truncatewords:25 }}{% else %}{{ point.content | truncatewords:25 | strip_newlines }}{% endif %}</em>
    </div>

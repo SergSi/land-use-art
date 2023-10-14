@@ -12,10 +12,10 @@
       {% if int == 7  %}{% cycle "add row7": "<div class='row'>", "", "" %}{% endif %}
         <div class="four columns">
           <a href="{{ site.baseurl }}{{ post.url }}" class="link">
-          <h4 style="margin-bottom: -0.5em; line-height: 1.2; font-weight: 400">{{ post.title }}</h4>
-          <div style="margin-bottom: -0.5em; line-height: 1.4em;" class="left">
-            {% if post.abstract %}<h6 style="font-style: normal; margin-bottom: 0em;">{{ post.abstract | truncatewords:25 }}{% else %}{{ post.content | truncatewords:25 | strip_newlines }}{% endif %}</h6>
-          </div>
+            <div style="line-height: 1.2em; font-weight: 500; margin-bottom: 0.1em;">
+              <b>{{ post.title }}</b>
+              <em>{% if post.abstract %} — {{ post.abstract | truncatewords:25 }}{% else %}{{ post.content | truncatewords:25 | strip_newlines }}{% endif %}</em>
+           </div>  
           </a>
         </div>
       {% if int == 1  %}{% cycle "end row1": "", "", "</div>" %}{% endif %}
