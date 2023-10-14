@@ -2,7 +2,8 @@
 layout: doc
 title: ""
 author: ""
-subtitle: abstract: 
+subtitle: 
+abstract: 
 category: Формирование земельных участков
 category: Межевание земель
 category: Технический план
