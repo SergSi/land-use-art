@@ -1,6 +1,5 @@
-<header>
-  {% include nav.html %}
-  <div class="container center">
+{% include nav.html %}
+ <div class="container center">
     <img src="{{ site.baseurl }}/assets/img/grunge.png" alt="" class="line bordernot">
       <p style="font-family: 'Rubik Dirt', cursive;" class="center author">{{ page.title | upcase }}<br></p>
     <img src="{{ site.baseurl }}/assets/img/grunge.png" alt="" class="line flip bordernot">
@@ -8,4 +7,3 @@
     {% if page.author %}<p style="margin-top: -0.3em;" class="center author">{{ page.author }}</p>{% endif %}
     {% if page.subtitle %}<h6 style="margin-bottom: 0em; font-weight: 600; font-size: 1.2em; letter-spacing: 1px;" class="center">{{ page.subtitle }}</h6>{% endif %}    
   </div>
-</header>

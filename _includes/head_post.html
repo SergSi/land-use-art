@@ -1,0 +1,7 @@
+{% include nav.html %}  
+  <div class="container center">
+      <h2 style="padding-top: 10px; padding-bottom: 0px; margin-bottom: 0em; font-weight: 600;" class="brand center title" id="title">{{ page.title | upcase }}</h2>
+      <br>{% if page.author %}<p style="margin-bottom: 0; margin-top: 0;" class="center author">{{ page.author }}</p>{% endif %}
+      <br>{% if page.abstract %}<h4 style="margin-top: 0; font-style: italic; font-family: 'Old Standard TT', serif;" class="center">{{ page.abstract }}<br></h4>{% endif %}
+      {% if page.subtitle %}<h6 style="margin-bottom: 0em; font-weight: 600; font-size: 1.2em; letter-spacing: 1px;" class="center">{{ page.subtitle }}</h6>{% endif %}   
+    </div>
