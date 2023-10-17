@@ -3,7 +3,7 @@ title: Техническое задание на межевание земел�
 category: Рекомендации
 layout: doc
 abstract: Содержательная часть технического задания    
-style: "h1 {font-weight: bold; font-size: 1rem; line-height: 1.2;  letter-spacing: -.05rem; font}"     
+style: "h1 {font-weight: bold; font-size: 1em; line-height: 1.2;  letter-spacing: -.05rem;}"     
 ---
 
 # Требования Заказчика к выполнению работ
