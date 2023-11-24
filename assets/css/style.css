@@ -25,12 +25,7 @@ body{
   text-decoration-skip: ink;
   color: #2f2f2f;
   padding-top: 0px;
-  background-color: #F2F7F9;
-  background-size: auto;
-  background-position: center;
-  background-repeat: repeat;
-  background-image: url("../img/bg.jpg");
-  background-attachment: scroll;
+  background-color: #f9f7f1;
 }
 
 em {
