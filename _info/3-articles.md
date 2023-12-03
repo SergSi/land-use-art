@@ -5,4 +5,8 @@ layout: info
 permalink: /articles/
 image_url: articles.png
 ---
-{% include articles.html %}
+<div>   
+  {% for doc in site.articles %}  
+    {% include articles.html %}
+  {% endfor %}
+</div>

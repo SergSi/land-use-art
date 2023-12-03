@@ -8,8 +8,16 @@ image_url: books.png
 
 # Рабочие документы проекта
 
-{% include materials.html %}
+<div>   
+  {% for doc in site.materials %}  
+    {% include articles.html %}
+  {% endfor %}
+</div>
 
 # Результаты проекта
 
-{% include results.html %}
+<div>   
+  {% for doc in site.results %}  
+    {% include articles.html %}
+  {% endfor %}
+</div>
