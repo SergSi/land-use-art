@@ -4,20 +4,25 @@
     {% include header.html %}
   </head>
   <body>
-    <main>
-      {% include head_post.html %}
-      <article>
-        <div class="justify container">
-          <div id="toc">{% include toc.html html=content %}</div>
-          <div class="book">
-            {{ content }} 
-            {% if page.gallery %}{% include gallery %}{% endif %}
-            {% if page.carousel %}{% include carousel.html height="55" unit="%" duration="777" number="1" %}{% endif %}    
-          </div>
-        </div>
-      </article>
+    <main>  
+      {% include head.html %}   
+      <div class="subhead serif gain-center  </div>  ">
+          <hr class="hr-line">
+          {% if page.superpermalink %}
+            <a class="link notall" href="{{page.superpermalink}}">
+          {% else %}
+            <a class="link notall" href="/">
+          {% endif %}
+          {% if page.supertitle %}
+            {{page.supertitle}}
+          {% else %}
+            На главную страницу
+          {% endif %}
+          </a><hr class="hr-line">
+      </div>         
+      {% include head-doc.html %}
     </main>
-    <footer>
+    <footer>      
       {% include foot.html %}
     </footer>
   </body>

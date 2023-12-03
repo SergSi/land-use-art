@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="center">
+      <h1 style="padding-top: 10px; padding-bottom: 0px; margin-bottom: 0em; font-weight: 300;" id="title">{{ page.title | upcase }}</h1>
+      {% if page.subtitle %}<h3 class="docsubtitle  sans-serif">{{ page.subtitle }}</h3>{% endif %} 
+      {% if page.author %}<p class="author">{{ page.author }}</p>{% endif %} 
+    </div> 
+    {% unless page.no-toc %}<div id="toc">{% include toc.html html=content %}</div>{% endunless %}          
+      {% assign align = page.align %}
+      {% if align == "left" %}
+        <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image_url }}"><img class="left-foto" src="{{ site.urlimg }}{{ page.image_url }}"></a>{% endif %}{{ content }}</div>
+      {% elsif align == "right"%}
+        <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image_url }}"><img class="right-foto" src="{{ site.urlimg }}{{ page.image_url }}"></a>{% endif %}{{ content }}</div>
+      {% else %}
+        <div>{{ content }}</div>
+      {% endif %}          
+  </div>  

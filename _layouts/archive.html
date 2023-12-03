@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include header.html %}
+  </head>
+  <body>
+    <main>
+      {% include head.html %}   
+      {% assign Y = site.time | date: "%Y" | minus: 1 %}  
+      {% assign M = site.time | date: "%m" %}  
+      <div class="subhead serif">
+        <hr class="hr-line">Архив новостей<hr class="hr-line"><br>         
+      </div>     
+      <div class="news-container">      
+        <div class="collumns">
+            {% for post in site.posts %}
+              {% assign YP = post.date | date: "%Y" | times: 365 %}
+              {% assign MP = post.date | date: "%m" | times: 30 %}
+              {% assign DP = post.date | date: "%d" %}
+              {% assign P = YP | plus: MP | plus: DP %}
+              {% assign YS = site.time | date: "%Y" | times: 365 %}
+              {% assign MS = site.time | date: "%m" | times: 30 %}
+              {% assign DS = site.time | date: "%d" %}
+              {% assign S = YS | plus: MS | plus: DS %}
+              {% assign date-post = S | minus: P %}
+              {% if date-post > site.olddate %}
+                {% assign day = post.date | date: "%d" %}
+                {% include columns.html %}
+              {% endif %} 
+            {% endfor %}
+        </div>
+      </div>
+    </main>
+    <footer>      
+      {% include foot.html %}
+    </footer>
+    </body>
+    </html>

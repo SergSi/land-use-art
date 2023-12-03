@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include header.html %}
+    <style>
+      p {text-indent: 0rem;
+      margin-bottom: 0.1rem;}      
+      p+p {text-indent: 1.5rem;}
+    </style>
+  </head>
+  <body>
+    <div class="head news-container">
+        <div class="headerobjectswrapper">
+            <header>{{ site.title | upcase }}</header>           
+        </div>      
+        <div class="subhead serif">
+          <hr class="hr-line">{{ site.subtitle }}<hr class="hr-line">
+        </div>          
+    </div><br>     
+    <div class="news-container">      
+      <div class="collumns">
+          {% for doc in site.info %}
+            <div class="collumn gain-center">
+              <a href="{{ site.baseurl }}{{ doc.url }}" target="blank" class="link notall">
+                <div class="head"><span class="headline hl1">{{ doc.title | upcase }}</span></div>
+                {% if doc.image_url %}<div><img class="media bordernot" style="width: 50%;" src="{{ site.urlimg }}{{ doc.image_url }}"></div>{% endif %} 
+                {% if doc.summary %}
+                  <div class="sans-serif">{{ doc.summary | truncatewords: 25 | strip_newlines }}</div>
+                {% endif %}
+              </a>
+            </div>
+          {% endfor %}
+          <div class="text linetitle serif">НОВОСТИ</div>
+          {% for post in site.posts %}
+            {% assign YP = post.date | date: "%Y" | times: 365 %}
+            {% assign MP = post.date | date: "%m" | times: 30 %}
+            {% assign DP = post.date | date: "%d" %}
+            {% assign P = YP | plus: MP | plus: DP %}
+            {% assign YS = site.time | date: "%Y" | times: 365 %}
+            {% assign MS = site.time | date: "%m" | times: 30 %}
+            {% assign DS = site.time | date: "%d" %}
+            {% assign S = YS | plus: MS | plus: DS %}
+            {% assign date-post = S | minus: P %}
+            {% if date-post <= site.olddate %}
+              {% assign day = post.date | date: "%d" %}
+              {% include columns.html %}
+            {% endif %} 
+          {% endfor %}
+      </div>
+    </div>
+    <footer>      
+      {% include foot.html %}
+    </footer>
+    </body>
+    </html>

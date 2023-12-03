@@ -1,9 +1,5 @@
-{% include nav.html %}
- <div class="container center">
-    <img src="{{ site.baseurl }}/assets/img/grunge.png" alt="" class="line bordernot">
-      <p style="font-family: 'Rubik Dirt', cursive;" class="center author">{{ page.title | upcase }}<br></p>
-    <img src="{{ site.baseurl }}/assets/img/grunge.png" alt="" class="line flip bordernot">
-    {% if page.abstract %}><h4 style="margin-top: -0.3em; font-style: italic; font-family: 'Old Standard TT', serif;" class="center">{{ page.abstract }}</h4>{% endif %}
-    {% if page.author %}<p style="margin-top: -0.3em;" class="center author">{{ page.author }}</p>{% endif %}
-    {% if page.subtitle %}<h6 style="margin-bottom: 0em; font-weight: 600; font-size: 1.2em; letter-spacing: 1px;" class="center">{{ page.subtitle }}</h6>{% endif %}    
-  </div>
+<div class="head news-container">
+  <div class="headerobjectswrapper gain-center">
+    {% if page.url == "/" %}class="active"{% endif %}<a class="link notall" href="{{ site.baseurl }}/"><header>{{ site.title | upcase }}</header></a>                 
+  </div>      
+</div>  

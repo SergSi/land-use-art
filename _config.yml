@@ -1,15 +1,65 @@
 title: Искусство землепользования
-subtitle: Книга в процессе написания
-author: Национальный союз землепользователей
+subtitle: Проект "Национального союза землепользователей"
 location: Москва
 date: true
+olddate: 180
 
 logo: /assets/img/logo.png
 
 baseurl: ""
-permalink: '/:categories/:title/'
+permalink: /:categories/:year/:month/:day/:title/
+
+author:
+  name      : С. И. Ивасюк
+  email     : cgles@yandex.ru
+  telegram  : https://t.me/land_use_art
 
 collections:
+  info:
+    output: true
+    sort_by: order
+  articles:
+    output: true
+    sort_by: date
+  materials: 
+    output: true
+  results:  
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: articles
+    values:
+      layout: doc   
+      supertitle: К списку статей
+      superpermalink: /articles/ 
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post   
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: doc
+      supertitle: К материалам проекта
+      superpermalink: /materials/ 
+  - scope:
+      path: ""
+      type: materials
+    values:
+      layout: doc
+      supertitle: К материалам проекта
+      superpermalink: /materials/ 
+  - scope:
+      path: ""
+      type: results
+    values:
+      layout: doc
+      supertitle: К материалам проекта
+      superpermalink: /materials/               
 
 # Build settings
 exclude: 
@@ -18,16 +68,9 @@ exclude:
   - Gemfile.lock
   
 markdown: kramdown
-
-gems:
-  - jekyll-feed
-
 urlimg: '/assets/img/'
 
-defaults:
-    scope:
-      path: ""
-      type: category
-    values:
-      toc: true
-      layout: "doc"
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

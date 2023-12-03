@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include header.html %}
+  </head>
+  <body>
+  <main>  
+    {% include head.html %}   
+    <div class="subhead serif">
+      <hr class="hr-line">{{ page.subtitle }}<hr class="hr-line">
+    </div>         
+    <div class="container"><br>
+        {% unless page.no-toc %}<div id="toc">{% include toc.html html=content %}</div>{% endunless %}          
+        {{ content }}
+    </div>           
+  </main>
+  <footer>      
+      {% include foot.html %}
+  </footer>
+  </body>
+</html>
