@@ -4,24 +4,26 @@
     {% include header.html %}
   </head>
   <body>
-    <main>  
-      {% include head.html %}   
-      <div class="subhead serif gain-center  </div>  ">
-          <hr class="hr-line">
-          {% if page.superpermalink %}
-            <a class="link notall" href="{{page.superpermalink}}">
-          {% else %}
-            <a class="link notall" href="/">
-          {% endif %}
-          {% if page.supertitle %}
-            {{page.supertitle}}
-          {% else %}
-            На главную страницу
-          {% endif %}
-          </a><hr class="hr-line">
-      </div>         
-      {% include head-doc.html %}
-    </main>
+    <main>
+    <div class="news-container">      
+        {% include head.html %}   
+        <div class="subhead serif gain-center  </div>  ">
+            <hr class="hr-line">
+            {% if page.superpermalink %}
+              <a class="link notall" href="{{page.superpermalink}}">
+            {% else %}
+              <a class="link notall" href="/">
+            {% endif %}
+            {% if page.supertitle %}
+              {{page.supertitle}}
+            {% else %}
+              На главную страницу
+            {% endif %}
+            </a><hr class="hr-line">
+        </div>         
+        {% include head-doc.html %}
+     </div>
+      </main>
     <footer>      
       {% include foot.html %}
     </footer>
