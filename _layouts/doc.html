@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    {% include header.html %}
+    {% include header.html %} 
+    <style>
+      h1, h2, h3 {font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+      font-weight: 600;} 
+    </style>   
   </head>
   <body>
     <main>
-    <div class="news-container">      
-        {% include head.html %}       
-        {% include head-doc.html %}
-     </div>
-      </main>
+      <div class="news-container">    
+        {% include head.html %}   
+        <div>          
+          {% include head-doc.html %}
+        </div> 
+      </div>   
+    </main>
     <footer>      
       {% include foot.html %}
     </footer>
