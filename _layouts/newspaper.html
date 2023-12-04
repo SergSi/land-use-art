@@ -10,14 +10,7 @@
   </head>
   <body>
     <div class="head news-container">
-        <div class="headerobjectswrapper">
-            <header>{{ site.title | upcase }}</header>           
-        </div>      
-        <div class="subhead serif">
-          <hr class="hr-line">{{ site.subtitle }}<hr class="hr-line">
-        </div>          
-    </div><br>     
-    <div class="news-container">      
+      {% include head.html %} 
       <div class="collumns">
           {% for doc in site.info %}
             <div class="collumn gain-center">
@@ -31,6 +24,10 @@
             </div>
           {% endfor %}
           <div class="text linetitle serif">НОВОСТИ</div>
+      </div>
+    </div>
+    <div class="news-container">
+      <div class="collumns">
           {% for post in site.posts %}
             {% assign YP = post.date | date: "%Y" | times: 365 %}
             {% assign MP = post.date | date: "%m" | times: 30 %}

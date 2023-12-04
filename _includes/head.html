@@ -1,5 +1,39 @@
-<div class="head">
-  <div class="headerobjectswrapper gain-center">
-    {% if page.url == "/" %}class="active"{% endif %}<a class="link notall" href="{{ site.baseurl }}/"><header>{{ site.title | upcase }}</header></a>                 
-  </div>      
-</div>  
+  <header>
+      {% if page.url == "/" %}
+        <div class="head">{{ site.title | upcase }}</div>      
+      {% else %}
+        <div class="head gain-center"><a class="link notall" href="{{ site.baseurl }}/">{{ site.title | upcase }}</a></div>       
+      {% endif %}
+  </header>                   
+  {% if page.url == "/" %}
+    <div class="subhead serif">
+    <hr class="hr-line">ПРОЕКТ "НАЦИОНАЛЬНОГО СОЮЗА ЗЕМЛЕПОЛЬЗОВАТЕЛЕЙ"<hr class="hr-line">
+  {% elsif page.superpermalink %}
+    <div class="subhead serif gain-center">
+      <hr class="hr-line"><a class="link notall" href="{{page.superpermalink}}">{% if page.supertitle %}{{page.supertitle}}{% else %}ПРОЕКТ "НАЦИОНАЛЬНОГО СОЮЗА ЗЕМЛЕПОЛЬЗОВАТЕЛЕЙ"{% endif %}</a><hr class="hr-line">
+  {% elsif page.collection == "posts" %}
+      {% assign YP = page.date | date: "%Y" | times: 365 %}
+      {% assign MP = page.date | date: "%m" | times: 30 %}
+      {% assign DP = page.date | date: "%d" %}
+      {% assign P = YP | plus: MP | plus: DP %}
+      {% assign YS = site.time | date: "%Y" | times: 365 %}
+      {% assign MS = site.time | date: "%m" | times: 30 %}
+      {% assign DS = site.time | date: "%d" %}
+      {% assign S = YS | plus: MS | plus: DS %}
+      {% assign date-post = S | minus: P %}
+      {% if date-post > site.olddate %}
+        <div class="subhead serif gain-center">
+        <hr class="hr-line"><a class="link notall" href="/archive/">{{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</a><hr class="hr-line">
+      {% else %}
+        <div class="subhead serif">
+        <hr class="hr-line">{{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}<hr class="hr-line">
+      {% endif %}
+    {% elsif page.permalink}} == "/archive/" %}
+      <div class="subhead serif"> 
+      <hr class="hr-line">{{ page.title}}<hr class="hr-line"> 
+    {% else %}
+      <div class="subhead serif"> 
+      <hr class="hr-line">{{ page.title}}<hr class="hr-line"> 
+    {% endif %}
+  </div>
+<br>  

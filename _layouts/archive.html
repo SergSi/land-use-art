@@ -6,12 +6,9 @@
   <body>
     <main>
       <div class="news-container">   
-        {% include head.html %}   
-        {% assign Y = site.time | date: "%Y" | minus: 1 %}  
-        {% assign M = site.time | date: "%m" %}  
-        <div class="subhead serif">
-          <hr class="hr-line">Архив новостей<hr class="hr-line"><br>         
-        </div>        
+          {% include head.html %}   
+          {% assign Y = site.time | date: "%Y" | minus: 1 %}  
+          {% assign M = site.time | date: "%m" %}       
           <div class="collumns">
               {% for post in site.posts %}
                 {% assign YP = post.date | date: "%Y" | times: 365 %}
