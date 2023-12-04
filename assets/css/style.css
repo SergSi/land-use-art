@@ -605,16 +605,17 @@ figcaption {
 
 @media only all and (max-width: 900px) {
   
-    
-  .collumn{
+.collumn{
       width: 100%;
-  }  
-
-  .collumn + .collumn {
+}  
+	
+.collumn + .collumn {
     border-left: none;
     border-bottom: 1px solid #2f2f2f;
     padding-bottom: 1rem;}
-
+	
+media {max-width: 70%;}
+	
 }
 
 
@@ -624,7 +625,6 @@ header {font-size: 2rem;
   line-height: 2.2rem;
 }
   
-media {max-width: 70%;}
 
 }
 @media only all and (max-width: 500px) {
