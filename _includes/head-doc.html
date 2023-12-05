@@ -1,7 +1,7 @@
 <div class="container">
     <div class="center">
-      <h1 style="font-size: 2rem; padding-top: 10px; padding-bottom: 0px; margin-bottom: 0.3rem; font-weight: 300;" id="title">{{ page.title | upcase }}</h1>
-      {% if page.subtitle %}<h3 class="docsubtitle  sans-serif">{{ page.subtitle }}</h3>{% endif %} 
+      <h1 class="doc-head" id="title">{{ page.title | upcase }}</h1>
+      {% if page.subtitle %}<h3 class="docsubtitle">{{ page.subtitle }}</h3>{% endif %} 
       {% if page.author %}<p class="author">{{ page.author }}</p>{% endif %} 
     </div> 
     {% unless page.no-toc %}<div id="toc">{% include toc.html html=content %}</div>{% endunless %}          
