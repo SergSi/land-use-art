@@ -31,7 +31,7 @@ defaults:
       path: ""
       type: articles
     values:
-      layout: doc   
+      layout: post   
       supertitle: К списку статей
       superpermalink: /articles/ 
   - scope:
