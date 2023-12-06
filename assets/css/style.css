@@ -47,10 +47,10 @@ body{
  }
 
  header{
-  font-size: clamp(4rem, 3.214rem + 2.095vw, 5.1rem);
+  font-size: clamp(1.6rem, 0.725rem + 4.375vw, 5.1rem);
   font-family: 'Playfair Display', serif;
   font-weight: 900;  
-  line-height: clamp(4rem, 3.214rem + 2.095vw, 5.1rem)
+  line-height: clamp(1.8rem, 0.925rem + 4.375vw, 5.3rem)
   margin-bottom: 15px;
   margin-top: 5px;
 }
@@ -594,10 +594,6 @@ figcaption {
 
 }
 
-@media only all and (max-width: 1200px) {
-
-}    
-
 @media only all and (max-width: 960px) {
   
   .collumn{
@@ -618,42 +614,11 @@ figcaption {
       border-bottom: 1px solid #2f2f2f;
       padding-bottom: 1rem;}  
 
-  header {font-size: 3rem;
-  line-height: 3.3rem;}
-  
-}
-
-@media only all and (max-width: 500px) {
-
-  header {
-    font-size: 2.4rem;
-    line-height: 2.6rem;}
-
 }
 
 @media only all and (max-width: 360px) {
 
-  header {
-    font-size: 2.2rem;
-    line-height: 2.4rem;}
-
   .collumn .headline.hl1{     
     font-size: 1.5rem}   
-  
-}
 
-@media only all and (max-width: 320px) {
-
-  header {
-    font-size: 1.8rem;
-    line-height: 2rem;}
-  
-}
-
-@media only all and (max-width: 300px) {
-
-  header {
-    font-size: 1.5rem;
-    line-height: 1.7rem;}
-  
 }
