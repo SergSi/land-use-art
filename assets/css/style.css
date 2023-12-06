@@ -503,7 +503,7 @@ figcaption {
   text-align: center; 
   padding-top: 1rem;
   margin-bottom: 2rem;
-  line-height: 1rem;
+  line-height: 2rem;
 }
 
 .caption {
@@ -512,7 +512,7 @@ figcaption {
   text-align: center; 
   padding-top: 1rem;
   margin-bottom: 2rem;
-  line-height: 1rem;
+  line-height: 2rem;
 }
 
 .flex-container {
@@ -605,7 +605,6 @@ figcaption {
 }
 
 @media only all and (max-width: 1200px) {
-
 
 
 }    
