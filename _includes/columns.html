@@ -22,6 +22,7 @@
             {% assign img = 0 %}
           {% endif %}
           {% assign itog = 80 | minus: tit | minus: sum | minus: sub | minus: img %}
+	</div>
           <div class="break cancel" style="letter-spacing: -0.5px;">{{ post.content | truncatewords: itog | strip_newlines }}</div>
           <div class="italic" style="margin-top: 0.5rem;">{{ post.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</div>
       </div>
