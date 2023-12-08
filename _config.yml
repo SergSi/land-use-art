@@ -14,7 +14,7 @@ permalink: /:categories/:year/:month/:day/:title/
 author:
   name      : С. И. Ивасюк
   email     : cgles@yandex.ru
-  telegram  : https://t.me/land_use_art
+  telegram_username  : https://t.me/serge_si
 
 organization:
   name      : Национальный союз землепользователей
@@ -80,3 +80,6 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+
+# Social media
+telegram: telegram
