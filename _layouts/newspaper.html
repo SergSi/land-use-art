@@ -30,7 +30,7 @@
       <div class="collumns">
         {% assign N = 0 %}
         {% for post in site.posts %}
-          {% if N == 4 %}
+          {% if N == site.count_post %}
             {% break %}
           {% endif %}
           {% assign N =  N | plus: 1 %}
