@@ -1,5 +1,5 @@
 title: Искусство землепользования
-description: землепользование, , межевание, полный и точный кадастр недвижимости
+description: землепользование, межевание, полный и точный кадастр недвижимости
 subtitle: Проект "Национального союза землепользователей"
 location: Москва
 date: true
@@ -15,6 +15,10 @@ author:
   name      : С. И. Ивасюк
   email     : cgles@yandex.ru
   telegram  : https://t.me/land_use_art
+
+organization:
+  name      : Национальный союз землепользователей
+  email     : info@nsz.su  
 
 collections:
   info:
