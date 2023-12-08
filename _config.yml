@@ -15,8 +15,9 @@ author:
   name      : С. И. Ивасюк
   email     : cgles@yandex.ru
 
-telegram:
-  username: https://t.me/serge_si
+social:
+  - username: https://t.me/serge_si
+  - links: https://t.me/land_use_art
 
 organization:
   name      : Национальный союз землепользователей
@@ -83,6 +84,3 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# Social media
-links:
-  - https://t.me/land_use_art
