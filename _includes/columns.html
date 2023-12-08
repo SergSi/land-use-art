@@ -1,16 +1,16 @@
-{% assign tit = post.title | size | divided_by: 3 | plus: 5 %}
+{% assign tit = post.title | size | divided_by: 2 %}
 {% if post.summary %}
   {% assign sum = post.summary | size | divided_by: 6 %}
 {% else %}
   {% assign sum = 0 %}
 {% endif %}
 {% if post.subtitle %}
-  {% assign sub = post.subtitle | size | divided_by: 3 | plus: 10 %}
+  {% assign sub = post.subtitle | size | divided_by: 2 %}
 {% else %}
   {% assign sub = 0 %}
 {% endif %}
 {% if post.image_url %}
-  {% assign img = 20 %}
+  {% assign img = 25 %}
 {% else %}
   {% assign img = 0 %}
 {% endif %}
