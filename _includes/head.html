@@ -16,7 +16,7 @@
   {% elsif page.collection == "posts" %}     
       {% assign N = 0 %}
       {% for post in site.posts %}      
-          {% if page.name == post.name %}
+          {% if {{page.name}} == {{post.name}} %}
           Page {{page.name}}<br>
           Post {{post.name}}  
             {% if N < site.count_post %}
