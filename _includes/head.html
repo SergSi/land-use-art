@@ -15,13 +15,13 @@
       {% assign N = 0 %}
       {% for post in site.posts %}        
           {% if page.name == post.name %}
-            {% if N >= site.count_post %}
-              <div class="subhead serif gain-center">
-              <hr class="hr-line"><a class="link notall" href="/archive/">АРХИВ НОВОСТЕЙ  |  {{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</a><hr class="hr-line">
-              {% break %}
-            {% else %}
+            {% if N < site.count_post %}
               <div class="subhead serif">
               <hr class="hr-line">НОВОСТИ  |  {{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}<hr class="hr-line">
+              {% break %}
+            {% else %}
+              <div class="subhead serif gain-center">
+              <hr class="hr-line"><a class="link notall" href="/archive/">АРХИВ НОВОСТЕЙ  |  {{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</a><hr class="hr-line">
               {% break %}
             {% endif %}
           {% endif %}
