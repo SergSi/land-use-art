@@ -16,7 +16,7 @@
   {% elsif page.collection == "posts" %}     
       {% assign N = 0 %}
       {% for post in site.posts %}           
-          {% if page.name == post.name %}
+          {% if page.url == post.url %}
             {% if N < site.count_post %}
               <div class="subhead serif">
                 <hr class="hr-line">НОВОСТИ  |  {{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}<hr class="hr-line">
