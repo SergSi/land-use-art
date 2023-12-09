@@ -15,8 +15,7 @@
     </div>
   {% elsif page.collection == "posts" %}     
       {% assign N = 0 %}
-      {% for post in site.posts %}  
-      1{{post.name}}    
+      {% for post in site.posts %}           
           {% if page.name == post.name %}
             {% if N < site.count_post %}
               <div class="subhead serif">
