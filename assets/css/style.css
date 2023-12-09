@@ -506,6 +506,10 @@ img {
   border: 1px solid #666;   
 }
 
+figure {
+  text-align: center;  
+}
+
 figcaption {
   font-weight: bold;
   font-size: 90%; 
@@ -522,9 +526,15 @@ figcaption {
 }
 
 .passe-partout {
-  padding: 30px; /* Ширина паспарту */
-  background: #f0f0f0; /* Цвет фона  паспарту */
-  border: 2px solid #666; /* Параметры рамки */ 
+  padding: 40px; /* Размер паспарту */
+  background: Silver; /* Цвет фона паспарту */
+  border: 2px solid #800000; /* Параметры рамки */
+  display: inline-block; /* Строчно-блочный элемент */
+  margin: 0; /* Убираем отступы */
+ } 
+
+ .passe-partout img {
+  border: 2px solid #666; /* Рамка вокруг изображения */
  }
 
 .media {
