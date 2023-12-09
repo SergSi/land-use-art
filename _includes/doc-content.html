@@ -1,0 +1,10 @@
+<div class="container">   
+  {% assign align = page.align %}
+  {% if align == "left" %}
+    <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image_url }}"><img class="left-foto" src="{{ site.urlimg }}{{ page.image_url }}"></a>{% endif %}{{ content }}</div>
+  {% elsif align == "right"%}
+    <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image_url }}"><img class="right-foto" src="{{ site.urlimg }}{{ page.image_url }}"></a>{% endif %}{{ content }}</div>
+  {% else %}
+    <div>{{ content }}</div>
+  {% endif %}          
+</div>  
