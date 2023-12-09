@@ -513,19 +513,17 @@ figure {
 }
 
 figcaption {
-  font-style: normal;
+  font-weight: bold;
   font-size: 90%; 
   text-align: center; 
-  padding-top: 1rem;
-  margin-bottom: 2rem;
   line-height: 1.8rem;
 }
 
 .caption {
-  font-style: normal;
+  font-weight: bold;
   font-size: 90%; 
   text-align: center; 
-  padding-top: 1rem;
+  margin-top: -1rem;
   margin-bottom: 2rem;
   line-height: 1.8rem;
 }
