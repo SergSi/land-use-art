@@ -293,15 +293,13 @@ td {
 }
 
 .collumn{
-  font-family: 'Roboto', sans-serif;
   display: inline-block;
   line-height: 120%;
   width: 22.5%;
   padding: 0 1% 0 1%;
   margin-bottom: 30px;
   transition: all .7s;
-  vertical-align: top;
-  overflow: visible;
+  vertical-align: top;   
 }
 
 .text{

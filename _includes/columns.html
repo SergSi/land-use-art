@@ -16,7 +16,7 @@
 {% endif %}
 {% assign itog = 70 | minus: tit | minus: sum | minus: sub | minus: img %}
 <div class="collumn gain-center sans-serif">
-    <a href="{{ site.baseurl }}{{ post.url }}" target="blank" class="notall">  
+    <a href="{{ site.baseurl }}{{ post.url }}" target="blank" class="notall" style="height: 10rem;">  
       <div class="head headline hl3">       
         {{ post.title }}        
         {% if post.subtitle %}<p><span class="headline hl4">{{ post.subtitle }}</span></p>{% endif %}
@@ -24,6 +24,6 @@
       {% if post.summary %}<div><p><span class="summary break cancel">{{ post.summary }}</span></p></div>{% endif %}
       {% if post.image_url %}<div><img class="media hover-image-scale" src="{{ site.urlimg }}{{ post.image_url }}"></div>{% endif %}         
       <div class="break cancel" style="letter-spacing: -0.5px;">{{ post.content | truncatewords: itog | strip_newlines }}</div>
-      <div class="italic" style="margin-top: 0.5rem;">{{ post.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January)", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</div>
+      <div class="italic serif" style="margin-top: 0.5rem;">{{ post.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January)", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</div>
     </a>      
 </div>
