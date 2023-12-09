@@ -15,8 +15,9 @@
     </div>
   {% elsif page.collection == "posts" %}     
       {% assign N = 0 %}
-      {% for post in site.posts %}      
-          {% if {{page.name}} == {{post.name}} %}
+      {% for post in site.posts %}  
+      {{post.name}}    
+          {% if page.name == post.name %}
             {% if N < site.count_post %}
               <div class="subhead serif">
                 <hr class="hr-line">НОВОСТИ  |   {{post.name}}{{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}<hr class="hr-line">
