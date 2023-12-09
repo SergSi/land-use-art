@@ -1,10 +1,10 @@
-<div class="flex-container" >
-   <div class="flex-item" style="width:{{ include.width }};"> 
-      <figure>
+<figure>
+<div class="flex-container">
+   <div class="flex-item" style="width:{{ include.width }};">     
          <a href="\assets\img\{{ include.file }}">
          <img src="\assets\img\{{ include.file }}" style="border-width: {{ include.border }};" alt="{{ include.caption }}"/>
          </a>
-         <figcaption>{{ include.caption }}</figcaption>
-      </figure>
+         <figcaption>{{ include.caption }}</figcaption>      
    </div>
 </div>
+</figure>
