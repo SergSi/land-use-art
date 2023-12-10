@@ -6,7 +6,7 @@ permalink: /articles/
 image_url: articles.png
 ---
 <div>   
-  {% for doc in site.articles %}  
+  {% for doc in site.articles reversed %}  
     {% include articles.html %}
   {% endfor %}
 </div>

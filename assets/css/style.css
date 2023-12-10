@@ -91,6 +91,10 @@ body{
   max-width: 960px;
 }
 
+.span {
+  column-span: all;
+  }
+
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -133,6 +137,21 @@ h1 {
   text-transform: uppercase;
   padding: 12px 0 12px 0;
 }
+
+blockquote {
+  margin: 0;
+  color: DarkSlateGray;
+  padding: 20px 30px 20px 60px;
+  margin-bottom: 1rem;
+  border-left: 8px solid LightGray;
+  position: relative;
+  font-weight: 300;
+  }
+
+ blockquote p {
+  font-style: italic;
+  margin-top: 0; 
+  }
 
 .hr-line {
 	margin: 0;
