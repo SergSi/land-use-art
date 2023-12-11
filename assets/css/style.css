@@ -547,13 +547,17 @@ figcaption {
 .passe-partout {
   padding: 40px; /* Размер паспарту */
   background: Silver; /* Цвет фона паспарту */
-  border: 2px solid #800000; /* Параметры рамки */
   display: inline-block; /* Строчно-блочный элемент */
   margin: 0; /* Убираем отступы */
+  border-radius: 0.3em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(155, 155, 155) grey grey grey;
+  box-shadow: 0.1em 0.4em 0.7em 0.1em #696969; 
  } 
 
  .passe-partout img {
-  border: 2px solid #666; /* Рамка вокруг изображения */
+  border: 1px solid #666; /* Рамка вокруг изображения */
  }
 
 .media {
