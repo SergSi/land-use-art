@@ -159,29 +159,26 @@ blockquote {
   font-weight: 300;
   }
 
-  blockquote::before {
-    quotes: "«" "»";
-    content: open-quote;
-    color: deepPink;
-    font-size: 3rem;
-    position: relative;
-    line-height: 1;    
-}
-
-blockquote::after {
+blockquote p::before {
   quotes: "«" "»";
-  content: close-quote;
+  content: open-quote " ";
   color: deepPink;
   font-size: 3rem;
-  position: relative;
-  line-height: 0;  
-  top: -10px;
+  line-height: 0;   
+}
+
+blockquote p::after {
+  quotes: "«" "»";
+  content:" " close-quote ;
+  color: deepPink;
+  font-size: 3rem;
+  line-height: 0; 
 }
 
  blockquote p {
   font-style: italic;
   margin-top: 0; 
-  }
+}
 
 .hr-line {
 	margin: 0;
