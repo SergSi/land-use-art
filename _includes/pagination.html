@@ -1,8 +1,7 @@
 <hr>
 {% if page.previous %}
-    <p>До: <a href="{{ page.previous.url }}">{{ page.previous.title }}</a></p>
+    <p style="color: grey">До: <a style="color: grey" href="{{ page.previous.url }}">{{ page.previous.title }}</a></p>
 {% endif %}
 {% if page.next %}
-    <p>После: <a href="{{ page.next.url }}">{{ page.next.title }}</a></p>
+    <p style="color: grey">После: <a style="color: grey" href="{{ page.next.url }}">{{ page.next.title }}</a></p>
 {% endif %}
-<hr>
