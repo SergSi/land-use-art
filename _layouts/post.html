@@ -11,6 +11,12 @@
       <div class="container">                      
         {% include doc-head.html %}
         {% include doc-content.html %}     
+        {% if page.previous %}
+          <p style="padding: 0 10px">Позже: <a href="{{ page.previous.url }}">{{ page.previous.title }}</a></p>
+        {% endif %}
+        {% if page.next %}
+          <p style="padding: 0 10px">Раньше: <a href="{{ page.next.url }}">{{ page.next.title }}</a></p>
+        {% endif %}
       </div>   
     </main>
     <footer>      
