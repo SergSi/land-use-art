@@ -93,11 +93,11 @@ body{
 .container {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 20px;
   box-sizing: border-box;
-  line-height: 1.5;  
+  line-height: 1.5;   
 }
 
 .news-container {
@@ -733,11 +733,13 @@ figcaption {
 }
 
 .shadow {
+  padding: 5% 3% 3% 3%;
+  margin-bottom: 1rem;
   border-radius: 0.3em;
   border-style: solid;
   border-width: 1px;
-  border-color: rgb(155, 155, 155) grey grey grey;
-  box-shadow: 0.1em 0.4em 0.7em 0.1em var(--shadow-color); 
+  border-color: rgba(211, 211, 211, 0.719) grey grey rgba(211, 211, 211, 0.719);
+  box-shadow: 0.1em 0.4em 0.7em 0.1em #696969; 
 }
 
 
@@ -749,6 +751,9 @@ figcaption {
  .weatherforcastbox{
     display: none;}
 
+ .shadow {
+    border-style: none;
+    box-shadow: none;}
 }
 
 @media only all and (max-width: 960px) {
