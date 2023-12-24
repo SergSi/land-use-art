@@ -1,0 +1,23 @@
+{% assign M = site.time | date: "%M" %}
+{% assign H = site.time | date: "%H" %}
+{% assign tH = site.time | date: "%H" |  replace: "12", "первого" |  replace: "13", "второго" |  replace: "14", "третьего"  |  replace: "15", "четвертого" |  replace: "16", "пятого" |  replace: "17", "шестого" |  replace: "18", "седьмого" |  replace: "19", "восьмого" 
+|  replace: "20", "девятого" |  replace: "21", "десятого" |  replace: "22", "одинадцатого"  |  replace: "23", "двенадцатого"
+|  replace: "00", "первого" |  replace: "01", "второго" |  replace: "02", "третьего"  |  replace: "03", "четвертого" |  replace: "04", "пятого" |  replace: "05", "шестого" |  replace: "06", "седьмого" |  replace: "07", "восьмого"  
+|  replace: "08", "девятого" |  replace: "09", "десятого" |  replace: "10", "одинадцатого"  |  replace: "11", "двенадцатого" %}
+{% if M > "00" and M < "15" %}
+    {% assign tM = "начало" %}
+{% elsif M > "14" and M < "30" %}
+    {% assign tM = "четверть" %}
+{% elsif M > "29" and M < "45" %}
+    {% assign tM = "половина" %}    
+{% elsif M > "44" and M < "60" %}
+    {% assign tM = "три четверти" %}       
+{% endif %}
+<em>&nbsp;-&nbsp;Сейчас&nbsp;<strong>{{tM}}&nbsp;{{tH}}</strong>&nbsp;часа</em>
+<script>
+    setTimeout(function() {
+      location.reload();
+    }, 600000);
+    var TimerId = window.setInterval(setTimeout, 600000);
+</script>
+    
