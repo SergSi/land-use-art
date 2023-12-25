@@ -66,7 +66,7 @@ html {
 
 body{
   font-size: 1.6rem;
-  font-size: calc(14px + (14 - 12) * ((100vw - 300px) / (1600 - 300))); 
+  font-size: clamp(1.2rem, 1.085rem + 0.615vw, 1.7rem)
   line-height: 1.6rem;
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
