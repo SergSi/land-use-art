@@ -735,6 +735,25 @@ figcaption {
   box-shadow: 0.1em 0.4em 0.7em 0.1em #696969; 
 }
 
+#timeout {
+  opacity: 0;
+  animation: ani 1.9s forwards;
+}
+
+#timeoutshort {
+  opacity: 0;
+  animation: ani 1.4s forwards;
+}
+
+#MyClockDisplay {
+  opacity: 0;
+  animation: ani 5s forwards;
+}
+
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
