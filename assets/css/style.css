@@ -65,9 +65,8 @@ html {
 }
 
 body{
-  font-size: 1.6rem;
-  font-size: clamp(1.2rem, 1.0939rem + 0.6061vw, 1.7rem);
-  line-height: 1.6rem;
+  font-size: clamp(1.3rem, 1.2rem + 0.5vw, 1.7rem);
+  line-height: clamp(1.4rem, 1.3rem + 0.5vw, 1.8rem);
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
   color: var(--font-color);
@@ -98,7 +97,7 @@ body{
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
-  line-height: 1.5;   
+  line-height: 1.5;  
 }
 
 .news-container {
@@ -255,7 +254,7 @@ li :is(ul, ol) {
 }
 
 .subhead{
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 1.625rem + 0.375vw, 2rem);
   text-align: center;
   text-transform: uppercase;
   padding: 12px 0 12px 0;
@@ -302,7 +301,7 @@ blockquote {
 .docsubtitle{
   margin-bottom: 0em; 
   font-weight: 400; 
-  font-size: 2.1rem; 
+  font-size: clamp(1.6rem, 1.45rem + 0.75vw, 2.2rem);
   letter-spacing: 1px; 
 }
 
@@ -469,7 +468,7 @@ td {
 
 .collumn .headline.hl1{
   font-weight: 700;
-  font-size: 1.9rem;
+  font-size: clamp(1.6rem, 1.5rem + 0.5vw, 2rem);
   text-transform: uppercase;
   padding: 10px 0 10px 0;
 }
@@ -477,7 +476,7 @@ td {
 .collumn .headline.hl2{
   font-weight: 400;
   font-style: italic;
-  font-size: 1.7rem;
+  font-size: clamp(1.5rem, 1.425rem + 0.375vw, 1.8rem);
   box-sizing: border-box;
   padding: 10px 0 10px 0;
 }
@@ -502,8 +501,7 @@ td {
 
 .collumn .headline.hl3{
   font-weight: 400;
-  font-size: clamp(2.4rem, 2.186rem + 0.571vw, 2.7rem);
-  line-height: clamp(2.5rem, 2.286rem + 0.571vw, 2.8rem);
+  font-size: clamp(2.4rem, 2.186rem + 0.571vw, 2.7rem);  
   font-style: normal;
   box-sizing: border-box;
   padding: 10px 0 10px 0;
@@ -512,7 +510,7 @@ td {
 
 .collumn .headline.hl4{
   font-weight: 400;
-  font-size: 1.9rem;
+  font-size: clamp(1.6rem, 1.5rem + 0.5vw, 2rem);
   font-style: italic;
   box-sizing: border-box;
   padding: 10px 0 10px 0;
@@ -539,8 +537,7 @@ td {
 
 .collumn .summary{
   font-family: 'Oswald', sans-serif;
-  font-size: 1.8rem;
-  line-height: 1.9rem;  
+  font-size: clamp(1.6rem, 1.55rem + 0.25vw, 1.8rem);
   font-style: normal;
   text-align: left;
   font-weight: 400;
@@ -551,8 +548,7 @@ td {
 
 .collumn .citation{
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  line-height: 3.2rem;
+  font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
   /*font-style: italic;*/
   text-align: center;
   font-weight: 400;
@@ -602,7 +598,7 @@ font-size: 1.2rem;
   padding: 0;
   margin: 20px;
   font-weight: bold;
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
   text-align: center;  
 }
 
@@ -657,16 +653,14 @@ figure {
 figcaption {
   font-weight: bold;
   font-size: 90%; 
-  text-align: center; 
-  line-height: 1.8rem;
+  text-align: center;   
 }
 
 .caption {
   font-weight: bold;
   font-size: 90%; 
   text-align: center; 
-  margin-bottom: 2rem;
-  line-height: 1.8rem;
+  margin-bottom: 2rem;  
 }
 
 .passe-partout {
