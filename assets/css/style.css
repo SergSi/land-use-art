@@ -737,17 +737,12 @@ figcaption {
 
 #timeout {
   opacity: 0;
-  animation: ani 1.9s forwards;
+  animation: ani 1.6s forwards;
 }
 
 #timeoutshort {
   opacity: 0;
   animation: ani 1.4s forwards;
-}
-
-#MyClockDisplay {
-  opacity: 0;
-  animation: ani 5s forwards;
 }
 
 @keyframes ani {
