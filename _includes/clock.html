@@ -1,6 +1,21 @@
-<span id="MyClockDisplay"</span>
+<style>
+
+.timeouts {
+  opacity: 0;
+  animation: ani 2.5s forwards;
+}
+
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+</style>
+
+<span id="MyClockDisplay"></span>
 
 <script>
+
 function showTime(){
     var date = new Date();
     var h = date.getHours(); // 0 - 23
@@ -54,7 +69,7 @@ function showTime(){
         text_m = "половина";
         break;
     case 36:
-    case 37:   
+    case 37:  
     case 38:
     case 39:
     case 40:
@@ -143,7 +158,7 @@ function showTime(){
     switch(m) {
     case 41:
     case 42:
-    case 43:   
+    case 43:    
     case 44:
         text_m = "почти без четверти";
         break;
@@ -156,6 +171,7 @@ function showTime(){
         text_m = "без четверти";
         break;    
     case 51:
+
     case 52:
     case 53:
     case 54:
@@ -248,13 +264,17 @@ function showTime(){
     }   
   }    
         
-    var time = text_m + " " + text_h;
+    var time = text_m + " " + text_h;    
+
     document.getElementById("MyClockDisplay").innerText = time;
-    document.getElementById("MyClockDisplay").textContent = time;
+    document.getElementById("MyClockDisplay").textContent = time;   
+    const element = document.getElementById("MyClockDisplay");
+    element.className = "timeouts";
 
     setTimeout(showTime, 30000); 
-}
 
+}
+  
 showTime();
 
 </script>
