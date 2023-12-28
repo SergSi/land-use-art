@@ -9,13 +9,15 @@ function showTime(){
     case 2:
     case 3:
     case 4:
+        text_m = "начало";
+        break;
     case 5:
     case 6: 
     case 7:
     case 8:
     case 9:
     case 10:
-        text_m = "начало";
+        text_m = "первая четверть";
         break;
     case 11:
     case 12:
@@ -27,14 +29,16 @@ function showTime(){
     case 16:
     case 17:
     case 18:
-    case 19:   
+    case 19:       
     case 20:
+        text_m = "четверть";
+        break;
     case 21:
     case 22:
     case 23:
     case 24:
     case 25:  
-        text_m = "четверть";
+        text_m = "вторая четверть";
         break;
     case 26:
     case 27:
@@ -57,7 +61,7 @@ function showTime(){
     case 40:
         text_m = "вторая половина";
         break;} 
-  if (m < 41) {
+  if ((m < 41 )) {
     switch(h) {
     case 0:
         text_h = "первого часа ночи";
@@ -153,7 +157,6 @@ function showTime(){
         text_m = "без четверти";
         break;    
     case 51:
-
     case 52:
     case 53:
     case 54:
@@ -167,7 +170,7 @@ function showTime(){
         text_m = "без малого";
         break; 
     }
-  if (m > 40) {
+  if ((m > 40 )) {
     switch(h) {
     case 0:
         text_h = "час ночи";
@@ -246,10 +249,11 @@ function showTime(){
     }   
   }    
         
+  
     var time = text_m + " " + text_h;    
     var delta = document.getElementById("MyClockDisplay").textContent; 
 
-    if (delta != time) {
+    if ((delta != time)) {
         let element = document.getElementById('MyClockDisplay');
         let opacity = 0;
         element.style.opacity = opacity;
