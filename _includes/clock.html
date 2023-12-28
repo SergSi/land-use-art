@@ -1,17 +1,3 @@
-<style>
-
-    .timeouts {
-      opacity: 0;
-      animation: ani 2.5s forwards;
-    }
-    
-    @keyframes ani {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
-    }
-    
-    </style>
-    
     <span id="MyClockDisplay"></span>
     
     <script>
@@ -265,10 +251,24 @@
       }    
             
         var time = text_m + " " + text_h;    
-    
-        document.getElementById("MyClockDisplay").innerText = time;
-        document.getElementById("MyClockDisplay").textContent = time;   
-      
+        var delta = document.getElementById("MyClockDisplay").textContent; 
+
+        if (delta != time) {
+            let element = document.getElementById('MyClockDisplay');
+            let opacity = 0;
+            element.style.opacity = opacity;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+            let interval = setInterval(function() {
+            if (opacity < 1) {
+            opacity += 0.05;
+            element.style.opacity = opacity;
+            } else {
+            clearInterval(interval);
+            }
+            }, 100);
+    }
+          
         setTimeout(showTime, 30000); 
     
     }
