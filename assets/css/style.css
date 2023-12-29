@@ -262,6 +262,7 @@ li :is(ul, ol) {
 
 .clock-text{
   width: 100%;
+  color: Gray;
   font-size: clamp(1.7rem, 1.625rem + 0.375vw, 2rem);
   text-transform: uppercase;
   padding: 0 0 3rem 0;
