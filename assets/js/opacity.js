@@ -26,12 +26,14 @@ function showTime(){
         break;
     case 15:
     case 16:
-    case 17:
-    case 18:
-    case 19:       
-    case 20:
         text_m = "четверть";
         break;
+    case 17:
+    case 18:
+        text_m = "начало второй четверти";
+        break;
+    case 19:       
+    case 20:
     case 21:
     case 22:
     case 23:
