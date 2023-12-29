@@ -254,10 +254,18 @@ li :is(ul, ol) {
 }
 
 .subhead{
-  font-size: clamp(1.7rem, 1.625rem + 0.375vw, 2rem);
+  font-size: clamp(1.8rem, 1.625rem + 0.875vw, 2.5rem);
   text-align: center;
   text-transform: uppercase;
   padding: 12px 0 12px 0;
+}
+
+.clock-text{
+  width: 100%;
+  font-size: clamp(1.7rem, 1.625rem + 0.375vw, 2rem);
+  text-transform: uppercase;
+  padding: 0 0 3rem 0;
+  line-height: 1rem;
 }
 
 blockquote {
@@ -446,10 +454,8 @@ td {
 }
 
 .text{
-  display: inline-block;
-  font-weight: 500;
   width: 100%;
-  font-size: clamp(2.1rem, 1.243rem + 2.286vw, 3.3rem);
+  font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
   text-transform: uppercase;
   padding: 1rem 0 3rem 0;
 }

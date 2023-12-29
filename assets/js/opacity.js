@@ -4,7 +4,6 @@ function showTime(){
     var m = date.getMinutes(); // 0 - 59
    
     switch(m) {
-    case 0:
     case 1:
     case 2:
     case 3:
@@ -61,6 +60,7 @@ function showTime(){
     case 40:
         text_m = "вторая половина";
         break;} 
+
   if ((m < 41 )) {
     switch(h) {
     case 0:
@@ -160,16 +160,17 @@ function showTime(){
     case 52:
     case 53:
     case 54:
-    case 55:
         text_m = "скоро";
         break;
+    case 55:
     case 56:
     case 57:
-    case 58:
+    case 58: 
     case 59:
         text_m = "без малого";
-        break; 
+        break;
     }
+
   if ((m > 40 )) {
     switch(h) {
     case 0:
@@ -247,9 +248,94 @@ function showTime(){
     default:  
         text_h = "неизвестного часа";
     }   
-  }    
-        
+  }  
   
+  switch(m) {
+    case 0:    
+        text_m = "";
+        break; 
+    }
+
+  if ((m == 0 )) {
+    switch(h) {
+    case 0:
+        text_h = "полночь";
+        break;    
+    case 1:
+        text_h = "час ночи";
+        break;
+    case 2:
+        text_h = "два часа ночи";
+        break;
+    case 3:
+        text_h = "три часа ночи";
+        break;
+    case 4:
+        text_h = "четыре часа утра";
+        break;
+    case 5:
+        text_h = "пять часова утра";
+        break;
+    case 6:
+        text_h = "шесть часоа утра";
+        break;
+    case 7:
+        text_h = "семь часа утра";
+        break;
+    case 8:
+        text_h = "восемь часов утра";
+        break;
+    case 9:
+        text_h = "девять часов утра";
+        break;
+    case 10:
+        text_h = "десять часов дня";
+        break;
+    case 11:
+        text_h = "одиннадцать часов дня";
+        break;
+    case 12:
+        text_h = "двенадцать часов дня";
+        break;
+    case 13:
+        text_h = "час дня";
+        break;
+    case 14:
+        text_h = "два часа дня";
+        break;
+    case 15:
+        text_h = "три часа дня";
+        break;
+    case 16:
+        text_h = "четыре часа дня";
+        break;
+    case 17:
+        text_h = "пять часов";
+        break;
+    case 18:
+        text_h = "шесть часов";
+        break;
+    case 19:
+        text_h = "семь часов";
+        break;
+    case 20:
+        text_h = "восемь часов вечера";
+        break;
+    case 21:
+        text_h = "девять часов вечера";
+        break;
+    case 22:
+        text_h = "десять часов вечера";
+        break;
+    case 23:
+        text_h = "одиннадцать часов вечера";
+        break;
+    default:  
+        text_h = "неизвестного часа";
+    }   
+  }    
+          
+          
     var time = text_m + " " + text_h;    
     var delta = document.getElementById("MyClockDisplay").textContent; 
 
@@ -269,7 +355,7 @@ function showTime(){
         }, 100);
 }
       
-    setTimeout(showTime, 30000); 
+    setTimeout(showTime, 15000); 
 
 }
   
