@@ -16,9 +16,9 @@ function showTime(){
     case 8:
     case 9:
     case 10:
+    case 11:
         text_m = "первая четверть";
         break;
-    case 11:
     case 12:
     case 13:   
     case 14:
