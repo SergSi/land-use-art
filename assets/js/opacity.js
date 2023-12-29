@@ -336,7 +336,7 @@ function showTime(){
   }    
           
           
-    var time = text_m + " " + text_h;    
+    var time = "—" + " " + text_m + " " + text_h + " " + "—";    
     var delta = document.getElementById("MyClockDisplay").textContent; 
 
     if ((delta != time)) {
