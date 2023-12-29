@@ -171,7 +171,7 @@ function showTime(){
     case 57:
     case 58: 
     case 59:
-        text_m = "без малого";
+        text_m = "через малое время";
         break;
     }
 
