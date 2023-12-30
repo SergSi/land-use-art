@@ -781,6 +781,9 @@ figcaption {
   .collumn + .collumn {
     border-left: none;} 	
 
+  .clock-text{
+    justify-content: center;}
+
 }
 
 @media only all and (max-width: 600px) {
