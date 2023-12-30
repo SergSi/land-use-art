@@ -261,12 +261,17 @@ li :is(ul, ol) {
 }
 
 .clock-text{
-  width: 100%;
+  display: flex;
+  justify-content: flex-end;
   color: Gray;
   font-size: clamp(1.7rem, 1.625rem + 0.375vw, 2rem);
   text-transform: uppercase;
   padding: 0 0 3rem 0;
-  line-height: 1rem;
+  line-height: 0;   
+}
+
+td, .clock-text{
+  
 }
 
 blockquote {
@@ -403,9 +408,9 @@ blockquote {
 
 th,
 td {
-  padding: 1px 1px ;
+  padding: 10px 10px ;
   text-align: left;
-  border-bottom: 01px solid #696969;
+  border-bottom: 1px solid #696969;
   font-family: 'Roboto Condensed', sans-serif;}
 th:first-child,
 td:first-child {

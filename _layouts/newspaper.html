@@ -8,9 +8,13 @@
     </style>
   </head>
   <body id="timeoutshort">
-    <div class="head news-container">
+    <<div class="head news-container">
       {% include head.html %} 
-      <div class="clock-text serif" id="MyClockDisplay"></div>
+      <div class="clock-text">
+        <table>   
+          <th class="serif bordernot" style="font-weight: 400;" id="MyClockDisplay"></th>
+        </table>
+    </div>
       <div class="collumns">
           {% for doc in site.info %}
             <div class="collumn gain-center">
