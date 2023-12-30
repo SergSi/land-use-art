@@ -269,7 +269,6 @@ li :is(ul, ol) {
   padding: 1rem 2rem 2rem 0;
   margin-top: -3rem;
   line-height: 1.5; 
-  width: 98%;
 }
 
 blockquote {
@@ -782,7 +781,8 @@ figcaption {
     border-left: none;} 	
 
   .clock-text{
-    justify-content: center;}
+    justify-content: center;
+    padding: 1rem 0 2rem 0;}
 
 }
 
