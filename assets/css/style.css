@@ -261,14 +261,14 @@ li :is(ul, ol) {
 }
 
 .clock-text{
-  display: flex;
-  justify-content: flex-end;
   color: Gray;
   font-size: clamp(1rem, 0.825rem + 0.875vw, 1.7rem);
   text-transform: uppercase;
-  padding: 1rem 2rem 2rem 0;
+  padding: 1rem 0 2rem 0;
   margin-top: -3rem;
   line-height: 1.5; 
+  text-decoration: overline grey; 
+  text-wrap: balance;         
 }
 
 blockquote {
@@ -779,10 +779,6 @@ figcaption {
  
   .collumn + .collumn {
     border-left: none;} 	
-
-  .clock-text{
-    justify-content: center;
-    padding: 1rem 0 2rem 0;}
 
 }
 
