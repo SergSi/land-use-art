@@ -246,6 +246,7 @@ li :is(ul, ol) {
   padding-bottom: 0px; 
   margin-bottom: 24px; 
   font-weight: 300;
+  color: var(--font-color);
 }
 
 .head{
@@ -258,6 +259,7 @@ li :is(ul, ol) {
   text-align: center;
   text-transform: uppercase;
   padding: 12px 0 12px 0;
+  color: var(--font-color);
 }
 
 .clock-text{
@@ -314,6 +316,7 @@ blockquote {
   font-weight: 400; 
   font-size: clamp(1.6rem, 1.45rem + 0.75vw, 2.2rem);
   letter-spacing: 1px; 
+  color: var(--font-color);
 }
 
 .docsubtitle:before{
