@@ -358,6 +358,7 @@ function showTime(){
         }, 100);
 }
       
+    console.log(m);  
     setTimeout(showTime, 15000); 
 
 }
