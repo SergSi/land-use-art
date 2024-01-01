@@ -74,7 +74,7 @@ function showTime(){
         text_h = "второго часа ночи";
         break;
     case 2:
-        text_h = "третьего часа утра";
+        text_h = "третьего часа ночи";
         break;
     case 3:
         text_h = "четвертого часа утра";
@@ -337,30 +337,34 @@ function showTime(){
         text_h = "неизвестного часа";
     }   
   }    
-          
-          
+              
     var time = text_m + " " + text_h;    
     var delta = document.getElementById("MyClockDisplay").textContent; 
-    
-
+ 
     if ((delta != time)) {
-        var opacity = 0; 
+        var opacity = 1; 
         let element = document.getElementById("MyClockDisplay");       
-        element.style.opacity = opacity;
-
-        document.getElementById("MyClockDisplay").innerText = time;
-        document.getElementById("MyClockDisplay").textContent = time; 
 
         const myInterval = setInterval(myTimer, 100);
-
+        var z = 1
         function myTimer() {
-            if (opacity < 1) {
+            if (z < 19) {
+                opacity -= 0.05;
+                element.style.opacity = opacity;
+                z += 1; } 
+            else if (z > 18 && z < 37) {
+                document.getElementById("MyClockDisplay").innerText = time;
+                document.getElementById("MyClockDisplay").textContent = time; 
                 opacity += 0.05;
                 element.style.opacity = opacity;
-                } else {
+                z += 1;}    
+            else {
                 clearInterval(myInterval);
+
                 }
             }
+
+        
                  
 }
 
