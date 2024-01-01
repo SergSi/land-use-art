@@ -341,23 +341,29 @@ function showTime(){
           
     var time = text_m + " " + text_h;    
     var delta = document.getElementById("MyClockDisplay").textContent; 
+    
 
     if ((delta != time)) {
-        let element = document.getElementById('MyClockDisplay');
-        let opacity = 0;
+        var opacity = 0; 
+        let element = document.getElementById("MyClockDisplay");       
         element.style.opacity = opacity;
+
         document.getElementById("MyClockDisplay").innerText = time;
-        document.getElementById("MyClockDisplay").textContent = time;
-        let interval = setInterval(function() {
-        if (opacity < 1) {
-        opacity += 0.05;
-        element.style.opacity = opacity;
-        } else {
-        clearInterval(interval);
-        }
-        }, 100);
+        document.getElementById("MyClockDisplay").textContent = time; 
+
+        const myInterval = setInterval(myTimer, 100);
+
+        function myTimer() {
+            if (opacity < 1) {
+                opacity += 0.05;
+                element.style.opacity = opacity;
+                } else {
+                clearInterval(myInterval);
+                }
+            }
+                 
 }
-      
+
     console.log(m);  
     setTimeout(showTime, 15000); 
 
