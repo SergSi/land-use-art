@@ -366,9 +366,8 @@ function showTime(){
                 element.style.opacity = opacity;
                 clearInterval(myInterval);
             }
-            }
-
-        
+        }
+      
                  
 }
 
