@@ -164,9 +164,9 @@ function showTime(){
     case 52:
     case 53:
     case 54:
+    case 55:
         text_m = "скоро";
         break;
-    case 55:
     case 56:
     case 57:
     case 58: 
@@ -346,22 +346,26 @@ function showTime(){
         let element = document.getElementById("MyClockDisplay");       
 
         const myInterval = setInterval(myTimer, 100);
-        var z = 1
+        var z = 0
+
         function myTimer() {
             if (z < 19) {
                 opacity -= 0.05;
                 element.style.opacity = opacity;
-                z += 1; } 
+                z += 1; 
+            } 
             else if (z > 18 && z < 37) {
                 document.getElementById("MyClockDisplay").innerText = time;
                 document.getElementById("MyClockDisplay").textContent = time; 
                 opacity += 0.05;
                 element.style.opacity = opacity;
-                z += 1;}    
+                z += 1;
+            }    
             else {
+                opacity += 0.05;
+                element.style.opacity = opacity;
                 clearInterval(myInterval);
-
-                }
+            }
             }
 
         
