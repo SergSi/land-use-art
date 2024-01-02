@@ -316,10 +316,10 @@ function showTime(){
         text_h = "пять часов";
         break;
     case 18:
-        text_h = "шесть часов";
+        text_h = "шесть часов вечера";
         break;
     case 19:
-        text_h = "семь часов";
+        text_h = "семь часов вечера";
         break;
     case 20:
         text_h = "восемь часов вечера";
@@ -338,42 +338,34 @@ function showTime(){
     }   
   }    
               
-    var time = text_m + " " + text_h;    
-    var delta = document.getElementById("MyClockDisplay").textContent; 
- 
-    if ((delta != time)) {
-        var opacity = 1; 
-        let element = document.getElementById("MyClockDisplay");       
-
-        const myInterval = setInterval(myTimer, 100);
-        var z = 0
-
-        function myTimer() {
-            if (z < 19) {
-                opacity -= 0.05;
-                element.style.opacity = opacity;
-                z += 1; 
-            } 
-            else if (z > 18 && z < 37) {
-                document.getElementById("MyClockDisplay").innerText = time;
-                document.getElementById("MyClockDisplay").textContent = time; 
-                opacity += 0.05;
-                element.style.opacity = opacity;
-                z += 1;
-            }    
-            else {
-                opacity = 1;
-                element.style.opacity = opacity;
-                clearInterval(myInterval);
-            }
-        }
-      
-                 
-}
-
-    console.log(m);  
-    setTimeout(showTime, 15000); 
-
-}
+  var time = text_m + " " + text_h;    
+  var delta = document.getElementById("MyClockDisplay").textContent; 
   
+
+  if ((delta != time)) {
+      var opacity = 0; 
+      let element = document.getElementById("MyClockDisplay");       
+      element.style.opacity = opacity;
+
+      document.getElementById("MyClockDisplay").innerText = time;
+      document.getElementById("MyClockDisplay").textContent = time; 
+
+      const myInterval = setInterval(myTimer, 100);
+
+      function myTimer() {
+          if (opacity < 1) {
+              opacity += 0.05;
+              element.style.opacity = opacity;
+              } else {
+              clearInterval(myInterval);
+              }
+          }
+               
+}
+
+  console.log(m);  
+  setTimeout(showTime, 15000); 
+
+}
+
 showTime();
