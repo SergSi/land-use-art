@@ -362,7 +362,7 @@ function showTime(){
                 z += 1;
             }    
             else {
-                opacity += 0.05;
+                opacity = 1;
                 element.style.opacity = opacity;
                 clearInterval(myInterval);
             }
