@@ -21,5 +21,11 @@ carousel:
 image_url: example.jpg
 caption: Пример подписи    
 align: left 
-align: right              
+align: right  
+style: "p + p {
+  text-indent: 0em;
+}
+p {
+  margin-bottom: 0.5em;
+}"              
 ---
