@@ -231,7 +231,7 @@ function showTime(){
         text_h = "шесть часов";
         break;
     case 18:
-        text_h = "семь часов";
+        text_h = "семь часов вечера";
         break;
     case 19:
         text_h = "восемь часов вечера";
