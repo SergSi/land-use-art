@@ -618,7 +618,7 @@ font-size: 1.2rem;
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 a {
-  color: var(--a-color);
+  color: purple;
   transition: 0.5s; 
 }
 
