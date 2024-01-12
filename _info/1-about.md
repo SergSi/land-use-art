@@ -17,12 +17,12 @@ permalink: /about/
 
 # Площадки проекта
 
-<a href="https://t.me/land_use_art/" target="blank" style="color: #031da3">Открытый Telegram-канал "Искусство землепользования"</a>
+<a href="https://t.me/land_use_art/" target="_blank" style="color: purple;">Открытый Telegram-канал "Искусство землепользования"</a>
 
-<a href="https://t.me/+RDilw91lQY0yMzgy" target="blank" style="color: #031da3">Проект "Схема" - создание Стандарта составления Схемы расположения земельного участка на кадастровом плане территориии</a>
+<a href="https://t.me/+RDilw91lQY0yMzgy" target="_blank" style="color: purple;">Проект "Схема" - создание Стандарта составления Схемы расположения земельного участка на кадастровом плане территориии</a>
 
 # Партнеры проекта
 
-<a href="https://xn----mtbukben7em.xn--p1ai/" target="blank" style="color: #031da3">Союз потребительских обществ “РУСЬ”</a>
+<a href="https://xn----mtbukben7em.xn--p1ai/" target="_blank" style="color: purple;">Союз потребительских обществ “РУСЬ”</a>
 
-<a href="https://kadastrsro.ru/" target="blank" style="color: #031da3">Ассоциация “Гильдия кадастровых инженеров”</a>
+<a href="https://kadastrsro.ru/" target="_blank" style="color: purple;">Ассоциация “Гильдия кадастровых инженеров”</a>
