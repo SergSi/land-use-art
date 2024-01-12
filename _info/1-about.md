@@ -19,7 +19,7 @@ permalink: /about/
 
 <a href="https://t.me/land_use_art/" target="blank" style="color: #031da3">Открытый Telegram-канал "Искусство землепользования"</a>
 
-<a href="https://paywall.pw/kp6nnmpvla6z" target="blank" style="color: #031da3">Подписка на закрытый Telegram-канал "Земельный вопрос"</a>
+<a href="https://t.me/+RDilw91lQY0yMzgy">Проект "Схема" - создание Стандарта составления Схемы расположения земельного участка на кадастровом плане территориии</a>
 
 # Партнеры проекта
 
