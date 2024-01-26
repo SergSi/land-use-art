@@ -276,20 +276,11 @@ li :is(ul, ol) {
 blockquote {
   margin: 0;
   color: DarkSlateGray;
-  padding: 2rem 2rem 2rem 3rem;
+  padding: 1rem 2rem 1rem 3rem;
   border-left: thick solid Lightgray;
   position: relative;
   font-family: sans-serif;
   font-weight: 300;
-  }
-
-  blockquote:before{
-  content: "\201C";
-  color: DarkSlateGray;
-  font-size: 3rem;
-  position: absolute;
-  left: 1rem;
-  top: -1rem;
   }
 
   blockquote p {
