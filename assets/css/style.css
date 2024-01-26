@@ -276,7 +276,7 @@ li :is(ul, ol) {
 blockquote {
   margin: 0;
   color: DarkSlateGray;
-  padding: 2rem 2rem 1rem 3rem;
+  padding: 2rem 2rem 2rem 3rem;
   border-left: thick solid Grey;
   position: relative;
   font-family: sans-serif;
@@ -286,7 +286,7 @@ blockquote {
   blockquote:before{
   content: "\201C";
   color: DarkSlateGray;
-  font-size: 5rem;
+  font-size: 4rem;
   position: absolute;
   left: 1rem;
   top: -1rem;
