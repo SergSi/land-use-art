@@ -1,14 +1,23 @@
   <header>
       {% if page.url == "/" %}
-        <div class="head">{{ site.title | upcase }}</div>      
+        <div class="head">{{ site.title | upcase }}</div> 
+        <div class="subhead serif">
+          {{ site.subtitle }}
+        </div>     
       {% else %}
-        <div class="head gain-center"><a class="link notall" href="{{ site.baseurl }}/">{{ site.title | upcase }}</a></div>       
+        <div class="head gain-center"><a class="link notall" href="{{ site.baseurl }}/">
+          {{ site.title | upcase }}
+          <div class="subhead serif gain-center">
+            {{ site.subtitle }}
+          </div> 
+        </a></div> 
+     
       {% endif %}     
   </header>                   
   {% if page.url == "/" %}
-    <div class="subhead serif">
-      <hr class="hr-line">{{ site.subtitle }}<hr class="hr-line">
-    </div>
+  <hr class="hr-line">
+    <div class="colunm clock-text serif" id="MyClockDisplay"></div>
+  <hr class="hr-line">
   {% elsif page.superpermalink %}
     <div class="subhead serif gain-center">
       <hr class="hr-line"><a class="link notall" href="{{page.superpermalink}}">{% if page.supertitle %}{{page.supertitle}}{% else %}{{ site.subtitle }}{% endif %}</a><hr class="hr-line">
