@@ -406,7 +406,6 @@ th,
 td {
   padding: 10px 10px ;
   text-align: left;
-  border-bottom: 1px solid #696969;
   font-family: 'Roboto Condensed', sans-serif;}
 th:first-child,
 td:first-child {
@@ -419,6 +418,16 @@ td {
  padding: 5px;
  font-family: 'Roboto Condensed', sans-serif;
 }
+
+tbody tr:nth-child(odd) {
+  background-color: silver;
+}
+
+tbody tr:nth-child(even) {
+  background-color: lightgrey;
+}
+
+th {background-color: rgb(226, 224, 224);}
 
 /* Next transfer
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
