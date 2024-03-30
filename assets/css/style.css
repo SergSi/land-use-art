@@ -412,22 +412,23 @@ td:first-child {
   padding-left: 0;}
 th:last-child,
 td:last-child {
-  padding-right: 0;}
+  padding-right: 0;
+}
 
 td {
  padding: 5px;
- font-family: 'Roboto Condensed', sans-serif;
-}
+ font-family: 'Roboto Condensed', sans-serif;}
 
 tbody tr:nth-child(odd) {
-  background-color: silver;
-}
+  background-color: Gainsboro;}
 
 tbody tr:nth-child(even) {
-  background-color: lightgrey;
-}
+  background-color: rgb(236, 236, 236);}
 
-th {background-color: rgb(226, 224, 224);}
+th {background-color: rgb(236, 236, 236);}
+
+table {margin-bottom: 1.5rem;}
+ol {margin-bottom: 1.5rem;}
 
 /* Next transfer
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
