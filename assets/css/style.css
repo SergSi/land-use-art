@@ -277,11 +277,11 @@ blockquote {
   position: relative;
   font-family: sans-serif;
   font-weight: 300;
+  margin-bottom: 10px;
   }
 
   blockquote p {
-  font-style: italic;
-  margin-top: 20rem;  
+  font-style: italic; 
   }
 
 .hr-line {
