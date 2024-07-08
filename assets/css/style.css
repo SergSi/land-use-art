@@ -71,7 +71,17 @@ body{
   font-weight: 400;
   color: var(--font-color);
   background-color: var(--background-color);
+  background-color: #f5f1ee;
+  background-image: -webkit-repeating-radial-gradient(circle, 
+    #e6d7c3, #e2dace 50%, #ebe4d9 100%
+  );
+  background-image: repeating-radial-gradient(circle, 
+    #e4d3bd, #e9e1d6 50%, #e4dccf 100%
+  );
+  background-size: 10px 10px;
  }
+
+ 
 
  header{
   font-size: clamp(1.6rem, 0.725rem + 4.375vw, 5.1rem);
