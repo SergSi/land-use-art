@@ -88,6 +88,7 @@ body{
   word-spacing: -.03rem;
   list-style: none;
   margin: 30px 2% 0 2%;
+  
 }
 
 .container {
@@ -97,7 +98,11 @@ body{
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
-  line-height: 1.5;  
+  line-height: 1.5;      
+}
+
+.container.shadow{
+  background-color: #ffffff; 
 }
 
 .news-container {
@@ -107,7 +112,7 @@ body{
   margin: 0 auto;
   padding: 0 10px;
   line-height: 1.5;  
-  overflow: visible;
+  overflow: visible;  
 }
 
 .newspaper {
@@ -777,10 +782,17 @@ figcaption {
  .weatherforcastbox{
     display: none;}
 
- .shadow {
-    border-style: none;
-    box-shadow: none;}
 }
+
+@media only all and (max-width: 1200px) {
+
+  .container.shadow {
+    border-style: none;
+    box-shadow: none;
+    background-color: var(--background-color); 
+  }  
+ 
+ }
 
 @media only all and (max-width: 960px) {
   
@@ -788,7 +800,7 @@ figcaption {
     width: 47%;} 
  
   .collumn + .collumn {
-    border-left: none;} 	
+    border-left: none;} 	   
 
 }
 
