@@ -164,7 +164,7 @@ function showTime(){
     case 52:
     case 53:
     case 54:
-        text_m = "без без десяти минут";
+        text_m = "без десяти минут";
         break;
     case 55:
         text_m = "без пяти минут";
