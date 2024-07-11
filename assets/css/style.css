@@ -160,6 +160,10 @@ p{
   margin-bottom: 1.5rem;
 }
 
+p {text-indent: 0rem;
+  margin-bottom: 0.1rem;}      
+  p+p {text-indent: 2rem;}
+
 p::selection{
   background: lightgrey;
 }
@@ -202,9 +206,11 @@ h6 {
 h1 + h2 {
   margin-top: var(--space-l2-sm);
 }
+
 h2 + h3 {
   margin-top: var(--space-l3-sm);
 }
+
 h3 + h4 {
   margin-top: var(--space-l4-sm);
 }
