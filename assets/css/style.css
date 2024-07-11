@@ -223,6 +223,16 @@ h5 + h6 {
   margin-top: var(--space-l6-sm);
 }
 
+ul {
+    list-style: none;
+}
+
+ul li:before {
+    content:  "—";
+    position: relative;
+    left:     -5px;
+}
+
 li + li {
   margin-top: var(--space-list-items);
 }
