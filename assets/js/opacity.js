@@ -8,49 +8,49 @@ function showTime(){
     case 2:
     case 3:
     case 4:
-        text_m = "начало";
-        break;
     case 5:
     case 6: 
     case 7:
+        text_m = "начало первой четверти";
+        break;
     case 8:
     case 9:
     case 10:
     case 11:
-        text_m = "первая четверть";
-        break;
     case 12:
+        text_m = "середина первой четверти";
+        break;
     case 13:   
     case 14:
         text_m = "почти четверть";
         break;
     case 15:
-    case 16:
         text_m = "четверть";
         break;
+    case 16:
     case 17:
     case 18:
-        text_m = "начало второй четверти";
-        break;
     case 19:       
     case 20:
     case 21:
+        text_m = "начало второй четверти";
+        break;
     case 22:
     case 23:
     case 24:
     case 25:  
     case 26:
-        text_m = "вторая четверть";
-        break;
     case 27:
+        text_m = "середина второй четверти";
+        break;
     case 28:
     case 29:
         text_m = "почти половина";
         break;
     case 30:
-    case 31:   
         text_m = "половина";
         break;
+    case 31:   
     case 32:
     case 33:
         text_m = "начало второй половины";
@@ -165,9 +165,9 @@ function showTime(){
     case 53:
     case 54:
     case 55:
+    case 56:
         text_m = "скоро";
         break;
-    case 56:
     case 57:
     case 58: 
     case 59:
