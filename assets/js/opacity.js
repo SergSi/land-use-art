@@ -62,7 +62,7 @@ function showTime(){
     case 38:
     case 39:
     case 40:
-        text_m = "вторая половина";
+        text_m = "первая четверть второй половины";
         break;} 
 
   if ((m < 41 )) {
