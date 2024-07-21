@@ -160,9 +160,7 @@ p{
   margin-bottom: 1.5rem;
 }
 
-p {text-indent: 0rem;
-  margin-bottom: 0.1rem;}      
-  p+p {text-indent: 2rem;}
+
 
 p::selection{
   background: lightgrey;
