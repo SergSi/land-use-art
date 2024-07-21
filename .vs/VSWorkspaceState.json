@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\pages",
-    "\\_posts"
+    "\\assets",
+    "\\assets\\js"
   ],
-  "SelectedNode": "\\.idea",
+  "SelectedNode": "\\assets\\js\\opacity.js",
   "PreviewInSolutionExplorer": true
 }
