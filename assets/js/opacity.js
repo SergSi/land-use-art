@@ -10,7 +10,7 @@ function showTime(){
     case 4:
     case 5:
     case 6: 
-        text_m = "начало первой четверти";
+        text_m = "начало";
         break;
     case 7:
     case 8:
