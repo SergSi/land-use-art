@@ -1,7 +1,7 @@
 ---
 title: Приобретение земель 
 subtitle: Новая статья
-image_url: /posts/batalnoe.jpg       
+image_url: /posts/Batalnoe.jpg      
 align: right  
 ---
 
