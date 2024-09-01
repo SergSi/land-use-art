@@ -178,6 +178,7 @@ h1 {
 h2 {
   margin-top: var(--space-l2-lg);
   margin-bottom: var(--space-l2-sm);
+  text-decoration: underline;
 }
 
 h3 {
