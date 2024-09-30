@@ -6,15 +6,17 @@ permalink: /materials/
 image_url: books.png 
 ---
 
-# Рабочие документы проекта
+<h1>Рабочие документы проекта</h1>
 
-<div>   
-  {% for doc in site.materials %}  
-    {% include articles.html %}
+<div>
+  {% for post in site.posts %}
+    {% if post.type == "raw" %}
+      {% include articles.html %}
+    {% endif %}
   {% endfor %}
 </div>
 
-# Результаты проекта
+<h1 style="margin-top: -0.1rem;" >Результаты проекта</h1>
 
 
  {% for doc in site.data.docs %}
@@ -23,6 +25,6 @@ image_url: books.png
     <strong>{{ doc.title | upcase }}</strong>{% if doc.author %} / {{ doc.author }}{% endif %}
     {% if doc.subtitle %}<br>{{ doc.subtitle }}{% endif %}<br>
   </a><br> 
-  </div>
+ </div>
   {% endfor %}
 <br>

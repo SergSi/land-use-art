@@ -16,13 +16,10 @@
               <a href="{{ site.baseurl }}{{ doc.url }}" target="blank" class="link notall">
                 <div class="head"><span class="headline hl1">{{ doc.title | upcase }}</span></div>
                 {% if doc.image_url %}<div><img class="media bordernot" style="width: 50%;" src="{{ site.urlimg }}{{ doc.image_url }}"></div>{% endif %} 
-                {% if doc.summary %}
-                  <div class="sans-serif">{{ doc.summary | truncatewords: 25 | strip_newlines }}</div>
-                {% endif %}
               </a>
             </div>
           {% endfor %}
-            <div class="text serif linetitle">НОВОСТИ</div>                
+            <div class="text serif linetitle">НОВЫЕ МАТЕРИАЛЫ</div>                
       </div>
     </div>
     <div class="news-container">

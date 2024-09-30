@@ -2,22 +2,17 @@
 <html>
   {% include top.html %}  
   <head>
-    {% include header.html %}
-  
+    {% include header.html %}  
   </head>
   <body id="timeoutshort">
     <main>
       <div class="news-container">   
-          {% include head.html %}   
-          {% assign Y = site.time | date: "%Y" | minus: 1 %}  
-          {% assign M = site.time | date: "%m" %}       
+          {% include head.html %}        
           <div class="collumns">
-            {% assign N = 0 %}
             {% for post in site.posts %}
-              {% if N >= site.count_post %}
+              {% if post.type == "news" %}
                 {% include columns.html %} 
-              {% endif %}
-              {% assign N =  N | plus: 1 %}                    
+              {% endif %}             
             {% endfor %}
           </div>
       </div>

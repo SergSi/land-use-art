@@ -1,12 +1,13 @@
 ---
 title: Статьи
-subtitle: Статьи по теме проекта
 layout: info
 permalink: /articles/
 image_url: articles.png
 ---
-<div>   
-  {% for doc in site.articles reversed %}  
-    {% include articles.html %}
+<div>
+  {% for post in site.posts %}
+    {% if post.type == "article" %}
+      {% include articles.html %}
+    {% endif %}
   {% endfor %}
 </div>

@@ -9,10 +9,9 @@
     <div class="news-container"> 
       {% include head.html %}
     </div>           
-      <div class="container">
-          {% unless page.no-toc %}<div id="toc">{% include toc.html html=content %}</div>{% endunless %}          
-          {{ content }}
-      </div>               
+    <div class="container">
+      {{ content }}
+    </div>               
   </main>
   <footer>      
       {% include foot.html %}
