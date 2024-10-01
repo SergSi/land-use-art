@@ -19,36 +19,22 @@
   <hr class="hr-line">
     <div class="clock-text serif" id="MyClockDisplay">&#160;</div>
   <hr class="hr-line">
-  {% elsif page.superpermalink %}
+  {% elsif page.class == "article" %}
     <div class="clock-text serif gain-center">
-      <hr class="hr-line"><a class="link notall" href="{{page.superpermalink}}">{% if page.supertitle %}{{page.supertitle}}{% else %}{{ site.subtitle }}{% endif %}</a><hr class="hr-line">
+      <hr class="hr-line"><a class="link notall" href="/articles/">К списку статей</a><hr class="hr-line">
     </div>
-  {% elsif page.collection == "posts" %}     
-      {% assign N = 0 %}
-      {% for post in site.posts %}           
-          {% if page.url == post.url %}
-            {% if N < site.count_post %}
-              <div class="clock-text serif">
-                <hr class="hr-line">НОВОСТИ  |  {{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}<hr class="hr-line">
-              </div>
-              {% break %}
-            {% else %}
-              <div class="clock-text serif gain-center">
-                <hr class="hr-line"><a class="link notall" href="/archive/">АРХИВ НОВОСТЕЙ  |  {{ page.date | date: "%B, %Y" | replace: "December", "декабрь" | replace: "January", "январь" | replace: "February", "февраль"| replace: "March", "март"| replace: "April", "апрель"| replace: "May", "май"| replace: "June", "июнь"| replace: "July", "июль"| replace: "August", "август"| replace: "September", "сентябрь"| replace: "October", "октябрь"| replace: "November", "ноябрь" }}</a><hr class="hr-line">
-              </div>
-              {% break %}
-            {% endif %}
-          {% endif %}
-          {% assign N =  N | plus: 1 %}                    
-      {% endfor %}
-    {% elsif page.permalink == "/archive/" %}
+  {% elsif page.class == "news" %}
+    <div class="clock-text serif gain-center">
+      <hr class="hr-line"><a class="link notall" href="/archive/">К архиву новостей</a><hr class="hr-line">
+    </div>  
+  {% elsif page.class == "raw" %}
+    <div class="clock-text serif gain-center">
+      <hr class="hr-line"><a class="link notall" href="/materials/  ">К материалам проекта</a><hr class="hr-line">
+    </div>   
+  {% else %}
       <div class="clock-text serif"> 
         <hr class="hr-line">{{ page.title}}<hr class="hr-line">
       </div>   
-    {% else %}
-      <div class="clock-text serif"> 
-        <hr class="hr-line">{{ page.title}}<hr class="hr-line">
-      </div>   
-    {% endif %}  
+  {% endif %}  
 <br>  
 {% include clock.html %}

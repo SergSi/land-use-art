@@ -27,18 +27,11 @@ collections:
   info:
     output: true
     sort_by: order
-  articles:
-    output: true
-    sort_by: date
-  materials: 
-    output: true
-  results:  
-    output: true
 
 defaults:
   - scope:
       path: ""
-      type: articles
+      type: article
     values:
       layout: doc   
       supertitle: К списку статей
@@ -57,14 +50,14 @@ defaults:
       superpermalink: /materials/ 
   - scope:
       path: ""
-      type: materials
+      type: raw
     values:
       layout: doc
       supertitle: К материалам проекта
       superpermalink: /materials/ 
   - scope:
       path: ""
-      type: results
+      type: ready
     values:
       layout: doc
       supertitle: К материалам проекта

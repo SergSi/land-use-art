@@ -10,7 +10,7 @@ image_url: books.png
 
 <div>
   {% for post in site.posts %}
-    {% if post.type == "raw" %}
+    {% if post.class == "raw" %}
       {% include articles.html %}
     {% endif %}
   {% endfor %}

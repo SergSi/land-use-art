@@ -6,7 +6,7 @@ image_url: articles.png
 ---
 <div>
   {% for post in site.posts %}
-    {% if post.type == "article" %}
+    {% if post.class == "article" %}
       {% include articles.html %}
     {% endif %}
   {% endfor %}
