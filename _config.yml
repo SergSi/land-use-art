@@ -3,7 +3,6 @@ description: землепользование, межевание, полный 
 subtitle: Проект Национального союза землепользователей
 location: Москва
 date: true
-olddate: 180
 count_post: 4
 
 logo: /assets/img/logo.png
@@ -31,37 +30,9 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: article
-    values:
-      layout: doc   
-      supertitle: К списку статей
-      superpermalink: /articles/ 
-  - scope:
-      path: ""
       type: posts
     values:
       layout: post   
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: doc
-      supertitle: К материалам проекта
-      superpermalink: /materials/ 
-  - scope:
-      path: ""
-      type: raw
-    values:
-      layout: doc
-      supertitle: К материалам проекта
-      superpermalink: /materials/ 
-  - scope:
-      path: ""
-      type: ready
-    values:
-      layout: doc
-      supertitle: К материалам проекта
-      superpermalink: /materials/               
 
 # Build settings
 exclude: 
