@@ -231,6 +231,18 @@ ul li:before {
     left:     -5px;
 }
 
+.toc ul li:before {
+  content:  "";
+  position: relative;
+  left:     -5px;
+}
+
+.toc li:before {
+  content:  "";
+  position: relative;
+  left:     -5px;
+}
+
 li + li {
   margin-top: var(--space-list-items);
 }
