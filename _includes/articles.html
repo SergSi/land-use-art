@@ -2,9 +2,9 @@
   <a href="{{ site.baseurl }}{{ post.url }}" target="blank" class="link notall">
     <strong>{{ post.title | upcase }}</strong>{% if post.author %} / {{ post.author }}{% endif %}
     {% if post.summary %}
-      <div class="sans-serif">{{ post.summary | truncatewords: 25 | strip_newlines | markdownify }}</div>
+      <div class="sans-serif">{{ post.summary | truncatewords: 24 | strip_newlines | markdownify }}</div>
     {% else %}                
-      <div class="sans-serif">{{ post.content | truncatewords: 25| strip_newlines | markdownify }}</div>
+      <div class="sans-serif">{{ post.content | truncatewords: 24| strip_newlines | markdownify }}</div>
     {% endif %}
   </a>
 </div><br>
