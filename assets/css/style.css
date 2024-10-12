@@ -167,7 +167,10 @@ p::selection{
 
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400;  
+  font-weight: 400;    
+}
+
+h1, h2 {
   color: FireBrick;
 }
 
@@ -178,8 +181,7 @@ h1 {
   
 h2 {
   margin-top: var(--space-l2-lg);
-  margin-bottom: var(--space-l2-sm);
-  text-decoration: underline;
+  margin-bottom: var(--space-l2-sm);  
 }
 
 h3 {
