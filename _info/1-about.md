@@ -22,7 +22,7 @@ permalink: /about/
 
 # Ведущая организация проекта
 
-<a href="https://nsz.su/" target="_blank" style="color: purple;">Национальный союз землепользователей”</a>
+<a href="https://nsz.su/" target="_blank" style="color: purple;">Межрегиональная общественная организация "Национальный союз землепользователей"</a>
 
 # Партнеры проекта
 
