@@ -30,4 +30,4 @@ permalink: /about/
 
 <a href="https://kadastrsro.ru/" target="_blank" style="color: purple;">Ассоциация “Гильдия кадастровых инженеров”</a>
 
-<a href="https://osenka-kolomna.ru/" target="_blank" style="color: purple;">Коломенский рыбхоз "осенка"”</a>
+<a href="https://osenka-kolomna.ru/" target="_blank" style="color: purple;">Коломенский рыбхоз "Осенка"”</a>
