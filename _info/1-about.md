@@ -20,7 +20,7 @@ permalink: /about/
 
 <a href="https://t.me/+RDilw91lQY0yMzgy" target="_blank" style="color: purple;">Проект "Схема" - создание руководящих документов, обучение составлению руководящих документов</a>
 
-# Ведущая оргаизация проекта
+# Ведущая организация проекта
 
 <a href="https://nsz.su/" target="_blank" style="color: purple;">Национальный союз землепользователей”</a>
 
