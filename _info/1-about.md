@@ -29,3 +29,5 @@ permalink: /about/
 <a href="https://xn----mtbukben7em.xn--p1ai/" target="_blank" style="color: purple;">Союз потребительских обществ “РУСЬ”</a>
 
 <a href="https://kadastrsro.ru/" target="_blank" style="color: purple;">Ассоциация “Гильдия кадастровых инженеров”</a>
+
+<a href="https://osenka-kolomna.ru/" target="_blank" style="color: purple;">Коломенский рыбхоз "осенка"”</a>
