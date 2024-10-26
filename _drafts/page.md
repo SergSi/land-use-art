@@ -4,8 +4,6 @@ subtitle:
 summary:
 author: 
 layout: doc
-no-toc: 1
-no-data: 1
 gallery:
   - image_url: example-1.jpg
     caption: Great images 
