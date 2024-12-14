@@ -229,7 +229,7 @@ ul {
 }
 
 ul li:before {
-    content:  "—";
+    content:  "–";
     position: relative;
     left:     -5px;
 }
