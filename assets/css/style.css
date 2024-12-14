@@ -251,7 +251,8 @@ li + li {
 }
 
 ul {
-  margin: var(--space-default);
+  margin-bottom: var(--space-default);  
+  margin-top: -1rem;  
 }
 
 li :is(ul, ol) {
