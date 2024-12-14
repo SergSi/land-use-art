@@ -250,6 +250,10 @@ li + li {
   margin-top: var(--space-list-items);
 }
 
+ul {
+  margin: var(--space-default);
+}
+
 li :is(ul, ol) {
   margin-top: var(--space-list-items);
   margin-bottom: 0;
