@@ -307,7 +307,7 @@ li :is(ul, ol) {
   font-size: clamp(1.8rem, 1.625rem + 0.875vw, 2.5rem);
   text-align: center;
   text-transform: uppercase;
-  color: var(--font-color);      
+  color: var(--font-color);
 }
 
 blockquote {
