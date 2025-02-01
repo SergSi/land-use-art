@@ -298,7 +298,7 @@
                     // Обновляем текст и плавно появляемся
                     clock.textContent = closestTime.text;
                     clock.style.opacity = 1;
-                }, 2000); // Задержка для анимации исчезновения
+                }, 2100); // Задержка для анимации исчезновения
             } else {
                 // Иначе просто отображаем текст без анимации
                 clock.textContent = closestTime.text;
