@@ -307,7 +307,7 @@
         }
 
         // Обновляем часы каждую секунду
-        setInterval(updateClock, 10000);
+        setInterval(updateClock, 1000);
         // Инициализация при загрузке страницы
         updateClock();
 
