@@ -506,6 +506,7 @@ ol {margin-bottom: 1.5rem;}
   transition: all .7s;
   vertical-align: top;  
   border: 1px solid var(--font-color); 
+  min-height: 22rem;
   }
 
 .text{
@@ -821,7 +822,8 @@ figcaption {
 @media only all and (max-width: 1400px) {
 
   .collumn{
-    width: 30%;} 
+    width: 30%;
+    min-height: auto;} 
 
   .container.shadow {
     border-style: none;
@@ -838,7 +840,8 @@ figcaption {
 @media only all and (max-width: 900px) {
 
   .collumn{
-    width: 47%;}  
+    width: 47%;
+  }  
 
 }  
 
@@ -846,7 +849,8 @@ figcaption {
 @media only all and (max-width: 600px) {
 
   .collumn{
-    width: 98%;} 
+    width: 98%;
+  } 
  
   .collumn .headline.hl1{     
     font-size: 1.5rem}    
