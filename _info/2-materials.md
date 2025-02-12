@@ -1,23 +1,10 @@
 ---
-title: Материалы проекта
+title: Нормативы
 subtitle: Материалы проекта
 layout: info
 permalink: /materials/   
 image_url: books.png 
 ---
-
-<h1>Рабочие документы проекта</h1>
-
-<div>
-  {% for post in site.posts %}
-    {% if post.class == "raw" %}
-      {% include articles.html %}
-    {% endif %}
-  {% endfor %}
-</div>
-
-<h1 style="margin-top: -0.1rem;" >Результаты проекта</h1>
-
 
  {% for doc in site.data.docs %}
  <div class="left gain-center">

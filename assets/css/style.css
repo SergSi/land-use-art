@@ -500,22 +500,19 @@ ol {margin-bottom: 1.5rem;}
 .collumn{
   display: inline-block;
   line-height: 120%;
-  width: 22.5%;
+  width: 14.2%;
   padding: 0 1% 0 1%;
   margin-bottom: 30px;
   transition: all .7s;
-  vertical-align: top;   
-}
+  vertical-align: top;  
+  border: 1px solid var(--font-color); 
+  }
 
 .text{
   width: 100%;
   font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
   text-transform: uppercase;
   padding: 1rem 0 3rem 0;
-}
-
-.collumn + .collumn { 
-    border-left: 1px solid var(--font-color);
 }
 
 .collumn .headline{
@@ -560,8 +557,8 @@ ol {margin-bottom: 1.5rem;}
 }
 
 .collumn .headline.hl3{
-  font-weight: 400;
-  font-size: clamp(2.4rem, 2.186rem + 0.571vw, 2.7rem);  
+  font-weight: 600;
+  font-size: clamp(1.6rem, 1.5rem + 0.5vw, 2rem); 
   font-style: normal;
   box-sizing: border-box;
   padding: 10px 0 10px 0;
@@ -587,7 +584,7 @@ ol {margin-bottom: 1.5rem;}
 }
 
 .collumn .headline.hl4:after{
-  border-bottom: 1px solid var(--font-color);
+  border-bottom: none;
   content: '';
   width: 150px;
   height: 10px;
@@ -651,7 +648,7 @@ font-size: 1.2rem;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  justify-content: center; 
+  justify-content: center;   
 }
 
 .flex-item {
@@ -659,7 +656,7 @@ font-size: 1.2rem;
   margin: 20px;
   font-weight: bold;
   font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
-  text-align: center;  
+  text-align: center;     
 }
 
 /* Link
@@ -812,49 +809,45 @@ figcaption {
 
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media only all and (max-width: 1400px) {
 
-@media only all and (max-width: 1600px) {
-
- .weatherforcastbox{
-    display: none;}
-
-}
-
-@media only all and (max-width: 1200px) {
+  .collumn{
+    width: 30%;} 
 
   .container.shadow {
     border-style: none;
     box-shadow: none;
-    background-color: var(--background-color); 
+    background-color: var(--background-color);   
+  
   }  
+
+  .collumn {
+    border: none;}
  
  }
 
-@media only all and (max-width: 960px) {
-  
-  .collumn{
-    width: 47%;} 
- 
-  .collumn + .collumn {
-    border-left: none;} 	   
+@media only all and (max-width: 900px) {
 
-}
+  .collumn{
+    width: 47%;}  
+
+}  
+
 
 @media only all and (max-width: 600px) {
 
   .collumn{
-    width: 100%;}  
-
-  .collumn + .collumn {
-      border-left: none;
-      border-bottom: 1px solid var(--font-color);
-      padding-bottom: 1rem;}  
+    width: 98%;} 
+ 
+  .collumn .headline.hl1{     
+    font-size: 1.5rem}    
 
 }
 
 @media only all and (max-width: 360px) {
 
+
   .collumn .headline.hl1{     
     font-size: 1.5rem}   
-
+  
 }
