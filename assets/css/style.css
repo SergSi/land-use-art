@@ -691,6 +691,7 @@ text-shadow: 3px 3px 1px rgba(47,47,47,0.2);
 
 .gain-center:hover {
   transform: scale(1.05); /* Увеличиваем масштаб */
+  background-color: rgba(0, 0, 0, 0.05); /* Затемнение фона с прозрачностью 50% */
 }
 
  /* IMG 

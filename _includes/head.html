@@ -23,14 +23,18 @@
     <div class="clock-text serif gain-center">
       <hr class="hr-line"><a class="link notall" href="/articles/">К списку статей</a><hr class="hr-line">
     </div>
-  {% elsif page.class == "news" %}
-    <div class="clock-text serif gain-center">
-      <hr class="hr-line"><a class="link notall" href="/archive/">К архиву новостей</a><hr class="hr-line">
-    </div>  
   {% elsif page.class == "raw" %}
     <div class="clock-text serif gain-center">
-      <hr class="hr-line"><a class="link notall" href="/materials/  ">К материалам проекта</a><hr class="hr-line">
+      <hr class="hr-line"><a class="link notall" href="/materials/">К нормативным материалам</a><hr class="hr-line">
     </div>   
+  {% elsif page.class == "methods" %}
+    <div class="clock-text serif gain-center">
+      <hr class="hr-line"><a class="link notall" href="/methods/">К списку методов</a><hr class="hr-line">
+    </div>   
+  {% elsif page.class == "expert" %}
+    <div class="clock-text serif gain-center">
+      <hr class="hr-line"><a class="link notall" href="/expert/">К списку примеров</a><hr class="hr-line">
+    </div>    
   {% else %}
       <div class="clock-text serif"> 
         <hr class="hr-line">{{ page.title}}<hr class="hr-line">
