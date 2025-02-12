@@ -9,10 +9,11 @@
       <div class="news-container">   
           {% include head.html %}        
           <div class="collumns">
+            {% assign skip_posts = site.count_post %}
             {% for post in site.posts %}
-              {% if post.class == "news" %}
-                {% include columns.html %} 
-              {% endif %}             
+              {% if forloop.index > skip_posts %}
+                {% include columns.html %}
+              {% endif %}
             {% endfor %}
           </div>
       </div>
