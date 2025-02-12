@@ -24,13 +24,8 @@
     </div>
     <div class="news-container">
       <div class="collumns" >
-        {% assign N = 0 %}
-        {% for post in site.posts %}
-          {% if N == site.count_post %}
-            {% break %}
-          {% endif %}
-          {% assign N =  N | plus: 1 %}
-          {% include columns.html %}       
+        {% for post in site.posts limit:site.count_post %}
+          {% include columns.html %}
         {% endfor %}
       </div>
     </div>
