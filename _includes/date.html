@@ -1,4 +1,20 @@
 <div style="font-family: 'Old Standard TT', serif;">
-{{page.author}}<br>
-{{ page.date | date: "%d %B %Y г." | replace: "December", "декабря" | replace: "January", "января" | replace: "February", "февраля"| replace: "March", "марта"| replace: "April", "апреля"| replace: "May", "мая"| replace: "June", "июня"| replace: "July", "июля"| replace: "August", "августа"| replace: "September", "сентября"| replace: "October", "октября"| replace: "November", "ноября" }}
-</div>
+    {% if page.author %}
+      {{ page.author }}<br>
+    {% endif %}
+    {% if page.date %}
+    {{ page.date | date: "%d %B %Y г." 
+      | replace: "January", "января" 
+      | replace: "February", "февраля" 
+      | replace: "March", "марта" 
+      | replace: "April", "апреля" 
+      | replace: "May", "мая" 
+      | replace: "June", "июня" 
+      | replace: "July", "июля" 
+      | replace: "August", "августа" 
+      | replace: "September", "сентября" 
+      | replace: "October", "октября" 
+      | replace: "November", "ноября" 
+      | replace: "December", "декабря" }}
+    {% endif %}
+  </div>

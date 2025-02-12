@@ -1,9 +1,13 @@
 <div class="flex-container" style="margin-bottom: 2rem;">
-      <div class="flex-item center" style="width: 80%;">    
-            <a href="\assets\img\{{ include.file-1 }}">
-            <img src="\assets\img\{{ include.file-1 }}" style="width:{{ include.width }}; border-width: {{ include.border }};" alt="{{ include.caption-1 }}"/>
-            </a>
-            <figcaption>{{ include.caption-1 }}</figcaption> 
-      </div>    
-</div>
+      <div class="flex-item center" style="width: 80%;">
+        <figure>
+          <a href="/assets/img/{{ include.file-1 }}">
+            <img src="/assets/img/{{ include.file-1 }}" style="width:{{ include.width | default: '100%' }}; border-width: {{ include.border | default: '0' }};" alt="{{ include.caption-1 }}"/>
+          </a>
+            {% if include.caption-1 %}
+                  <figcaption>{{ include.caption-1 }}</figcaption>
+            {% endif %}
+        </figure>
+      </div>
+    </div>
 

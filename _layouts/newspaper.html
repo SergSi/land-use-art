@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    {% include header.html %} 
+    {% include header.html %}
     <style>
-      p {text-indent: 0rem;
-      margin-bottom: 0.1rem;}     
+      .news-container p {
+        text-indent: 0rem;
+        margin-bottom: 0.1rem;
+      }
     </style>
   </head>
   <body id="timeoutshort">
     <div class="head news-container">
-      {% include head.html %}       
+      {% include head.html %}
       <div class="collumns">
-          {% for doc in site.info %}
-            <div class="collumn gain-center">
-              <a href="{{ site.baseurl }}{{ doc.url }}" target="blank" class="link notall">
-                <div class="head"><span class="headline hl1">{{ doc.title | upcase }}</span></div>
-                {% if doc.image_url %}<div><img class="media bordernot" style="width: 50%;" src="{{ site.urlimg }}{{ doc.image_url }}"></div>{% endif %} 
-              </a>
-            </div>
-          {% endfor %}
-            <div class="text serif linetitle">НОВЫЕ МАТЕРИАЛЫ</div>                
+        {% for doc in site.info %}
+          <div class="collumn gain-center">
+            <a href="{{ site.baseurl }}{{ doc.url }}" target="_blank" class="link notall">
+              <div class="head"><span class="headline hl1">{{ doc.title | upcase }}</span></div>
+              {% if doc.image_url and doc.image_url != "" %}
+                <div><img class="media bordernot" style="width: 50%;" src="{{ site.urlimg }}{{ doc.image_url }}"></div>
+              {% endif %}
+            </a>
+          </div>
+        {% endfor %}
+        <div class="text serif linetitle">НОВЫЕ МАТЕРИАЛЫ</div>
       </div>
     </div>
     <div class="news-container">
-      <div class="collumns" >
-        {% for post in site.posts limit:site.count_post %}
+      <div class="collumns">
+        {% for post in site.posts limit: site.count_post %}
           {% include columns.html %}
         {% endfor %}
       </div>
     </div>
-    <footer>      
+    <footer>
       {% include foot.html %}
     </footer>
-    </body>
-    </html>
+  </body>
+</html>

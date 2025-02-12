@@ -1,10 +1,11 @@
 <div class="left gain-centerN">
-  <a href="{{ site.baseurl }}{{ post.url }}" target="blank" class="link notall">
+  <a href="{{ site.baseurl }}{{ post.url }}" target="_blank" class="link notall">
     <strong>{{ post.title | upcase }}</strong>{% if post.author %} / {{ post.author }}{% endif %}
     {% if post.summary %}
       <div class="sans-serif">{{ post.summary | truncatewords: 15 | strip_newlines | markdownify }}</div>
-    {% else %}                
-      <div class="sans-serif">{{ post.content | truncatewords: 15| strip_newlines | markdownify }}</div>
+    {% else %}
+      <div class="sans-serif">{{ post.content | truncatewords: 15 | strip_newlines | markdownify }}</div>
     {% endif %}
   </a>
-</div><br>
+</div>
+<br>
