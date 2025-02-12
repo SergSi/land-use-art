@@ -5,7 +5,7 @@
           {{ site.subtitle }}
         </div>     
       {% else %}
-        <div class="head gain-center">
+        <div class="head gain-centerN">
           <a class="link notall" href="{{ site.baseurl }}/">
             {{ site.title | upcase }}
             <div class="subhead serif">
@@ -20,19 +20,19 @@
     <div style="transition: opacity 2s ease-in-out;" class="clock-text serif" id="MyClockDisplay">&#160;</div>
   <hr class="hr-line">
   {% elsif page.class == "article" %}
-    <div class="clock-text serif gain-center">
+    <div class="clock-text serif gain-centerN">
       <hr class="hr-line"><a class="link notall" href="/articles/">К списку статей</a><hr class="hr-line">
     </div>
   {% elsif page.class == "raw" %}
-    <div class="clock-text serif gain-center">
+    <div class="clock-text serif gain-centerN">
       <hr class="hr-line"><a class="link notall" href="/materials/">К нормативным материалам</a><hr class="hr-line">
     </div>   
   {% elsif page.class == "methods" %}
-    <div class="clock-text serif gain-center">
+    <div class="clock-text serif gain-centerN">
       <hr class="hr-line"><a class="link notall" href="/methods/">К списку методов</a><hr class="hr-line">
     </div>   
   {% elsif page.class == "expert" %}
-    <div class="clock-text serif gain-center">
+    <div class="clock-text serif gain-centerN">
       <hr class="hr-line"><a class="link notall" href="/expert/">К списку примеров</a><hr class="hr-line">
     </div>    
   {% else %}
