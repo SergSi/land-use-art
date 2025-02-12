@@ -7,7 +7,7 @@ image_url: books.png
 ---
 
  {% for doc in site.data.docs %}
- <div class="left gain-center">
+ <div class="left gain-centerN">
   <a href="\assets\docs\{{ doc.file }}" target="_blank" class="link notall">
     <strong>{{ doc.title | upcase }}</strong>{% if doc.author %} / {{ doc.author }}{% endif %}
     {% if doc.subtitle %}<br>{{ doc.subtitle }}{% endif %}<br>
