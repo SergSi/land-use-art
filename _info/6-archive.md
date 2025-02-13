@@ -1,9 +1,69 @@
 ---
 title: Архив
 image_url: logo.png
-layout: archive  
+layout: news  
 image_url: archiv.png
 permalink: /archive/
 ---
+ <div> 
+    {% assign grouped_posts = site.posts | group_by: "class" %}
+    {% assign class_data = site.data.classes %}
 
+    {% if class_data.order %}
+        {% assign class_order = class_data.order %}
+    {% else %}
+        {% assign class_order = grouped_posts | map: "name" | sort %}
+    {% endif %}
 
+    {% assign misc_posts = "" | split: "" %}
+
+    {% for post in site.posts %}
+        {% unless class_order contains post.class %}
+        {% assign misc_posts = misc_posts | push: post %}
+        {% endunless %}
+    {% endfor %}
+
+    {% for class_key in class_order %}
+        {% assign group = grouped_posts | where: "name", class_key | first %}
+        {% if group and group.items.size > 0 %}
+        {% assign class_name = class_data.names[class_key] | default: class_key %}
+        <h2 class="text serif linetitle">{{ class_name | capitalize }}</h2>
+        <div class="card-grid">
+            {% for post in group.items %}
+            <div class="card">
+                <a href="{{ post.url }}">
+                {% if post.image %}
+                    <img src="{{ post.image_url }}" alt="{{ post.title }}" class="card-image">
+                {% endif %}
+                <div class="card-content">
+                    <h3 class="card-title">{{ post.title }}</h3>                    
+                    <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                    <p class="card-date"><i>{% include month.html %}</i></p>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endfor %}
+
+    {% if misc_posts.size > 0 %}
+        <h2 class="text serif linetitle">Разное</h2>
+        <div class="card-grid">
+        {% for post in misc_posts %}
+            <div class="card">
+            <a href="{{ post.url }}">
+                {% if post.image %}
+                <img src="{{ post.image }}" alt="{{ post.title }}" class="card-image">
+                {% endif %}
+                <div class="card-content">
+                <h3 class="card-title">{{ post.title }}</h3>                
+                <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                <p class="card-date"><i>{% include month.html %}</i></p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+</div>

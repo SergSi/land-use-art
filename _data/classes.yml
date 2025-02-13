@@ -1,0 +1,10 @@
+names:
+  article: Статьи
+  expert: Заключения
+  methods: Методы
+  news: Новости
+order:
+  - news
+  - article
+  - methods
+  - expert

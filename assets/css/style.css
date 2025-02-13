@@ -472,7 +472,7 @@ th {background-color: rgb(236, 236, 236);}
 table {margin-bottom: 1.5rem;}
 ol {margin-bottom: 1.5rem;}
 
-/* Next transfer
+/* Text transfer
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .break {
@@ -817,8 +817,89 @@ figcaption {
   100% {opacity: 1;}
 }
 
+
+/*КАРТОЧКИ
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 карточек в ряд */
+  gap: 1rem; /* Отступ между карточками */
+  margin-bottom: 2rem; /* Отступ между группами */
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card a {
+  text-decoration: none; /* Убираем подчеркивание для всех текстов внутри ссылки */
+  color: inherit; /* Сохраняем цвет текста, как у родителя */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+
+.card-date {
+  font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
+  font-style: normal;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #666;
+  margin: 0 0 0.5rem 0;
+}
+
+.card-summary {
+  font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
+  font-style: normal;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #444;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 карточки в ряд на экранах меньше 1200px */
+  }
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 768px */
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 480px */
+  }
+}
+
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 @media only all and (max-width: 1400px) {
 
   .collumn{

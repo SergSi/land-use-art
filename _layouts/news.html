@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  {% include top.html %}  
+  <head>
+    {% include header.html %}
+  </head>
+  <body id="timeoutshort">
+  <main> 
+    <div class="news-container"> 
+      {% include head.html %}
+    </div>           
+    <div class="news-container">
+      {{ content }}
+    </div>               
+  </main>
+  <footer>      
+      {% include foot.html %}
+  </footer>
+  </body>
+</html>
