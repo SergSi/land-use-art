@@ -861,6 +861,7 @@ figcaption {
   font-weight: bold;
   margin: 0 0 0.5rem 0;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .card-date {
