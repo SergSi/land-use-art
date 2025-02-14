@@ -1,7 +1,7 @@
 names:
   article: Статьи
   expert: Примеры заключений 
-  methods: Методы исследования
+  methods: Методические материалы
   news: Новости
 order:
   - methods
