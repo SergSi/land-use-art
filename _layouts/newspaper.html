@@ -41,7 +41,7 @@
                 <div class="card">
                     <a href="{{ post.url }}">
                     {% if post.image %}
-                        <img src="{{ site.urlimg }}{{ post.image_url }}" alt="{{ post.title }}" class="card-image">
+                        <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
                     {% endif %}
                     <div class="card-content">
                         <h3 class="card-title">{{ post.title }}</h3>                    
@@ -61,8 +61,8 @@
             {% for post in misc_posts %}
                 <div class="card">
                 <a href="{{ post.url }}">
-                    {% if post.image_url %}
-                    <img src="{{ site.urlimg }}{{ post.image_url }}" alt="{{ post.title }}" class="card-image">
+                    {% if post.image %}
+                    <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
                     {% endif %}
                     <div class="card-content">
                     <h3 class="card-title">{{ post.title }}</h3>                
