@@ -48,3 +48,5 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+include:
+  - assets/img
