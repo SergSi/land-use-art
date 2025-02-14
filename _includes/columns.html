@@ -1,9 +1,0 @@
-<div class="collumn gain-center sans-serif">
-    <a href="{{ site.baseurl }}{{ post.url }}" target="blank" class="notall" style="height: 10rem;">  
-      <div class="head headline hl3">       
-        {{ post.title }}        
-        {% if post.subtitle %}<p><span class="headline hl4">{{ post.subtitle }}</span></p>{% endif %}
-      </div>
-      {% if post.summary | truncatewords: 30  %}<div><p><span class="summary break cancel">{{ post.summary }}</span></p></div>{% endif %}      
-    </a>      
-</div>

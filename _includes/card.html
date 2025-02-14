@@ -22,7 +22,7 @@
           {% assign group = grouped_posts | where: "name", class_key | first %}
           {% if group and group.items.size > 0 %}
           {% assign class_name = class_data.names[class_key] | default: class_key %}
-          <h2 class="text serif linetitle">{{ class_name | capitalize }}</h2>
+          <h2 class="text serif linetitle" style="text-transform: uppercase;">{{ class_name | capitalize }}</h2>
           <div class="card-grid">
               {% for post in group.items %}
               <div class="card">
