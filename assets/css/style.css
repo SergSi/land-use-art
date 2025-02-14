@@ -832,7 +832,7 @@ figcaption {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.7s ease, box-shadow 0.7s ease;
 }
 
 .card a {
@@ -869,6 +869,7 @@ figcaption {
   font-family: 'Roboto Condensed', sans-serif;
   color: #666;
   margin: 0 0 0.5rem 0;
+  text-align: left;
 }
 
 .card-summary {
@@ -877,6 +878,7 @@ figcaption {
   font-family: 'Roboto Condensed', sans-serif;
   color: #444;
   margin: 0;
+  text-align: left;
 }
 
 @media (max-width: 1200px) {

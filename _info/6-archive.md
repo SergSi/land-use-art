@@ -1,5 +1,5 @@
 ---
-title: Архив
+title: База знаний
 image_url: logo.png
 layout: news  
 image_url: archiv.png

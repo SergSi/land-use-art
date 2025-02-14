@@ -1,10 +1,10 @@
 names:
   article: Статьи
-  expert: Заключения
-  methods: Методы
+  expert: Примеры заключений эксперта
+  methods: Методы исследования
   news: Новости
 order:
-  - news
-  - article
   - methods
   - expert
+  - article
+  - news

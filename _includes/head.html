@@ -22,23 +22,23 @@
   <hr class="hr-line">
 {% elsif page.class == "article" %}
   <div class="clock-text serif gain-centerN">
-    <hr class="hr-line"><a class="link notall" href="/articles/">К списку статей</a><hr class="hr-line">
+    <hr class="hr-line"><a class="link notall" href="/articles/">Статья</a><hr class="hr-line">
   </div>
 {% elsif page.class == "materials" %}
   <div class="clock-text serif gain-centerN">
-    <hr class="hr-line"><a class="link notall" href="/materials/">К нормативным материалам</a><hr class="hr-line">
+    <hr class="hr-line"><a class="link notall" href="/materials/">Нормативный материал</a><hr class="hr-line">
   </div>
 {% elsif page.class == "methods" %}
   <div class="clock-text serif gain-centerN">
-    <hr class="hr-line"><a class="link notall" href="/methods/">К списку методов</a><hr class="hr-line">
+    <hr class="hr-line"><a class="link notall" href="/methods/">Метод исследования</a><hr class="hr-line">
   </div>
 {% elsif page.class == "expert" %}
   <div class="clock-text serif gain-centerN">
-    <hr class="hr-line"><a class="link notall" href="/expert/">К списку примеров</a><hr class="hr-line">
+    <hr class="hr-line"><a class="link notall" href="/expert/">Пример заключения</a><hr class="hr-line">
   </div>
 {% else %}
   <div class="clock-text serif">
-    <hr class="hr-line">{{ page.title }}<hr class="hr-line">
+    <hr class="hr-line"><a class="link notall" href="/">Прочий материал</a><hr class="hr-line">
   </div>
 {% endif %}
 
