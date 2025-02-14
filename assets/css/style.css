@@ -826,7 +826,7 @@ figcaption {
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.7s ease, box-shadow 0.7s ease;
-}
+  background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.05)); /* Градиентное затемнение */}
 
 .card a {
   text-decoration: none; /* Убираем подчеркивание для всех текстов внутри ссылки */
