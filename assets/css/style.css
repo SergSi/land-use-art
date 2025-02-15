@@ -718,13 +718,13 @@ figcaption {
 
 @media (max-width: 1400px) {
   .card-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 карточки в ряд на экранах меньше 1200px */
+    grid-template-columns: repeat(4, 1fr); /* 4 карточки в ряд на экранах меньше 1400px */
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 768px */
+    grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 800px */
   }
 }
 
