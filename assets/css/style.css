@@ -278,7 +278,7 @@ li :is(ul, ol) {
 }
 
 .toc-item {
- color: DimGray;
+  color: purple;
 }
 
 .doc-head{
