@@ -680,6 +680,11 @@ figcaption {
   height: 150px;
   object-fit: cover;
   filter: grayscale(90%);
+  transition: filter 2.5s ease 0.5s; /* Задержка 0.5 секунды перед началом анимации */
+}
+
+.card:hover .card-image {
+  filter: grayscale(0%); /* Убираем черно-белый фильтр */
 }
 
 .card-content {
