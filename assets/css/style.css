@@ -322,7 +322,7 @@ blockquote {
   margin-bottom: 10px;
   }
 
-  blockquote p {
+blockquote p {
   font-style: italic; 
   }
 
@@ -373,17 +373,6 @@ blockquote {
   height: 13px;
   display: block;
   margin: 0 auto 1rem auto;
-}
-
-.weatherforcastbox{
-  position: relative;
-  width: 12%;
-  left: auto;
-  border: 3px double var(--font-color);
-  padding: 10px 15px 10px 15px;
-  line-height: 20px;
-  display: inline-block;
-  margin: 0 50px 20px -360px;
 }
 
 .logo{
@@ -472,7 +461,7 @@ th {background-color: rgb(236, 236, 236);}
 table {margin-bottom: 1.5rem;}
 ol {margin-bottom: 1.5rem;}
 
-/* Text transfer
+/* Text transfer - пероеносы
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .break {
@@ -491,156 +480,8 @@ ol {margin-bottom: 1.5rem;}
   overflow-wrap: break-word;
 }
 
-/* Columns
+/* Flex
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.collumns{
-}
-
-.collumn{
-  display: inline-block;
-  line-height: 120%;
-  width: 14.2%;
-  padding: 0 1% 0 1%;
-  margin-bottom: 30px;
-  transition: all .7s;
-  vertical-align: top;  
-  border: 1px solid var(--font-color); 
-  min-height: 22rem;
-  }
-
-.text{
-  width: 100%;
-  font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
-  text-transform: uppercase;
-  padding: 1rem 0 3rem 0;
-}
-
-.collumn .headline{
-  text-align: center;
-  line-height: normal;
-  font-family: 'Old Standard TT', serif;
-  display: block;
-  margin: 0 auto;
-}
-
-.collumn .headline.hl1{
-  font-weight: 700;
-  font-size: clamp(1.6rem, 1.5rem + 0.5vw, 2rem);
-  text-transform: uppercase;
-  padding: 10px 0 10px 0;
-}
-
-.collumn .headline.hl2{
-  font-weight: 400;
-  font-style: italic;
-  font-size: clamp(1.5rem, 1.425rem + 0.375vw, 1.8rem);
-  box-sizing: border-box;
-  padding: 10px 0 10px 0;
-}
-
-.collumn .headline.hl2:before{
-  border-top: 1px solid var(--font-color);
-  content: '';
-  width: 150px;
-  height: 7px;
-  display: block;
-  margin: 0 auto;
-}
-
-.collumn .headline.hl2:after{
-  border-bottom: 1px solid var(--font-color);
-  content: '';
-  width: 150px;
-  height: 13px;
-  display: block;
-  margin: 0 auto -1rem auto;
-}
-
-.collumn .headline.hl3{
-  font-weight: 600;
-  font-size: clamp(1.6rem, 1.5rem + 0.5vw, 2rem); 
-  font-style: normal;
-  box-sizing: border-box;
-  padding: 10px 0 10px 0;
-  text-indent: 0px;
-}
-
-.collumn .headline.hl4{
-  font-weight: 400;
-  font-size: clamp(1.6rem, 1.5rem + 0.5vw, 2rem);
-  font-style: italic;
-  box-sizing: border-box;
-  padding: 10px 0 10px 0;
-  margin-bottom: 1rem;
-}
-
-.collumn .headline.hl4:before{
-  border-top: 1px solid var(--font-color);
-  content: '';
-  width: 150px;
-  height: 7px;
-  display: block;
-  margin: 0 auto;
-}
-
-.collumn .headline.hl4:after{
-  border-bottom: none;
-  content: '';
-  width: 150px;
-  height: 10px;
-  display: block;
-  margin: 0 auto -1rem auto;
-}
-
-.collumn .summary{
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.6rem, 1.55rem + 0.25vw, 1.8rem);
-  font-style: normal;
-  text-align: left;
-  font-weight: 300;
-  display: block;
-  letter-spacing: 0.5px; 
-  margin-bottom: 1rem; 
- }
-
-.collumn .citation{
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 1.75rem + 1.25vw, 3rem);
-  /*font-style: italic;*/
-  text-align: center;
-  font-weight: 400;
-  display: block;
-  margin: 40px 0 40px 0;
-  font-feature-settings: "liga", "dlig";
-}
-
-.collumn .citation:before{
-  border-top: 1px solid var(--font-color);
-  content: '';
-  width: 150px;
-  height: 8px;
-  display: block;
-  margin: 0 auto;
-}
-
-.collumn .citation:after{
-  border-bottom: 1px solid var(--font-color);
-  content: '';
-  width: 150px;
-  height: 12px;
-  display: block;
-  margin: 0 auto -1rem auto;
-}
-
-.collumn .figure {
-  margin: 0 0 20px;
-}
-
-.collumn .figcaption{
-font-style: normal;
-font-size: 1.2rem;
-}
 
 .flex-container {
   padding: 0;
@@ -756,27 +597,6 @@ figcaption {
   border: 1px solid #666; /* Рамка вокруг изображения */
  }
 
-.media {
-  -webkit-filter: sepia(80%) contrast(1) opacity(0.8);
-  filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
-  mix-blend-mode: multiply;
-  display: block;
-  margin: auto;
-  margin-bottom: 0.6rem;
-  width: auto;
-  max-width: 75%;
-}
-
-.foto {
-  display: block;
-  margin: auto;
-  width: auto;
-  max-width: 70%;
-  aspect-ratio: auto; 
-  border-radius: 0.3em;
-  box-shadow: 0.1em 0.4em 0.7em 0.1em var(--shadow-color); 
-}
-
 .left-foto{
   float: left;
   margin: 10px 20px 2px 0px;
@@ -828,7 +648,7 @@ figcaption {
 }
 
 
-/*КАРТОЧКИ
+/*CARDS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .card-grid {
@@ -852,7 +672,7 @@ figcaption {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-image {
@@ -893,6 +713,9 @@ figcaption {
   text-align: left;
 }
 
+/*MEDIAQUERIES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 @media (max-width: 1400px) {
   .card-grid {
     grid-template-columns: repeat(4, 1fr); /* 4 карточки в ряд на экранах меньше 1200px */
@@ -909,53 +732,4 @@ figcaption {
   .card-grid {
     grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 480px */
   }
-}
-
-/*MEDIAQUERIES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-@media only all and (max-width: 1400px) {
-
-  .collumn{
-    width: 30%;
-    min-height: auto;} 
-
-  .container.shadow {
-    border-style: none;
-    box-shadow: none;
-    background-color: var(--background-color);   
-  
-  }  
-
-  .collumn {
-    border: none;}
- 
- }
-
-@media only all and (max-width: 900px) {
-
-  .collumn{
-    width: 47%;
-  }  
-
-}  
-
-
-@media only all and (max-width: 600px) {
-
-  .collumn{
-    width: 98%;
-  } 
- 
-  .collumn .headline.hl1{     
-    font-size: 1.5rem}    
-
-}
-
-@media only all and (max-width: 360px) {
-
-
-  .collumn .headline.hl1{     
-    font-size: 1.5rem}   
-  
 }
