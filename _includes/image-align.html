@@ -1,0 +1,11 @@
+{% assign align = include.align | default: 'center' %}
+{% assign width = include.width | default: '40%' %}
+
+<div class="image-container image-{{ align }}" style="width: {{ width }};">
+  <figure>
+    <a href="/assets/img/{{ include.file }}">
+      <img src="/assets/img/{{ include.file }}" alt="{{ include.caption }}" style="width: 100%; height: auto;">
+    </a>
+    <figcaption>{{ include.caption }}</figcaption>
+  </figure>
+</div>

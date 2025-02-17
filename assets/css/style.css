@@ -515,6 +515,7 @@ ol {margin-bottom: 1.5rem;}
   font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
   color: #666;
   margin-bottom: 2rem;
+  font-weight: bold;
 }
 
 /* Link
@@ -563,34 +564,41 @@ text-shadow: 3px 3px 1px rgba(47,47,47,0.2);
  /* IMG 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .image-left {
-  float: left;
-  margin: 0 1rem 1rem 0;
+  float: left; /* Выравнивание влево */
+  margin-right: 1rem; /* Отступ справа для обтекания текстом */
 }
 
 .image-right {
-  float: right;
-  margin: 0 0 1rem 1rem;
+  float: right; /* Выравнивание вправо */
+  margin-left: 1rem; /* Отступ слева для обтекания текстом */
 }
 
 .image-center {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto; /* Центрирование */
   text-align: center;
+  float: none; /* Убедимся, что float не применяется */
 }
 
 .flex-container {
   overflow: hidden; /* Чтобы контейнер не схлопывался из-за float */
 }
 
+.image-container {
+  margin-bottom: 1rem; /* Отступ снизу */
+}
 
 figure {
-  text-align: center;  
+  margin: 0; /* Убираем стандартные отступы */
 }
 
 figcaption {
+  text-align: center; /* Центрируем подпись */
+  font-style: normal; /* Курсив для подписи */
+  margin-top: 0.5rem; /* Отступ сверху */
+  color: #666;
+  font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
   font-weight: bold;
-  font-size: 90%; 
-  text-align: center;   
 }
 
 .caption {
