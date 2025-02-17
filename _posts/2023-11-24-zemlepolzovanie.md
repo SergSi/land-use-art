@@ -1,7 +1,6 @@
 ---
 title: Рекомендации по оформлению землепользования
 summary: основные действия по оформлению землепользования
-permalink: /zemlepolzovanie/ 
 class: raw
 layout: doc  
 ---
