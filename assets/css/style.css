@@ -754,10 +754,19 @@ figcaption {
   }
 }
 
+@media (max-width: 920px) {
+
+  .shadow {
+    border-style: none;
+    box-shadow: none; 
+  }
+}
+
 @media (max-width: 800px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 800px */
   }
+
 }
 
 @media (max-width: 480px) {
