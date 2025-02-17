@@ -1,10 +1,8 @@
 <div class="flex-container" style="margin-bottom: 2rem;">
   <div class="flex-item">
     {% if include.file-1 %}
-      <figure class="image-{{ include.align | default: 'center' }}">
-        <a href="/assets/img/{{ include.file-1 }}">
-          <img src="/assets/img/{{ include.file-1 }}" alt="{{ include.caption-1 }}">
-        </a>
+      <figure>
+        <a href="/assets/img/{{ include.file-1 }}"><img src="/assets/img/{{ include.file-1 }}" alt="{{ include.caption-1 }}"></a>
         <figcaption>{{ include.caption-1 }}</figcaption>
       </figure>
     {% endif %}
@@ -13,3 +11,4 @@
 {% if include.caption %}
   <figcaption class="global-caption">{{ include.caption }}</figcaption>
 {% endif %}
+
