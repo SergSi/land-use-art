@@ -779,7 +779,7 @@ figcaption {
   overflow: hidden; /* Скрываем содержимое, выходящее за пределы */
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  transition: max-height 0.7s ease, opacity 0.7s ease, padding 0.7s ease;
   padding: 0 10px; /* Начальный отступ */
   border: 1px solid #ccc;
   border-radius: 5px;
