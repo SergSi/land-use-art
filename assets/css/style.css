@@ -758,10 +758,6 @@ figcaption {
   margin-bottom: 10px;
 }
 
-.tab input[type="radio"] {
-  display: none;
-}
-
 .tab-label {
   display: block;
   padding: 10px;
@@ -770,21 +766,12 @@ figcaption {
   border: none;
   border-radius: 5px;
   margin-bottom: 5px;
-  transition: background-color 0.3s ease; /* Плавное изменение фона */
 }
 
 .tab-label h2 {
   margin: 0; /* Убираем отступы у заголовка внутри вкладки */
   font-family: serif;
   text-transform: uppercase;
-}
-
-.tab-label:hover {
-  background-color: #ddd; /* Эффект при наведении */
-}
-
-.tab input[type="radio"]:checked ~ .tab-label {
-  background-color: #ccc; /* Выделение активной вкладки */
 }
 
 /* Анимация для появления и исчезновения содержимого */
