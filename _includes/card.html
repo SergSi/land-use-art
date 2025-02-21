@@ -1,65 +1,104 @@
 <div class="head news-container">
     {% include head.html %}
-    <div> 
-      {% assign grouped_posts = site.posts | group_by: "class" %}
-      {% assign class_data = site.data.classes %}
-  
-      {% if class_data.order %}
-          {% assign class_order = class_data.order %}
-      {% else %}
-          {% assign class_order = grouped_posts | map: "name" | sort %}
-      {% endif %}
-  
-      {% assign misc_posts = "" | split: "" %}
-  
-      {% for post in site.posts %}
-          {% unless class_order contains post.class %}
-          {% assign misc_posts = misc_posts | push: post %}
-          {% endunless %}
-      {% endfor %}
-  
-      {% for class_key in class_order %}
-          {% assign group = grouped_posts | where: "name", class_key | first %}
-          {% if group and group.items.size > 0 %}
-          {% assign class_name = class_data.names[class_key] | default: class_key %}
-          <h2 class="serif linetitle" style="text-transform: uppercase;">{{ class_name | capitalize }}</h2>
-          <div class="card-grid">
-              {% for post in group.items %}
-              <div class="card">
-                  <a href="{{ post.url }}">
-                   <div class="card-content">
-                      <h3 class="card-title">{{ post.title }}</h3>    
-                      {% if post.image %}
-                        <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
-                      {% endif %}                
-                      <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
-                      <p class="card-date"><i>{% include month.html %}</i></p>
-                  </div>
-                  </a>
-              </div>
-              {% endfor %}
-          </div>
-          {% endif %}
-      {% endfor %}
-  
-      {% if misc_posts.size > 0 %}
-          <h2 class="serif linetitle" style="text-transform: uppercase;" >Разное</h2>
-          <div class="card-grid">
-          {% for post in misc_posts %}
-              <div class="card">
-              <a href="{{ post.url }}">
-                  <div class="card-content">
-                  <h3 class="card-title">{{ post.title }}</h3>  
-                  {% if post.image %}
-                    <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
-                  {% endif %}              
-                  <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
-                  <p class="card-date"><i>{% include month.html %}</i></p>
-                  </div>
-              </a>
-              </div>
-          {% endfor %}
-          </div>
-      {% endif %}
-  </div>
-  </div>
+    <div class="tabs">
+        {% assign grouped_posts = site.posts | group_by: "class" %}
+        {% assign class_data = site.data.classes %}
+        
+        {% if class_data.order %}
+            {% assign class_order = class_data.order %}
+        {% else %}
+            {% assign class_order = grouped_posts | map: "name" | sort %}
+        {% endif %}
+        
+        {% assign misc_posts = "" | split: "" %}
+        
+        {% for post in site.posts %}
+            {% unless class_order contains post.class %}
+                {% assign misc_posts = misc_posts | push: post %}
+            {% endunless %}
+        {% endfor %}
+        
+        {% for class_key in class_order %}
+            {% assign group = grouped_posts | where: "name", class_key | first %}
+            {% if group and group.items.size > 0 %}
+                {% assign class_name = class_data.names[class_key] | default: class_key %}
+                <div class="tab">
+                    <input type="radio" id="tab-{{ class_key }}" name="tab-group">
+                    <label for="tab-{{ class_key }}" class="tab-label">
+                        <h2 class="serif linetitle" style="text-transform: uppercase;">{{ class_name | capitalize }}</h2>
+                    </label>
+                    <div class="tab-content">
+                        <div class="card-grid">
+                            {% for post in group.items %}
+                                <div class="card">
+                                    <a href="{{ post.url }}">
+                                        <div class="card-content">
+                                            <h3 class="card-title">{{ post.title }}</h3>
+                                            {% if post.image %}
+                                                <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
+                                            {% endif %}
+                                            <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                            <p class="card-date"><i>{% include month.html %}</i></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+        {% if misc_posts.size > 0 %}
+            <div class="tab">
+                <input type="radio" id="tab-misc" name="tab-group">
+                <label for="tab-misc" class="tab-label">
+                    <h2 class="serif linetitle" style="text-transform: uppercase;">Разное</h2>
+                </label>
+                <div class="tab-content">
+                    <div class="card-grid">
+                        {% for post in misc_posts %}
+                            <div class="card">
+                                <a href="{{ post.url }}">
+                                    <div class="card-content">
+                                        <h3 class="card-title">{{ post.title }}</h3>
+                                        {% if post.image %}
+                                            <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
+                                        {% endif %}
+                                        <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                        <p class="card-date"><i>{% include month.html %}</i></p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<script>
+document.querySelectorAll('.tab-label').forEach(label => {
+    // Обработчик одинарного клика
+    label.addEventListener('click', () => {
+        const tabContent = label.nextElementSibling; // Находим связанный контент
+        const radioInput = label.previousElementSibling; // Находим radio-кнопку
+
+        if (tabContent.style.maxHeight === "0px" || tabContent.classList.contains('collapsed')) {
+            // Если контент скрыт, показываем его
+            tabContent.style.maxHeight = tabContent.scrollHeight + "px"; // Раскрываем до полной высоты
+            tabContent.style.opacity = "1";
+            tabContent.style.padding = "10px";
+            tabContent.classList.remove('collapsed');
+            radioInput.checked = true; // Активируем вкладку
+        } else {
+            // Если контент видим, скрываем его
+            tabContent.style.maxHeight = "0";
+            tabContent.style.opacity = "0";
+            tabContent.style.padding = "0 10px";
+            tabContent.classList.add('collapsed');
+            radioInput.checked = false; // Деактивируем вкладку
+        }
+    });
+});
+</script>

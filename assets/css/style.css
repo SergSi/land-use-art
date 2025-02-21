@@ -745,6 +745,59 @@ figcaption {
   text-align: left;
 }
 
+/*ВЕРТИКАЛЬНЫЕ ВКЛАДКИ
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Основные стили для вкладок */
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab {
+  margin-bottom: 10px;
+}
+
+.tab input[type="radio"] {
+  display: none;
+}
+
+.tab-label {
+  display: block;
+  padding: 10px;
+  background-color: var(--background-color);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease; /* Плавное изменение фона */
+}
+
+.tab-label h2 {
+  margin: 0; /* Убираем отступы у заголовка внутри вкладки */
+  font-family: serif;
+  text-transform: uppercase;
+}
+
+.tab-label:hover {
+  background-color: #ddd; /* Эффект при наведении */
+}
+
+.tab input[type="radio"]:checked ~ .tab-label {
+  background-color: #ccc; /* Выделение активной вкладки */
+}
+
+/* Анимация для появления и исчезновения содержимого */
+.tab-content {
+  overflow: hidden; /* Скрываем содержимое, выходящее за пределы */
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  padding: 0 10px; /* Начальный отступ */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
