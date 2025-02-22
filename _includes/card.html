@@ -118,7 +118,7 @@
 <script>
     document.querySelectorAll('.tab-label').forEach(label => {
         // Обработчик одинарного клика
-        label.addEventListener('click', () => {
+        label.addEventListener('pointerdown', () => {
             const tabContent = label.nextElementSibling; // Находим связанный контент
 
             if (tabContent.style.maxHeight === "0px" || tabContent.classList.contains('collapsed')) {
