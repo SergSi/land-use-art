@@ -1,23 +1,63 @@
 <div class="head news-container">
     {% include head.html %}
     <div class="tabs">
+        {% assign currentDate = site.time | date: "%s" | plus: 0 %} <!-- Текущая дата в секундах -->
+        {% assign oneMonthAgo = currentDate | minus: 2592000 %} <!-- 30 дней в секундах (30 * 24 * 60 * 60) -->
+
+        <!-- Фильтруем посты за последний месяц вручную -->
+        {% assign recent_posts = "" | split: "" %} <!-- Создаем пустой массив -->
+        {% for post in site.posts %}
+            {% assign postDate = post.date | date: "%s" | plus: 0 %} <!-- Дата поста в секундах -->
+            {% if postDate > oneMonthAgo %} <!-- Если пост создан за последний месяц -->
+                {% assign recent_posts = recent_posts | push: post %} <!-- Добавляем пост в массив -->
+            {% endif %}
+        {% endfor %}
+
+        <!-- Если есть посты за последний месяц, добавляем раздел -->
+        {% if recent_posts.size > 0 %}
+            <div class="tab">
+                <div class="tab-label">
+                    <h2 class="serif linetitle" style="text-transform: uppercase;">Новые материалы</h2>
+                </div>
+                <div class="tab-content">
+                    <div class="card-grid">
+                        {% for post in recent_posts %}
+                            <div class="card">
+                                <a href="{{ post.url }}">
+                                    <div class="card-content">
+                                        <h3 class="card-title">{{ post.title }}</h3>
+                                        {% if post.image %}
+                                            <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
+                                        {% endif %}
+                                        <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                        <p class="card-date"><i>{% include month.html %}</i></p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Остальные разделы -->
         {% assign grouped_posts = site.posts | group_by: "class" %}
         {% assign class_data = site.data.classes %}
-        
+
         {% if class_data.order %}
             {% assign class_order = class_data.order %}
         {% else %}
             {% assign class_order = grouped_posts | map: "name" | sort %}
         {% endif %}
-        
+
         {% assign misc_posts = "" | split: "" %}
-        
+
         {% for post in site.posts %}
             {% unless class_order contains post.class %}
                 {% assign misc_posts = misc_posts | push: post %}
             {% endunless %}
         {% endfor %}
-        
+
         {% for class_key in class_order %}
             {% assign group = grouped_posts | where: "name", class_key | first %}
             {% if group and group.items.size > 0 %}
@@ -47,7 +87,7 @@
                 </div>
             {% endif %}
         {% endfor %}
-        
+
         {% if misc_posts.size > 0 %}
             <div class="tab">
                 <div class="tab-label">
