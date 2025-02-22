@@ -785,6 +785,27 @@ figcaption {
   border-radius: 5px;
 }
 
+/*МАТЕМАТИКА
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.math {
+  font-family: "Times New Roman", serif;
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+.example {
+  background: #f4f4f4;
+  padding: 10px;
+  border-left: 5px solid #3498db;
+  margin: 20px 0;
+}
+.example h4 {
+  margin-top: 0;
+}
+.section {
+  margin-bottom: 30px;
+}
+
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

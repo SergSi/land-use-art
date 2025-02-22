@@ -8,7 +8,7 @@ count_post: 6
 logo: /assets/img/logo.png
 
 baseurl: ""
-permalink: /:categories/:year/:month/:day/:title/
+permalink: /:categories/:year/:month/:title/
 
 author:
   name      : С. И. Ивасюк
