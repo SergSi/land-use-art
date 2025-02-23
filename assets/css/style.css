@@ -353,7 +353,6 @@ blockquote p {
   margin-bottom: 0em; 
   font-weight: 400; 
   font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
-  letter-spacing: 1px; 
   color: var(--font-color);
 }
 
