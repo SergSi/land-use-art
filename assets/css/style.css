@@ -745,6 +745,36 @@ figcaption {
   text-align: left;
 }
 
+.summary {
+  font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
+  font-style: normal;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #444;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.summary:before {
+  content: ""; /* Обязательное свойство для псевдоэлемента */
+  display: block; /* Делаем элемент блочным */
+  width: 50px; /* Ширина линии */
+  height: 2px; /* Высота линии */
+  background-color: black; /* Цвет линии */
+  margin: 10px auto; /* Отступ сверху и снизу, автоматическое выравнивание по центру */
+}
+
+
+.summary:after {
+  content: ""; /* Обязательное свойство для псевдоэлемента */
+  display: block; /* Делаем элемент блочным */
+  width: 50px; /* Ширина линии */
+  height: 2px; /* Высота линии */
+  background-color: black; /* Цвет линии */
+  margin: 10px auto; /* Отступ сверху и снизу, автоматическое выравнивание по центру */
+}
+
+
 /*ВЕРТИКАЛЬНЫЕ ВКЛАДКИ
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

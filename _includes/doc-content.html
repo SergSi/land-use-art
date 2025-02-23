@@ -5,6 +5,7 @@
   {% elsif align == "right"%}
     <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image }}"><img class="right-foto" src="{{ site.urlimg }}{{ page.image }}"></a>{% endif %}{{ content }}</div>
   {% else %}
+    <div class="summary">{% if page.summary %}{{ page.summary }}{% endif %}</div>
     <div>{{ content }}</div>
   {% endif %}         
  
