@@ -354,6 +354,7 @@ blockquote p {
   font-weight: 400; 
   font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
   color: var(--font-color);
+  font-family: 'PT Serif', serif;
 }
 
 .docsubtitle:before{
