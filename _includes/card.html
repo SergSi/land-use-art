@@ -8,7 +8,7 @@
         {% assign recent_posts = "" | split: "" %} <!-- Создаем пустой массив -->
         {% for post in site.posts %}
             {% assign postDate = post.date | date: "%s" | plus: 0 %} <!-- Дата поста в секундах -->
-            {% if postDate > oneMonthAgo %} <!-- Если пост создан за последний месяц -->
+            {% if postDate > oneMonthAgo and post.class != "info" %} <!-- Если пост создан за последний месяц и не относится к классу "info" -->
                 {% assign recent_posts = recent_posts | push: post %} <!-- Добавляем пост в массив -->
             {% endif %}
         {% endfor %}
@@ -53,14 +53,14 @@
         {% assign misc_posts = "" | split: "" %}
 
         {% for post in site.posts %}
-            {% unless class_order contains post.class %}
+            {% unless class_order contains post.class or post.class == "info" %}
                 {% assign misc_posts = misc_posts | push: post %}
             {% endunless %}
         {% endfor %}
 
         {% for class_key in class_order %}
             {% assign group = grouped_posts | where: "name", class_key | first %}
-            {% if group and group.items.size > 0 %}
+            {% if group and group.items.size > 0 and class_key != "info" %}
                 {% assign class_name = class_data.names[class_key] | default: class_key %}
                 <div class="tab">
                     <div class="tab-label" data-tab-id="{{class_key}}">
@@ -105,6 +105,38 @@
                                         {% endif %}
                                         <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
                                         <p class="card-date"><i>{% include month.html %}</i></p>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Отдельная группа для постов класса "info" (после раздела "Разное") -->
+        {% assign info_posts = site.posts | where: "class", "info" %}
+        {% if info_posts.size > 0 %}
+            <div class="tab">
+                <div class="tab-label" data-tab-id="info">
+                    <h2 class="serif linetitle" style="text-transform: uppercase;">Полезные ресурсы</h2>
+                </div>
+                <div class="tab-content">
+                    <div class="card-grid">
+                        {% for post in info_posts %}
+                            <div class="card">
+                                {% if post.external_url %}
+                                    <a href="{{ post.external_url }}" target="_blank">
+                                {% else %}
+                                    <a href="{{ post.url }}">
+                                {% endif %}
+                                    <div class="card-content">
+                                        <h3 class="card-title">{{ post.title }}</h3>
+                                        {% if post.image %}
+                                            <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
+                                        {% endif %}
+                                        <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                        <!-- Дата удалена для постов в разделе "Информация" -->
                                     </div>
                                 </a>
                             </div>
