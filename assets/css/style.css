@@ -817,6 +817,96 @@ figcaption {
   margin-bottom: 30px;
 }
 
+/*МОДАЛЬНОЕ ОКНО
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Стили для кнопки */
+#openModalBtn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.7s ease;
+}
+
+#openModalBtn:hover {
+  background-color: #45a049;
+}
+
+/* Стили для модального окна */
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0; /* Начальная прозрачность */
+  transition: opacity 0.7s ease; /* Плавное изменение прозрачности */
+}
+
+.modal.modal-open {
+  opacity: 1; /* Полная видимость */
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-50px); /* Начальное смещение */
+  opacity: 0; /* Начальная прозрачность */
+  transition: transform 0.7s ease, opacity 0.7s ease; /* Плавные переходы */
+}
+
+.modal.modal-open .modal-content {
+  transform: translateY(0); /* Конечное положение */
+  opacity: 0.9; /* Полная видимость */
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.modal-content ul li {
+  margin: 10px 0;
+}
+
+.modal-content ul li a {
+  text-decoration: none;
+  color: #4CAF50;
+  font-size: 18px;
+}
+
+.modal-content ul li a:hover {
+  text-decoration: underline;
+}
+
+#closeModalBtn {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#closeModalBtn:hover {
+  color: #f00;
+}
+
+
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
