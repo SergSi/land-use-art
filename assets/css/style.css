@@ -437,7 +437,7 @@ blockquote p {
    vertical-align: middle;
    width: 50%;
    height: 2px;
-   background-color: grey;
+   background-color: lightgray;
    position: relative;
 }
 
