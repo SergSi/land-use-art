@@ -200,10 +200,18 @@ h3 {
   margin-bottom: var(--space-l3-sm);
 }
 
-h3+ul {
-  margin-top: 0.5em; 
+/* Отступы для списков, следующих после h3 и h4 */
+h3 + ul,
+h3 + ol,
+h4 + ul,
+h4 + ol {
+    margin-top: 0.5em;        /* Отступ сверху для списка после h3 или h4 */
 }
 
+/* Отступы между элементами списка */
+ul, ol {
+    margin-bottom: 0.5em;     /* Отступ снизу для списка */
+}
 
 h4 {
   margin-top: var(--space-l4-lg);
@@ -277,7 +285,7 @@ li :is(ul, ol) {
 }
 
  *:first-child {
-  margin-top: 0;
+
 }
 
  *:last-child {
