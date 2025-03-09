@@ -45,12 +45,12 @@ MEDIAQUERIES
   --space-l5-lg: 1.5rem;
   --space-l6-lg: 1rem;
 
-  --space-l1-sm: calc(var(--space-l1-lg) / 4);
-  --space-l2-sm: calc(var(--space-l2-lg) / 4);
-  --space-l3-sm: calc(var(--space-l3-lg) / 4);
-  --space-l4-sm: calc(var(--space-l4-lg) / 4);
-  --space-l5-sm: calc(var(--space-l5-lg) / 4);
-  --space-l6-sm: calc(var(--space-l6-lg) / 4);
+  --space-l1-sm: calc(var(--space-l1-lg) / 2);
+  --space-l2-sm: calc(var(--space-l2-lg) / 2);
+  --space-l3-sm: calc(var(--space-l3-lg) / 2);
+  --space-l4-sm: calc(var(--space-l4-lg) / 2);
+  --space-l5-sm: calc(var(--space-l5-lg) / 2);
+  --space-l6-sm: calc(var(--space-l6-lg) / 2);
 
   --space-list-items: 0.5rem; 
 
@@ -172,10 +172,32 @@ p::selection{
   background: lightgrey;
 }
 
+/* Стиль для заголовка первого уровня (h1) */
+h1 {
+  font-size: 24px;          /* Размер шрифта */
+  font-weight: bold;        /* Жирное начертание */
+  text-align: center;       /* Выравнивание по центру */
+  text-transform: uppercase; /* Все буквы заглавные (опционально) */
+}
+
+/* Стиль для заголовка второго уровня (h2) */
+h2 {
+  font-size: 125%;          /* Размер шрифта */
+  font-weight: bold;        /* Жирное начертание */
+  border-bottom: 2px solid #ccc; /* Линия под заголовком (опционально) */
+  padding-bottom: 5px;      /* Отступ снизу для линии */
+}
+
+/* Стиль для заголовка третьего уровня (h3) */
+h3 {
+  font-size: 110%;          /* Размер шрифта */
+  font-weight: bold;        /* Жирное начертание */
+  font-style: normal;       /* Начертание (опционально) */
+}
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400;   
   letter-spacing: 0.02em; 
+  line-height: 1.2em;
 }
 
 h1, h2 {
@@ -196,6 +218,11 @@ h3 {
   margin-top: var(--space-l3-lg);
   margin-bottom: var(--space-l3-sm);
 }
+
+h3+ul {
+  margin-top: 0.5em; 
+}
+
 
 h4 {
   margin-top: var(--space-l4-lg);
@@ -323,7 +350,6 @@ blockquote {
   padding: 1rem 2rem 1rem 3rem;
   border-left: thick solid Lightgray;
   position: relative;
-  font-family: sans-serif;
   font-weight: 300;
   margin-bottom: 10px;
   }
