@@ -1001,6 +1001,11 @@ figcaption {
     border-style: none;
     box-shadow: none; 
   }
+
+  .container.shadow{
+    background-color: var(--background-color);  
+  }
+
 }
 
 @media (max-width: 800px) {
