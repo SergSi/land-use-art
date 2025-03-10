@@ -365,7 +365,7 @@ li :is(ul, ol) {
 
 .doc-head{
   font-size: clamp(2rem, 1.7500rem + 1.2500vw, 3rem);
-  padding-top: 10px; 
+  padding-top: 0; 
   padding-bottom: 0px; 
   margin-bottom: 24px; 
   font-weight: 600;
