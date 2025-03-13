@@ -1019,13 +1019,13 @@ figcaption {
 
 @media (max-width: 1200px) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 800px */
+    grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 1200px */
   }
 
 }
 
 @media (max-width: 1080px) {
   .card-grid {
-    grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 600px */
+    grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 1080px */
   }
 }
