@@ -1008,6 +1008,15 @@ figcaption {
 
 }
 
+@media (max-width: 1100px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 карточки в ряд на экранах меньше 1100px */
+  }
+
+}
+
+@media (max-width
+
 @media (max-width: 800px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 800px */
