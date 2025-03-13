@@ -149,54 +149,59 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Функция для сохранения состояния вкладки
-        const saveTabState = (tabId, isOpen) => {
-            localStorage.setItem(`tabState-${tabId}`, isOpen ? 'open' : 'closed');
-        };
+   document.addEventListener('DOMContentLoaded', () => {
+  // Функция для сохранения состояния вкладки
+  const saveTabState = (tabId, isOpen) => {
+    localStorage.setItem(`tabState-${tabId}`, isOpen ? 'open' : 'closed');
+  };
 
-        // Функция для загрузки состояния вкладки
-        const loadTabState = (tabId) => {
-            return localStorage.getItem(`tabState-${tabId}`) === 'open';
-        };
+  // Функция для загрузки состояния вкладки
+  const loadTabState = (tabId) => {
+    return localStorage.getItem(`tabState-${tabId}`) === 'open';
+  };
 
-        // Обработчик клика для вкладок
-        document.querySelectorAll('.tab-label').forEach(label => {
-            const tabId = label.getAttribute('data-tab-id'); // Получаем ID вкладки
-            const tabContent = label.nextElementSibling; // Находим связанный контент
+  // Функция для обновления высоты контента вкладки
+  const updateTabContentHeight = (tabContent) => {
+    if (tabContent.classList.contains('collapsed')) {
+      tabContent.style.maxHeight = "0";
+      tabContent.style.opacity = "0";
+      tabContent.style.padding = "0 10px";
+    } else {
+      tabContent.style.maxHeight = tabContent.scrollHeight + "px";
+      tabContent.style.opacity = "1";
+      tabContent.style.padding = "10px";
+    }
+  };
 
-            // Восстанавливаем состояние вкладки при загрузке страницы
-            const isOpen = loadTabState(tabId);
-            if (isOpen) {
-                tabContent.style.maxHeight = tabContent.scrollHeight + "px";
-                tabContent.style.opacity = "1";
-                tabContent.style.padding = "10px";
-                tabContent.classList.remove('collapsed');
-            } else {
-                tabContent.style.maxHeight = "0";
-                tabContent.style.opacity = "0";
-                tabContent.style.padding = "0 10px";
-                tabContent.classList.add('collapsed');
-            }
+  // Обработчик клика для вкладок
+  document.querySelectorAll('.tab-label').forEach(label => {
+    const tabId = label.getAttribute('data-tab-id'); // Получаем ID вкладки
+    const tabContent = label.nextElementSibling; // Находим связанный контент
 
-            // Обработчик клика для раскрытия/схлопывания
-            label.addEventListener('click', () => {
-                if (tabContent.style.maxHeight === "0px" || tabContent.classList.contains('collapsed')) {
-                    // Раскрываем вкладку
-                    tabContent.style.maxHeight = tabContent.scrollHeight + "px";
-                    tabContent.style.opacity = "1";
-                    tabContent.style.padding = "10px";
-                    tabContent.classList.remove('collapsed');
-                    saveTabState(tabId, true); // Сохраняем состояние
-                } else {
-                    // Схлопываем вкладку
-                    tabContent.style.maxHeight = "0";
-                    tabContent.style.opacity = "0";
-                    tabContent.style.padding = "0 10px";
-                    tabContent.classList.add('collapsed');
-                    saveTabState(tabId, false); // Сохраняем состояние
-                }
-            });
-        });
+    // Восстанавливаем состояние вкладки при загрузке страницы
+    const isOpen = loadTabState(tabId);
+    if (isOpen) {
+      tabContent.classList.remove('collapsed');
+    } else {
+      tabContent.classList.add('collapsed');
+    }
+    updateTabContentHeight(tabContent);
+
+    // Обработчик клика для раскрытия/схлопывания
+    label.addEventListener('click', () => {
+      tabContent.classList.toggle('collapsed');
+      updateTabContentHeight(tabContent);
+      saveTabState(tabId, !tabContent.classList.contains('collapsed'));
     });
+  });
+
+  // Обновляем высоту контента при изменении размера окна
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.tab-content').forEach(tabContent => {
+      if (!tabContent.classList.contains('collapsed')) {
+        tabContent.style.maxHeight = tabContent.scrollHeight + "px";
+      }
+    });
+  });
+});
 </script>

@@ -114,10 +114,11 @@ body{
   position: relative;
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 10px;
-  line-height: 1.5;  
-  overflow: visible;  
+  margin: 0 auto; /* Центрирование контейнера */
+  padding: 0 10px; /* Отступы по бокам */
+  line-height: 1.5;
+  overflow: visible; /* Убедитесь, что переполнение видимо */
+  box-sizing: border-box; /* Учитываем padding в ширине */
 }
 
 .newspaper {
@@ -759,23 +760,34 @@ figcaption {
 /*CARDS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+/* Сетка карточек (Flexbox) */
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 карточек в ряд */
+  display: flex;
+  flex-wrap: wrap; /* Перенос карточек на новую строку */
   gap: 1rem; /* Отступ между карточками */
-  margin-bottom: 2rem; /* Отступ между группами */
+  justify-content: center; /* Центрирование карточек по горизонтали */
+  width: 100%;
+  margin: 0; /* Убираем внешние отступы */
+  padding: 0; /* Убираем внутренние отступы */
+  overflow: visible; /* Убедитесь, что переполнение видимо */
 }
 
+/* Карточки */
 .card {
+  flex: 1 1 calc(16.666% - 1rem); /* 6 карточек в строке с учётом отступов */
+  max-width: calc(16.666% - 1rem); /* Ограничение ширины карточки */
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.7s ease, box-shadow 0.7s ease;
-  background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.07)); /* Градиентное затемнение */}
+  background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.07));
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  min-height: 300px; /* Минимальная высота карточки */
+}
 
 .card a {
-  text-decoration: none; /* Убираем подчеркивание для всех текстов внутри ссылки */
-  color: inherit; /* Сохраняем цвет текста, как у родителя */
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
@@ -789,12 +801,9 @@ figcaption {
   object-fit: cover;
 }
 
-.card:hover .card-image {
-  
-}
-
 .card-content {
   padding: 1rem;
+  text-align: center; /* Центрирование текста внутри карточки */
 }
 
 .card-title {
@@ -823,7 +832,6 @@ figcaption {
   margin: 0;
   text-align: left;
 }
-
 .summary {
   font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
   font-style: normal;
@@ -833,7 +841,6 @@ figcaption {
   text-align: center;
   margin-bottom: 30px;
 }
-
 
 /*ВЕРТИКАЛЬНЫЕ ВКЛАДКИ
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -989,10 +996,25 @@ figcaption {
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-/* Для экранов шириной до 1200px (4 карточки в ряд) */
-@media (max-width: 1400px) {
-  .card-grid {
-    grid-template-columns: repeat(4, 1fr);
+/* 6 карточек в строке (по умолчанию) */
+.card {
+  flex: 1 1 calc(16.666% - 1rem);
+  max-width: calc(16.666% - 1rem);
+}
+
+/* 4 карточки в строке (для экранов меньше 1200px) */
+@media (max-width: 1200px) {
+  .card {
+    flex: 1 1 calc(25% - 1rem);
+    max-width: calc(25% - 1rem);
+  }
+}
+
+/* 3 карточки в строке (для экранов меньше 992px) */
+@media (max-width: 992px) {
+  .card {
+    flex: 1 1 calc(33.333% - 1rem);
+    max-width: calc(33.333% - 1rem);
   }
 }
 
@@ -1009,23 +1031,20 @@ figcaption {
 
 }
 
-/* Для экранов шириной до 900px (3 карточки в ряд) */
-@media (max-width: 900px) {
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
+/* 2 карточки в строке (для экранов меньше 768px) */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
   }
 }
 
-/* Для экранов шириной до 600px (2 карточки в ряд) */
-@media (max-width: 600px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* 1 карточка в строке (для экранов меньше 480px) */
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 calc(100% - 1rem);
+    max-width: calc(100% - 1rem);
   }
 }
 
-/* Для экранов шириной до 400px (1 карточка в ряд) */
-@media (max-width: 400px) {
-  .card-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
+
