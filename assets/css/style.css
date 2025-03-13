@@ -990,7 +990,7 @@ figcaption {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Для экранов шириной до 1200px (4 карточки в ряд) */
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .card-grid {
     grid-template-columns: repeat(4, 1fr);
   }
