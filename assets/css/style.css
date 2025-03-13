@@ -1024,8 +1024,8 @@ figcaption {
 
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .card-grid {
-    grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 480px */
+    grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 600px */
   }
 }
