@@ -988,37 +988,44 @@ figcaption {
 
 /*MEDIAQUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media (max-width: 1600px) {
-  .card-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 карточки в ряд на экранах меньше 1600px */
-  }
-}
 
+/* Для экранов шириной до 1200px (4 карточки в ряд) */
 @media (max-width: 1200px) {
   .card-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 карточки в ряд на экранах меньше 1200px */
-  }
-}
-
-@media (max-width: 1080px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд на экранах меньше 1080px */
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 920px) {
+
   .shadow {
     border-style: none;
-    box-shadow: none;
+    box-shadow: none; 
   }
 
-  .container.shadow {
-    background-color: var(--background-color);
+  .container.shadow{
+    background-color: var(--background-color);  
+  }
+
+}
+
+/* Для экранов шириной до 900px (3 карточки в ряд) */
+@media (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
+/* Для экранов шириной до 600px (2 карточки в ряд) */
 @media (max-width: 600px) {
   .card-grid {
-    grid-template-columns: 1fr; /* 1 карточка в ряд на экранах меньше 600px */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Для экранов шириной до 400px (1 карточка в ряд) */
+@media (max-width: 400px) {
+  .card-grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
