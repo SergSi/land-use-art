@@ -64,6 +64,8 @@ body{
   background-color: var(--background-color); 
  }
 
+ /* Основные разделы */
+
  header{
   font-size: clamp(1.6rem, 0.725rem + 4.375vw, 5.1rem);
   font-family: 'Playfair Display', serif;
