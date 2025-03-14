@@ -11,21 +11,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
-/*
-font-family: 'Old Standard TT', serif;
-font-family: 'Playfair Display', serif;
-font-family: 'Source Serif 4', serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Roboto Condensed', sans-serif;
-font-family: 'PT Serif', serif;
-font-family: "Fira Sans", sans-serif;
-font-family: "Fira Sans Condensed", sans-serif;
-font-family: "Lora", serif;
-font-family: "PT Sans", sans-serif;
-font-family: "Open Sans", sans-serif;
-*/
-
 :root {
   --space-default: 1rem;
   --space-l1-lg: 4rem;
@@ -42,46 +27,44 @@ font-family: "Open Sans", sans-serif;
   --space-l5-sm: calc(var(--space-l5-lg) / 2);
   --space-l6-sm: calc(var(--space-l6-lg) / 2);
 
-  --space-list-items: 0.5rem; 
-
-  --background-color: #fdfbee;  
+  --space-list-items: 0.5rem;
+  --background-color: #fdfbee;
   --font-color: #2f2f2f;
   --a-color: #3a3535;
   --shadow-color: #696969;
 }
 
+/* Глобальные стили */
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
 
-body{
+body {
   font-size: clamp(1.4rem, 1.3rem + 0.5vw, 1.8rem);
   line-height: clamp(1.45rem, 1.164rem + 0.762vw, 1.85rem);
   font-family: "Lora", serif;
   font-weight: 400;
   color: var(--font-color);
-  background-color: var(--background-color); 
- }
+  background-color: var(--background-color);
+}
 
- /* Основные разделы */
-
- header{
+/* Основные разделы */
+header {
   font-size: clamp(1.6rem, 0.725rem + 4.375vw, 5.1rem);
   font-family: 'Playfair Display', serif;
-  font-weight: 900;  
-  line-height: clamp(1.8rem, 0.925rem + 4.375vw, 5.3rem)
+  font-weight: 900;
+  line-height: clamp(1.8rem, 0.925rem + 4.375vw, 5.3rem);
   margin-bottom: 15px;
   margin-top: 5px;
 }
 
-.content{
+.content {
   font-size: 0;
   line-height: 0;
   word-spacing: -.03rem;
   list-style: none;
   margin: 30px 2% 0 2%;
-  
 }
 
 .container {
@@ -91,22 +74,22 @@ body{
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
-  line-height: 1.5;      
+  line-height: 1.5;
 }
 
-.container.shadow{
-  background-color: #fffbf5; 
+.container.shadow {
+  background-color: #fffbf5;
 }
 
 .news-container {
   position: relative;
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto; /* Центрирование контейнера */
-  padding: 0 10px; /* Отступы по бокам */
+  margin: 0 auto;
+  padding: 0 10px;
   line-height: 1.5;
-  overflow: visible; /* Убедитесь, что переполнение видимо */
-  box-sizing: border-box; /* Учитываем padding в ширине */
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .newspaper {
@@ -121,11 +104,11 @@ body{
 }
 
 .main {
-  margin-top: 30px;   
+  margin-top: 30px;
 }
 
-.back{
-  background: rgba(253,251,238,0.7);
+.back {
+  background: rgba(253, 251, 238, 0.7);
 }
 
 .navbar {
@@ -133,38 +116,33 @@ body{
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1030;   
+  z-index: 1030;
 }
 
 .navbar a {
   float: right;
-  display: block;  
+  display: block;
   text-align: center;
   padding: 14px 16px 10px 10px;
 }
 
-/* Typography
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* Типография */
 * {
   margin: 0;
 }
 
-p{  
+p {
   margin-bottom: 1.5rem;
   hyphens: auto;
   hyphenate-limit-chars: 8 4 4;
 }
 
-
-p::selection{
+p::selection {
   background: lightgrey;
 }
 
- /* Типография */
-
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: 0.02em; 
+  letter-spacing: 0.02em;
   line-height: 1.2em;
 }
 
@@ -177,10 +155,10 @@ h1 {
   margin-top: var(--space-l1-lg);
   margin-bottom: var(--space-l1-sm);
 }
-  
+
 h2 {
   margin-top: var(--space-l2-lg);
-  margin-bottom: var(--space-l2-sm);  
+  margin-bottom: var(--space-l2-sm);
 }
 
 h3 {
@@ -223,96 +201,80 @@ h5 + h6 {
   margin-top: var(--space-l6-sm);
 }
 
-
-/* Списки
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* Общие стили для списков */
+/* Списки */
 ol, ul {
-  padding-left: 0; /* Отступ слева для всех списков */
+  padding-left: 0;
 }
 
-/* Отступы для списков, следующих после h3 и h4 */
 h3 + ul,
 h3 + ol,
 h4 + ul,
 h4 + ol {
-    margin-top: 0.5em;        /* Отступ сверху для списка после h3 или h4 */
+  margin-top: 0.5em;
 }
 
-/* Отступы между элементами списка */
 ul, ol {
-    margin-bottom: 0.5em;     /* Отступ снизу для списка */
+  margin-bottom: 0.5em;
 }
 
-/* Стили для нумерованного списка */
 ol {
-  list-style: none; /* Отключаем стандартные номера */
-  counter-reset: li; /* Инициализация счетчика */
+  list-style: none;
+  counter-reset: li;
 }
 
 ol > li {
-  position: relative; /* Позиционируем элементы списка относительно */
-  padding-left: 2.5em; /* Отступ слева для текста */
-  counter-increment: li; /* Увеличиваем счетчик только для элементов <ol> */
+  position: relative;
+  padding-left: 2.5em;
+  counter-increment: li;
 }
 
 ol > li::before {
-  content: counter(li) "."; /* Вставляем номер */
-  position: absolute; /* Абсолютное позиционирование */
-  left: 0; /* Размещаем номер слева */
-  width: 2em; /* Ширина области для номера */
-  text-align: right; /* Выравниваем номер по правому краю области */
-  margin-right: 1em; /* Отступ номера от текста */
+  content: counter(li) ".";
+  position: absolute;
+  left: 0;
+  width: 2em;
+  text-align: right;
+  margin-right: 1em;
 }
 
-/* Стили для ненумерованного списка */
 ul {
-  list-style: none; /* Убираем стандартные маркеры */
+  list-style: none;
 }
 
 ul > li {
-  position: relative; /* Позиционируем элементы списка относительно */
-  padding-left: 2.5em; /* Отступ слева для текста */
+  position: relative;
+  padding-left: 2.5em;
 }
 
 ul > li::before {
-  content: "–"; /* Вставляем тире */
-  position: absolute; /* Абсолютное позиционирование */
-  left: 0; /* Размещаем тире слева */
-  width: 2em; /* Ширина области для тире */
-  text-align: right; /* Выравниваем тире по правому краю области */
-  margin-right: 1em; /* Отступ тире от текста */
+  content: "–";
+  position: absolute;
+  left: 0;
+  width: 2em;
+  text-align: right;
+  margin-right: 1em;
 }
 
-/* Стили для вложенных списков */
 ol ul, ul ol, ol ol, ul ul {
-  margin-top: 0.5em; /* Отступ сверху для вложенных списков */
-  margin-bottom: 0.5em; /* Отступ снизу для вложенных списков */
-  padding-left: 0; /* Убираем отступ слева для вложенных списков (сдвигаем влево на 2em) */
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 0;
 }
 
-/* Сброс счетчика для вложенных нумерованных списков */
 ol ol {
-  counter-reset: li; /* Сбрасываем счетчик для вложенных списков */
+  counter-reset: li;
 }
 
 ol ol > li::before {
-  content: counters(li, ".") " "; /* Многоуровневая нумерация (например, 1.1, 1.2) */
+  content: counters(li, ".") " ";
 }
 
-/* Оглавление
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.toc ul li:before {
-  content:  "";
-  position: relative;
-  left:     -5px;
-}
-
+/* Оглавление */
+.toc ul li:before,
 .toc li:before {
-  content:  "";
+  content: "";
   position: relative;
-  left:     -5px;
+  left: -5px;
 }
 
 li + li {
@@ -320,8 +282,8 @@ li + li {
 }
 
 ul {
-  margin-bottom: var(--space-default);  
-  margin-top: -1rem;  
+  margin-bottom: var(--space-default);
+  margin-top: -1rem;
 }
 
 li :is(ul, ol) {
@@ -329,43 +291,37 @@ li :is(ul, ol) {
   margin-bottom: 0;
 }
 
- *:first-child {
-
-}
-
- *:last-child {
+*:last-child {
   margin-bottom: 0;
 }
 
 .toc {
-  padding-top: 10px; 
-  padding-bottom: 0px; 
-  margin-bottom: 24px; 
-  letter-spacing: 0.5px;  
+  padding-top: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
 }
 
 .toc-item {
   color: purple;
 }
 
-/* Оформление
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.doc-head{
+/* Оформление */
+.doc-head {
   font-size: clamp(2rem, 1.7500rem + 1.2500vw, 3rem);
-  padding-top: 0; 
-  padding-bottom: 0px; 
-  margin-bottom: 24px; 
+  padding-top: 0;
+  padding-bottom: 0px;
+  margin-bottom: 24px;
   font-weight: 600;
   color: var(--font-color);
 }
 
-.head{
+.head {
   text-align: center;
-  position: relative;  
+  position: relative;
 }
 
-.subhead{
+.subhead {
   font-size: clamp(1.8rem, 1.625rem + 0.875vw, 2.5rem);
   text-align: center;
   text-transform: uppercase;
@@ -373,7 +329,7 @@ li :is(ul, ol) {
   color: var(--font-color);
 }
 
-.clock-text{
+.clock-text {
   font-size: clamp(1.8rem, 1.625rem + 0.875vw, 2.5rem);
   text-align: center;
   text-transform: uppercase;
@@ -389,44 +345,44 @@ blockquote {
   position: relative;
   font-weight: 300;
   margin-bottom: 10px;
-  }
+}
 
 blockquote p {
-  font-style: italic; 
-  }
+  font-style: italic;
+}
 
 .hr-line {
-	margin: 0;
-	padding: 0;
-	height: 2px;
-	border-top: 2px solid var(--font-color);
+  margin: 0;
+  padding: 0;
+  height: 2px;
+  border-top: 2px solid var(--font-color);
 }
 
-.author{
+.author {
   text-align: center;
   font-size: 110%;
-  margin-top: 24px; 
-  margin-bottom: 24px; 
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
-.serif{
+.serif {
   font-family: 'Source Serif 4', serif;
 }
 
-.sans-serif{
-  font-family: Roboto Condensed', sans-serif;
+.sans-serif {
+  font-family: 'Roboto Condensed', sans-serif;
   font-weight: 400;
 }
 
-.docsubtitle{
-  margin-bottom: 0em; 
-  font-weight: 400; 
+.docsubtitle {
+  margin-bottom: 0em;
+  font-weight: 400;
   font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
   color: var(--font-color);
   font-family: 'PT Serif', serif;
 }
 
-.docsubtitle:before{
+.docsubtitle:before {
   border-top: 1px solid var(--font-color);
   content: '';
   width: 150px;
@@ -435,29 +391,29 @@ blockquote p {
   margin: 0 auto;
 }
 
-.docsubtitle:after{
+.docsubtitle:after {
   border-bottom: 1px solid var(--font-color);
   content: '';
   width: 150px;
-  height:   0.5em;
+  height: 0.5em;
   display: block;
   margin: 0 auto 1em auto;
 }
 
-.logo{
+.logo {
   position: relative;
   width: 12%;
-  display: inline-block; 
-  line-height: 12px; 
+  display: inline-block;
+  line-height: 12px;
   margin: 10px 50px 20px 0;
   padding: 10px 15px 10px 15px;
 }
 
-.center{
+.center {
   text-align: center;
 }
 
-.right{
+.right {
   text-align: right;
 }
 
@@ -480,59 +436,69 @@ blockquote p {
 
 .linetitle:before,
 .linetitle:after {
-   content: "";
-   display: inline-block;
-   vertical-align: middle;
-   width: 50%;
-   height: 2px;
-   background-color: lightgrey;
-   position: relative;
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+  height: 2px;
+  background-color: lightgrey;
+  position: relative;
 }
 
 .linetitle:before {
-   margin-left: -100%;
-   left: -14px;
+  margin-left: -100%;
+  left: -14px;
 }
 
 .linetitle:after {
-   margin-right: -100%;
-   right: -14px;
+  margin-right: -100%;
+  right: -14px;
 }
 
-/* Tables
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* Таблицы */
 th,
 td {
-  padding: 10px 10px ;
+  padding: 10px 10px;
   text-align: left;
-  font-family: 'Roboto Condensed', sans-serif;}
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 th:first-child,
 td:first-child {
-  padding-left: 5px;}
+  padding-left: 5px;
+}
+
 th:last-child,
 td:last-child {
   padding-right: 0;
 }
 
 td {
- padding: 5px;
- font-family: 'Roboto Condensed', sans-serif;}
+  padding: 5px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
 
 tbody tr:nth-child(odd) {
-  background-color: Gainsboro;}
+  background-color: Gainsboro;
+}
 
 tbody tr:nth-child(even) {
-  background-color: rgb(236, 236, 236);}
+  background-color: rgb(236, 236, 236);
+}
 
-th {background-color: rgb(236, 236, 236);}
+th {
+  background-color: rgb(236, 236, 236);
+}
 
-table {margin-bottom: 1.5rem;}
-ol {margin-bottom: 1.5rem;}
+table {
+  margin-bottom: 1.5rem;
+}
 
-/* Text transfer - пероеносы
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ol {
+  margin-bottom: 1.5rem;
+}
 
+/* Переносы текста */
 .break {
   word-break: break-all;
 }
@@ -549,19 +515,17 @@ ol {margin-bottom: 1.5rem;}
   overflow-wrap: break-word;
 }
 
-/* Flex
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* Flex */
 .flex-container {
   padding: 0;
   margin: 0;
   list-style: none;
   flex-wrap: wrap;
   align-items: flex-end;
-  justify-content: center;  
+  justify-content: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
 }
 
 .flex-item {
@@ -571,13 +535,13 @@ ol {margin-bottom: 1.5rem;}
   font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
   display: flex;
   flex-direction: column;
-  text-align: center;  
+  text-align: center;
 }
 
 .flex-item img {
-  max-width: 70%; /* Ограничение ширины изображения */
-  height: auto; /* Сохранение пропорций */
-  border-radius: 8px; /* Скругление углов */
+  max-width: 70%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .global-caption {
@@ -587,84 +551,76 @@ ol {margin-bottom: 1.5rem;}
   font-weight: bold;
 }
 
-/* Link
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* Ссылки */
 a {
   color: purple;
-  transition: 0.5s; 
+  transition: 0.5s;
 }
 
 .underline {
   color: var(--a-color);
-  text-decoration: underline;  
-  transition: 0.5s; 
+  text-decoration: underline;
+  transition: 0.5s;
 }
 
 a:hover {
-color: rgb(57, 57, 65);
-text-shadow: 3px 3px 1px rgba(47,47,47,0.2);
+  color: rgb(57, 57, 65);
+  text-shadow: 3px 3px 1px rgba(47, 47, 47, 0.2);
 }
 
 .notall {
   color: var(--a-color);
   text-decoration: none;
-  transition: 0.5s; 
+  transition: 0.5s;
 }
 
-/* Увеличение по центру */
-.gain-center{
-  transition: 1s; /* Время эффекта */  
+.gain-center {
+  transition: 1s;
 }
 
 .gain-center:hover {
-  transform: scale(1.05); /* Увеличиваем масштаб */
-  background-color: rgba(0, 0, 0, 0.05); /* Затемнение фона с прозрачностью 50% */
+  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.gain-centerN{
-  transition: 1s; /* Время эффекта */  
+.gain-centerN {
+  transition: 1s;
 }
 
 .gain-centerN:hover {
-  transform: scale(1.05); /* Увеличиваем масштаб */
+  transform: scale(1.05);
 }
 
- /* IMG 
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Изображения */
 .image-left {
-  float: left; /* Выравнивание влево */
-  margin-right: 1rem; /* Отступ справа для обтекания текстом */
+  float: left;
+  margin-right: 1rem;
 }
 
 .image-right {
-  float: right; /* Выравнивание вправо */
-  margin-left: 1rem; /* Отступ слева для обтекания текстом */
+  float: right;
+  margin-left: 1rem;
 }
 
 .image-center {
   display: block;
-  margin: 0 auto; /* Центрирование */
+  margin: 0 auto;
   text-align: center;
-  float: none; /* Убедимся, что float не применяется */
-}
-
-.flex-container {
-  overflow: hidden; /* Чтобы контейнер не схлопывался из-за float */
+  float: none;
 }
 
 .image-container {
-  margin-bottom: 1rem; /* Отступ снизу */
+  margin-bottom: 1rem;
 }
 
 figure {
-  margin: 0; /* Убираем стандартные отступы */
+  margin: 0;
 }
 
 figcaption {
-  text-align: center; /* Центрируем подпись */
-  font-style: normal; 
-  margin-top: 0.5rem; /* Отступ сверху */
+  text-align: center;
+  font-style: normal;
+  margin-top: 0.5rem;
   color: #666;
   font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
   font-weight: bold;
@@ -672,45 +628,45 @@ figcaption {
 
 .caption {
   font-weight: bold;
-  font-size: 90%; 
-  text-align: center; 
-  margin-bottom: 2rem;  
+  font-size: 90%;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .passe-partout {
-  padding: 40px; /* Размер паспарту */
-  background: Silver; /* Цвет фона паспарту */
-  display: inline-block; /* Строчно-блочный элемент */
-  margin: 0; /* Убираем отступы */
+  padding: 40px;
+  background: Silver;
+  display: inline-block;
+  margin: 0;
   border-radius: 0.3em;
   border-style: solid;
   border-width: 1px;
   border-color: rgb(155, 155, 155) grey grey grey;
-  box-shadow: 0.1em 0.4em 0.7em 0.1em var(--shadow-color); 
- } 
+  box-shadow: 0.1em 0.4em 0.7em 0.1em var(--shadow-color);
+}
 
- .passe-partout img {
-  border: 1px solid #666; /* Рамка вокруг изображения */
- }
+.passe-partout img {
+  border: 1px solid #666;
+}
 
-.left-foto{
+.left-foto {
   float: left;
   margin: 10px 20px 2px 0px;
   max-width: 40%;
-  }
-  
-.right-foto{
+}
+
+.right-foto {
   float: right;
   margin: 10px 0px 2px 20px;
   max-width: 40%;
- }
-  
+}
+
 .bordernot {
   border-style: none;
   box-shadow: none;
 }
 
-.narrow{
+.narrow {
   max-width: 50%;
 }
 
@@ -725,7 +681,7 @@ figcaption {
   border-style: solid;
   border-width: 1px;
   border-color: rgba(211, 211, 211, 0.719) grey grey rgba(211, 211, 211, 0.719);
-  box-shadow: 0.1em 0.4em 0.7em 0.1em #696969; 
+  box-shadow: 0.1em 0.4em 0.7em 0.1em #696969;
 }
 
 #timeout {
@@ -739,37 +695,32 @@ figcaption {
 }
 
 @keyframes ani {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-
-
-/*CARDS
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* Сетка карточек (Flexbox) */
-.card-grid {
-  display: flex;
-  flex-wrap: wrap; /* Перенос карточек на новую строку */
-  gap: 1rem; /* Отступ между карточками */
-  justify-content: center; /* Центрирование карточек по горизонтали */
-  width: 100%;
-  margin: 0; /* Убираем внешние отступы */
-  padding: 0; /* Убираем внутренние отступы */
-  overflow: visible; /* Убедитесь, что переполнение видимо */
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* Карточки */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
 .card {
-  flex: 1 1 calc(16.666% - 1rem); /* 6 карточек в строке с учётом отступов */
-  max-width: calc(16.666% - 1rem); /* Ограничение ширины карточки */
+  flex: 1 1 calc(16.666% - 1rem);
+  max-width: calc(16.666% - 1rem);
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.7s ease, box-shadow 0.7s ease;
   background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.07));
-  box-sizing: border-box; /* Учитываем padding в ширине */
-  min-height: 300px; /* Минимальная высота карточки */
+  box-sizing: border-box;
+  min-height: 300px;
 }
 
 .card a {
@@ -790,7 +741,7 @@ figcaption {
 
 .card-content {
   padding: 1rem;
-  text-align: center; /* Центрирование текста внутри карточки */
+  text-align: center;
 }
 
 .card-title {
@@ -819,6 +770,7 @@ figcaption {
   margin: 0;
   text-align: left;
 }
+
 .summary {
   font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
   font-style: normal;
@@ -829,10 +781,7 @@ figcaption {
   margin-bottom: 30px;
 }
 
-/*ВЕРТИКАЛЬНЫЕ ВКЛАДКИ
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* Основные стили для вкладок */
+/* Вертикальные вкладки */
 .tabs {
   display: flex;
   flex-direction: column;
@@ -853,46 +802,44 @@ figcaption {
 }
 
 .tab-label h2 {
-  margin: 0; /* Убираем отступы у заголовка внутри вкладки */
+  margin: 0;
   font-family: serif;
   text-transform: uppercase;
 }
 
-/* Анимация для появления и исчезновения содержимого */
 .tab-content {
-  overflow: hidden; /* Скрываем содержимое, выходящее за пределы */
+  overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height 0.7s ease, opacity 0.7s ease, padding 0.7s ease;
-  padding: 0 10px; /* Начальный отступ */
+  padding: 0 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-/*МАТЕМАТИКА
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* Математика */
 .math {
   font-family: "Times New Roman", serif;
   font-size: 1.1em;
   margin: 10px 0;
 }
+
 .example {
   background: #f4f4f4;
   padding: 10px;
   border-left: 5px solid #3498db;
   margin: 20px 0;
 }
+
 .example h4 {
   margin-top: 0;
 }
+
 .section {
   margin-bottom: 30px;
 }
 
-/*МОДАЛЬНОЕ ОКНО
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/* Стили для кнопки */
+/* Модальное окно */
 #openModalBtn {
   background-color: #4CAF50;
   color: white;
@@ -908,9 +855,8 @@ figcaption {
   background-color: #45a049;
 }
 
-/* Стили для модального окна */
 .modal {
-  display: none; /* Скрыто по умолчанию */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -918,12 +864,12 @@ figcaption {
   width: 100%;
   height: auto%;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0; /* Начальная прозрачность */
-  transition: opacity 0.7s ease; /* Плавное изменение прозрачности */
+  opacity: 0;
+  transition: opacity 0.7s ease;
 }
 
 .modal.modal-open {
-  opacity: 1; /* Полная видимость */
+  opacity: 1;
 }
 
 .modal-content {
@@ -935,14 +881,14 @@ figcaption {
   max-width: 600px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transform: translateY(-50px); /* Начальное смещение */
-  opacity: 0; /* Начальная прозрачность */
-  transition: transform 0.7s ease, opacity 0.7s ease; /* Плавные переходы */
+  transform: translateY(-50px);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
 .modal.modal-open .modal-content {
-  transform: translateY(0); /* Конечное положение */
-  opacity: 0.9; /* Полная видимость */
+  transform: translateY(0);
+  opacity: 0.9;
 }
 
 .modal-content h2 {
@@ -979,17 +925,7 @@ figcaption {
   color: #f00;
 }
 
-
-/*MEDIAQUERIES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* 6 карточек в строке (по умолчанию) */
-.card {
-  flex: 1 1 calc(16.666% - 1rem);
-  max-width: calc(16.666% - 1rem);
-}
-
-/* 4 карточки в строке (для экранов меньше 1200px) */
+/* Медиазапросы */
 @media (max-width: 1200px) {
   .card {
     flex: 1 1 calc(25% - 1rem);
@@ -997,7 +933,6 @@ figcaption {
   }
 }
 
-/* 3 карточки в строке (для экранов меньше 992px) */
 @media (max-width: 992px) {
   .card {
     flex: 1 1 calc(33.333% - 1rem);
@@ -1006,19 +941,16 @@ figcaption {
 }
 
 @media (max-width: 920px) {
-
   .shadow {
     border-style: none;
-    box-shadow: none; 
+    box-shadow: none;
   }
 
-  .container.shadow{
-    background-color: var(--background-color);  
+  .container.shadow {
+    background-color: var(--background-color);
   }
-
 }
 
-/* 2 карточки в строке (для экранов меньше 768px) */
 @media (max-width: 768px) {
   .card {
     flex: 1 1 calc(50% - 1rem);
@@ -1026,12 +958,9 @@ figcaption {
   }
 }
 
-/* 1 карточка в строке (для экранов меньше 480px) */
 @media (max-width: 480px) {
   .card {
     flex: 1 1 calc(100% - 1rem);
     max-width: calc(100% - 1rem);
   }
 }
-
-
