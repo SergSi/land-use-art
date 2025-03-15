@@ -28,8 +28,9 @@
   --space-l6-sm: calc(var(--space-l6-lg) / 2);
 
   --space-list-items: 0.5rem;
-  --background-color: #fdfbee;
-  --font-color: #2f2f2f;
+  --background-color: #FDF5E6;
+  --page-color: #FFF5EE;
+  --font-color: #030202;
   --a-color: #3a3535;
   --shadow-color: #696969;
 }
@@ -65,7 +66,7 @@ body {
 }
 
 .container.shadow {
-  background-color: #fffbf5;
+  background-color: var(--page-color);
 }
 
 .content {
