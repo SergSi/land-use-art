@@ -41,8 +41,8 @@ html {
 }
 
 body {
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
-  line-height: clamp(1.5, 2vw, 1.8); /* Адаптивный line-height */
+  font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
+  line-height: clamp(1.5rem, 1.286rem + 0.571vw, 1.8rem); /* Адаптивный line-height */
   font-family: "Lora", serif;
   font-weight: 400;
   color: var(--font-color);
@@ -51,7 +51,7 @@ body {
 
 /* Основные разделы */
 header {
-  font-size: clamp(2rem, 5vw, 4rem); /* Ограничение минимального и максимального размеров */
+  font-size: clamp(2rem, 0.571rem + 3.81vw, 4rem);
   font-family: 'Playfair Display', serif;
   font-weight: 900;
   line-height: clamp(1.8rem, 0.925rem + 4.375vw, 5.3rem);
