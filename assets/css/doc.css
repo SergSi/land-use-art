@@ -13,13 +13,17 @@ h2 {
   font-weight: bold;        /* Жирное начертание */
   border-bottom: 2px solid #ccc; /* Линия под заголовком (опционально) */
   padding-bottom: 5px;      /* Отступ снизу для линии */
+  text-transform: uppercase; /* Все буквы заглавные (опционально) */
 }
 
 /* Стиль для заголовка третьего уровня (h3) */
 h3 {
   font-size: clamp(1.5rem, 3.2vw, 2.2rem);
   line-height: 1.4;
-  font-weight: bold;        /* Жирное начертание */
+  font-weight: normal;        /* Жирное начертание */
   font-style: normal;       /* Начертание (опционально) */
+  text-transform: uppercase; /* Все буквы заглавные (опционально) */
+  margin-bottom: 0;
+
 }
 
