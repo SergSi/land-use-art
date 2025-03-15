@@ -1,5 +1,6 @@
 h1 {
-  font-size: 24px;          /* Размер шрифта */
+  font-size: clamp(1.92rem, 4vw, 2.88rem);
+  line-height: 1.2;
   font-weight: bold;        /* Жирное начертание */
   text-align: center;       /* Выравнивание по центру */
   text-transform: uppercase; /* Все буквы заглавные (опционально) */
@@ -7,7 +8,8 @@ h1 {
 
 /* Стиль для заголовка второго уровня (h2) */
 h2 {
-  font-size: 125%;          /* Размер шрифта */
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.3;
   font-weight: bold;        /* Жирное начертание */
   border-bottom: 2px solid #ccc; /* Линия под заголовком (опционально) */
   padding-bottom: 5px;      /* Отступ снизу для линии */
@@ -15,7 +17,8 @@ h2 {
 
 /* Стиль для заголовка третьего уровня (h3) */
 h3 {
-  font-size: 110%;          /* Размер шрифта */
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  line-height: 1.4;
   font-weight: bold;        /* Жирное начертание */
   font-style: normal;       /* Начертание (опционально) */
 }

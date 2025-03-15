@@ -41,8 +41,8 @@ html {
 }
 
 body {
-  font-size: clamp(1.4rem, 1.3rem + 0.5vw, 1.8rem);
-  line-height: clamp(1.45rem, 1.164rem + 0.762vw, 1.85rem);
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  line-height: clamp(1.5, 2vw, 1.8); /* Адаптивный line-height */
   font-family: "Lora", serif;
   font-weight: 400;
   color: var(--font-color);
@@ -143,7 +143,7 @@ p::selection {
 
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.02em;
-  line-height: 1.2em;
+  line-height: 1.2;
 }
 
 h1, h2 {
@@ -269,14 +269,6 @@ ol ol > li::before {
   content: counters(li, ".") " ";
 }
 
-/* Оглавление */
-.toc ul li:before,
-.toc li:before {
-  content: "";
-  position: relative;
-  left: -5px;
-}
-
 li + li {
   margin-top: var(--space-list-items);
 }
@@ -289,6 +281,14 @@ ul {
 li :is(ul, ol) {
   margin-top: var(--space-list-items);
   margin-bottom: 0;
+}
+
+/* Оглавление */
+.toc ul li:before,
+.toc li:before {
+  content: "";
+  position: relative;
+  left: -5px;
 }
 
 *:last-child {
