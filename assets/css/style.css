@@ -45,7 +45,7 @@ body {
   background-color: var(--background-color);
   color: var(--font-color);
   font-family: "Lora", serif;
-  font-size: clamp(1.6rem, 1.446rem + 0.615vw, 2rem);
+  font-size: clamp(1.5rem, 1.286rem + 0.571vw, 1.8rem);
   font-weight: 400;
   line-height: clamp(1.5rem, 1.286rem + 0.571vw, 1.8rem);
 }
