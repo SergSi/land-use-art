@@ -27,3 +27,6 @@ h3 {
 
 }
 
+ul li, ol li {
+  margin-bottom: 1rem;  
+}
