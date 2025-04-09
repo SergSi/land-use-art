@@ -186,10 +186,12 @@ h5 + h6 {
   margin-top: var(--space-l6-sm);
 }
 
+
 h6 {
   margin-bottom: var(--space-l6-sm);
   margin-top: var(--space-l6-lg);
 }
+
 
 /* Общие стили для списков */
 ol, ul {
@@ -258,7 +260,11 @@ p::selection {
 
 /* Дополнительные отступы */
 li + li {
-  margin-top: var(--space-list-items);
+  margin-top: 1.5rem;
+}
+
+.toc, li + li {
+  margin-top: 0.5rem;
 }
 
 li :is(ul, ol) {
@@ -275,8 +281,6 @@ h3 + ul, h3 + ol, h4 + ul, h4 + ol {
 ul {
   margin-top: -1rem;
 }
-
-
 
 /* Оглавление */
 .toc {
@@ -302,7 +306,7 @@ ul {
 }
 
 *:last-child {
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
 }
 
 /* Оформление */
