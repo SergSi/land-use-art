@@ -27,7 +27,7 @@
   --space-l5-sm: calc(var(--space-l5-lg) / 2);
   --space-l6-sm: calc(var(--space-l6-lg) / 2);
 
-  --space-list-items: 0;
+  --space-list-items: 1.5em;
   --background-color: #FDF5E6;
   --page-color: #FFF5EE;
   --font-color: #030202;
