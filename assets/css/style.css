@@ -203,14 +203,14 @@ ol {
 
 ol > li {
   counter-increment: li;
-  padding-left: 2.5rem;
+  padding-left: 2.5em;
   position: relative;
 }
 
 ol > li::before {
   content: counter(li) ".";
   left: 0;
-  margin-right: 1rem;
+  margin-right: 1em;
   position: absolute;
   text-align: right;
   width: 2em;
@@ -225,8 +225,8 @@ ol ol > li::before {
 }
 
 ol ul, ul ol, ol ol, ul ul {
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
   padding-left: 0;
 }
 
@@ -247,14 +247,14 @@ ul {
 }
 
 ul > li {
-  padding-left: 2.5rem;
+  padding-left: 2.5em;
   position: relative;
 }
 
 ul > li::before {
   content: "–";
   left: 0;
-  margin-right: 1rem;
+  margin-right: 1em;
   position: absolute;
   text-align: right;
   width: 2em;
@@ -273,7 +273,7 @@ h3 + ul,
 h3 + ol,
 h4 + ul,
 h4 + ol {
-  margin-top: 0.5rem;
+  margin-top: 0.5em;
 }
 
 /* Оглавление */
