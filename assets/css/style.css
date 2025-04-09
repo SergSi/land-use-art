@@ -191,24 +191,27 @@ h6 {
   margin-top: var(--space-l6-lg);
 }
 
+/* Общие стили для списков */
 ol, ul {
   padding-left: 0;
+  list-style: none;
+  margin-bottom: var(--space-default);
 }
 
+/* Специфичные стили для нумерованных списков */
 ol {
   counter-reset: li;
-  list-style: none;
   margin-bottom: 1.5rem;
 }
 
-ol > li {
-  counter-increment: li;
+/* Общие стили для элементов списка */
+ol > li, ul > li {
   padding-left: 2.5em;
   position: relative;
 }
 
-ol > li::before {
-  content: counter(li) ".";
+/* Общие стили для маркеров списка */
+ol > li::before, ul > li::before {
   left: 0;
   margin-right: 1em;
   position: absolute;
@@ -216,6 +219,17 @@ ol > li::before {
   width: 2em;
 }
 
+/* Специфичные стили для маркеров */
+ol > li::before {
+  content: counter(li) ".";
+  counter-increment: li;
+}
+
+ul > li::before {
+  content: "–";
+}
+
+/* Вложенные списки */
 ol ol {
   counter-reset: li;
 }
@@ -224,12 +238,14 @@ ol ol > li::before {
   content: counters(li, ".") " ";
 }
 
+/* Отступы для вложенных списков */
 ol ul, ul ol, ol ol, ul ul {
   margin-bottom: 0.5em;
   margin-top: 0.5em;
   padding-left: 0;
 }
 
+/* Стили для параграфов */
 p {
   hyphens: auto;
   hyphenate-limit-chars: 8 4 4;
@@ -240,26 +256,7 @@ p::selection {
   background: lightgrey;
 }
 
-ul {
-  list-style: none;
-  margin-bottom: var(--space-default);
-  margin-top: -1rem;
-}
-
-ul > li {
-  padding-left: 2.5em;
-  position: relative;
-}
-
-ul > li::before {
-  content: "–";
-  left: 0;
-  margin-right: 1em;
-  position: absolute;
-  text-align: right;
-  width: 2em;
-}
-
+/* Дополнительные отступы */
 li + li {
   margin-top: var(--space-list-items);
 }
@@ -269,12 +266,17 @@ li :is(ul, ol) {
   margin-top: var(--space-list-items);
 }
 
-h3 + ul,
-h3 + ol,
-h4 + ul,
-h4 + ol {
+/* Специфичные отступы после заголовков */
+h3 + ul, h3 + ol, h4 + ul, h4 + ol {
   margin-top: 0.5em;
 }
+
+/* Коррекция отступа для маркированных списков */
+ul {
+  margin-top: -1rem;
+}
+
+
 
 /* Оглавление */
 .toc {
