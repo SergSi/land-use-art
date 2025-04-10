@@ -305,10 +305,6 @@ ul {
   color: purple;
 }
 
-*:last-child {
-  margin-bottom: 1.5rem;
-}
-
 /* Оформление */
 .author {
   font-size: 110%;
