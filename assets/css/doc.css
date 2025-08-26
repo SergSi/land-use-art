@@ -20,9 +20,8 @@ h2 {
 h3 {
   font-size: clamp(1.5rem, 1.071rem + 1.143vw, 2.1rem);
   line-height: 1.4;
-  font-weight: normal;        /* Жирное начертание */
+  font-weight: bold;        /* Жирное начертание */
   font-style: normal;       /* Начертание (опционально) */
-  text-transform: uppercase; /* Все буквы заглавные (опционально) */
   margin-bottom: 0;
 
 }
