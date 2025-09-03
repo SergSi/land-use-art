@@ -648,14 +648,7 @@ a:hover {
   text-align: center;
 }
 
-figcaption {
-  color: #666;
-  font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
-  font-style: normal;
-  font-weight: bold;
-  margin-top: 0.5rem;
-  text-align: center;
-}
+
 
 figure {
   margin: 0;
@@ -732,6 +725,52 @@ figure {
 #timeoutshort {
   animation: ani 1.4s forwards;
   opacity: 0;
+}
+
+.float-left {
+  float: left;
+  margin: 0 1.5em 1em 0;
+  text-align: center;
+  max-width: 40%;
+  width: 40%;
+}
+
+.float-right {
+  float: right;
+  margin: 0 0 1em 1.5em;
+  text-align: center;
+  max-width: 40%;
+  width: 40%;
+}
+
+
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+figcaption {
+  font-style: italic;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
+  color: #666;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .float-left,
+  .float-right,
+  .center {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 1em auto;
+  }
 }
 
 @keyframes ani {
@@ -1004,3 +1043,4 @@ figure {
     max-width: calc(100% - 1rem);
   }
 }
+

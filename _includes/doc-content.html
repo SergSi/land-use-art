@@ -1,10 +1,40 @@
- 
-  {% assign align = page.align %}
-  {% if align == "left" %}
-    <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image }}"><img class="left-foto" src="{{ site.urlimg }}{{ page.image }}"></a>{% endif %}{{ content }}</div>
-  {% elsif align == "right"%}
-    <div>{% if page.align %}<a href="{{ site.urlimg }}{{ page.image }}"><img class="right-foto" src="{{ site.urlimg }}{{ page.image }}"></a>{% endif %}{{ content }}</div>
-  {% else %}
-    <div>{{ content }}</div>
-  {% endif %}         
- 
+{% assign align = page.align %}
+{% if align == "left" %}
+  <div style="overflow: hidden;">
+    <figure class="float-left" style="width: 40%;">
+      <a href="{{ site.urlimg }}{{ page.image }}">
+        <img src="{{ site.urlimg }}{{ page.image }}" alt="{{ page.caption | default: 'Image' }}" style="width: 100%; height: auto;">
+      </a>
+      {% if page.caption %}
+        <figcaption>{{ page.caption }}</figcaption>
+      {% endif %}
+    </figure>
+    {{ content }}
+  </div>
+{% elsif align == "right" %}
+  <div style="overflow: hidden;">
+    <figure class="float-right" style="width: 40%;">
+      <a href="{{ site.urlimg }}{{ page.image }}">
+        <img src="{{ site.urlimg }}{{ page.image }}" alt="{{ page.caption | default: 'Image' }}" style="width: 100%; height: auto;">
+      </a>
+      {% if page.caption %}
+        <figcaption>{{ page.caption }}</figcaption>
+      {% endif %}
+    </figure>
+    {{ content }}
+  </div>
+{% else %}
+  <div>
+    {% if page.image %}
+      <figure class="center" style="width: 40%; margin-left: auto; margin-right: auto;">
+        <a href="{{ site.urlimg }}{{ page.image }}">
+          <img src="{{ site.urlimg }}{{ page.image }}" alt="{{ page.caption | default: 'Image' }}" style="width: 100%; height: auto;">
+        </a>
+        {% if page.caption %}
+          <figcaption>{{ page.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    {% endif %}
+    {{ content }}
+  </div>
+{% endif %}
