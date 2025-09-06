@@ -1,11 +1,18 @@
 {% assign diagram = site.data.diagrams[include.key] %}
 {% if diagram %}
-<div class="mermaid">
-  {{ diagram.content }}
-</div>
-{% if diagram.caption %}
-<figcaption>{{ diagram.caption }}</figcaption><br>
-{% endif %}
+<figure class="mermaid-figure">
+  <div class="mermaid">
+    {{ diagram.content }}
+  </div>
+  {% if diagram.caption %}
+  <figcaption>{{ diagram.caption }}</figcaption><br>
+  {% endif %}
+</figure>
 {% else %}
-<p>Диаграмма "{{ include.key }}" не найдена</p>
+<p class="error">Диаграмма "{{ include.key }}" не найдена в site.data.diagrams</p>
+<p>Доступные ключи: 
+{% for key in site.data.diagrams %}
+  "{{ key[0] }}" 
+{% endfor %}
+</p>
 {% endif %}
