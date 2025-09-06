@@ -1,0 +1,12 @@
+<figure class="mermaid-figure">
+  <div class="mermaid">
+    {{ include.content }}
+  </div>
+  {% if include.caption %}
+  <figcaption class="mermaid-caption">
+    {{ include.caption }}
+    {% if include.source %}<span class="mermaid-source">Источник: {{ include.source }}</span>{% endif %}
+    {% if include.number %}<span class="mermaid-number">Рис. {{ include.number }}</span>{% endif %}
+  </figcaption><br>
+  {% endif %}
+</figure>
