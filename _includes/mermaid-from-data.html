@@ -1,0 +1,11 @@
+{% assign diagram = site.data.diagrams[include.key] %}
+{% if diagram %}
+<div class="mermaid">
+  {{ diagram.content }}
+</div>
+{% if diagram.caption %}
+<figcaption>{{ diagram.caption }}</figcaption><br>
+{% endif %}
+{% else %}
+<p>Диаграмма "{{ include.key }}" не найдена</p>
+{% endif %}

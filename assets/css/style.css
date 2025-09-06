@@ -761,6 +761,23 @@ figcaption {
   line-height: 1.4;
 }
 
+.mermaid {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: none;
+  border-radius: 8px;
+  border: none;
+  overflow: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .float-left,

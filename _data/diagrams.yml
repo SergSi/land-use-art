@@ -1,0 +1,59 @@
+цмп:
+  title: "Целостный метод проектирования землепользования"
+  caption: "Схема целостного метода проектирования землепользования"
+  content: |
+    flowchart TD
+    A["ЦЕЛОСТНЫЙ МЕТОД ПРОЕКТИРОВАНИЯ (ЦМП)<br>ЗЕМЛЕПОЛЬЗОВАНИЯ"]
+    
+    subgraph S1[Фаза 1: Аналитическая]
+        direction TB
+        B["Этап 1: ПОСТАНОВКА ПРОБЛЕМЫ:<br>формулирование системного противоречия"]
+        C["Этап 2: АНАЛИЗ ОСНОВАНИЙ:<br>территориальное, экономическое,<br>правовое, социальное"]
+        D["Этап 3: КОНЦЕПТУАЛЬНОЕ РЕШЕНИЕ:<br>создание новой ценности,<br>разработка ТЗ"]
+        
+        B --> C --> D
+    end
+
+    subgraph S2[Фаза 2: Проектная]
+        direction TB
+        E["Этап 4: БЛОК ПРОЕКТИРОВАНИЯ:<br>техническое, управление,<br>социальное, культурное"]
+        F["Этап 5: ПРОВЕРКА И УТВЕРЖДЕНИЕ:<br>соответствие концепции,<br>нормативам, ресурсам"]
+        G["Этап 6: РЕАЛИЗАЦИЯ И ТРАНСФЕР:<br>оформление прав, <br>запуск управления, <br>авторский надзор"]
+        
+        E --> F --> G
+    end
+
+    A --> S1
+    D --> E
+
+    H["СУВЕРЕНИТЕТ ЗЕМЛЕПОЛЬЗОВАТЕЛЕЙ:<br>право на авторство, правила,<br>ценностные ориентиры, контроль"]
+
+    H -.-> B
+    H -.-> C
+    H -.-> D
+    H -.-> F
+
+    style A fill:#e6e6fa,stroke:#d0d0f0,color:#333333  
+    style B fill:#d0d0f0,stroke:#b9b9e6,color:#333333  
+    style C fill:#b9b9e6,stroke:#a3a3dc,color:#333333  
+    style D fill:#a3a3dc,stroke:#8c8cd2,color:#333333  
+    style E fill:#8c8cd2,stroke:#7575c8,color:#ffffff  
+    style F fill:#7575c8,stroke:#5e5ebe,color:#ffffff  
+    style G fill:#5e5ebe,stroke:#4747b4,color:#ffffff  
+    style H fill:#e6e6fa,stroke:#4747b4,color:#333333
+
+бисер:
+  caption: "Механизм Игры в бисер"
+  content: |
+    flowchart TD
+    A["КУЛЬТУРНЫЙ КОНТЕКСТ:<br>науки, искусства, философия"] --> B["ФУНДАМЕНТ:<br>Универсальный язык Игры"]
+    B --> C["ФОРМАЛЬНЫЙ АППАРАТ:<br>правила, грамматика Игры, <br>комбинаторика, контрапункт, ритм"]
+    C --> D["УЧАСТНИКИ ПРЦЕССА:<br>Магистр<br>Игроки"]
+    D --> E["РЕЗУЛЬТАТ:<br>Завершённая Партия<br>Симфония смыслов"]
+    E --> F["ЦЕЛЬ:<br>Созерцание и Постижение"]
+        style A fill:#f5f0ff,stroke:#d9c6f2,color:black
+        style B fill:#e8dcf8,stroke:#cab0ec,color:black
+        style C fill:#d9c6f2,stroke:#bb9ae6,color:black
+        style D fill:#cab0ec,stroke:#9c70d9,color:black
+        style E fill:#bb9ae6,stroke:#6a3bb5,color:white
+        style F fill:#4b0082,stroke:#2e0854,color:white
