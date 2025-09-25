@@ -2,7 +2,7 @@
     {% include head.html %}
     <div class="tabs">
         {% assign currentDate = site.time | date: "%s" | plus: 0 %} <!-- Текущая дата в секундах -->
-        {% assign oneMonthAgo = currentDate | minus: 2592000 %} <!-- 30 дней в секундах (30 * 24 * 60 * 60) -->
+        {% assign oneMonthAgo = currentDate | minus: 5184000 %} <!-- 30 дней в секундах (30 * 24 * 60 * 60) -->
 
         <!-- Фильтруем посты за последний месяц вручную -->
         {% assign recent_posts = "" | split: "" %} <!-- Создаем пустой массив -->
