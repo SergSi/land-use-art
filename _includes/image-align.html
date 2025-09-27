@@ -6,6 +6,11 @@
     <a href="/assets/img/{{ include.file }}">
       <img src="/assets/img/{{ include.file }}" alt="{{ include.caption }}" style="width: 100%; height: auto;">
     </a>
-    <figcaption>{{ include.caption }}</figcaption>
+    <figcaption>
+      {{ include.caption }}
+      {% if include.source %}
+      <br><span class="image-source">Источник: {{ include.source }}</span>
+      {% endif %}
+    </figcaption>
   </figure>
 </div>
