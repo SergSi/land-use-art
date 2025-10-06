@@ -10,6 +10,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Math&display=swap');
 
 :root {
   --space-default: 1rem;
@@ -264,9 +265,11 @@ code {
     background-color: none;
     padding: 2px 6px;
     border-radius: 0px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-    color: #440f29;
+    font-family: "Libertinus Math", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.1em;
+    color: #6e1b43;
 }
 
 pre code {
@@ -277,7 +280,7 @@ pre code {
     border: 0px solid #e9ecef;
     border-radius: 6px;
     overflow-x: auto;
-    color: #212529;
+    color: #0f2841;
     line-height: 1.5;
 }
 
