@@ -877,18 +877,40 @@ figcaption {
   min-height: 300px;
   overflow: hidden;
   transition: transform 0.7s ease, box-shadow 0.7s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .card a {
   color: inherit;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card-content {
   padding: 1rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
+.card-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.5rem 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  min-height: auto; /* Убираем фиксированную высоту, она будет устанавливаться JS */
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Остальные стили остаются без изменений */
 .card-date {
   color: #666;
   font-family: "Fira Sans", sans-serif;
@@ -926,16 +948,7 @@ figcaption {
   font-style: normal;
   margin: 0;
   text-align: left;
-}
-
-.card-title {
-  font-family: 'Roboto', sans-serif;
-  font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
-  font-weight: bold;
-  letter-spacing: 0.03em;
-  margin: 0 0 0.5rem 0;
-  text-decoration: none;
-  text-transform: uppercase;
+  flex-grow: 1;
 }
 
 .summary {

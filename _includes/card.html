@@ -205,3 +205,60 @@
   });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Функция для выравнивания высоты заголовков в группах
+    function alignCardTitles() {
+        // Находим все контейнеры с карточками
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabContents.forEach(tabContent => {
+            const cards = tabContent.querySelectorAll('.card');
+            if (cards.length === 0) return;
+            
+            let maxTitleHeight = 0;
+            
+            // Сначала находим максимальную высоту заголовка в этой группе
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title');
+                if (title) {
+                    // Сбрасываем высоту для точного измерения
+                    title.style.height = 'auto';
+                    const titleHeight = title.offsetHeight;
+                    if (titleHeight > maxTitleHeight) {
+                        maxTitleHeight = titleHeight;
+                    }
+                }
+            });
+            
+            // Затем устанавливаем найденную максимальную высоту для всех заголовков в группе
+            if (maxTitleHeight > 0) {
+                cards.forEach(card => {
+                    const title = card.querySelector('.card-title');
+                    if (title) {
+                        title.style.height = maxTitleHeight + 'px';
+                        title.style.overflow = 'hidden';
+                        title.style.display = 'flex';
+                        title.style.alignItems = 'center';
+                        title.style.justifyContent = 'center';
+                    }
+                });
+            }
+        });
+    }
+    
+    // Вызываем функцию после загрузки DOM
+    alignCardTitles();
+    
+    // Также вызываем при изменении размера окна
+    window.addEventListener('resize', alignCardTitles);
+    
+    // И при переключении вкладок (если у вас есть такая функциональность)
+    document.querySelectorAll('.tab-label').forEach(label => {
+        label.addEventListener('click', () => {
+            // Небольшая задержка чтобы контент успел раскрыться
+            setTimeout(alignCardTitles, 100);
+        });
+    });
+});
+</script>
