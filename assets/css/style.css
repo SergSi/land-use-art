@@ -716,8 +716,6 @@ a:hover {
   text-align: center;
 }
 
-
-
 figure {
   margin: 0;
 }
@@ -736,17 +734,20 @@ figure {
 .image-left {
   float: left;
   margin-right: 1rem;
+  border-radius: 4px;
 }
 
 .image-right {
   float: right;
   margin-left: 1rem;
+  border-radius: 4px;
 }
 
 .left-foto {
   float: left;
   margin: 10px 20px 2px 0px;
   max-width: 40%;
+  border-radius: 4px;
 }
 
 .passe-partout {
@@ -769,6 +770,7 @@ figure {
   float: right;
   margin: 10px 0px 2px 20px;
   max-width: 40%;
+  border-radius: 4px;
 }
 
 .sepia {
@@ -816,6 +818,7 @@ figure img {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 4px; /* Закругления для изображений в figure */
 }
 
 figcaption {
