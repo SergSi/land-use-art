@@ -1,8 +1,15 @@
-  <div class="center">
+<div class="center">
     <h1 class="doc-head" id="title">{{ page.title | upcase }}</h1>
+    
+    {% if page.subtitle %}
     <div class="docsubtitle">
-      {% if page.subtitle %}{{ page.subtitle }}<br>{% endif %} 
-      {% if page.summary %}{{ page.summary }}{% endif %}
+      {{ page.subtitle }}
     </div>
-  </div>      
- 
+    {% endif %}
+    
+    {% if page.summary %}
+    <div class="summary">
+      {{ page.summary }}
+    </div>
+    {% endif %}
+</div>
