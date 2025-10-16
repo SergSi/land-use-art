@@ -899,7 +899,7 @@ figcaption {
 
 .card-title {
   font-family: 'Roboto', sans-serif;
-  font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
+  font-size: clamp(1.2rem, 1.021rem + 0.476vw, 1.45rem);  
   font-weight: bold;
   letter-spacing: 0.03em;
   margin: 0 0 0.5rem 0;
