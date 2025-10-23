@@ -22,6 +22,18 @@ h3 {
   line-height: 1.4;
   font-weight: bold;        /* Жирное начертание */
   font-style: normal;       /* Начертание (опционально) */
-
 }
 
+h4 {
+  font-size: clamp(1.5rem, 1.286rem + 0.571vw, 1.8rem);
+  line-height: 1.4;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h5 {
+  font-size: clamp(1.5rem, 1.286rem + 0.571vw, 1.8rem);
+  line-height: 1.4;
+  font-weight: bold;
+  font-style: italic;
+}
