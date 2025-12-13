@@ -221,6 +221,7 @@ ol > li::before, ul > li::before {
   position: absolute;
   text-align: right;
   width: 2em;
+    text-indent: 0;
 }
 
 /* Специфичные стили для маркеров */
@@ -330,8 +331,6 @@ ul {
 .toc ul li:before,
 .toc li:before {
   content: "";
-  left: -5px;
-  position: relative;
 }
 
 .toc-item {
