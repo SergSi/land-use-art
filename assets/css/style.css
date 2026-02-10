@@ -151,6 +151,10 @@ h1, h2 {
   font-weight: normal;
 }
 
+h3, h2 {
+  color: FireBrick;
+}
+
 h1 {
   margin-bottom: var(--space-l1-sm);
   margin-top: var(--space-l1-lg);
