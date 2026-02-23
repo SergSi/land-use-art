@@ -38,7 +38,7 @@ file-2="2023-12-22/Планшет2.jpg" caption-2="Фрагмент плана �
 file-1="a7.png" caption="Кадастровый квартал 30:04:060101" 
 file-2="a8.png" file-3="a9.png"  %}
 
-{% include image-align.html file="СадыНаРеке.jpg" caption="Рекламный щит у въезда на территорию" align="right" width="40%" %}
+{% include image-align.html file="22.jpg" caption="Алхимик за работой" align="right" width="40%" %}
 
 {% include mermaid.html content='
 graph TD
