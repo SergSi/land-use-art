@@ -29,7 +29,14 @@
                                         {% if post.image %}
                                             <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
                                         {% endif %}
-                                        <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                        <!-- ИЗМЕНЕНИЕ: Если summary есть, используем его, иначе берем первые 15 слов из контента -->
+                                        <p class="card-summary">
+                                            {% if post.summary %}
+                                                {{ post.summary | truncatewords: 15 }}
+                                            {% else %}
+                                                {{ post.content | strip_html | truncatewords: 15 }}
+                                            {% endif %}
+                                        </p>
                                         <p class="card-date"><i>{% include month.html %}</i></p>
                                     </div>
                                 </a>
@@ -76,7 +83,14 @@
                                             {% if post.image %}
                                                 <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
                                             {% endif %}
-                                            <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                            <!-- ИЗМЕНЕНИЕ: Если summary есть, используем его, иначе берем первые 15 слов из контента -->
+                                            <p class="card-summary">
+                                                {% if post.summary %}
+                                                    {{ post.summary | truncatewords: 15 }}
+                                                {% else %}
+                                                    {{ post.content | strip_html | truncatewords: 15 }}
+                                                {% endif %}
+                                            </p>
                                             <p class="card-date"><i>{% include month.html %}</i></p>
                                         </div>
                                     </a>
@@ -104,7 +118,14 @@
                                         {% if post.image %}
                                             <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
                                         {% endif %}
-                                        <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                        <!-- ИЗМЕНЕНИЕ: Если summary есть, используем его, иначе берем первые 15 слов из контента -->
+                                        <p class="card-summary">
+                                            {% if post.summary %}
+                                                {{ post.summary | truncatewords: 15 }}
+                                            {% else %}
+                                                {{ post.content | strip_html | truncatewords: 15 }}
+                                            {% endif %}
+                                        </p>
                                         <p class="card-date"><i>{% include month.html %}</i></p>
                                     </div>
                                 </a>
@@ -136,7 +157,14 @@
                                         {% if post.image %}
                                             <img src="{{ site.urlimg }}{{ post.image }}" alt="{{ post.title }}" class="card-image">
                                         {% endif %}
-                                        <p class="card-summary">{{ post.summary | truncatewords: 15 }}</p>
+                                        <!-- ИЗМЕНЕНИЕ: Если summary есть, используем его, иначе берем первые 15 слов из контента -->
+                                        <p class="card-summary">
+                                            {% if post.summary %}
+                                                {{ post.summary | truncatewords: 15 }}
+                                            {% else %}
+                                                {{ post.content | strip_html | truncatewords: 15 }}
+                                            {% endif %}
+                                        </p>
                                         <!-- Дата удалена для постов в разделе "Информация" -->
                                     </div>
                                 </a>
@@ -157,6 +185,11 @@
 
   // Функция для загрузки состояния вкладки
   const loadTabState = (tabId) => {
+    // ИЗМЕНЕНИЕ: Вкладка "new-materials" всегда должна быть открыта при загрузке
+    if (tabId === 'new-materials') {
+        return true; // Всегда открыта
+    }
+    // Для всех остальных вкладок загружаем состояние из localStorage
     return localStorage.getItem(`tabState-${tabId}`) === 'open';
   };
 
@@ -191,7 +224,12 @@
     label.addEventListener('click', () => {
       tabContent.classList.toggle('collapsed');
       updateTabContentHeight(tabContent);
-      saveTabState(tabId, !tabContent.classList.contains('collapsed'));
+      
+      // ИЗМЕНЕНИЕ: Сохраняем состояние для всех вкладок, кроме "new-materials"
+      // (для "new-materials" состояние сохранять не нужно, так как оно игнорируется при загрузке)
+      if (tabId !== 'new-materials') {
+          saveTabState(tabId, !tabContent.classList.contains('collapsed'));
+      }
     });
   });
 

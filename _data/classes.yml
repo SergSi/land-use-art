@@ -2,9 +2,10 @@ names:
   article: Статьи
   expert: Примеры заключений 
   methods: Методические материалы
-  mind: Философия практики
+  news: Короткие сообщения
 order:
+  - news
   - methods
   - expert
   - article
-  - mind
+  
