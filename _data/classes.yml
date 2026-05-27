@@ -2,7 +2,7 @@ names:
   training: Учебные курсы
   lib: Библиотека землепользователя
   admin: Управление землепользованием
-  analitika: Земельная аналитика
+  analitika: Аналитика
 order:
   - training
   - lib
