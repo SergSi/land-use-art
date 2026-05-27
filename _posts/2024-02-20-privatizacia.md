@@ -2,7 +2,7 @@
 title: Приватизация земель колхозов и совхозов
 summary: По закону и по понятиям
 author: С. И. Ивасюк
-class: article
+class: lib
 layout: doc 
 ---
 

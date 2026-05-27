@@ -1,11 +1,11 @@
 names:
-  article: Статьи
-  expert: Примеры заключений 
-  methods: Методические материалы
-  news: Короткие сообщения
+  training: Учебные курсы
+  lib: Библиотека землепользователя
+  admin: Управление землепользованием
+  analitika: Земельная аналитика
 order:
-  - news
-  - methods
-  - expert
-  - article
+  - training
+  - lib
+  - admin
+  - analitika
   
