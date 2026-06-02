@@ -1,6 +1,3 @@
-Вот исправленная и структурированная версия `README.md`:
-
-```markdown
 # Land Use Art
 
 🔗 **[https://github.com/SergSi/land-use-art](https://github.com/SergSi/land-use-art)**
@@ -32,7 +29,6 @@
 
 ## 📂 Структура репозитория
 
-```
 land-use-art/
 ├── _data/                # Данные в формате YAML/JSON
 ├── _drafts/              # Черновики постов
