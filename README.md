@@ -29,6 +29,7 @@
 
 ## 📂 Структура репозитория
 
+```
 land-use-art/
 ├── _data/                # Данные в формате YAML/JSON
 ├── _drafts/              # Черновики постов
@@ -54,6 +55,9 @@ land-use-art/
 ├── _config.yml
 ├── favicon.ico
 └── index.md
+```
+
+
 ```
 
 ---
