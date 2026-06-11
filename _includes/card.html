@@ -320,22 +320,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalColor = titleElement.style.color;
         const originalTextShadow = titleElement.style.textShadow;
         
-        // Применяем анимацию
-        titleElement.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        titleElement.style.transform = 'scale(1.08)';
+        // Используем scale с уменьшенным значением (1.02 вместо 1.08)
+        // Это решит проблему с полосой прокрутки без CSS
+        titleElement.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        titleElement.style.transform = 'scale(1.02)'; // Уменьшено с 1.08 до 1.02
         titleElement.style.color = '#ff4444';
         titleElement.style.textShadow = '0 2px 4px rgba(0,0,0,0.1)';
-        
-        // Дополнительный эффект для фона (если нужно)
-        if (label.style.backgroundColor) {
-            const originalBg = label.style.backgroundColor;
-            label.style.backgroundColor = '#fff9e6';
-            label.style.transition = 'background-color 0.7s ease';
-            
-            setTimeout(() => {
-                label.style.backgroundColor = originalBg;
-            }, 700);
-        }
         
         // Через 350 мс возвращаем обратно
         setTimeout(() => {
