@@ -3,9 +3,19 @@ names:
   lib: Библиотека землепользователя
   admin: Управление землепользованием
   analitika: Аналитика
+  practice: Практика
+
+document_types:
+  training: Учебный курс
+  lib: Статья
+  admin: Методический материал
+  analitika: Аналитический материал
+  practice: Практический пример
+
 order:
   - training
   - lib
   - admin
   - analitika
+  - practice
   

@@ -20,30 +20,19 @@
   <hr class="hr-line">
   <div style="transition: opacity 2s ease-in-out;" class="clock-text serif" id="MyClockDisplay">&#160;</div>
   <hr class="hr-line">
-{% elsif page.class == "lib" %}
-  <div class="clock-text serif">
-    <hr class="hr-line">Статья<hr class="hr-line">
-  </div>
-{% elsif page.class == "training" %}
-  <div class="clock-text serif">
-    <hr class="hr-line">Учебный курс<hr class="hr-line">
-  </div>
-{% elsif page.class == "admin" %}
-  <div class="clock-text serif">
-    <hr class="hr-line">Методика<hr class="hr-line">
-  </div>
-{% elsif page.class == "analitika" %}
-  <div class="clock-text serif">
-    <hr class="hr-line">Аналитический материал<hr class="hr-line">
-  </div>
-{% elsif page.class == "mind" %}
-  <div class="clock-text serif">
-    <hr class="hr-line">Философские и исторические заметки<hr class="hr-line">
-  </div>  
 {% else %}
-  <div class="clock-text serif">
-    <hr class="hr-line">Прочий материал<hr class="hr-line">
-  </div>
+  {% assign doc_types = site.data.classes.document_types %}
+  {% assign class_key = page.class %}
+  
+  {% if doc_types[class_key] %}
+    <div class="clock-text serif">
+      <hr class="hr-line">{{ doc_types[class_key] }}<hr class="hr-line">
+    </div>
+  {% else %}
+    <div class="clock-text serif">
+      <hr class="hr-line">Прочий материал<hr class="hr-line">
+    </div>
+  {% endif %}
 {% endif %}
 
 <br>
