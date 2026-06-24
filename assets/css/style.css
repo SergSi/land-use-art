@@ -1122,6 +1122,98 @@ figcaption {
   color: #f00;
 }
 
+/*  */
+.kanban-board {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+  background: #f4f6f8;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.kanban-board th {
+  background: #2c3e50;
+  color: white;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid #1a2630;
+}
+
+.kanban-board td {
+  vertical-align: top;
+  padding: 12px;
+  background: #ecf0f1;
+  border: 1px solid #d5d8dc;
+  width: 20%;
+  min-height: 300px;
+}
+
+.kanban-card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-left: 4px solid #3498db;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: transform 0.2s;
+}
+
+.kanban-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.kanban-card.warning {
+  border-left-color: #f39c12;
+}
+
+.kanban-card.success {
+  border-left-color: #2ecc71;
+}
+
+.kanban-card.danger {
+  border-left-color: #e74c3c;
+}
+
+.kanban-card.purple {
+  border-left-color: #9b59b6;
+}
+
+.kanban-card .badge {
+  display: inline-block;
+  background: #ecf0f1;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 6px;
+}
+
+.kanban-arrow {
+  text-align: center;
+  font-size: 28px;
+  color: #7f8c8d;
+  padding: 4px 0;
+}
+
+.kanban-stage-title {
+  font-weight: 700;
+  color: #2c3e50;
+  background: #d5d8dc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  text-align: center;
+  font-size: 15px;
+}
+
 /* Медиазапросы */
 @media (max-width: 1200px) {
   .card {
