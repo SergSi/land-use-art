@@ -35,3 +35,9 @@ h5 {
   font-weight: bold;
   font-style: italic;
 }
+
+h6 {
+  font-size: clamp(1.531rem, 1.531rem + ((1vw - 0.6rem) * 0.324), 1.871rem);    line-height: 1.4;
+  font-weight: normal;
+  font-style: normal;
+}
