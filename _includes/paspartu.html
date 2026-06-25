@@ -1,7 +1,9 @@
-<div class="center" style="margin-bottom: 1rem;">
-    <figure class="passe-partout">
-        <img src="\assets\img\{{ include.file-1 }}" alt="{{ include.caption-1 }}">   
-    </figure>
+{% assign align = include.align | default: 'center' %}
+{% assign width = include.width | default: '40%' %}
+
+<div class="image-container image-{{ align }}" style="width: {{ width }}; margin-left: {% if align == 'left' %}0{% elsif align == 'right' %}auto{% else %}auto{% endif %}; margin-right: {% if align == 'left' %}auto{% elsif align == 'right' %}0{% else %}auto{% endif %}; margin-bottom: 1rem;">
+  <figure class="passe-partout">
+    <img src="\assets\img\{{ include.file-1 }}" alt="{{ include.caption-1 }}" style="width: 100%; height: auto;">
+  </figure>
 </div>
-<figcaption style="margin-top: 2rem;">{{ include.caption-1 }}</figcaption>   
-<br>
+<figcaption style="margin-top: 2rem;">{{ include.caption-1 }}</figcaption> 
