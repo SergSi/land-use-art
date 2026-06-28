@@ -1127,27 +1127,32 @@ figcaption {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
   border-collapse: collapse;
-  background: #f4f6f8;
+  /* background: #f4f6f8; */ /* СТАРЫЙ ЦВЕТ */
+  background: #faf3eb; /* НОВЫЙ — тёплый кремовый */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .kanban-board th {
-  background: #2c3e50;
+  background: #9c5a4f; 
+  /* background: #8b6b4f;*/ 
   color: white;
   padding: 16px;
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  border: 1px solid #1a2630;
+  /* border: 1px solid #1a2630; */ /* СТАРЫЙ ЦВЕТ */
+  border: 1px solid #6d5340; /* НОВЫЙ — под цвет фона */
 }
 
 .kanban-board td {
   vertical-align: top;
   padding: 12px;
-  background: #ecf0f1;
-  border: 1px solid #d5d8dc;
+  /* background: #ecf0f1; */ /* СТАРЫЙ ЦВЕТ */
+  background: #f5ede4; /* НОВЫЙ — тёплый светло-бежевый */
+  /* border: 1px solid #d5d8dc; */ /* СТАРЫЙ ЦВЕТ */
+  border: 1px solid #dccfc4; /* НОВЫЙ — тёплый серо-бежевый */
   width: 20%;
   min-height: 300px;
 }
@@ -1158,7 +1163,8 @@ figcaption {
   padding: 12px 14px;
   margin-bottom: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  border-left: 4px solid #3498db;
+  /* border-left: 4px solid #3498db; */ /* СТАРЫЙ ЦВЕТ */
+  border-left: 4px solid #c47c5a; /* НОВЫЙ — тёплый терракотовый (базовый) */
   font-size: 14px;
   line-height: 1.5;
   transition: transform 0.2s;
@@ -1170,43 +1176,52 @@ figcaption {
 }
 
 .kanban-card.warning {
-  border-left-color: #f39c12;
+  /* border-left-color: #f39c12; */ /* СТАРЫЙ ЦВЕТ */
+  border-left-color: #d4833a; /* НОВЫЙ — тёплый оранжево-коричневый */
 }
 
 .kanban-card.success {
-  border-left-color: #2ecc71;
+  /* border-left-color: #2ecc71; */ /* СТАРЫЙ ЦВЕТ */
+  border-left-color: #7ba05b; /* НОВЫЙ — тёплый оливково-зелёный */
 }
 
 .kanban-card.danger {
-  border-left-color: #e74c3c;
+  /* border-left-color: #e74c3c; */ /* СТАРЫЙ ЦВЕТ */
+  border-left-color: #b85a4a; /* НОВЫЙ — тёплый красно-коричневый */
 }
 
 .kanban-card.purple {
-  border-left-color: #9b59b6;
+  /* border-left-color: #9b59b6; */ /* СТАРЫЙ ЦВЕТ */
+  border-left-color: #a67c6b; /* НОВЫЙ — тёплый серо-коричневый с фиолетовым оттенком */
 }
 
 .kanban-card .badge {
   display: inline-block;
-  background: #ecf0f1;
+  /* background: #ecf0f1; */ /* СТАРЫЙ ЦВЕТ */
+  background: #e8dbd0; /* НОВЫЙ — тёплый светло-бежевый */
   padding: 2px 10px;
   border-radius: 12px;
   font-size: 11px;
   font-weight: 600;
-  color: #2c3e50;
+  /* color: #2c3e50; */ /* СТАРЫЙ ЦВЕТ */
+  color: #5a4033; /* НОВЫЙ — тёплый тёмно-коричневый */
   margin-top: 6px;
 }
 
 .kanban-arrow {
   text-align: center;
   font-size: 28px;
-  color: #7f8c8d;
+  /* color: #7f8c8d; */ /* СТАРЫЙ ЦВЕТ */
+  color: #b09582; /* НОВЫЙ — тёплый серо-бежевый */
   padding: 4px 0;
 }
 
 .kanban-stage-title {
   font-weight: 700;
-  color: #2c3e50;
-  background: #d5d8dc;
+  /* color: #2c3e50; */ /* СТАРЫЙ ЦВЕТ */
+  color: #4d3a2e; /* НОВЫЙ — тёплый тёмно-коричневый */
+  /* background: #d5d8dc; */ /* СТАРЫЙ ЦВЕТ */
+  background: #e2d3c6; /* НОВЫЙ — тёплый светло-бежевый */
   padding: 8px 12px;
   border-radius: 6px;
   margin-bottom: 14px;
