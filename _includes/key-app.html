@@ -1,0 +1,1170 @@
+<!-- 
+  Ключ к действию — встраиваемый модуль для Jekyll
+  Удалены: <!DOCTYPE>, <html>, <head>, <body>, дублирующая шапка .header
+  Стили и скрипты объединены в один блок
+-->
+
+<style>
+    /* БАЗОВЫЕ СТИЛИ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .klyuch-app {
+        font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+        background: #f7f5ef;
+        color: #1c1c1c;
+        padding: 16px 16px 90px;
+        max-width: 500px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+
+        .klyuch-app-header {
+        text-align: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e0dcd2;
+        margin-bottom: 20px;
+    }
+
+    .klyuch-app-header h1 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #2c2c2c;
+    }
+
+    .klyuch-app-header .sub {
+        font-size: 13px;
+        color: #7a7a7a;
+        margin-top: 4px;
+    }
+
+    /* КАРТОЧКИ */
+    .stage {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        border-left: 4px solid #c4b8a0;
+        transition: all 0.2s;
+        display: none;
+    }
+
+    .stage.active {
+        display: block;
+        border-left-color: #6a4e9b;
+        background: #fcfaf7;
+    }
+
+    .stage-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #8a8a8a;
+        margin-bottom: 6px;
+    }
+
+    .stage-label .badge {
+        background: #e8e4dc;
+        padding: 2px 12px;
+        border-radius: 30px;
+        font-size: 11px;
+        color: #4a4a4a;
+    }
+
+    .stage.active .badge {
+        background: #6a4e9b;
+        color: #fff;
+    }
+
+    .stage-title {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .stage-desc {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+
+    .stage-hint {
+        font-size: 13px;
+        color: #8a7a6a;
+        background: #f4f1eb;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-style: italic;
+        margin-top: 10px;
+    }
+
+    /* ПОЛЯ */
+    .field-group {
+        margin-top: 12px;
+    }
+
+    .field-group label {
+        font-size: 13px;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 4px;
+        color: #3a3a3a;
+    }
+
+    .field-group textarea,
+    .field-group input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd8ce;
+        border-radius: 10px;
+        font-size: 14px;
+        background: #fdfdfb;
+        resize: vertical;
+        font-family: inherit;
+        transition: border 0.2s;
+    }
+
+    .field-group textarea:focus,
+    .field-group input:focus {
+        outline: none;
+        border-color: #6a4e9b;
+        background: #fff;
+    }
+
+    .field-group textarea {
+        min-height: 56px;
+    }
+
+    /* КНОПКИ */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 30px;
+        font-size: 15px;
+        font-weight: 500;
+        background: #e8e4dc;
+        color: #2c2c2c;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+        width: 100%;
+        margin-top: 10px;
+        touch-action: manipulation;
+    }
+
+    .btn:active {
+        transform: scale(0.97);
+    }
+
+    .btn-primary {
+        background: #6a4e9b;
+        color: #fff;
+    }
+
+    .btn-primary:active {
+        background: #5a3e8a;
+    }
+
+    .btn-success {
+        background: #3a8a6a;
+        color: #fff;
+    }
+
+    .btn-success:active {
+        background: #2e7a5a;
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #c4b8a0;
+    }
+
+    .btn-ai {
+        background: linear-gradient(135deg, #6a4e9b, #4a7a9b);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-ai:active {
+        opacity: 0.8;
+    }
+
+    .btn-ai .spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    .btn-ai.loading .spinner {
+        display: inline-block;
+    }
+
+    .btn-ai.loading .btn-text {
+        display: none;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .btn-row {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-row .btn {
+        flex: 1;
+    }
+
+    /* AI-БЛОК ОТВЕТА */
+    .ai-response {
+        background: #f4f1eb;
+        border-radius: 14px;
+        padding: 0 18px;
+        margin-top: 12px;
+        border-left: 4px solid #4a7a9b;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, padding 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .ai-response.open {
+        max-height: 800px;
+        padding: 16px 18px;
+        opacity: 1;
+    }
+
+    .ai-response .ai-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #4a7a9b;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .ai-response .ai-label .ai-icon {
+        font-size: 16px;
+    }
+
+    .ai-response .ai-text {
+        font-size: 14px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+        color: #2c2c2c;
+    }
+
+    .ai-response .ai-actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .ai-response .ai-actions .ai-action-btn {
+        background: transparent;
+        border: 1px solid #c4b8a0;
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 12px;
+        color: #555;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .ai-response .ai-actions .ai-action-btn:hover {
+        background: #e8e4dc;
+    }
+
+    .ai-response .ai-actions .ai-action-btn.apply {
+        border-color: #6a4e9b;
+        color: #6a4e9b;
+    }
+
+    .ai-response .ai-actions .ai-action-btn.apply:hover {
+        background: #6a4e9b;
+        color: #fff;
+    }
+
+    /* ПРОГРЕСС */
+    .progress {
+        display: flex;
+        gap: 6px;
+        margin: 4px 0 16px;
+    }
+
+    .progress-dot {
+        flex: 1;
+        height: 4px;
+        border-radius: 4px;
+        background: #e0dcd2;
+        transition: background 0.3s;
+    }
+
+    .progress-dot.done {
+        background: #6a4e9b;
+    }
+
+    .progress-dot.current {
+        background: #b8a8d0;
+    }
+
+    /* РЕЗУЛЬТАТ */
+    .result {
+        background: #f4f1eb;
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-top: 16px;
+        border-left: 4px solid #6a4e9b;
+        display: none;
+    }
+
+    .result.visible {
+        display: block;
+    }
+
+    .result-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #6a4e9b;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .result-text {
+        font-size: 15px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    /* НАВИГАЦИЯ */
+    .nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        padding: 10px 16px 14px;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+        display: flex;
+        justify-content: space-around;
+        border-radius: 20px 20px 0 0;
+        border-top: 1px solid #eee9e0;
+        z-index: 10;
+    }
+
+    .nav-btn {
+        background: none;
+        border: none;
+        font-size: 12px;
+        color: #9a9a9a;
+        padding: 6px 14px;
+        border-radius: 30px;
+        transition: all 0.2s;
+        cursor: pointer;
+        font-weight: 500;
+        touch-action: manipulation;
+    }
+
+    .nav-btn.active {
+        background: #6a4e9b;
+        color: #fff;
+    }
+
+    .nav-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* УТИЛИТЫ */
+    .mt-8 { margin-top: 8px; }
+    .text-center { text-align: center; }
+    .text-muted { color: #8a8a8a; font-size: 13px; }
+    .hidden { display: none; }
+    .gap-8 { gap: 8px; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+</style>
+
+<!-- 
+  ============================================
+  HTML КОНТЕНТ ПРИЛОЖЕНИЯ
+  ============================================
+-->
+<div class="klyuch-app">
+
+    <!-- ПРОГРЕСС -->
+    <div class="progress" id="progress">
+        <div class="progress-dot current" data-step="0"></div>
+        <div class="progress-dot" data-step="1"></div>
+        <div class="progress-dot" data-step="2"></div>
+        <div class="progress-dot" data-step="3"></div>
+        <div class="progress-dot" data-step="4"></div>
+    </div>
+
+    <div id="app">
+
+        <!-- ====== ЭТАП 0: ЗАМЫСЕЛ ====== -->
+        <div class="stage active" data-step="0">
+            <div class="stage-label">
+                <span>Шаг 1</span>
+                <span class="badge">Замысел</span>
+            </div>
+            <div class="stage-title">🎯 Сформулируй замысел</div>
+            <div class="stage-desc">Что ты хочешь изменить? Какой результат тебе нужен?</div>
+            <div class="field-group">
+                <label for="intent">Мой замысел:</label>
+                <textarea id="intent" rows="2" placeholder="Например: подготовить отчёт по участку..."></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('analyze_intent')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Помочь сформулировать замысел</span>
+            </button>
+
+            <div class="ai-response" id="ai-intent">
+                <div class="ai-label"><span class="ai-icon">💡</span> AI рекомендует</div>
+                <div class="ai-text" id="ai-intent-text"></div>
+                <div class="ai-actions">
+                    <button class="ai-action-btn apply" onclick="applyAI('intent')">📋 Применить</button>
+                </div>
+            </div>
+
+            <div class="stage-hint">💡 Замысел должен быть конкретным результатом, а не описанием проблемы.</div>
+            <button class="btn btn-primary" onclick="nextStep(0)">✅ Зафиксировать →</button>
+        </div>
+
+        <!-- ====== ЭТАП 1: УСЛОВИЯ И ОПОРЫ ====== -->
+        <div class="stage hidden" data-step="1">
+            <div class="stage-label">
+                <span>Шаг 2</span>
+                <span class="badge">Условия и опоры</span>
+            </div>
+            <div class="stage-title">📋 Собери два множества</div>
+            <div class="stage-desc"><strong>Условия</strong> — что есть сейчас: факты, документы, ресурсы, позиции.<br>
+            <strong>Опоры</strong> — что из объективного порядка (законы, практики, правила) можно приложить к условиям.</div>
+
+            <div class="field-group">
+                <label for="conditions">📌 Условия (факты):</label>
+                <textarea id="conditions" rows="3" placeholder="Список фактов, документов, ресурсов..."></textarea>
+            </div>
+
+            <div class="field-group">
+                <label for="supports">⚓ Опоры (законы, практики, прецеденты):</label>
+                <textarea id="supports" rows="3" placeholder="Что из порядка может быть приложено?"></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('analyze_conditions')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Проверить условия и опоры</span>
+            </button>
+
+            <div class="ai-response" id="ai-conditions">
+                <div class="ai-label"><span class="ai-icon">🔍</span> AI анализ</div>
+                <div class="ai-text" id="ai-conditions-text"></div>
+                <div class="ai-actions">
+                    <button class="ai-action-btn" onclick="suggestMore('conditions')">➕ Дополнить</button>
+                </div>
+            </div>
+
+            <div class="stage-hint">🔍 Опоры — это не твои идеи, а то, что уже существует независимо от тебя.</div>
+
+            <div class="btn-row">
+                <button class="btn btn-outline" onclick="prevStep(1)">← Назад</button>
+                <button class="btn btn-primary" onclick="nextStep(1)">Далее →</button>
+            </div>
+        </div>
+
+        <!-- ====== ЭТАП 2: ВОПРОСЫ И КРИТИЧЕСКИЙ ОСТАТОК ====== -->
+        <div class="stage hidden" data-step="2">
+            <div class="stage-label">
+                <span>Шаг 3</span>
+                <span class="badge">Вопросы и диагноз</span>
+            </div>
+            <div class="stage-title">❓ Задай вопросы</div>
+            <div class="stage-desc">Какие вопросы рождаются из сопоставления замысла с условиями и опорами?</div>
+
+            <div class="field-group">
+                <label for="questions">Вопросы, которые нужно прояснить:</label>
+                <textarea id="questions" rows="3" placeholder="Что мне мешает? Что я не знаю? Что нужно проверить?"></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('generate_questions')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Сгенерировать вопросы</span>
+            </button>
+
+            <div class="ai-response" id="ai-questions">
+                <div class="ai-label"><span class="ai-icon">❓</span> AI вопросы</div>
+                <div class="ai-text" id="ai-questions-text"></div>
+                <div class="ai-actions">
+                    <button class="ai-action-btn apply" onclick="applyAI('questions')">📋 Применить все</button>
+                </div>
+            </div>
+
+            <div class="stage-title" style="font-size:16px; margin-top:14px;">🔴 Критический остаток</div>
+            <div class="stage-desc">Главное противоречие — диагноз ситуации. Обобщи ответы на вопросы.</div>
+            <div class="field-group">
+                <label for="critical">Критический остаток (главное противоречие):</label>
+                <textarea id="critical" rows="2" placeholder="Например: у нас есть правовое основание, но нет подтверждающих документов..."></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('find_critical')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Найти критический остаток</span>
+            </button>
+
+            <div class="ai-response" id="ai-critical">
+                <div class="ai-label"><span class="ai-icon">🔴</span> AI диагноз</div>
+                <div class="ai-text" id="ai-critical-text"></div>
+                <div class="ai-actions">
+                    <button class="ai-action-btn apply" onclick="applyAI('critical')">📋 Применить</button>
+                </div>
+            </div>
+
+            <div class="stage-hint">⚡ Критический остаток — это точка приложения силы. Найди его — и ты поймёшь, что делать.</div>
+
+            <div class="btn-row">
+                <button class="btn btn-outline" onclick="prevStep(2)">← Назад</button>
+                <button class="btn btn-primary" onclick="nextStep(2)">Далее →</button>
+            </div>
+        </div>
+
+        <!-- ====== ЭТАП 3: ШАГИ ====== -->
+        <div class="stage hidden" data-step="3">
+            <div class="stage-label">
+                <span>Шаг 4</span>
+                <span class="badge">Действие</span>
+            </div>
+            <div class="stage-title">⚡ Выбери шаги</div>
+            <div class="stage-desc">Какие действия <strong>соединят</strong> найденные опоры с условиями?</div>
+
+            <div class="field-group">
+                <label for="steps">Мои шаги (гипотезы):</label>
+                <textarea id="steps" rows="3" placeholder="Что я сделаю сейчас? Шаг — это проверка, а не план."></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('suggest_steps')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Предложить шаги</span>
+            </button>
+
+            <div class="ai-response" id="ai-steps">
+                <div class="ai-label"><span class="ai-icon">⚡</span> AI предлагает шаги</div>
+                <div class="ai-text" id="ai-steps-text"></div>
+                <div class="ai-actions">
+                    <button class="ai-action-btn apply" onclick="applyAI('steps')">📋 Применить</button>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="check">Три вопроса оценки (перед шагом):</label>
+                <textarea id="check" rows="3" placeholder="1. Кто может пострадать?&#10;2. Могу ли я уменьшить потери?&#10;3. Стоит ли результат этих потерь?"></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('analyze_risks')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Проанализировать риски</span>
+            </button>
+
+            <div class="ai-response" id="ai-risks">
+                <div class="ai-label"><span class="ai-icon">🛡️</span> AI анализ рисков</div>
+                <div class="ai-text" id="ai-risks-text"></div>
+            </div>
+
+            <div class="stage-hint">🧭 Выбирай первые шаги, которые можно сделать сейчас, и не забывай о последствиях.</div>
+
+            <div class="btn-row">
+                <button class="btn btn-outline" onclick="prevStep(3)">← Назад</button>
+                <button class="btn btn-success" onclick="finish()">✅ Сделать шаг и оценить</button>
+            </div>
+        </div>
+
+        <!-- ====== ЭТАП 4: РЕЗУЛЬТАТ ====== -->
+        <div class="stage hidden" data-step="4">
+            <div class="stage-label">
+                <span>Шаг 5</span>
+                <span class="badge">Завершение</span>
+            </div>
+            <div class="stage-title">🔚 Оцени проявленное</div>
+            <div class="stage-desc">Что изменилось после шагов? Достигнут ли замысел?</div>
+
+            <div class="field-group">
+                <label for="outcome">Что проявилось:</label>
+                <textarea id="outcome" rows="3" placeholder="Улучшение? Ясность? Невозможность? Отказ?"></textarea>
+            </div>
+
+            <div class="field-group">
+                <label for="loss">Кому стало хуже? (оглянись):</label>
+                <textarea id="loss" rows="2" placeholder="Кто потерял ресурс, статус, время?"></textarea>
+            </div>
+
+            <div class="field-group">
+                <label for="lesson">Что я понял о порядке в результате этого круга:</label>
+                <textarea id="lesson" rows="2" placeholder="Новое понимание → опыт для следующего круга"></textarea>
+            </div>
+
+            <button class="btn btn-ai" onclick="callAI('summarize')">
+                <span class="spinner"></span>
+                <span class="btn-text">🤖 Резюмировать круг</span>
+            </button>
+
+            <div class="ai-response" id="ai-summary">
+                <div class="ai-label"><span class="ai-icon">📊</span> AI резюме</div>
+                <div class="ai-text" id="ai-summary-text"></div>
+            </div>
+
+            <div class="stage-hint">🌱 Каждый завершённый круг делает тебя искуснее, а порядок — доступнее.</div>
+
+            <button class="btn btn-outline" onclick="resetAll()">🔄 Начать новый круг</button>
+            <button class="btn btn-primary" onclick="exportResult()" style="margin-top:8px;">📤 Сохранить результат</button>
+        </div>
+
+        <!-- РЕЗУЛЬТАТ (сводка) -->
+        <div class="result" id="resultBlock">
+            <div class="result-label">📋 Сводка круга</div>
+            <div class="result-text" id="resultText"></div>
+        </div>
+
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="nav" id="nav">
+        <button class="nav-btn active" data-step="0">🎯 Замысел</button>
+        <button class="nav-btn" data-step="1">📋 Условия</button>
+        <button class="nav-btn" data-step="2">❓ Вопросы</button>
+        <button class="nav-btn" data-step="3">⚡ Шаги</button>
+        <button class="nav-btn" data-step="4">🔚 Итог</button>
+    </div>
+
+</div>
+
+<!-- 
+  ============================================
+  СКРИПТЫ
+  ============================================
+-->
+<script>
+    // ============================================
+    // 1. КОНФИГУРАЦИЯ
+    // ============================================
+    
+    // 🔧 ИЗМЕНИТЕ ЭТОТ URL НА ВАШ API
+    const API_BASE_URL = 'https://your-api.com/ai';
+    
+    // Для демонстрации — если нет API, используем локальные ответы
+    const DEMO_MODE = true; // Выключите для работы с реальным API
+
+    // ============================================
+    // 2. СОСТОЯНИЕ
+    // ============================================
+    
+    let currentStep = 0;
+    const totalSteps = 5;
+    let aiResponses = {};
+
+    // DOM-элементы
+    const stages = document.querySelectorAll('.stage');
+    const dots = document.querySelectorAll('.progress-dot');
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const resultBlock = document.getElementById('resultBlock');
+    const resultText = document.getElementById('resultText');
+
+    const fields = {
+        intent: document.getElementById('intent'),
+        conditions: document.getElementById('conditions'),
+        supports: document.getElementById('supports'),
+        questions: document.getElementById('questions'),
+        critical: document.getElementById('critical'),
+        steps: document.getElementById('steps'),
+        check: document.getElementById('check'),
+        outcome: document.getElementById('outcome'),
+        loss: document.getElementById('loss'),
+        lesson: document.getElementById('lesson'),
+    };
+
+    // ============================================
+    // 3. НАВИГАЦИЯ
+    // ============================================
+    
+    function goToStep(step) {
+        if (step < 0) step = 0;
+        if (step >= totalSteps) step = totalSteps - 1;
+        currentStep = step;
+
+        stages.forEach((el, i) => {
+            el.classList.remove('active');
+            if (i === step) el.classList.add('active');
+        });
+
+        dots.forEach((dot, i) => {
+            dot.classList.remove('current', 'done');
+            if (i < step) dot.classList.add('done');
+            else if (i === step) dot.classList.add('current');
+        });
+
+        navBtns.forEach((btn, i) => {
+            btn.classList.toggle('active', i === step);
+        });
+
+        resultBlock.classList.remove('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextStep(from) {
+        const checks = {
+            0: fields.intent,
+            1: [fields.conditions, fields.supports],
+            2: [fields.questions, fields.critical],
+            3: fields.steps,
+        };
+        const field = checks[from];
+        if (field) {
+            const fieldsArray = Array.isArray(field) ? field : [field];
+            const empty = fieldsArray.some(f => !f.value.trim());
+            if (empty && !confirm('Некоторые поля не заполнены. Продолжить?')) return;
+        }
+        goToStep(from + 1);
+    }
+
+    function prevStep(from) {
+        goToStep(from - 1);
+    }
+
+    // ============================================
+    // 4. AI-ВЫЗОВЫ
+    // ============================================
+    
+    async function callAI(action) {
+        const btn = document.querySelector(`.btn-ai[onclick*="${action}"]`);
+        if (btn) {
+            btn.classList.add('loading');
+            btn.disabled = true;
+        }
+
+        const context = {
+            intent: fields.intent.value,
+            conditions: fields.conditions.value,
+            supports: fields.supports.value,
+            questions: fields.questions.value,
+            critical: fields.critical.value,
+            steps: fields.steps.value,
+            check: fields.check.value,
+            outcome: fields.outcome.value,
+            loss: fields.loss.value,
+            lesson: fields.lesson.value,
+        };
+
+        try {
+            let response;
+            
+            if (DEMO_MODE) {
+                response = await demoAI(action, context);
+            } else {
+                const res = await fetch(`${API_BASE_URL}/${action}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(context)
+                });
+                if (!res.ok) throw new Error(`API error: ${res.status}`);
+                const data = await res.json();
+                response = data.result || data.response || data.message || 'Нет ответа от API';
+            }
+
+            showAIResponse(action, response);
+            aiResponses[action] = response;
+
+        } catch (error) {
+            console.error('AI Error:', error);
+            showAIResponse(action, `❌ Ошибка: ${error.message}\n\nПроверьте подключение к API или включите DEMO_MODE.`);
+        }
+
+        if (btn) {
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    }
+
+    function showAIResponse(action, text) {
+        const responseMap = {
+            'analyze_intent': 'ai-intent',
+            'analyze_conditions': 'ai-conditions',
+            'generate_questions': 'ai-questions',
+            'find_critical': 'ai-critical',
+            'suggest_steps': 'ai-steps',
+            'analyze_risks': 'ai-risks',
+            'summarize': 'ai-summary',
+        };
+
+        const containerId = responseMap[action];
+        if (!containerId) return;
+
+        const container = document.getElementById(containerId);
+        const textEl = document.getElementById(containerId + '-text');
+        
+        if (container && textEl) {
+            textEl.innerHTML = text.replace(/\n/g, '<br>');
+            container.classList.add('open');
+            
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+    }
+
+    // ============================================
+    // 5. ДЕМО-ОТВЕТЫ (для тестирования без API)
+    // ============================================
+    
+    function demoAI(action, context) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                let response = '';
+                
+                switch(action) {
+                    case 'analyze_intent':
+                        response = `📌 **Анализ замысла**
+
+Ваш замысел: "${context.intent || 'Не указан'}"
+
+✅ Сильные стороны:
+• Замысел сформулирован как конкретное действие
+• В нём есть субъект действия
+
+💡 Рекомендации:
+• Сделайте замысел более измеримым — что именно должно измениться?
+• Уточните сроки: когда вы хотите увидеть результат?
+• Проверьте, не смешан ли замысел с проблемой. Замысел = результат, проблема = препятствие.
+
+**Пример хорошего замысла:** "Подготовить и утвердить отчёт по участку №7 до 1 августа"`;
+                        break;
+
+                    case 'analyze_conditions':
+                        response = `📋 **Анализ условий и опор**
+
+📌 Условия: ${context.conditions || '—'}
+⚓ Опоры: ${context.supports || '—'}
+
+🔍 Что я вижу:
+${context.conditions ? '• Условия описаны, это даёт опору для анализа' : '• Условия не описаны — это риск'} 
+${context.supports ? '• Опоры определены — вы ищете опору в объективном порядке' : '• Опоры не найдены — без них действие слепо'}
+
+💡 Проверьте:
+1. Каждая ли опора действительно существует независимо от вас?
+2. Каждое ли условие — это факт, а не интерпретация?
+3. Есть ли опоры, которые вы упустили? (законы, практики, прецеденты)`;
+                        break;
+
+                    case 'generate_questions':
+                        response = `❓ **Сгенерированные вопросы**
+
+Исходя из вашего замысла и описанных условий, вот вопросы, которые нужно прояснить:
+
+${context.intent ? `1. Что мешает "${context.intent}" прямо сейчас?` : '1. Что мешает достижению замысла?'}
+2. Какие документы подтверждают или опровергают мои опоры?
+3. Кто ещё вовлечён в ситуацию и какова их позиция?
+4. Что произойдёт, если я ничего не сделаю?
+5. Каков минимальный шаг, который изменит ситуацию?
+
+${context.conditions ? `6. Какое из описанных условий является самым критичным?` : ''}
+${context.supports ? `7. Какая из опор наиболее надёжна в данном контексте?` : ''}
+
+💡 Ответы на эти вопросы помогут сформировать Критический остаток.`;
+                        break;
+
+                    case 'find_critical':
+                        const intent = context.intent || 'замысел';
+                        const conditions = context.conditions || 'не описаны';
+                        const supports = context.supports || 'не найдены';
+                        
+                        response = `🔴 **Критический остаток (диагноз)**
+
+На основе ваших данных я вижу главное противоречие:
+
+**"${intent}" требует ${conditions}, но опоры в виде ${supports} не обеспечивают прямого соединения.**
+
+${context.questions ? `Ваши вопросы подтверждают это: ${context.questions.slice(0, 60)}...` : ''}
+
+📌 Это означает, что ваши шаги должны быть направлены не на изменение условий или поиск новых опор по отдельности, а на **создание соединения** между тем, что уже есть.
+
+💡 **Формулировка для записи:**
+"У меня есть ${supports || 'опоры'}, но они не соединены с ${conditions || 'условиями'}. Нужно создать мост."`;
+                        break;
+
+                    case 'suggest_steps':
+                        response = `⚡ **Предлагаемые шаги**
+
+На основе Критического остатка и описанной ситуации:
+
+${context.critical ? `🔴 Исходя из диагноза: "${context.critical.slice(0, 80)}..."` : '🔴 Диагноз не сформулирован, предлагаю общие шаги:'}
+
+**Шаг 1 (проверка):** 
+Собрать все документы/факты, которые подтверждают ${context.supports || 'опоры'}
+
+**Шаг 2 (соединение):** 
+Подготовить письменное обоснование, связывающее ${context.supports || 'опоры'} с ${context.conditions || 'условиями'}
+
+**Шаг 3 (действие):** 
+Отправить обоснование ключевому лицу, принимающему решение
+
+**Шаг 4 (оценка):** 
+Через 48 часов оценить, появилась ли реакция
+
+💡 Помните: шаги — это гипотезы, а не обязательства. После каждого шага оценивайте, что проявилось.`;
+                        break;
+
+                    case 'analyze_risks':
+                        response = `🛡️ **Анализ рисков и потерь**
+
+Ваши шаги: ${context.steps || 'не указаны'}
+
+1️⃣ **Кто может пострадать?**
+• Люди, чьи интересы затронуты (${context.steps ? 'см. ваши шаги' : 'не определено'})
+• Вы сами — если шаг не приведёт к результату
+• Те, кто не в курсе ваших намерений
+
+2️⃣ **Можно ли уменьшить потери?**
+✅ Да. Сделайте шаги прозрачными для всех вовлечённых
+✅ Объясните причины ваших действий заранее
+✅ Предложите компенсации тем, кто может потерять
+
+3️⃣ **Стоит ли результат этих потерь?**
+Задайте себе вопрос: ${context.intent ? `"${context.intent}" стоит того, чтобы рискнуть?` : '"Стоит ли замысел возможных потерь?"'}
+
+💡 Если вы не можете ответить на третий вопрос "да" — пересмотрите шаги.`;
+                        break;
+
+                    case 'summarize':
+                        response = `📊 **Резюме круга**
+
+🎯 Замысел: ${context.intent || '—'}
+📌 Условия: ${context.conditions || '—'}
+⚓ Опоры: ${context.supports || '—'}
+❓ Вопросы: ${context.questions || '—'}
+🔴 Критический остаток: ${context.critical || '—'}
+⚡ Шаги: ${context.steps || '—'}
+
+🔚 Проявилось: ${context.outcome || '—'}
+
+📖 Понято о порядке: ${context.lesson || '—'}
+
+---
+
+💡 **Вывод по кругу:**
+${context.outcome ? 'Круг дал результат — вы можете переходить к следующему замыслу' : 'Круг не завершён — вернитесь к шагам и оцените, что проявилось'}
+
+${context.lesson ? 'Вы зафиксировали понимание — это обогащает вашу практику' : 'Зафиксируйте, что вы поняли об объективном порядке'}`;
+                        break;
+
+                    default:
+                        response = '🤔 Я не знаю, как ответить на этот запрос. Попробуйте другую функцию.';
+                }
+                
+                resolve(response);
+            }, 800);
+        });
+    }
+
+    // ============================================
+    // 6. ПРИМЕНЕНИЕ AI-ОТВЕТОВ
+    // ============================================
+    
+    function applyAI(target) {
+        const actionMap = {
+            'intent': 'analyze_intent',
+            'questions': 'generate_questions',
+            'critical': 'find_critical',
+            'steps': 'suggest_steps',
+        };
+
+        const action = actionMap[target];
+        if (!action || !aiResponses[action]) {
+            alert('Сначала запросите AI-помощь (нажмите кнопку с 🤖)');
+            return;
+        }
+
+        const field = fields[target];
+        if (!field) return;
+
+        let text = aiResponses[action];
+        text = text.replace(/^[📌🔍❓🔴⚡🛡️📊💡✅]\s*/gm, '');
+        text = text.replace(/\*\*/g, '').replace(/\*/g, '');
+        const parts = text.split(/[💡\-]{2,}/);
+        let cleanText = parts[0] || text;
+        cleanText = cleanText.trim();
+
+        if (cleanText.length > 300) {
+            if (!confirm('Текст довольно длинный. Применить всё?')) {
+                return;
+            }
+        }
+
+        field.value = cleanText;
+        field.focus();
+        
+        const responseContainer = document.getElementById(`ai-${target === 'intent' ? 'intent' : target}`);
+        if (responseContainer) {
+            responseContainer.classList.remove('open');
+        }
+
+        field.style.transition = 'background 0.3s';
+        field.style.background = '#e8f0e8';
+        setTimeout(() => {
+            field.style.background = '';
+        }, 1000);
+
+        if (target === 'critical' || target === 'steps') {
+            const badge = document.querySelector(`.stage.active .badge`);
+            if (badge) {
+                badge.textContent = `✅ ${badge.textContent}`;
+            }
+        }
+    }
+
+    // ============================================
+    // 7. ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ
+    // ============================================
+    
+    function suggestMore(type) {
+        const prompts = {
+            'conditions': 'Проверьте, не упустили ли вы важные факты или документы.',
+            'questions': 'Попробуйте задать вопрос: "Что произойдёт, если я не сделаю ничего?"',
+            'steps': 'Подумайте о самом маленьком шаге, который можно сделать прямо сейчас.'
+        };
+        alert('💡 ' + (prompts[type] || 'Попробуйте посмотреть на ситуацию с другой стороны.'));
+    }
+
+    // ============================================
+    // 8. ЗАВЕРШЕНИЕ КРУГА
+    // ============================================
+    
+    function finish() {
+        goToStep(4);
+        showSummary();
+    }
+
+    function showSummary() {
+        const data = {};
+        for (const [key, el] of Object.entries(fields)) {
+            data[key] = el.value.trim() || '—';
+        }
+
+        let html = `
+            <p><strong>🎯 Замысел:</strong> ${data.intent}</p>
+            <p><strong>📌 Условия:</strong> ${data.conditions}</p>
+            <p><strong>⚓ Опоры:</strong> ${data.supports}</p>
+            <p><strong>❓ Вопросы:</strong> ${data.questions}</p>
+            <p><strong>🔴 Критический остаток:</strong> ${data.critical}</p>
+            <p><strong>⚡ Шаги:</strong> ${data.steps}</p>
+            ${data.check !== '—' ? `<p><strong>🧭 Оценка потерь:</strong> ${data.check}</p>` : ''}
+            <hr style="border-color:#ddd8ce; margin: 12px 0;">
+            <p><strong>🔚 Проявилось:</strong> ${data.outcome}</p>
+            ${data.loss !== '—' ? `<p><strong>👁️ Оглянуться:</strong> ${data.loss}</p>` : ''}
+            ${data.lesson !== '—' ? `<p><strong>📖 Понято о порядке:</strong> ${data.lesson}</p>` : ''}
+        `;
+
+        resultText.innerHTML = html;
+        resultBlock.classList.add('visible');
+    }
+
+    function exportResult() {
+        const text = resultText.textContent || 'Нет данных';
+        const blob = new Blob([`КЛЮЧ — Сводка круга\n${'='.repeat(40)}\n\n${text}`], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `klyuch-${new Date().toISOString().slice(0,10)}.txt`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+
+    function resetAll() {
+        if (!confirm('Начать новый круг? Все данные будут очищены.')) return;
+        Object.values(fields).forEach(el => el.value = '');
+        aiResponses = {};
+        document.querySelectorAll('.ai-response').forEach(el => el.classList.remove('open'));
+        resultBlock.classList.remove('visible');
+        goToStep(0);
+    }
+
+    // ============================================
+    // 9. АВТОСОХРАНЕНИЕ
+    // ============================================
+    
+    function autoSave() {
+        const data = {};
+        for (const [key, el] of Object.entries(fields)) {
+            data[key] = el.value;
+        }
+        data.aiResponses = aiResponses;
+        try {
+            localStorage.setItem('klyuch_data', JSON.stringify(data));
+        } catch (e) {}
+    }
+
+    function autoLoad() {
+        try {
+            const raw = localStorage.getItem('klyuch_data');
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            for (const [key, val] of Object.entries(data)) {
+                if (fields[key]) fields[key].value = val;
+            }
+            if (data.aiResponses) {
+                aiResponses = data.aiResponses;
+            }
+        } catch (e) {}
+    }
+
+    // Сохраняем при изменении
+    Object.values(fields).forEach(el => {
+        el.addEventListener('input', autoSave);
+    });
+
+    // ============================================
+    // 10. ИНИЦИАЛИЗАЦИЯ
+    // ============================================
+    
+    autoLoad();
+    goToStep(0);
+
+    // Telegram Web App
+    if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+    }
+
+    // Навигация
+    navBtns.forEach((btn, i) => {
+        btn.addEventListener('click', () => goToStep(i));
+    });
+
+    console.log('🗝️ Ключ к действию + AI загружен');
+    console.log(`🤖 AI режим: ${DEMO_MODE ? 'ДЕМО (локальные ответы)' : 'РЕАЛЬНЫЙ API'}`);
+    console.log(`🔗 API URL: ${API_BASE_URL}`);
+</script>

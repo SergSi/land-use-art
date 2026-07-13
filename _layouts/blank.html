@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% include top.html %}  
+  <head>
+    {% include header.html %} 
+    <link rel="stylesheet" href="/assets/css/doc.css">
+  </head>
+  <body>
+    <main>
+      <div id="timeoutshort" class="news-container">    
+        {% include head.html %} 
+        <div id="timeout" class="container shadow">                                 
+          {% include doc-head.html %}
+          {% include doc-toc.html %}
+          
+          <!-- ОСНОВНОЙ КОНТЕНТ -->
+          {{ content }}         
+        </div> 
+      </div>       
+    </main>
+    <!-- ФУТЕР УДАЛЁН -->
+  </body>
+</html>
