@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Множества Ключа</title>
+
+<style>
+    /* БАЗОВЫЕ СТИЛИ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .sets-app {
+        font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+        background: #f7f5ef;
+        color: #1c1c1c;
+        padding: 16px 16px 90px;
+        max-width: 600px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+
+    .sets-header {
+        text-align: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e0dcd2;
+        margin-bottom: 20px;
+    }
+
+    .sets-header h1 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c2c2c;
+    }
+
+    .sets-header h1 span {
+        color: #6a4e9b;
+    }
+
+    .sets-header .sub {
+        font-size: 14px;
+        color: #7a7a7a;
+        margin-top: 4px;
+    }
+
+    .sets-header .badge {
+        display: inline-block;
+        background: #6a4e9b;
+        color: #fff;
+        font-size: 11px;
+        padding: 2px 14px;
+        border-radius: 30px;
+        margin-top: 6px;
+    }
+
+    /* КАРТОЧКИ МНОЖЕСТВ */
+    .set-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        border-left: 4px solid #c4b8a0;
+        transition: all 0.2s;
+    }
+
+    .set-card.opory {
+        border-left-color: #6a4e9b;
+    }
+
+    .set-card.voprosy {
+        border-left-color: #2980b9;
+    }
+
+    .set-card.shagi {
+        border-left-color: #27ae60;
+    }
+
+    .set-card .set-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #8a8a8a;
+        margin-bottom: 4px;
+    }
+
+    .set-card .set-label .set-icon {
+        font-size: 18px;
+    }
+
+    .set-card .set-title {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .set-card .set-desc {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    .set-card .field-group {
+        margin-top: 8px;
+    }
+
+    .set-card .field-group label {
+        font-size: 13px;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 4px;
+        color: #3a3a3a;
+    }
+
+    .set-card .field-group textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd8ce;
+        border-radius: 10px;
+        font-size: 14px;
+        background: #fdfdfb;
+        resize: vertical;
+        font-family: inherit;
+        transition: border 0.2s;
+        min-height: 80px;
+    }
+
+    .set-card .field-group textarea:focus {
+        outline: none;
+        border-color: #6a4e9b;
+        background: #fff;
+    }
+
+    .set-card .field-group textarea.small {
+        min-height: 56px;
+    }
+
+    /* ПРИМЕРЫ */
+    .examples {
+        background: #f4f1eb;
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-top: 8px;
+        font-size: 13px;
+        color: #6a5a4a;
+    }
+
+    .examples strong {
+        color: #4a3a2a;
+    }
+
+    .examples .tag {
+        display: inline-block;
+        background: #e8e4dc;
+        padding: 1px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        margin: 2px 4px 2px 0;
+        color: #555;
+    }
+
+    /* КНОПКИ */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 30px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+        touch-action: manipulation;
+    }
+
+    .btn:active {
+        transform: scale(0.97);
+    }
+
+    .btn-primary {
+        background: #6a4e9b;
+        color: #fff;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+        background: #5a3e8a;
+    }
+
+    .btn-success {
+        background: #27ae60;
+        color: #fff;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .btn-success:hover {
+        background: #1e8449;
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #c4b8a0;
+        color: #2c2c2c;
+    }
+
+    .btn-outline:hover {
+        background: #e8e4dc;
+    }
+
+    .btn-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .btn-row .btn {
+        flex: 1;
+        margin-top: 0;
+    }
+
+    .btn-export {
+        background: linear-gradient(135deg, #6a4e9b, #2980b9);
+        color: #fff;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 16px;
+        padding: 14px 24px;
+    }
+
+    .btn-export:hover {
+        opacity: 0.9;
+    }
+
+    .btn-export .icon {
+        font-size: 20px;
+    }
+
+    /* БЛОК ПРЕДПРОСМОТРА */
+    .preview-block {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-top: 20px;
+        border: 2px dashed #c4b8a0;
+        display: none;
+    }
+
+    .preview-block.visible {
+        display: block;
+    }
+
+    .preview-block .preview-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #6a4e9b;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .preview-block .preview-content {
+        background: #f8f6f0;
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-family: 'Courier New', monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+        max-height: 300px;
+        overflow-y: auto;
+        color: #2c2c2c;
+    }
+
+    .preview-block .preview-content .highlight {
+        background: #fff3c4;
+        padding: 0 2px;
+        border-radius: 3px;
+    }
+
+    /* СЧЁТЧИК */
+    .counter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f4f1eb;
+        border-radius: 10px;
+        padding: 8px 14px;
+        margin-top: 12px;
+        font-size: 13px;
+        color: #5a5a5a;
+    }
+
+    .counter .num {
+        font-weight: 600;
+        color: #2c2c2c;
+        background: #fff;
+        padding: 0 8px;
+        border-radius: 4px;
+    }
+
+    /* УВЕДОМЛЕНИЕ */
+    .toast {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #2c2c2c;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+        z-index: 100;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .toast.show {
+        opacity: 1;
+    }
+
+    .toast.success {
+        background: #27ae60;
+    }
+
+    .toast.error {
+        background: #e74c3c;
+    }
+
+    /* УТИЛИТЫ */
+    .text-muted { color: #8a8a8a; font-size: 13px; }
+    .mt-8 { margin-top: 8px; }
+    .mb-8 { margin-bottom: 8px; }
+    .text-center { text-align: center; }
+    .flex { display: flex; }
+    .gap-8 { gap: 8px; }
+    .items-center { align-items: center; }
+
+    /* АДАПТИВ */
+    @media (max-width: 480px) {
+        .sets-app {
+            padding: 12px 12px 80px;
+        }
+        .set-card {
+            padding: 14px 16px;
+        }
+        .btn {
+            font-size: 14px;
+            padding: 10px 16px;
+        }
+        .preview-block .preview-content {
+            font-size: 12px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="sets-app">
+
+    <!-- ШАПКА -->
+    <div class="sets-header">
+        <h1>📋 <span>Множества</span> Ключа</h1>
+        <div class="sub">структурированный сбор опор, вопросов и шагов</div>
+        <div class="badge">✍️ для записи в .txt</div>
+    </div>
+
+    <!-- КАРТОЧКА: ЗАМЫСЕЛ -->
+    <div class="set-card">
+        <div class="set-label">
+            <span>ШАГ 1</span>
+            <span class="set-icon">🎯</span>
+        </div>
+        <div class="set-title">Замысел</div>
+        <div class="set-desc">Что ты хочешь изменить? Какой результат тебе нужен?</div>
+        <div class="field-group">
+            <label for="s-intent">Мой замысел:</label>
+            <textarea id="s-intent" class="small" placeholder="Например: получить разрешение на строительство до 1 августа"></textarea>
+        </div>
+        <div class="examples">
+            <strong>💡 Пример:</strong> 
+            <span class="tag">подготовить отчёт</span>
+            <span class="tag">согласовать проект</span>
+            <span class="tag">получить разрешение</span>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ОПОРЫ -->
+    <div class="set-card opory">
+        <div class="set-label">
+            <span>ШАГ 2</span>
+            <span class="set-icon">⚓</span>
+        </div>
+        <div class="set-title">Опоры</div>
+        <div class="set-desc">Что из объективного порядка (законы, правила, практики, прецеденты) можно приложить к условиям?</div>
+        <div class="field-group">
+            <label for="s-supports">Опоры:</label>
+            <textarea id="s-supports" placeholder="Список законов, правил, практик, прецедентов..."></textarea>
+        </div>
+        <div class="examples">
+            <strong>📌 Примеры опор:</strong> 
+            <span class="tag">СНиП 2.07.01-89</span>
+            <span class="tag">регламент №45</span>
+            <span class="tag">судебная практика</span>
+            <span class="tag">должностная инструкция</span>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: УСЛОВИЯ -->
+    <div class="set-card">
+        <div class="set-label">
+            <span>ШАГ 2</span>
+            <span class="set-icon">📌</span>
+        </div>
+        <div class="set-title">Условия</div>
+        <div class="set-desc">Конкретные обстоятельства ситуации: факты, документы, позиции сторон, доступные ресурсы.</div>
+        <div class="field-group">
+            <label for="s-conditions">Условия:</label>
+            <textarea id="s-conditions" placeholder="Факты, документы, ресурсы, позиции сторон..."></textarea>
+        </div>
+        <div class="examples">
+            <strong>📌 Примеры условий:</strong> 
+            <span class="tag">участок №7</span>
+            <span class="tag">письмо от 15.06</span>
+            <span class="tag">бюджет 500 тыс.</span>
+            <span class="tag">комитет по земле</span>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ВОПРОСЫ -->
+    <div class="set-card voprosy">
+        <div class="set-label">
+            <span>ШАГ 3</span>
+            <span class="set-icon">❓</span>
+        </div>
+        <div class="set-title">Вопросы</div>
+        <div class="set-desc">Что нужно прояснить, чтобы замысел получил опору в условиях?</div>
+        <div class="field-group">
+            <label for="s-questions">Вопросы:</label>
+            <textarea id="s-questions" placeholder="Что мне мешает? Что я не знаю? Что нужно проверить?"></textarea>
+        </div>
+        <div class="examples">
+            <strong>❓ Примеры вопросов:</strong> 
+            <span class="tag">кто согласовал?</span>
+            <span class="tag">есть ли документы?</span>
+            <span class="tag">какие сроки?</span>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: КРИТИЧЕСКИЙ ОСТАТОК -->
+    <div class="set-card" style="border-left-color: #e74c3c;">
+        <div class="set-label">
+            <span>ШАГ 3</span>
+            <span class="set-icon">🔴</span>
+        </div>
+        <div class="set-title">Критический остаток</div>
+        <div class="set-desc">Главное противоречие — диагноз ситуации. Устранение этого остатка разрешает большинство производных проблем.</div>
+        <div class="field-group">
+            <label for="s-critical">Критический остаток:</label>
+            <textarea id="s-critical" class="small" placeholder="Например: есть правовое основание, но нет подтверждающих документов"></textarea>
+        </div>
+        <div class="examples">
+            <strong>🔴 Примеры:</strong> 
+            <span class="tag">есть опора, нет соединения</span>
+            <span class="tag">условия не подтверждены</span>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ШАГИ -->
+    <div class="set-card shagi">
+        <div class="set-label">
+            <span>ШАГ 4</span>
+            <span class="set-icon">⚡</span>
+        </div>
+        <div class="set-title">Шаги</div>
+        <div class="set-desc">Действия, которые соединяют найденные опоры с условиями. Шаги — это гипотеза, а не обязательство.</div>
+        <div class="field-group">
+            <label for="s-steps">Шаги:</label>
+            <textarea id="s-steps" placeholder="Что я сделаю сейчас? Шаг — это проверка, а не план."></textarea>
+        </div>
+        <div class="examples">
+            <strong>⚡ Примеры шагов:</strong> 
+            <span class="tag">направить запрос</span>
+            <span class="tag">собрать подписи</span>
+            <span class="tag">подготовить письмо</span>
+        </div>
+    </div>
+
+    <!-- СЧЁТЧИК -->
+    <div class="counter">
+        <span>📊 Заполнено:</span>
+        <span><span class="num" id="fieldCounter">0</span> из <span class="num">6</span> полей</span>
+    </div>
+
+    <!-- КНОПКИ -->
+    <div class="btn-row">
+        <button class="btn btn-outline" onclick="clearAll()">🗑️ Очистить всё</button>
+        <button class="btn btn-outline" onclick="loadExample()">📋 Заполнить пример</button>
+    </div>
+
+    <button class="btn btn-export" onclick="exportTxt()">
+        <span class="icon">📤</span> Экспортировать в .txt
+    </button>
+
+    <button class="btn btn-primary" onclick="togglePreview()">
+        👁️ Показать / скрыть предпросмотр
+    </button>
+
+    <!-- ПРЕДПРОСМОТР -->
+    <div class="preview-block" id="previewBlock">
+        <div class="preview-label">
+            <span>👁️</span> Предпросмотр .txt
+            <span style="font-weight:400;color:#8a8a8a;font-size:11px;text-transform:none;">
+                (проверьте перед сохранением)
+            </span>
+        </div>
+        <div class="preview-content" id="previewContent"></div>
+    </div>
+
+    <!-- TOAST-УВЕДОМЛЕНИЕ -->
+    <div class="toast" id="toast"></div>
+
+</div>
+
+<script>
+    // ============================================
+    // 1. ПОЛЯ
+    // ============================================
+
+    var fields = {
+        intent: document.getElementById('s-intent'),
+        supports: document.getElementById('s-supports'),
+        conditions: document.getElementById('s-conditions'),
+        questions: document.getElementById('s-questions'),
+        critical: document.getElementById('s-critical'),
+        steps: document.getElementById('s-steps'),
+    };
+
+    var fieldNames = {
+        intent: '🎯 Замысел',
+        supports: '⚓ Опоры',
+        conditions: '📌 Условия',
+        questions: '❓ Вопросы',
+        critical: '🔴 Критический остаток',
+        steps: '⚡ Шаги'
+    };
+
+    // ============================================
+    // 2. СЧЁТЧИК
+    // ============================================
+
+    function updateCounter() {
+        var count = 0;
+        for (var key in fields) {
+            if (fields.hasOwnProperty(key) && fields[key].value.trim().length > 0) {
+                count++;
+            }
+        }
+        document.getElementById('fieldCounter').textContent = count;
+    }
+
+    // Обновляем счётчик при вводе
+    for (var key in fields) {
+        if (fields.hasOwnProperty(key)) {
+            fields[key].addEventListener('input', updateCounter);
+        }
+    }
+
+    // ============================================
+    // 3. ГЕНЕРАЦИЯ ТЕКСТА
+    // ============================================
+
+    function generateTxt() {
+        var lines = [];
+        var date = new Date();
+        var dateStr = date.toLocaleDateString('ru-RU') + ' ' + date.toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
+        
+        lines.push('═══════════════════════════════════════════');
+        lines.push('  📋 МНОЖЕСТВА КЛЮЧА  ');
+        lines.push('  ' + dateStr);
+        lines.push('═══════════════════════════════════════════');
+        lines.push('');
+        
+        var hasData = false;
+        
+        for (var key in fieldNames) {
+            if (fieldNames.hasOwnProperty(key)) {
+                var value = fields[key] ? fields[key].value.trim() : '';
+                if (value.length > 0) {
+                    hasData = true;
+                    lines.push(fieldNames[key]);
+                    lines.push('─────────────────────────────────────────');
+                    // Добавляем отступы для читаемости
+                    var lines_split = value.split('\n');
+                    for (var i = 0; i < lines_split.length; i++) {
+                        if (lines_split[i].trim().length > 0) {
+                            lines.push('  • ' + lines_split[i].trim());
+                        }
+                    }
+                    lines.push('');
+                }
+            }
+        }
+        
+        if (!hasData) {
+            lines.push('⚠️ Нет заполненных данных');
+            lines.push('');
+            lines.push('Заполните хотя бы одно поле, чтобы');
+            lines.push('создать структурированную запись.');
+        }
+        
+        lines.push('═══════════════════════════════════════════');
+        lines.push('  ✍️ Создано с помощью "Множества Ключа"');
+        lines.push('  https://kadinfo.ru/klyuch');
+        lines.push('═══════════════════════════════════════════');
+        
+        return lines.join('\n');
+    }
+
+    // ============================================
+    // 4. ЭКСПОРТ В .TXT
+    // ============================================
+
+    function exportTxt() {
+        var text = generateTxt();
+        
+        // Проверяем, есть ли данные
+        var hasData = false;
+        for (var key in fields) {
+            if (fields.hasOwnProperty(key) && fields[key].value.trim().length > 0) {
+                hasData = true;
+                break;
+            }
+        }
+        
+        if (!hasData) {
+            showToast('⚠️ Нет данных для экспорта. Заполните хотя бы одно поле.', 'error');
+            return;
+        }
+        
+        try {
+            var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            var link = document.createElement('a');
+            var date = new Date();
+            var filename = 'mnozhestva-klyucha-' + 
+                date.getFullYear() + '-' + 
+                String(date.getMonth()+1).padStart(2,'0') + '-' + 
+                String(date.getDate()).padStart(2,'0') + '.txt';
+            
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+            
+            showToast('✅ Файл "' + filename + '" успешно сохранён!', 'success');
+        } catch (e) {
+            showToast('❌ Ошибка при сохранении: ' + e.message, 'error');
+        }
+    }
+
+    // ============================================
+    // 5. ПРЕДПРОСМОТР
+    // ============================================
+
+    function togglePreview() {
+        var block = document.getElementById('previewBlock');
+        var content = document.getElementById('previewContent');
+        
+        if (block.classList.contains('visible')) {
+            block.classList.remove('visible');
+        } else {
+            content.textContent = generateTxt();
+            block.classList.add('visible');
+            // Скролл к предпросмотру
+            setTimeout(function() {
+                block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+    }
+
+    // ============================================
+    // 6. ОЧИСТКА
+    // ============================================
+
+    function clearAll() {
+        if (!confirm('Очистить все поля?')) return;
+        for (var key in fields) {
+            if (fields.hasOwnProperty(key)) {
+                fields[key].value = '';
+            }
+        }
+        updateCounter();
+        document.getElementById('previewBlock').classList.remove('visible');
+        showToast('🗑️ Все поля очищены', '');
+    }
+
+    // ============================================
+    // 7. ЗАПОЛНИТЬ ПРИМЕР
+    // ============================================
+
+    function loadExample() {
+        fields.intent.value = 'Получить разрешение на строительство объекта до 1 августа 2026 года';
+        fields.supports.value = '1. СНиП 2.07.01-89 «Градостроительство. Планировка и застройка городских и сельских поселений»\n2. Градостроительный кодекс РФ, ст. 51\n3. Постановление администрации № 45-п от 15.03.2023\n4. Судебная практика: Определение ВС РФ № 304-ЭС23-1234';
+        fields.conditions.value = '1. Земельный участок находится в собственности (кадастровый номер 50:12:001234:56)\n2. Проектная документация разработана ООО «ПроектСтрой»\n3. Экспертиза проведена 15.06.2026 (заключение № 78-Э)\n4. Бюджет на строительство — 15 млн руб.\n5. Срок начала работ — август 2026 года';
+        fields.questions.value = '1. Кто именно подписывает разрешение в администрации?\n2. Какие документы нужно приложить к заявлению?\n3. Есть ли дополнительный регламент для нашего типа объектов?\n4. Какой срок рассмотрения заявления?\n5. Кто может затянуть процесс и как это предотвратить?';
+        fields.critical.value = 'У нас есть правовое основание (СНиП и ГрК РФ), но нет подтверждающих документов о согласовании с ресурсоснабжающими организациями. Без этого разрешение не будет выдано.';
+        fields.steps.value = '1. Запросить перечень ресурсоснабжающих организаций в администрации\n2. Подготовить пакет документов для согласования\n3. Направить письма-запросы с проектной документацией\n4. Получить согласования и приложить их к заявлению\n5. Подать заявление на разрешение через МФЦ или личный приём';
+        
+        updateCounter();
+        document.getElementById('previewBlock').classList.remove('visible');
+        showToast('📋 Пример загружен!', 'success');
+    }
+
+    // ============================================
+    // 8. TOAST-УВЕДОМЛЕНИЕ
+    // ============================================
+
+    var toastTimer = null;
+
+    function showToast(message, type) {
+        var toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast';
+        if (type === 'success') toast.classList.add('success');
+        if (type === 'error') toast.classList.add('error');
+        toast.classList.add('show');
+        
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // ============================================
+    // 9. ИНИЦИАЛИЗАЦИЯ
+    // ============================================
+
+    updateCounter();
+
+    // Telegram Web App
+    if (window.Telegram && window.Telegram.WebApp) {
+        var tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+    }
+
+    console.log('📋 Множества Ключа загружены');
+    console.log('💡 Заполните поля и нажмите "Экспортировать в .txt"');
+</script>
+</body>
+</html>
