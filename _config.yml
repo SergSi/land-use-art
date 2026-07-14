@@ -10,7 +10,16 @@ new_materials_months: 2  # 1, 2 или 3
 logo: /assets/img/logo.png
 
 baseurl: ""
+# Для постов
 permalink: /:categories/:year/:month/:day/:title/
+
+# Для страниц (оставить как есть)
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      permalink: /:path/
 
 author:
   name      : С. И. Ивасюк
