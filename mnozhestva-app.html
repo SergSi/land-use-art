@@ -482,10 +482,11 @@
         </div>
         <div class="examples">
             <strong>💡 Примеры:</strong>
-            <span class="tag">построить жилой дом</span>
-            <span class="tag">оформить водопользование</span>
-            <span class="tag">узаконить постройку</span>
-            <span class="tag">разрешить конфликтную ситуацию с администрацией</span>
+                <span class="tag">оформить право на объект</span>
+                <span class="tag">устранить неопределённость</span>
+                <span class="tag">подтвердить право использования</span>
+                <span class="tag">создать условия для сделки</span>
+                <span class="tag">получить ясность по статусу</span>
         </div>
     </div>
 
@@ -501,10 +502,20 @@
             <label for="s-conditions">Условия:</label>
             <textarea id="s-conditions" class="large" placeholder="Перечислите: документы (даты, номера, органы), статус объекта, позиции сторон..."></textarea>
         </div>
+        <div class="examples">
+            <strong>📌 Примеры условий:</strong>
+            <span class="tag">кадастровый номер</span>
+            <span class="tag">документы и даты</span>
+            <span class="tag">ресурсы и бюджет</span>
+            <span class="tag">позиции сторон</span>
+            <span class="tag">территориальное зонирование</span>
+            <span class="tag">статус объекта</span>
+            <span class="tag">сроки и ограничения</span>
+        </div>
         <button class="hint-toggle" onclick="toggleHint('conditions-hint')">💡 Показать подсказку</button>
         <div class="hint" id="conditions-hint">
             <strong>Пример заполнения:</strong><br>
-            • Участок в собственности, кад. номер 50:12:001234:56<br>
+            • Участок в собственности, кад. номер 50:00:000000:00<br>
             • Уведомление о соответствии № 732 от 21.10.2020 (Управление архитектуры г. Геленджик)<br>
             • Участок находится в промышленной зоне (ПЗЗ г. Геленджика)<br>
             • Решение Геленджикского городского суда от 05.08.2020 об обязании выдать уведомление<br>
@@ -526,7 +537,16 @@
             <label for="s-done">Сделанные действия:</label>
             <textarea id="s-done" class="small" placeholder="Что вы уже делали и что из этого получилось?"></textarea>
         </div>
-        <button class="hint-toggle" onclick="toggleHint('done-hint')">💡 Показать подсказку</button>
+        <div class="examples">
+            <strong>🔄 Примеры действий:</strong>
+            <span class="tag">обращение в администрацию</span>
+            <span class="tag">получение документов</span>
+            <span class="tag">судебное решение</span>
+            <span class="tag">проведение экспертизы</span>
+            <span class="tag">переговоры со сторонами</span>
+            <span class="tag">подготовка проектной документации</span>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('done-hint')">💡 Показать подсказку</button>    
         <div class="hint" id="done-hint">
             <strong>Пример заполнения:</strong><br>
             • 2020 г. — подан иск в Геленджикский городской суд<br>
@@ -548,6 +568,15 @@
         <div class="field-group">
             <label for="s-obstacles">Остановки и риски:</label>
             <textarea id="s-obstacles" class="small" placeholder="Что вас смущает? Какие риски вы видите?"></textarea>
+        </div>
+        <div class="examples">
+            <strong>⚠️ Примеры остановок и рисков:</strong>
+            <span class="tag">противоречие в документах</span>
+            <span class="tag">неопределённость правового статуса</span>
+            <span class="tag">риск судебного оспаривания</span>
+            <span class="tag">отсутствие согласия сторон</span>
+            <span class="tag">неполные или устаревшие документы</span>
+            <span class="tag">истекающие сроки</span>
         </div>
         <button class="hint-toggle" onclick="toggleHint('obstacles-hint')">💡 Показать подсказку</button>
         <div class="hint" id="obstacles-hint">
@@ -581,6 +610,16 @@
             <label for="s-supports">Опоры:</label>
             <textarea id="s-supports" class="large" placeholder="Законы, нормы, практики, прецеденты..."></textarea>
         </div>
+        <div class="examples">
+            <strong>⚓ Примеры опор:</strong>
+            <span class="tag">нормы прямого действия</span>
+            <span class="tag">подзаконные акты</span>
+            <span class="tag">прецеденты ВС РФ</span>
+            <span class="tag">полномочия органов власти</span>
+            <span class="tag">процессуальные опоры</span>
+            <span class="tag">институциональные опоры</span>
+            <span class="tag">фактические опоры</span>
+        </div>
         <button class="hint-toggle" onclick="toggleHint('supports-hint')">💡 Показать пример</button>
         <div class="hint" id="supports-hint">
             <strong>Пример опор:</strong><br>
@@ -606,6 +645,16 @@
             <label for="s-questions">Вопросы:</label>
             <textarea id="s-questions" class="large" placeholder="Что нужно проверить, уточнить, выяснить?"></textarea>
         </div>
+        <div class="examples">
+            <strong>❓ Примеры вопросов:</strong>
+            <span class="tag">полномочия органа</span>
+            <span class="tag">документальное подтверждение</span>
+            <span class="tag">процедура согласования</span>
+            <span class="tag">сроки и последствия</span>
+            <span class="tag">позиции сторон</span>
+            <span class="tag">альтернативные варианты</span>
+            <span class="tag">риски и последствия</span>
+        </div>
         <button class="hint-toggle" onclick="toggleHint('questions-hint')">💡 Показать пример</button>
         <div class="hint" id="questions-hint">
             <strong>Пример вопросов:</strong><br>
@@ -630,6 +679,14 @@
             <label for="s-critical">Критический остаток:</label>
             <textarea id="s-critical" class="small" placeholder="Главное противоречие в 1-3 предложениях"></textarea>
         </div>
+        <div class="examples">
+            <strong>🔴 Примеры критических остатков:</strong>
+            <span class="tag">противоречие между правом и фактическим статусом</span>
+            <span class="tag">неопределённость статуса объекта</span>
+            <span class="tag">несоответствие документов реальному положению</span>
+            <span class="tag">ключевое решение заблокировано</span>
+            <span class="tag">отсутствие опоры для следующего шага</span>
+        </div>        
         <button class="hint-toggle" onclick="toggleHint('critical-hint')">💡 Показать пример</button>
         <div class="hint" id="critical-hint">
             <strong>Пример критического остатка:</strong><br>
@@ -648,6 +705,14 @@
         <div class="field-group">
             <label for="s-steps">Шаги:</label>
             <textarea id="s-steps" class="large" placeholder="Что делать прямо сейчас?"></textarea>
+        </div>
+        <div class="examples">
+            <strong>🔴 Примеры критических остатков:</strong>
+            <span class="tag">противоречие между правом и фактическим статусом</span>
+            <span class="tag">неопределённость статуса объекта</span>
+            <span class="tag">несоответствие документов реальному положению</span>
+            <span class="tag">ключевое решение заблокировано</span>
+            <span class="tag">отсутствие опоры для следующего шага</span>
         </div>
         <button class="hint-toggle" onclick="toggleHint('steps-hint')">💡 Показать пример</button>
         <div class="hint" id="steps-hint">
