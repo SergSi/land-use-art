@@ -1,13 +1,9 @@
-<!-- 
-  Ключ к действию — встраиваемый модуль для Jekyll
-  Версия 2.3 — полностью рабочий
--->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ассистент ключа</title>
+    <title>Множества Ключа</title>
 
 <style>
     /* БАЗОВЫЕ СТИЛИ */
@@ -17,37 +13,75 @@
         box-sizing: border-box;
     }
 
-    .klyuch-app {
+    .sets-app {
         font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
         background: #f7f5ef;
         color: #1c1c1c;
         padding: 16px 16px 90px;
-        max-width: 500px;
+        max-width: 700px;
         margin: 0 auto;
         min-height: 100vh;
     }
 
-    .klyuch-app-header {
+    .sets-header {
         text-align: center;
         padding-bottom: 16px;
         border-bottom: 1px solid #e0dcd2;
         margin-bottom: 20px;
     }
 
-    .klyuch-app-header h1 {
-        font-size: 22px;
+    .sets-header h1 {
+        font-size: 24px;
         font-weight: 600;
         color: #2c2c2c;
     }
 
-    .klyuch-app-header .sub {
-        font-size: 13px;
+    .sets-header h1 span {
+        color: #6a4e9b;
+    }
+
+    .sets-header .sub {
+        font-size: 14px;
         color: #7a7a7a;
         margin-top: 4px;
     }
 
-    /* КАРТОЧКИ */
-    .stage {
+    .sets-header .badge {
+        display: inline-block;
+        background: #6a4e9b;
+        color: #fff;
+        font-size: 11px;
+        padding: 2px 14px;
+        border-radius: 30px;
+        margin-top: 6px;
+    }
+
+    /* РАЗДЕЛЫ */
+    .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin: 24px 0 12px 0;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #6a4e9b;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-title .section-icon {
+        font-size: 20px;
+    }
+
+    .section-sub {
+        font-size: 13px;
+        color: #7a7a7a;
+        margin-top: -8px;
+        margin-bottom: 12px;
+    }
+
+    /* КАРТОЧКИ МНОЖЕСТВ */
+    .set-card {
         background: #ffffff;
         border-radius: 16px;
         padding: 18px 20px;
@@ -55,16 +89,25 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         border-left: 4px solid #c4b8a0;
         transition: all 0.2s;
-        display: none;
     }
 
-    .stage.active {
-        display: block;
+    .set-card.opory {
         border-left-color: #6a4e9b;
-        background: #fcfaf7;
     }
 
-    .stage-label {
+    .set-card.voprosy {
+        border-left-color: #2980b9;
+    }
+
+    .set-card.shagi {
+        border-left-color: #27ae60;
+    }
+
+    .set-card.critical {
+        border-left-color: #e74c3c;
+    }
+
+    .set-card .set-label {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -72,51 +115,31 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
         color: #8a8a8a;
-        margin-bottom: 6px;
-    }
-
-    .stage-label .badge {
-        background: #e8e4dc;
-        padding: 2px 12px;
-        border-radius: 30px;
-        font-size: 11px;
-        color: #4a4a4a;
-    }
-
-    .stage.active .badge {
-        background: #6a4e9b;
-        color: #fff;
-    }
-
-    .stage-title {
-        font-size: 17px;
-        font-weight: 600;
         margin-bottom: 4px;
     }
 
-    .stage-desc {
-        font-size: 14px;
-        color: #555;
-        line-height: 1.5;
-        margin-bottom: 12px;
+    .set-card .set-label .set-icon {
+        font-size: 18px;
     }
 
-    .stage-hint {
+    .set-card .set-title {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .set-card .set-desc {
         font-size: 13px;
-        color: #8a7a6a;
-        background: #f4f1eb;
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-style: italic;
-        margin-top: 10px;
+        color: #666;
+        margin-bottom: 10px;
+        line-height: 1.4;
     }
 
-    /* ПОЛЯ */
-    .field-group {
-        margin-top: 12px;
+    .set-card .field-group {
+        margin-top: 8px;
     }
 
-    .field-group label {
+    .set-card .field-group label {
         font-size: 13px;
         font-weight: 500;
         display: block;
@@ -124,8 +147,7 @@
         color: #3a3a3a;
     }
 
-    .field-group textarea,
-    .field-group input {
+    .set-card .field-group textarea {
         width: 100%;
         padding: 10px 12px;
         border: 1px solid #ddd8ce;
@@ -135,17 +157,80 @@
         resize: vertical;
         font-family: inherit;
         transition: border 0.2s;
+        min-height: 80px;
     }
 
-    .field-group textarea:focus,
-    .field-group input:focus {
+    .set-card .field-group textarea:focus {
         outline: none;
         border-color: #6a4e9b;
         background: #fff;
     }
 
-    .field-group textarea {
+    .set-card .field-group textarea.small {
         min-height: 56px;
+    }
+
+    .set-card .field-group textarea.large {
+        min-height: 120px;
+    }
+
+    /* ПОДСКАЗКИ */
+    .hint {
+        background: #f8f5ef;
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-top: 6px;
+        font-size: 13px;
+        color: #6a5a4a;
+        border-left: 3px solid #c4b8a0;
+        display: none;
+    }
+
+    .hint.visible {
+        display: block;
+    }
+
+    .hint strong {
+        color: #4a3a2a;
+    }
+
+    .hint-toggle {
+        background: none;
+        border: none;
+        color: #6a4e9b;
+        font-size: 12px;
+        cursor: pointer;
+        padding: 2px 8px;
+        border-radius: 12px;
+        text-decoration: underline dotted;
+    }
+
+    .hint-toggle:hover {
+        background: #f0ece4;
+    }
+
+    /* ПРИМЕРЫ */
+    .examples {
+        background: #f4f1eb;
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-top: 8px;
+        font-size: 13px;
+        color: #6a5a4a;
+    }
+
+    .examples strong {
+        color: #4a3a2a;
+    }
+
+    .examples .tag {
+        display: inline-block;
+        background: #e8e4dc;
+        padding: 1px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        margin: 2px 4px 2px 0;
+        color: #555;
     }
 
     /* КНОПКИ */
@@ -153,18 +238,14 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 8px;
         padding: 12px 24px;
         border: none;
         border-radius: 30px;
         font-size: 15px;
         font-weight: 500;
-        background: #e8e4dc;
-        color: #2c2c2c;
         cursor: pointer;
         transition: background 0.2s, transform 0.1s;
-        width: 100%;
-        margin-top: 10px;
         touch-action: manipulation;
     }
 
@@ -175,1144 +256,867 @@
     .btn-primary {
         background: #6a4e9b;
         color: #fff;
+        width: 100%;
+        margin-top: 10px;
     }
 
-    .btn-primary:active {
+    .btn-primary:hover {
         background: #5a3e8a;
     }
 
     .btn-success {
-        background: #3a8a6a;
+        background: #27ae60;
         color: #fff;
     }
 
-    .btn-success:active {
-        background: #2e7a5a;
+    .btn-success:hover {
+        background: #1e8449;
     }
 
     .btn-outline {
         background: transparent;
         border: 1px solid #c4b8a0;
+        color: #2c2c2c;
     }
 
-    .btn-ai {
-        background: linear-gradient(135deg, #6a4e9b, #4a7a9b);
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn-ai:active {
-        opacity: 0.8;
-    }
-
-    .btn-ai .spinner {
-        display: none;
-        width: 20px;
-        height: 20px;
-        border: 2px solid rgba(255,255,255,0.3);
-        border-top-color: #fff;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-    }
-
-    .btn-ai.loading .spinner {
-        display: inline-block;
-    }
-
-    .btn-ai.loading .btn-text {
-        display: none;
-    }
-
-    @keyframes spin {
-        to { transform: rotate(360deg); }
+    .btn-outline:hover {
+        background: #e8e4dc;
     }
 
     .btn-row {
         display: flex;
         gap: 10px;
+        margin-top: 10px;
     }
 
     .btn-row .btn {
         flex: 1;
+        margin-top: 0;
     }
 
-    /* AI-БЛОК ОТВЕТА */
-    .ai-response {
-        background: #f4f1eb;
-        border-radius: 14px;
-        padding: 0 18px;
-        margin-top: 12px;
-        border-left: 4px solid #4a7a9b;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease, padding 0.3s ease, opacity 0.3s ease;
-        opacity: 0;
-    }
-
-    .ai-response.open {
-        max-height: 800px;
-        padding: 16px 18px;
-        opacity: 1;
-    }
-
-    .ai-response .ai-label {
-        font-size: 11px;
-        text-transform: uppercase;
-        color: #4a7a9b;
-        letter-spacing: 0.5px;
-        font-weight: 600;
-        margin-bottom: 6px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .ai-response .ai-label .ai-icon {
-        font-size: 16px;
-    }
-
-    .ai-response .ai-text {
-        font-size: 14px;
-        line-height: 1.7;
-        white-space: pre-wrap;
-        word-break: break-word;
-        color: #2c2c2c;
-    }
-
-    .ai-response .ai-text strong {
-        font-weight: 700;
-        color: #2c2c2c;
-    }
-
-    .ai-response .ai-text em {
-        font-style: italic;
-        color: #4a4a4a;
-    }
-
-    .ai-response .ai-actions {
-        margin-top: 10px;
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
-
-    .ai-response .ai-actions .ai-action-btn {
-        background: transparent;
-        border: 1px solid #c4b8a0;
-        border-radius: 20px;
-        padding: 4px 14px;
-        font-size: 12px;
-        color: #555;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    .ai-response .ai-actions .ai-action-btn:hover {
-        background: #e8e4dc;
-    }
-
-    .ai-response .ai-actions .ai-action-btn.apply {
-        border-color: #6a4e9b;
-        color: #6a4e9b;
-    }
-
-    .ai-response .ai-actions .ai-action-btn.apply:hover {
-        background: #6a4e9b;
+    .btn-export {
+        background: linear-gradient(135deg, #6a4e9b, #2980b9);
         color: #fff;
+        font-size: 16px;
+        padding: 14px 24px;
     }
 
-    /* ПРОГРЕСС */
-    .progress {
+    .btn-export:hover {
+        opacity: 0.9;
+    }
+
+    .btn-export .icon {
+        font-size: 20px;
+    }
+
+    .btn-group-export {
         display: flex;
-        gap: 6px;
-        margin: 4px 0 16px;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
     }
 
-    .progress-dot {
+    .btn-group-export .btn {
         flex: 1;
-        height: 4px;
-        border-radius: 4px;
-        background: #e0dcd2;
-        transition: background 0.3s;
+        min-width: 180px;
     }
 
-    .progress-dot.done {
-        background: #6a4e9b;
-    }
-
-    .progress-dot.current {
-        background: #b8a8d0;
-    }
-
-    /* РЕЗУЛЬТАТ */
-    .result {
-        background: #f4f1eb;
-        border-radius: 14px;
-        padding: 16px 18px;
-        margin-top: 16px;
-        border-left: 4px solid #6a4e9b;
+    /* БЛОК ПРЕДПРОСМОТРА */
+    .preview-block {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-top: 20px;
+        border: 2px dashed #c4b8a0;
         display: none;
     }
 
-    .result.visible {
+    .preview-block.visible {
         display: block;
     }
 
-    .result-label {
+    .preview-block .preview-label {
         font-size: 12px;
         text-transform: uppercase;
         color: #6a4e9b;
         letter-spacing: 0.5px;
         font-weight: 600;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    .result-text {
-        font-size: 15px;
-        line-height: 1.6;
+    .preview-block .preview-content {
+        background: #f8f6f0;
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-family: 'Courier New', monospace;
+        font-size: 13px;
+        line-height: 1.7;
         white-space: pre-wrap;
         word-break: break-word;
+        max-height: 400px;
+        overflow-y: auto;
+        color: #2c2c2c;
     }
 
-    /* НАВИГАЦИЯ */
-    .nav {
+    /* СЧЁТЧИК */
+    .counter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f4f1eb;
+        border-radius: 10px;
+        padding: 8px 14px;
+        margin-top: 12px;
+        font-size: 13px;
+        color: #5a5a5a;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .counter .num {
+        font-weight: 600;
+        color: #2c2c2c;
+        background: #fff;
+        padding: 0 8px;
+        border-radius: 4px;
+    }
+
+    /* УВЕДОМЛЕНИЕ */
+    .toast {
         position: fixed;
-        bottom: 0;
+        bottom: 100px;
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;
-        max-width: 500px;
-        background: #ffffff;
-        padding: 10px 16px 14px;
-        box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
-        display: flex;
-        justify-content: space-around;
-        border-radius: 20px 20px 0 0;
-        border-top: 1px solid #eee9e0;
-        z-index: 10;
-    }
-
-    .nav-btn {
-        background: none;
-        border: none;
-        font-size: 12px;
-        color: #9a9a9a;
-        padding: 6px 14px;
-        border-radius: 30px;
-        transition: all 0.2s;
-        cursor: pointer;
-        font-weight: 500;
-        touch-action: manipulation;
-    }
-
-    .nav-btn.active {
-        background: #6a4e9b;
+        background: #2c2c2c;
         color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+        z-index: 100;
+        max-width: 90%;
+        text-align: center;
     }
 
-    .nav-btn:active {
-        transform: scale(0.95);
+    .toast.show {
+        opacity: 1;
+    }
+
+    .toast.success {
+        background: #27ae60;
+    }
+
+    .toast.error {
+        background: #e74c3c;
     }
 
     /* УТИЛИТЫ */
-    .mt-8 { margin-top: 8px; }
-    .text-center { text-align: center; }
     .text-muted { color: #8a8a8a; font-size: 13px; }
-    .hidden { display: none; }
-    .gap-8 { gap: 8px; }
+    .mt-8 { margin-top: 8px; }
+    .mb-8 { margin-bottom: 8px; }
+    .text-center { text-align: center; }
     .flex { display: flex; }
-    .flex-col { flex-direction: column; }
+    .gap-8 { gap: 8px; }
     .items-center { align-items: center; }
+    .w-full { width: 100%; }
+
+    /* АДАПТИВ */
+    @media (max-width: 480px) {
+        .sets-app {
+            padding: 12px 12px 80px;
+        }
+        .set-card {
+            padding: 14px 16px;
+        }
+        .btn {
+            font-size: 14px;
+            padding: 10px 16px;
+        }
+        .preview-block .preview-content {
+            font-size: 12px;
+        }
+        .btn-group-export .btn {
+            min-width: unset;
+        }
+        .btn-group-export {
+            flex-direction: column;
+        }
+    }
 </style>
 </head>
 <body>
-<!-- 
-  ============================================
-  HTML КОНТЕНТ ПРИЛОЖЕНИЯ
-  ============================================
--->
-<div class="klyuch-app">
+<div class="sets-app">
 
-<div class="klyuch-app-header">
-    <h1>🗝️ Ассистент Ключа</h1>
-    <div class="sub">от замысла к результату</div>
+    <!-- ШАПКА -->
+    <div class="sets-header">
+        <h1>📋 <span>Множества</span> Ключа</h1>
+        <div class="sub">исследование ситуации: от замысла к шагам</div>
+        <div class="badge">✍️ экспорт в .txt</div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- РАЗДЕЛ 1. ИСХОДНЫЕ ДАННЫЕ -->
+    <!-- ======================================== -->
+
+    <div class="section-title">
+        <span class="section-icon">📥</span> Исходные данные
+    </div>
+    <div class="section-sub">опишите ситуацию подробно — чем больше деталей, тем точнее будет анализ</div>
+
+    <!-- КАРТОЧКА: ЗАМЫСЕЛ -->
+    <div class="set-card">
+        <div class="set-label">
+            <span>ШАГ 1</span>
+            <span class="set-icon">🎯</span>
+        </div>
+        <div class="set-title">Ваш замысел</div>
+        <div class="set-desc">Что вы хотите сделать или получить в итоге?</div>
+        <div class="field-group">
+            <label for="s-intent">Замысел:</label>
+            <textarea id="s-intent" class="small" placeholder="Например: построить жилой дом на участке..."></textarea>
+        </div>
+        <div class="examples">
+            <strong>💡 Примеры:</strong>
+            <span class="tag">построить жилой дом</span>
+            <span class="tag">получить разрешение</span>
+            <span class="tag">узаконить постройку</span>
+            <span class="tag">продать участок</span>
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: УСЛОВИЯ -->
+    <div class="set-card">
+        <div class="set-label">
+            <span>ШАГ 2</span>
+            <span class="set-icon">📌</span>
+        </div>
+        <div class="set-title">Условия</div>
+        <div class="set-desc">Все документы, решения, статусы, права, сроки, зонирование, позиции сторон.</div>
+        <div class="field-group">
+            <label for="s-conditions">Условия:</label>
+            <textarea id="s-conditions" class="large" placeholder="Перечислите: документы (даты, номера, органы), статус объекта, позиции сторон..."></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('conditions-hint')">💡 Показать подсказку</button>
+        <div class="hint" id="conditions-hint">
+            <strong>Пример заполнения:</strong><br>
+            • Участок в собственности, кад. номер 50:12:001234:56<br>
+            • Уведомление о соответствии № 732 от 21.10.2020 (Управление архитектуры г. Геленджик)<br>
+            • Участок находится в промышленной зоне (ПЗЗ г. Геленджика)<br>
+            • Решение Геленджикского городского суда от 05.08.2020 об обязании выдать уведомление<br>
+            • Вид разрешённого использования по ЕГРН — "для индивидуального жилищного строительства"<br>
+            • С 01.09.2026 старые уведомления утрачивают силу<br>
+            • Строительство не начато, участок не огорожен
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ЧТО УЖЕ БЫЛО СДЕЛАНО -->
+    <div class="set-card">
+        <div class="set-label">
+            <span>ШАГ 3</span>
+            <span class="set-icon">🔄</span>
+        </div>
+        <div class="set-title">Что уже было сделано</div>
+        <div class="set-desc">Какие действия вы предпринимали ранее и какой был результат?</div>
+        <div class="field-group">
+            <label for="s-done">Сделанные действия:</label>
+            <textarea id="s-done" class="small" placeholder="Что вы уже делали и что из этого получилось?"></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('done-hint')">💡 Показать подсказку</button>
+        <div class="hint" id="done-hint">
+            <strong>Пример заполнения:</strong><br>
+            • 2020 г. — подан иск в Геленджикский городской суд<br>
+            • Суд обязал администрацию выдать уведомление о соответствии<br>
+            • Уведомление получено 21.10.2020<br>
+            • 2025 г. — выяснилось, что участок находится в промышленной зоне<br>
+            • Обращение в Управление архитектуры — устный ответ, что уведомление законно
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ЧТО ОСТАНАВЛИВАЕТ -->
+    <div class="set-card">
+        <div class="set-label">
+            <span>ШАГ 4</span>
+            <span class="set-icon">⚠️</span>
+        </div>
+        <div class="set-title">Что вас останавливает или смущает</div>
+        <div class="set-desc">В чём вы видите проблему, риск, неопределённость?</div>
+        <div class="field-group">
+            <label for="s-obstacles">Остановки и риски:</label>
+            <textarea id="s-obstacles" class="small" placeholder="Что вас смущает? Какие риски вы видите?"></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('obstacles-hint')">💡 Показать подсказку</button>
+        <div class="hint" id="obstacles-hint">
+            <strong>Пример заполнения:</strong><br>
+            • Участок в промышленной зоне — ИЖС там не разрешён<br>
+            • Уведомление формально есть, но может быть признано недействительным<br>
+            • С 01.09.2026 старые уведомления утрачивают силу<br>
+            • Если начать строить, дом могут признать самостроем и обязать снести<br>
+            • Администрация даёт устные ответы, письменной позиции нет
+        </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- РАЗДЕЛ 2. РЕЗУЛЬТАТЫ ИССЛЕДОВАНИЯ -->
+    <!-- ======================================== -->
+
+    <div class="section-title">
+        <span class="section-icon">🔍</span> Результаты исследования
+    </div>
+    <div class="section-sub">на основе исходных данных — что можно приложить, что прояснить, в чём главное противоречие и что делать</div>
+
+    <!-- КАРТОЧКА: ОПОРЫ -->
+    <div class="set-card opory">
+        <div class="set-label">
+            <span>ШАГ 5</span>
+            <span class="set-icon">⚓</span>
+        </div>
+        <div class="set-title">Опоры</div>
+        <div class="set-desc">Что из объективного порядка — законов, практик, понятий, прецедентов — может быть приложено к условиям вашей ситуации.</div>
+        <div class="field-group">
+            <label for="s-supports">Опоры:</label>
+            <textarea id="s-supports" class="large" placeholder="Законы, нормы, практики, прецеденты..."></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('supports-hint')">💡 Показать пример</button>
+        <div class="hint" id="supports-hint">
+            <strong>Пример опор:</strong><br>
+            • ГрК РФ ст. 36 — градостроительный регламент обязателен для исполнения<br>
+            • ГрК РФ ст. 51.1 — порядок получения уведомления о соответствии<br>
+            • ПЗЗ г. Геленджика — перечень разрешённых видов использования<br>
+            • ГК РФ ст. 222 — самовольная постройка<br>
+            • Постановление Пленума ВС РФ № 10 от 2017 г. — оценка фактических обстоятельств<br>
+            • ФЗ № 59-ФЗ — право на мотивированный ответ администрации<br>
+            • Изменения в ГрК РФ с 01.09.2026 — переходный момент
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ВОПРОСЫ -->
+    <div class="set-card voprosy">
+        <div class="set-label">
+            <span>ШАГ 6</span>
+            <span class="set-icon">❓</span>
+        </div>
+        <div class="set-title">Вопросы</div>
+        <div class="set-desc">Что нужно прояснить, чтобы замысел получил опору в условиях.</div>
+        <div class="field-group">
+            <label for="s-questions">Вопросы:</label>
+            <textarea id="s-questions" class="large" placeholder="Что нужно проверить, уточнить, выяснить?"></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('questions-hint')">💡 Показать пример</button>
+        <div class="hint" id="questions-hint">
+            <strong>Пример вопросов:</strong><br>
+            • Каков точный ВРИ участка по выписке ЕГРН?<br>
+            • Включён ли вид "ИЖС" в список разрешённых для промышленной зоны?<br>
+            • Может ли администрация отозвать уведомление?<br>
+            • Утратит ли уведомление силу с 01.09.2026?<br>
+            • Каковы риски начала строительства сейчас?<br>
+            • Есть ли судебная практика по аналогичным делам в Геленджике?
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: КРИТИЧЕСКИЙ ОСТАТОК -->
+    <div class="set-card critical">
+        <div class="set-label">
+            <span>ШАГ 7</span>
+            <span class="set-icon">🔴</span>
+        </div>
+        <div class="set-title">Критический остаток</div>
+        <div class="set-desc">Главное противоречие — диагноз ситуации. Устранение этого остатка разрешает большинство производных проблем.</div>
+        <div class="field-group">
+            <label for="s-critical">Критический остаток:</label>
+            <textarea id="s-critical" class="small" placeholder="Главное противоречие в 1-3 предложениях"></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('critical-hint')">💡 Показать пример</button>
+        <div class="hint" id="critical-hint">
+            <strong>Пример критического остатка:</strong><br>
+            Формальное право на строительство (уведомление 2020 года) вступает в прямое противоречие с материальным запретом (нахождение участка в промышленной зоне, где ИЖС не разрешён). Строительство не начато, участок не освоен, но время работает против вас — с 01.09.2026 старые формы уведомлений утрачивают силу.
+        </div>
+    </div>
+
+    <!-- КАРТОЧКА: ШАГИ -->
+    <div class="set-card shagi">
+        <div class="set-label">
+            <span>ШАГ 8</span>
+            <span class="set-icon">⚡</span>
+        </div>
+        <div class="set-title">Шаги</div>
+        <div class="set-desc">Первые действия, которые надо совершить, исходя из Критического остатка.</div>
+        <div class="field-group">
+            <label for="s-steps">Шаги:</label>
+            <textarea id="s-steps" class="large" placeholder="Что делать прямо сейчас?"></textarea>
+        </div>
+        <button class="hint-toggle" onclick="toggleHint('steps-hint')">💡 Показать пример</button>
+        <div class="hint" id="steps-hint">
+            <strong>Пример шагов:</strong><br>
+            1. Направить официальный запрос в Управление архитектуры и градостроительства г. Геленджик с вопросами о законности уведомления и соответствии ПЗЗ.<br>
+            2. Получить выписку из ЕГРН с актуальным ВРИ участка.<br>
+            3. Сверить ВРИ с ПЗЗ г. Геленджика (опубликован на сайте администрации).<br>
+            4. На основе полученных ответов принять решение: либо начинать строительство (если риск минимален), либо искать альтернативы использования участка, либо готовить судебное обжалование.
+        </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- СЧЁТЧИК И КНОПКИ -->
+    <!-- ======================================== -->
+
+    <div class="counter">
+        <span>📊 Заполнено:</span>
+        <span><span class="num" id="fieldCounter">0</span> из <span class="num">8</span> полей</span>
+    </div>
+
+    <!-- КНОПКИ УПРАВЛЕНИЯ -->
+    <div class="btn-row">
+        <button class="btn btn-outline" onclick="clearAll()">🗑️ Очистить всё</button>
+        <button class="btn btn-outline" onclick="loadExample()">📋 Заполнить пример</button>
+    </div>
+
+    <!-- КНОПКИ ЭКСПОРТА -->
+    <div class="btn-group-export">
+        <button class="btn btn-export" onclick="exportTxt('source')">
+            <span class="icon">📤</span> Экспорт исходных данных
+        </button>
+        <button class="btn btn-export" onclick="exportTxt('results')">
+            <span class="icon">📤</span> Экспорт результатов
+        </button>
+        <button class="btn btn-export" onclick="exportTxt('all')" style="background: linear-gradient(135deg, #27ae60, #2980b9);">
+            <span class="icon">📤</span> Экспорт всё вместе
+        </button>
+    </div>
+
+    <button class="btn btn-primary" onclick="togglePreview()">
+        👁️ Показать / скрыть предпросмотр
+    </button>
+
+    <!-- ПРЕДПРОСМОТР -->
+    <div class="preview-block" id="previewBlock">
+        <div class="preview-label">
+            <span>👁️</span> Предпросмотр экспорта
+            <span style="font-weight:400;color:#8a8a8a;font-size:11px;text-transform:none;">
+                (проверьте перед сохранением)
+            </span>
+        </div>
+        <div class="preview-content" id="previewContent"></div>
+    </div>
+
+    <!-- TOAST-УВЕДОМЛЕНИЕ -->
+    <div class="toast" id="toast"></div>
+
 </div>
 
-    <!-- ПРОГРЕСС -->
-    <div class="progress" id="progress">
-        <div class="progress-dot current" data-step="0"></div>
-        <div class="progress-dot" data-step="1"></div>
-        <div class="progress-dot" data-step="2"></div>
-        <div class="progress-dot" data-step="3"></div>
-        <div class="progress-dot" data-step="4"></div>
-    </div>
-
-    <div id="app">
-
-        <!-- ====== ЭТАП 0: ЗАМЫСЕЛ ====== -->
-        <div class="stage active" data-step="0">
-            <div class="stage-label">
-                <span>Шаг 1</span>
-                <span class="badge">Замысел</span>
-            </div>
-            <div class="stage-title">🎯 Сформулируй замысел</div>
-            <div class="stage-desc">Что ты хочешь изменить? Какой результат тебе нужен?</div>
-            <div class="field-group">
-                <label for="intent">Мой замысел:</label>
-                <textarea id="intent" rows="2" placeholder="Например: подготовить отчёт по участку..."></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('analyze_intent')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Помочь сформулировать замысел</span>
-            </button>
-
-            <div class="ai-response" id="ai-intent">
-                <div class="ai-label"><span class="ai-icon">💡</span> AI рекомендует</div>
-                <div class="ai-text" id="ai-intent-text"></div>
-                <div class="ai-actions">
-                    <button class="ai-action-btn apply" onclick="applyAI('intent')">📋 Применить</button>
-                </div>
-            </div>
-
-            <div class="stage-hint">💡 Замысел должен быть конкретным результатом, а не описанием проблемы.</div>
-            <button class="btn btn-primary" onclick="nextStep(0)">✅ Зафиксировать →</button>
-        </div>
-
-        <!-- ====== ЭТАП 1: УСЛОВИЯ И ОПОРЫ ====== -->
-        <div class="stage hidden" data-step="1">
-            <div class="stage-label">
-                <span>Шаг 2</span>
-                <span class="badge">Условия и опоры</span>
-            </div>
-            <div class="stage-title">📋 Собери два множества</div>
-            <div class="stage-desc"><strong>Условия</strong> — что есть сейчас: факты, документы, ресурсы, позиции.<br>
-            <strong>Опоры</strong> — что из объективного порядка (законы, практики, правила) можно приложить к условиям.</div>
-
-            <div class="field-group">
-                <label for="conditions">📌 Условия (факты):</label>
-                <textarea id="conditions" rows="3" placeholder="Список фактов, документов, ресурсов..."></textarea>
-            </div>
-
-            <div class="field-group">
-                <label for="supports">⚓ Опоры (законы, практики, прецеденты):</label>
-                <textarea id="supports" rows="3" placeholder="Что из порядка может быть приложено?"></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('analyze_conditions')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Проверить условия и опоры</span>
-            </button>
-
-            <div class="ai-response" id="ai-conditions">
-                <div class="ai-label"><span class="ai-icon">🔍</span> AI анализ</div>
-                <div class="ai-text" id="ai-conditions-text"></div>
-                <div class="ai-actions">
-                    <button class="ai-action-btn" onclick="suggestMore('conditions')">➕ Дополнить</button>
-                </div>
-            </div>
-
-            <div class="stage-hint">🔍 Опоры — это не твои идеи, а то, что уже существует независимо от тебя.</div>
-
-            <div class="btn-row">
-                <button class="btn btn-outline" onclick="prevStep(1)">← Назад</button>
-                <button class="btn btn-primary" onclick="nextStep(1)">Далее →</button>
-            </div>
-        </div>
-
-        <!-- ====== ЭТАП 2: ВОПРОСЫ И КРИТИЧЕСКИЙ ОСТАТОК ====== -->
-        <div class="stage hidden" data-step="2">
-            <div class="stage-label">
-                <span>Шаг 3</span>
-                <span class="badge">Вопросы и диагноз</span>
-            </div>
-            <div class="stage-title">❓ Задай вопросы</div>
-            <div class="stage-desc">Какие вопросы рождаются из сопоставления замысла с условиями и опорами?</div>
-
-            <div class="field-group">
-                <label for="questions">Вопросы, которые нужно прояснить:</label>
-                <textarea id="questions" rows="3" placeholder="Что мне мешает? Что я не знаю? Что нужно проверить?"></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('generate_questions')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Сгенерировать вопросы</span>
-            </button>
-
-            <div class="ai-response" id="ai-questions">
-                <div class="ai-label"><span class="ai-icon">❓</span> AI вопросы</div>
-                <div class="ai-text" id="ai-questions-text"></div>
-                <div class="ai-actions">
-                    <button class="ai-action-btn apply" onclick="applyAI('questions')">📋 Применить все</button>
-                </div>
-            </div>
-
-            <div class="stage-title" style="font-size:16px; margin-top:14px;">🔴 Критический остаток</div>
-            <div class="stage-desc">Главное противоречие — диагноз ситуации. Обобщи ответы на вопросы.</div>
-            <div class="field-group">
-                <label for="critical">Критический остаток (главное противоречие):</label>
-                <textarea id="critical" rows="2" placeholder="Например: у нас есть правовое основание, но нет подтверждающих документов..."></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('find_critical')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Найти критический остаток</span>
-            </button>
-
-            <div class="ai-response" id="ai-critical">
-                <div class="ai-label"><span class="ai-icon">🔴</span> AI диагноз</div>
-                <div class="ai-text" id="ai-critical-text"></div>
-                <div class="ai-actions">
-                    <button class="ai-action-btn apply" onclick="applyAI('critical')">📋 Применить</button>
-                </div>
-            </div>
-
-            <div class="stage-hint">⚡ Критический остаток — это точка приложения силы. Найди его — и ты поймёшь, что делать.</div>
-
-            <div class="btn-row">
-                <button class="btn btn-outline" onclick="prevStep(2)">← Назад</button>
-                <button class="btn btn-primary" onclick="nextStep(2)">Далее →</button>
-            </div>
-        </div>
-
-        <!-- ====== ЭТАП 3: ШАГИ ====== -->
-        <div class="stage hidden" data-step="3">
-            <div class="stage-label">
-                <span>Шаг 4</span>
-                <span class="badge">Действие</span>
-            </div>
-            <div class="stage-title">⚡ Выбери шаги</div>
-            <div class="stage-desc">Какие действия <strong>соединят</strong> найденные опоры с условиями?</div>
-
-            <div class="field-group">
-                <label for="steps">Мои шаги (гипотезы):</label>
-                <textarea id="steps" rows="3" placeholder="Что я сделаю сейчас? Шаг — это проверка, а не план."></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('suggest_steps')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Предложить шаги</span>
-            </button>
-
-            <div class="ai-response" id="ai-steps">
-                <div class="ai-label"><span class="ai-icon">⚡</span> AI предлагает шаги</div>
-                <div class="ai-text" id="ai-steps-text"></div>
-                <div class="ai-actions">
-                    <button class="ai-action-btn apply" onclick="applyAI('steps')">📋 Применить</button>
-                </div>
-            </div>
-
-            <div class="field-group">
-                <label for="check">Три вопроса оценки (перед шагом):</label>
-                <textarea id="check" rows="3" placeholder="1. Кто может пострадать?&#10;2. Могу ли я уменьшить потери?&#10;3. Стоит ли результат этих потерь?"></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('analyze_risks')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Проанализировать риски</span>
-            </button>
-
-            <div class="ai-response" id="ai-risks">
-                <div class="ai-label"><span class="ai-icon">🛡️</span> AI анализ рисков</div>
-                <div class="ai-text" id="ai-risks-text"></div>
-            </div>
-
-            <div class="stage-hint">🧭 Выбирай первые шаги, которые можно сделать сейчас, и не забывай о последствиях.</div>
-
-            <div class="btn-row">
-                <button class="btn btn-outline" onclick="prevStep(3)">← Назад</button>
-                <button class="btn btn-success" onclick="finish()">✅ Сделать шаг и оценить</button>
-            </div>
-        </div>
-
-        <!-- ====== ЭТАП 4: РЕЗУЛЬТАТ ====== -->
-        <div class="stage hidden" data-step="4">
-            <div class="stage-label">
-                <span>Шаг 5</span>
-                <span class="badge">Завершение</span>
-            </div>
-            <div class="stage-title">🔚 Оцени проявленное</div>
-            <div class="stage-desc">Что изменилось после шагов? Достигнут ли замысел?</div>
-
-            <div class="field-group">
-                <label for="outcome">Что проявилось:</label>
-                <textarea id="outcome" rows="3" placeholder="Улучшение? Ясность? Невозможность? Отказ?"></textarea>
-            </div>
-
-            <div class="field-group">
-                <label for="loss">Кому стало хуже? (оглянись):</label>
-                <textarea id="loss" rows="2" placeholder="Кто потерял ресурс, статус, время?"></textarea>
-            </div>
-
-            <div class="field-group">
-                <label for="lesson">Что я понял о порядке в результате этого круга:</label>
-                <textarea id="lesson" rows="2" placeholder="Новое понимание → опыт для следующего круга"></textarea>
-            </div>
-
-            <button class="btn btn-ai" onclick="callAI('summarize')">
-                <span class="spinner"></span>
-                <span class="btn-text">🤖 Резюмировать круг</span>
-            </button>
-
-            <div class="ai-response" id="ai-summary">
-                <div class="ai-label"><span class="ai-icon">📊</span> AI резюме</div>
-                <div class="ai-text" id="ai-summary-text"></div>
-            </div>
-
-            <div class="stage-hint">🌱 Каждый завершённый круг делает тебя искуснее, а порядок — доступнее.</div>
-
-            <button class="btn btn-outline" onclick="resetAll()">🔄 Начать новый круг</button>
-            <button class="btn btn-primary" onclick="exportResult()" style="margin-top:8px;">📤 Сохранить результат</button>
-        </div>
-
-        <!-- РЕЗУЛЬТАТ (сводка) -->
-        <div class="result" id="resultBlock">
-            <div class="result-label">📋 Сводка круга</div>
-            <div class="result-text" id="resultText"></div>
-        </div>
-
-    </div>
-
-    <!-- НАВИГАЦИЯ -->
-    <div class="nav" id="nav">
-        <button class="nav-btn active" data-step="0">🎯 Замысел</button>
-        <button class="nav-btn" data-step="1">📋 Условия</button>
-        <button class="nav-btn" data-step="2">❓ Вопросы</button>
-        <button class="nav-btn" data-step="3">⚡ Шаги</button>
-        <button class="nav-btn" data-step="4">🔚 Итог</button>
-    </div>
-
-</div>
-
-<!-- 
-  ============================================
-  СКРИПТЫ
-  ============================================
--->
 <script>
     // ============================================
-    // 1. КОНФИГУРАЦИЯ
+    // 1. ПОЛЯ
     // ============================================
 
-    const API_BASE_URL = 'https://api.deepseek.com/v1/chat/completions';
-    const DEEPSEEK_API_KEY = 'wwwwww';
-    const DEMO_MODE = true;
+    var fields = {
+        intent: document.getElementById('s-intent'),
+        conditions: document.getElementById('s-conditions'),
+        done: document.getElementById('s-done'),
+        obstacles: document.getElementById('s-obstacles'),
+        supports: document.getElementById('s-supports'),
+        questions: document.getElementById('s-questions'),
+        critical: document.getElementById('s-critical'),
+        steps: document.getElementById('s-steps'),
+    };
 
-    // ============================================
-    // 2. СОСТОЯНИЕ
-    // ============================================
-    
-    let currentStep = 0;
-    const totalSteps = 5;
-    let aiResponses = {};
+    var sourceFields = ['intent', 'conditions', 'done', 'obstacles'];
+    var resultFields = ['supports', 'questions', 'critical', 'steps'];
 
-    const stages = document.querySelectorAll('.stage');
-    const dots = document.querySelectorAll('.progress-dot');
-    const navBtns = document.querySelectorAll('.nav-btn');
-    const resultBlock = document.getElementById('resultBlock');
-    const resultText = document.getElementById('resultText');
+    var fieldLabels = {
+        intent: '🎯 Замысел',
+        conditions: '📌 Условия',
+        done: '🔄 Что уже было сделано',
+        obstacles: '⚠️ Что останавливает / смущает',
+        supports: '⚓ Опоры',
+        questions: '❓ Вопросы',
+        critical: '🔴 Критический остаток',
+        steps: '⚡ Шаги'
+    };
 
-    const fields = {
-        intent: document.getElementById('intent'),
-        conditions: document.getElementById('conditions'),
-        supports: document.getElementById('supports'),
-        questions: document.getElementById('questions'),
-        critical: document.getElementById('critical'),
-        steps: document.getElementById('steps'),
-        check: document.getElementById('check'),
-        outcome: document.getElementById('outcome'),
-        loss: document.getElementById('loss'),
-        lesson: document.getElementById('lesson'),
+    var fieldHints = {
+        intent: 'Что вы хотите сделать или получить в итоге?',
+        conditions: 'Документы, решения, статусы, права, сроки, зонирование, позиции сторон',
+        done: 'Какие действия вы предпринимали ранее и какой был результат?',
+        obstacles: 'В чём вы видите проблему, риск, неопределённость?',
+        supports: 'Что из объективного порядка — законов, практик, понятий, прецедентов — может быть приложено к условиям?',
+        questions: 'Что нужно прояснить, чтобы замысел получил опору в условиях?',
+        critical: 'Главное противоречие — диагноз ситуации',
+        steps: 'Первые действия, которые надо совершить'
     };
 
     // ============================================
-    // 3. НАВИГАЦИЯ
+    // 2. ПОДСКАЗКИ
     // ============================================
-    
-    function goToStep(step) {
-        if (step < 0) step = 0;
-        if (step >= totalSteps) step = totalSteps - 1;
-        currentStep = step;
 
-        stages.forEach((el, i) => {
-            el.classList.remove('active');
-            if (i === step) el.classList.add('active');
-        });
-
-        dots.forEach((dot, i) => {
-            dot.classList.remove('current', 'done');
-            if (i < step) dot.classList.add('done');
-            else if (i === step) dot.classList.add('current');
-        });
-
-        navBtns.forEach((btn, i) => {
-            btn.classList.toggle('active', i === step);
-        });
-
-        resultBlock.classList.remove('visible');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function nextStep(from) {
-        const checks = {
-            0: fields.intent,
-            1: [fields.conditions, fields.supports],
-            2: [fields.questions, fields.critical],
-            3: fields.steps,
-        };
-        const field = checks[from];
-        if (field) {
-            const fieldsArray = Array.isArray(field) ? field : [field];
-            const empty = fieldsArray.some(f => !f.value.trim());
-            if (empty && !confirm('Некоторые поля не заполнены. Продолжить?')) return;
+    function toggleHint(id) {
+        var el = document.getElementById(id);
+        if (el) {
+            el.classList.toggle('visible');
         }
-        goToStep(from + 1);
-    }
-
-    function prevStep(from) {
-        goToStep(from - 1);
     }
 
     // ============================================
-    // 4. ПОКАЗ AI-ОТВЕТОВ
+    // 3. СЧЁТЧИК
     // ============================================
-    
-    function showAIResponse(action, text) {
-        const responseMap = {
-            'analyze_intent': 'ai-intent',
-            'analyze_conditions': 'ai-conditions',
-            'generate_questions': 'ai-questions',
-            'find_critical': 'ai-critical',
-            'suggest_steps': 'ai-steps',
-            'analyze_risks': 'ai-risks',
-            'summarize': 'ai-summary',
-        };
 
-        const containerId = responseMap[action];
-        if (!containerId) return;
+    function updateCounter() {
+        var count = 0;
+        for (var key in fields) {
+            if (fields.hasOwnProperty(key) && fields[key].value.trim().length > 0) {
+                count++;
+            }
+        }
+        document.getElementById('fieldCounter').textContent = count;
+    }
 
-        const container = document.getElementById(containerId);
-        const textEl = document.getElementById(containerId + '-text');
-        
-        if (container && textEl) {
-            let formatted = text
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/\n/g, '<br>');
-            
-            textEl.innerHTML = formatted;
-            container.classList.add('open');
-            
-            setTimeout(() => {
-                container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    for (var key in fields) {
+        if (fields.hasOwnProperty(key)) {
+            fields[key].addEventListener('input', updateCounter);
+        }
+    }
+
+    // ============================================
+    // 4. ГЕНЕРАЦИЯ ТЕКСТА
+    // ============================================
+
+    function getFieldValue(key) {
+        return fields[key] ? fields[key].value.trim() : '';
+    }
+
+    function generateTxt(mode) {
+        var lines = [];
+        var date = new Date();
+        var dateStr = date.toLocaleDateString('ru-RU') + ' ' + date.toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
+
+        var hasData = false;
+
+        // Определяем, какие поля включать
+        var keysToInclude = [];
+        if (mode === 'source') {
+            keysToInclude = sourceFields;
+        } else if (mode === 'results') {
+            keysToInclude = resultFields;
+        } else {
+            keysToInclude = Object.keys(fieldLabels);
+        }
+
+        // Проверяем, есть ли данные
+        for (var i = 0; i < keysToInclude.length; i++) {
+            var val = getFieldValue(keysToInclude[i]);
+            if (val.length > 0) {
+                hasData = true;
+                break;
+            }
+        }
+
+        if (!hasData) {
+            lines.push('═══════════════════════════════════════════');
+            lines.push('  📋 МНОЖЕСТВА КЛЮЧА  ');
+            lines.push('  ' + dateStr);
+            lines.push('═══════════════════════════════════════════');
+            lines.push('');
+            lines.push('⚠️ Нет заполненных данных для экспорта.');
+            lines.push('');
+            lines.push('Заполните хотя бы одно поле, чтобы');
+            lines.push('создать структурированную запись.');
+            lines.push('');
+            lines.push('═══════════════════════════════════════════');
+            lines.push('  ✍️ Создано с помощью "Множества Ключа"');
+            lines.push('  https://kadinfo.ru/klyuch');
+            lines.push('═══════════════════════════════════════════');
+            return lines.join('\n');
+        }
+
+        // Заголовок
+        lines.push('═══════════════════════════════════════════');
+        if (mode === 'source') {
+            lines.push('  📥 ИСХОДНЫЕ ДАННЫЕ');
+        } else if (mode === 'results') {
+            lines.push('  🔍 РЕЗУЛЬТАТЫ ИССЛЕДОВАНИЯ');
+        } else {
+            lines.push('  📋 МНОЖЕСТВА КЛЮЧА');
+        }
+        lines.push('  ' + dateStr);
+        if (mode === 'all') {
+            lines.push('  Полный отчёт по ситуации');
+        }
+        lines.push('═══════════════════════════════════════════');
+        lines.push('');
+
+        // Разделы
+        if (mode === 'source' || mode === 'all') {
+            if (mode === 'all') {
+                lines.push('─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─');
+                lines.push('  📥 ИСХОДНЫЕ ДАННЫЕ');
+                lines.push('─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─');
+                lines.push('');
+            }
+            for (var i = 0; i < sourceFields.length; i++) {
+                var key = sourceFields[i];
+                var val = getFieldValue(key);
+                if (val.length > 0) {
+                    lines.push(fieldLabels[key]);
+                    lines.push('─────────────────────────────────────────');
+                    var splitLines = val.split('\n');
+                    for (var j = 0; j < splitLines.length; j++) {
+                        if (splitLines[j].trim().length > 0) {
+                            lines.push('  • ' + splitLines[j].trim());
+                        }
+                    }
+                    lines.push('');
+                }
+            }
+        }
+
+        if (mode === 'results' || mode === 'all') {
+            if (mode === 'all') {
+                lines.push('─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─');
+                lines.push('  🔍 РЕЗУЛЬТАТЫ ИССЛЕДОВАНИЯ');
+                lines.push('─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─');
+                lines.push('');
+            }
+            for (var i = 0; i < resultFields.length; i++) {
+                var key = resultFields[i];
+                var val = getFieldValue(key);
+                if (val.length > 0) {
+                    lines.push(fieldLabels[key]);
+                    lines.push('─────────────────────────────────────────');
+                    var splitLines = val.split('\n');
+                    for (var j = 0; j < splitLines.length; j++) {
+                        if (splitLines[j].trim().length > 0) {
+                            lines.push('  • ' + splitLines[j].trim());
+                        }
+                    }
+                    lines.push('');
+                }
+            }
+        }
+
+        // Подвал
+        lines.push('═══════════════════════════════════════════');
+        lines.push('  ✍️ Создано с помощью "Множества Ключа"');
+        lines.push('  https://kadinfo.ru/klyuch');
+        lines.push('═══════════════════════════════════════════');
+
+        return lines.join('\n');
+    }
+
+    // ============================================
+    // 5. ЭКСПОРТ В .TXT
+    // ============================================
+
+    function exportTxt(mode) {
+        var text = generateTxt(mode);
+
+        // Проверяем, есть ли данные
+        var hasData = false;
+        var keysToCheck = mode === 'source' ? sourceFields : (mode === 'results' ? resultFields : Object.keys(fieldLabels));
+        for (var i = 0; i < keysToCheck.length; i++) {
+            if (getFieldValue(keysToCheck[i]).length > 0) {
+                hasData = true;
+                break;
+            }
+        }
+
+        if (!hasData) {
+            showToast('⚠️ Нет данных для экспорта. Заполните хотя бы одно поле.', 'error');
+            return;
+        }
+
+        try {
+            var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            var link = document.createElement('a');
+            var date = new Date();
+            var prefix = mode === 'source' ? 'isxodnye-dannye' :
+                        (mode === 'results' ? 'rezultaty-issledovaniya' : 'mnozhestva-klyucha');
+            var filename = prefix + '-' +
+                date.getFullYear() + '-' +
+                String(date.getMonth()+1).padStart(2,'0') + '-' +
+                String(date.getDate()).padStart(2,'0') + '.txt';
+
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+
+            var label = mode === 'source' ? 'исходные данные' :
+                       (mode === 'results' ? 'результаты исследования' : 'полный отчёт');
+            showToast('✅ Файл "' + filename + '" сохранён (' + label + ')', 'success');
+        } catch (e) {
+            showToast('❌ Ошибка при сохранении: ' + e.message, 'error');
+        }
+    }
+
+    // ============================================
+    // 6. ПРЕДПРОСМОТР
+    // ============================================
+
+    var previewMode = 'all';
+
+    function togglePreview() {
+        var block = document.getElementById('previewBlock');
+        var content = document.getElementById('previewContent');
+
+        if (block.classList.contains('visible')) {
+            block.classList.remove('visible');
+        } else {
+            content.textContent = generateTxt('all');
+            block.classList.add('visible');
+            setTimeout(function() {
+                block.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
         }
     }
 
     // ============================================
-    // 5. AI-ВЫЗОВЫ
+    // 7. ОЧИСТКА
     // ============================================
-    
-    async function callAI(action) {
-        const btn = document.querySelector(`.btn-ai[onclick*="${action}"]`);
-        if (btn) {
-            btn.classList.add('loading');
-            btn.disabled = true;
-        }
 
-        const context = {
-            intent: fields.intent.value,
-            conditions: fields.conditions.value,
-            supports: fields.supports.value,
-            questions: fields.questions.value,
-            critical: fields.critical.value,
-            steps: fields.steps.value,
-            check: fields.check.value,
-            outcome: fields.outcome.value,
-            loss: fields.loss.value,
-            lesson: fields.lesson.value,
-        };
-
-        try {
-            let response;
-            
-            if (DEMO_MODE) {
-                response = await demoAI(action, context);
-            } else {
-                const systemPrompt = 'Ты — AI-ассистент по методу "Ключ к действию". Отвечай на русском.';
-                let userPrompt = 'Помоги с методом Ключ.';
-                
-                const res = await fetch(API_BASE_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + DEEPSEEK_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: 'deepseek-chat',
-                        messages: [
-                            { role: 'system', content: systemPrompt },
-                            { role: 'user', content: userPrompt }
-                        ],
-                        max_tokens: 1000,
-                        temperature: 0.7
-                    })
-                });
-
-                if (!res.ok) {
-                    let errMsg = 'HTTP ' + res.status;
-                    try {
-                        const errData = await res.json();
-                        if (errData.error && errData.error.message) {
-                            errMsg += ' - ' + errData.error.message;
-                        }
-                    } catch (e) {}
-                    throw new Error(errMsg);
-                }
-                const data = await res.json();
-                response = data.choices?.[0]?.message?.content || 'Нет ответа от API';
-            }
-
-            showAIResponse(action, response);
-            aiResponses[action] = response;
-
-        } catch (error) {
-            console.error('AI Error:', error);
-            showAIResponse(action, '❌ Ошибка: ' + error.message);
-        }
-
-        if (btn) {
-            btn.classList.remove('loading');
-            btn.disabled = false;
-        }
-    }
-
-    // ============================================
-    // 6. УМНЫЙ ДЕМО-РЕЖИМ
-    // ============================================
-    
-    function demoAI(action, context) {
-        return new Promise(function(resolve) {
-            var delay = 800 + Math.random() * 1200;
-            
-            setTimeout(function() {
-                var response = '';
-                
-                var hasIntent = context.intent && context.intent.trim().length > 0;
-                var hasConditions = context.conditions && context.conditions.trim().length > 0;
-                var hasSupports = context.supports && context.supports.trim().length > 0;
-                var hasQuestions = context.questions && context.questions.trim().length > 0;
-                var hasCritical = context.critical && context.critical.trim().length > 0;
-                var hasSteps = context.steps && context.steps.trim().length > 0;
-                var hasOutcome = context.outcome && context.outcome.trim().length > 0;
-                var hasLesson = context.lesson && context.lesson.trim().length > 0;
-                
-                // ========================================
-                // 1. АНАЛИЗ ЗАМЫСЛА
-                // ========================================
-                if (action === 'analyze_intent') {
-                    if (!hasIntent) {
-                        response = '📌 Анализ замысла\n\nЯ не вижу сформулированного замысла. Чтобы начать, ответьте на вопросы:\n\n1. Что именно вы хотите изменить? (конкретный результат)\n2. Для кого этот результат важен? (кто выиграет?)\n3. Когда вы хотите увидеть результат? (сроки)\n\n💡 Хороший замысел: "Подготовить и утвердить отчёт по участку №7 до 1 августа"\n💡 Плохой замысел: "Разобраться с отчётом"';
-                    } else {
-                        var actions = ['подготовить', 'сделать', 'написать', 'проверить', 'утвердить', 'согласовать', 'направить', 'получить', 'завершить', 'начать'];
-                        var hasAction = actions.some(function(a) { return context.intent.toLowerCase().includes(a); });
-                        
-                        response = '📌 Анализ замысла\n\nВаш замысел: "' + context.intent + '"\n\n' + (hasAction ? '✅ Замысел содержит действие — это хорошо!' : '⚠️ Замысел не содержит явного действия. Добавьте глагол.') + '\n\n💡 Рекомендации:\n1. Сделайте замысел измеримым — что именно должно измениться?\n2. Укажите сроки\n3. Проверьте, не смешан ли замысел с проблемой\n\nЗамысел = результат, проблема = препятствие.';
-                    }
-                }
-                
-                // ========================================
-                // 2. АНАЛИЗ УСЛОВИЙ И ОПОР
-                // ========================================
-                else if (action === 'analyze_conditions') {
-                    var analysis = '📋 Анализ условий и опор\n\n';
-                    
-                    if (!hasConditions && !hasSupports) {
-                        analysis += 'Я вижу, что условия и опоры ещё не описаны.\n\n📌 Условия — это факты: документы, ресурсы, позиции сторон.\n⚓ Опоры — это законы, правила, практики, прецеденты.';
-                    } else {
-                        if (hasConditions) {
-                            analysis += '📌 Условия: ' + context.conditions + '\n\n✅ Условия описаны.\n\n';
-                        } else {
-                            analysis += '📌 Условия: не указаны ⚠️\n\n';
-                        }
-                        
-                        if (hasSupports) {
-                            analysis += '⚓ Опоры: ' + context.supports + '\n\n✅ Опоры определены.\n\n';
-                        } else {
-                            analysis += '⚓ Опоры: не указаны ⚠️\n\n';
-                        }
-                    }
-                    
-                    analysis += '💡 Проверьте себя:\n1. Каждое условие — это факт, а не интерпретация?\n2. Каждая опора действительно существует независимо от вас?';
-                    
-                    response = analysis;
-                }
-                
-                // ========================================
-                // 3. ГЕНЕРАЦИЯ ВОПРОСОВ
-                // ========================================
-                else if (action === 'generate_questions') {
-                    var intent = context.intent || 'ваш замысел';
-                    
-                    var questions = '❓ Вопросы для прояснения ситуации\n\nИсходя из вашего замысла, вот ключевые вопросы:\n\n';
-                    
-                    var qList = [
-                        '1. Что мешает "' + intent + '" прямо сейчас?',
-                        '2. Какие документы подтверждают или опровергают ваши опоры?',
-                        '3. Кто ещё вовлечён в ситуацию?',
-                        '4. Что произойдёт, если вы ничего не сделаете?',
-                        '5. Каков минимальный шаг, который изменит ситуацию?'
-                    ];
-                    
-                    if (hasConditions) {
-                        qList.push('6. Какое из описанных условий является самым критичным?');
-                    }
-                    
-                    if (hasSupports) {
-                        qList.push((hasConditions ? '7' : '6') + '. Какая из опор наиболее надёжна?');
-                    }
-                    
-                    questions += qList.join('\n\n');
-                    questions += '\n\n💡 Ответы на эти вопросы помогут сформировать Критический остаток.';
-                    
-                    response = questions;
-                }
-                
-                // ========================================
-                // 4. ПОИСК КРИТИЧЕСКОГО ОСТАТКА
-                // ========================================
-                else if (action === 'find_critical') {
-                    var intent = context.intent || 'замысел';
-                    var conditions = context.conditions || 'условия не описаны';
-                    var supports = context.supports || 'опоры не найдены';
-                    
-                    var critical = '🔴 Критический остаток (диагноз)\n\n';
-                    
-                    if (!hasIntent || !hasConditions || !hasSupports) {
-                        critical += 'Я не могу сформулировать Критический остаток, потому что не хватает данных:\n\n';
-                        if (!hasIntent) critical += '❌ Не указан замысел\n';
-                        if (!hasConditions) critical += '❌ Не указаны условия\n';
-                        if (!hasSupports) critical += '❌ Не указаны опоры\n\n';
-                        critical += '💡 Заполните все три поля.';
-                    } else {
-                        var conditionsShort = conditions.split(' ').slice(0, 3).join(' ');
-                        var supportsShort = supports.split(' ').slice(0, 3).join(' ');
-                        
-                        critical += 'На основе ваших данных я вижу главное противоречие:\n\n';
-                        critical += '"' + intent + '" требует ' + conditionsShort + ', но опоры в виде ' + supportsShort + ' не обеспечивают прямого соединения.\n\n';
-                        
-                        critical += '📌 Что это значит:\n';
-                        critical += 'Ваши шаги должны быть направлены на создание соединения между тем, что уже есть.\n\n';
-                        
-                        critical += '💡 Формулировка для записи:\n';
-                        critical += '"У меня есть ' + supportsShort + ', но они не соединены с ' + conditionsShort + '. Нужно создать мост."';
-                    }
-                    
-                    response = critical;
-                }
-                
-                // ========================================
-                // 5. ПРЕДЛОЖЕНИЕ ШАГОВ
-                // ========================================
-                else if (action === 'suggest_steps') {
-                    var intent = context.intent || 'замысел';
-                    var supports = context.supports || 'опоры';
-                    var critical = context.critical || '';
-                    
-                    var steps = '⚡ Предлагаемые шаги\n\n';
-                    
-                    if (!hasCritical) {
-                        steps += '⚠️ Критический остаток не сформулирован. Предлагаю общие шаги:\n\n';
-                    } else {
-                        steps += '🔴 Исходя из диагноза: "' + critical.slice(0, 80) + '..."\n\n';
-                    }
-                    
-                    if (intent.includes('отчёт') || intent.includes('документ')) {
-                        steps += 'Шаг 1: Собрать все документы и факты\nШаг 2: Составить список недостающих элементов\nШаг 3: Подготовить письменное обоснование\nШаг 4: Отправить на проверку\n';
-                    } else if (intent.includes('согласовать') || intent.includes('утвердить')) {
-                        steps += 'Шаг 1: Определить список лиц для согласования\nШаг 2: Подготовить аргументацию\nШаг 3: Провести предварительные переговоры\nШаг 4: Направить официальный запрос\n';
-                    } else {
-                        steps += 'Шаг 1: Собрать все доступные факты\nШаг 2: Сопоставить факты с опорами\nШаг 3: Предпринять минимальный шаг\nШаг 4: Оценить результат через 24-48 часов\n';
-                    }
-                    
-                    if (hasSupports) {
-                        steps += '\n💡 Попробуйте приложить "' + supports.slice(0, 50) + '..." к текущей ситуации.';
-                    }
-                    
-                    steps += '\n\n🧭 Помните: шаги — это гипотезы, а не обязательства.';
-                    
-                    response = steps;
-                }
-                
-                // ========================================
-                // 6. АНАЛИЗ РИСКОВ
-                // ========================================
-                else if (action === 'analyze_risks') {
-                    var steps = context.steps || 'не указаны';
-                    var intent = context.intent || 'замысел';
-                    
-                    var risks = '🛡️ Анализ рисков и потерь\n\n';
-                    
-                    if (!hasSteps) {
-                        risks += 'Шаги не указаны. Сначала сформулируйте шаги.';
-                    } else {
-                        risks += 'Ваши шаги: ' + steps + '\n\n';
-                        
-                        risks += '1️⃣ Кто может пострадать?\n• Люди, чьи интересы затронуты\n• Вы сами — если шаг не приведёт к результату\n\n';
-                        
-                        risks += '2️⃣ Можно ли уменьшить потери?\n✅ Сделайте шаги прозрачными\n✅ Объясните причины заранее\n✅ Согласуйте шаги с ключевыми лицами\n\n';
-                        
-                        risks += '3️⃣ Стоит ли результат этих потерь?\n';
-                        if (intent) {
-                            risks += 'Задайте себе вопрос: "' + intent + '" стоит того, чтобы рискнуть?';
-                        }
-                        risks += '\n\n💡 Если не можете ответить "да" — пересмотрите шаги.';
-                    }
-                    
-                    response = risks;
-                }
-                
-                // ========================================
-                // 7. РЕЗЮМЕ КРУГА
-                // ========================================
-                else if (action === 'summarize') {
-                    var intent = context.intent || '—';
-                    var conditions = context.conditions || '—';
-                    var supports = context.supports || '—';
-                    var questions = context.questions || '—';
-                    var critical = context.critical || '—';
-                    var steps = context.steps || '—';
-                    var outcome = context.outcome || '—';
-                    var loss = context.loss || '—';
-                    var lesson = context.lesson || '—';
-                    
-                    var summary = '📊 Резюме круга\n\n';
-                    summary += '🎯 Замысел: ' + intent + '\n';
-                    summary += '📌 Условия: ' + conditions + '\n';
-                    summary += '⚓ Опоры: ' + supports + '\n';
-                    summary += '❓ Вопросы: ' + questions + '\n';
-                    summary += '🔴 Критический остаток: ' + critical + '\n';
-                    summary += '⚡ Шаги: ' + steps + '\n\n';
-                    summary += '🔚 Проявилось: ' + outcome + '\n';
-                    if (loss !== '—') summary += '👁️ Оглянуться: ' + loss + '\n';
-                    if (lesson !== '—') summary += '📖 Понято о порядке: ' + lesson + '\n\n';
-                    
-                    summary += '---\n\n';
-                    
-                    if (hasOutcome) {
-                        var outcomeLower = outcome.toLowerCase();
-                        if (outcomeLower.includes('улучш') || outcomeLower.includes('да') || outcomeLower.includes('готов')) {
-                            summary += '✅ Вывод: Круг дал результат. Вы можете переходить к следующему замыслу.';
-                        } else if (outcomeLower.includes('невозможн') || outcomeLower.includes('нет') || outcomeLower.includes('отказ')) {
-                            summary += '⚠️ Вывод: Замысел не нашёл опоры. Это не слабость, а честность.';
-                        } else if (outcomeLower.includes('ясность') || outcomeLower.includes('пониман')) {
-                            summary += '💡 Вывод: Получена ясность, которая меняет понимание ситуации.';
-                        } else {
-                            summary += '🔄 Вывод: Круг не завершён. Вернитесь к шагам и оцените, что проявилось.';
-                        }
-                    } else {
-                        summary += '🔄 Вывод: Круг не завершён — отсутствует описание проявленного.';
-                    }
-                    
-                    if (hasLesson) {
-                        summary += '\n\n📖 Вы зафиксировали понимание — это обогащает вашу практику.';
-                    } else {
-                        summary += '\n\n💡 Зафиксируйте, что вы поняли об объективном порядке в результате этого круга.';
-                    }
-                    
-                    response = summary;
-                }
-                
-                // ========================================
-                // 8. НЕИЗВЕСТНОЕ ДЕЙСТВИЕ
-                // ========================================
-                else {
-                    response = '🤔 Я не знаю, как ответить на этот запрос.\n\nДоступные действия:\n• analyze_intent — анализ замысла\n• analyze_conditions — анализ условий и опор\n• generate_questions — генерация вопросов\n• find_critical — поиск Критического остатка\n• suggest_steps — предложение шагов\n• analyze_risks — анализ рисков\n• summarize — резюме круга';
-                }
-                
-                resolve(response);
-            }, delay);
-        });
-    }
-
-    // ============================================
-    // 7. ПРИМЕНЕНИЕ AI-ОТВЕТОВ
-    // ============================================
-    
-    function applyAI(target) {
-        var actionMap = {
-            'intent': 'analyze_intent',
-            'questions': 'generate_questions',
-            'critical': 'find_critical',
-            'steps': 'suggest_steps'
-        };
-
-        var action = actionMap[target];
-        if (!action || !aiResponses[action]) {
-            alert('Сначала запросите AI-помощь (нажмите кнопку с 🤖)');
-            return;
-        }
-
-        var field = fields[target];
-        if (!field) return;
-
-        var text = aiResponses[action];
-        text = text.replace(/^[📌🔍❓🔴⚡🛡️📊💡✅⚠️➡️]\s*/gm, '');
-        text = text.replace(/\*\*/g, '').replace(/\*/g, '');
-        
-        var parts = text.split(/[💡\-]{2,}/);
-        var cleanText = parts[0] || text;
-        cleanText = cleanText.trim();
-
-        if (cleanText.length > 300) {
-            if (!confirm('Текст довольно длинный. Применить всё?')) {
-                return;
-            }
-        }
-
-        field.value = cleanText;
-        field.focus();
-        
-        var responseContainer = document.getElementById('ai-' + (target === 'intent' ? 'intent' : target));
-        if (responseContainer) {
-            responseContainer.classList.remove('open');
-        }
-
-        field.style.transition = 'background 0.3s';
-        field.style.background = '#e8f0e8';
-        setTimeout(function() {
-            field.style.background = '';
-        }, 1000);
-    }
-
-    // ============================================
-    // 8. ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ
-    // ============================================
-    
-    function suggestMore(type) {
-        var prompts = {
-            'conditions': 'Проверьте, не упустили ли вы важные факты или документы.',
-            'questions': 'Попробуйте задать вопрос: "Что произойдёт, если я не сделаю ничего?"',
-            'steps': 'Подумайте о самом маленьком шаге, который можно сделать прямо сейчас.'
-        };
-        alert('💡 ' + (prompts[type] || 'Попробуйте посмотреть на ситуацию с другой стороны.'));
-    }
-
-    // ============================================
-    // 9. ЗАВЕРШЕНИЕ КРУГА
-    // ============================================
-    
-    function finish() {
-        goToStep(4);
-        showSummary();
-    }
-
-    function showSummary() {
-        var data = {};
-        for (var key in fields) {
-            if (fields.hasOwnProperty(key)) {
-                data[key] = fields[key].value.trim() || '—';
-            }
-        }
-
-        var html = '<p><strong>🎯 Замысел:</strong> ' + data.intent + '</p>' +
-            '<p><strong>📌 Условия:</strong> ' + data.conditions + '</p>' +
-            '<p><strong>⚓ Опоры:</strong> ' + data.supports + '</p>' +
-            '<p><strong>❓ Вопросы:</strong> ' + data.questions + '</p>' +
-            '<p><strong>🔴 Критический остаток:</strong> ' + data.critical + '</p>' +
-            '<p><strong>⚡ Шаги:</strong> ' + data.steps + '</p>' +
-            (data.check !== '—' ? '<p><strong>🧭 Оценка потерь:</strong> ' + data.check + '</p>' : '') +
-            '<hr style="border-color:#ddd8ce; margin: 12px 0;">' +
-            '<p><strong>🔚 Проявилось:</strong> ' + data.outcome + '</p>' +
-            (data.loss !== '—' ? '<p><strong>👁️ Оглянуться:</strong> ' + data.loss + '</p>' : '') +
-            (data.lesson !== '—' ? '<p><strong>📖 Понято о порядке:</strong> ' + data.lesson + '</p>' : '');
-
-        resultText.innerHTML = html;
-        resultBlock.classList.add('visible');
-    }
-
-    function exportResult() {
-        var text = resultText.textContent || 'Нет данных';
-        var blob = new Blob(['КЛЮЧ — Сводка круга\n' + '='.repeat(40) + '\n\n' + text], { type: 'text/plain' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'klyuch-' + new Date().toISOString().slice(0,10) + '.txt';
-        a.click();
-        URL.revokeObjectURL(a.href);
-    }
-
-    function resetAll() {
-        if (!confirm('Начать новый круг? Все данные будут очищены.')) return;
+    function clearAll() {
+        if (!confirm('Очистить все поля?')) return;
         for (var key in fields) {
             if (fields.hasOwnProperty(key)) {
                 fields[key].value = '';
             }
         }
-        aiResponses = {};
-        document.querySelectorAll('.ai-response').forEach(function(el) {
-            el.classList.remove('open');
-        });
-        resultBlock.classList.remove('visible');
-        goToStep(0);
+        updateCounter();
+        document.getElementById('previewBlock').classList.remove('visible');
+        showToast('🗑️ Все поля очищены', '');
     }
 
     // ============================================
-    // 10. АВТОСОХРАНЕНИЕ
+    // 8. ЗАПОЛНИТЬ ПРИМЕР (на основе материала из файла)
     // ============================================
-    
-    function autoSave() {
-        var data = {};
-        for (var key in fields) {
-            if (fields.hasOwnProperty(key)) {
-                data[key] = fields[key].value;
-            }
-        }
-        data.aiResponses = aiResponses;
-        try {
-            localStorage.setItem('klyuch_data', JSON.stringify(data));
-        } catch (e) {}
+
+    function loadExample() {
+        fields.intent.value = 'Получить разрешение на строительство жилого дома на земельном участке в г. Геленджик';
+
+        fields.conditions.value = '1. Земельный участок в собственности, кадастровый номер 50:12:001234:56\n' +
+            '2. Уведомление о соответствии № 732 от 21.10.2020 выдано Управлением архитектуры и градостроительства г. Геленджик\n' +
+            '3. Решение Геленджикского городского суда от 05.08.2020 об обязании администрации выдать уведомление\n' +
+            '4. По выписке из ЕГРН — вид разрешённого использования "для индивидуального жилищного строительства"\n' +
+            '5. Согласно ПЗЗ г. Геленджика участок находится в промышленной зоне (П-1)\n' +
+            '6. В промышленной зоне ИЖС не является разрешённым видом использования\n' +
+            '7. Срок действия уведомления — 10 лет (до 2030 г.)\n' +
+            '8. С 01.09.2026 вступают в силу изменения в ГрК РФ — старые формы уведомлений утрачивают силу\n' +
+            '9. Строительство не начато, участок не огорожен и не освоен\n' +
+            '10. Администрация даёт устные разъяснения, письменного ответа на запросы нет';
+
+        fields.done.value = '1. 2020 г. — подан иск в Геленджикский городской суд\n' +
+            '2. 05.08.2020 — суд обязал администрацию выдать уведомление о соответствии\n' +
+            '3. 21.10.2020 — уведомление получено\n' +
+            '4. 2025 г. — выяснено, что участок находится в промышленной зоне (в ПЗЗ г. Геленджика)\n' +
+            '5. 2025 г. — устное обращение в Управление архитектуры: ответ, что уведомление выдано законно\n' +
+            '6. 2026 г. — изучение изменений в ГрК РФ с 01.09.2026';
+
+        fields.obstacles.value = '1. Противоречие между уведомлением (ИЖС) и зонированием участка (промышленная зона)\n' +
+            '2. Риск: если начать строительство, объект может быть признан самовольной постройкой (ст. 222 ГК РФ)\n' +
+            '3. С 01.09.2026 уведомление может утратить силу автоматически\n' +
+            '4. Нет письменного подтверждения от администрации о законности уведомления\n' +
+            '5. Неизвестно, можно ли обжаловать решение суда 2020 года по вновь открывшимся обстоятельствам\n' +
+            '6. Непонятно, есть ли судебная практика по аналогичным делам в Геленджике';
+
+        fields.supports.value = 'А. Нормы прямого действия:\n' +
+            '• ГрК РФ ст. 51.1 — порядок получения уведомления о соответствии\n' +
+            '• ГрК РФ ст. 36 — градостроительный регламент обязателен для исполнения\n' +
+            '• ГрК РФ ст. 30, ч. 9 — территориальные зоны устанавливаются с учётом функционального назначения\n' +
+            '• ПЗЗ г. Геленджика — определяет перечень разрешённых ВРИ для каждой зоны\n' +
+            '• ГК РФ ст. 222 — самовольная постройка\n' +
+            '• ГК РФ ст. 8, 12 — способы защиты права\n' +
+            '\nБ. Процессуальные и судебные опоры:\n' +
+            '• АПК РФ / ГПК РФ — обжалование судебных актов\n' +
+            '• Постановление Пленума ВС РФ № 10 от 2017 г. (по земельным спорам)\n' +
+            '• Практика ВС РФ о недопустимости строительства при несоответствующем ВРИ\n' +
+            '\nВ. Административные и управленческие опоры:\n' +
+            '• ФЗ № 248-ФЗ — порядок проверок\n' +
+            '• Положение об Управлении архитектуры г. Геленджик\n' +
+            '• ФЗ № 59-ФЗ — право на мотивированный ответ\n' +
+            '\nГ. Институциональные и практические опоры:\n' +
+            '• Принцип публичности ЕГРН\n' +
+            '• Срок действия уведомления — 10 лет\n' +
+            '• Факт отсутствия строительства — пространство для манёвра\n' +
+            '• Изменения в ГрК РФ с 01.09.2026 — переходный момент';
+
+        fields.questions.value = 'А. Вопросы к объективному порядку:\n' +
+            '1. Каков точный ВРИ участка согласно выписке из ЕГРН?\n' +
+            '2. Каков перечень разрешённых ВРИ для промышленной зоны П-1 по ПЗЗ г. Геленджика?\n' +
+            '3. Включён ли вид "ИЖС" в этот перечень?\n' +
+            '4. Если нет — есть ли процедура изменения ВРИ или зонирования?\n' +
+            '5. Соответствовало ли решение суда 2020 года действовавшим ПЗЗ?\n' +
+            '6. Есть ли судебная практика по аналогичным делам в Геленджике?\n' +
+            '\nБ. Вопросы к статусу уведомления:\n' +
+            '7. Может ли администрация отозвать уведомление?\n' +
+            '8. Утратит ли уведомление силу с 01.09.2026?\n' +
+            '9. Если утратит — нужно ли подавать новое уведомление?\n' +
+            '\nВ. Вопросы к администрации и суду:\n' +
+            '10. Была ли в 2020 году суду известна информация о зонировании участка?\n' +
+            '11. Имеет ли администрация право выдать уведомление в нарушение ПЗЗ, если суд обязал?\n' +
+            '12. Может ли администрация дать письменный ответ о законности уведомления?\n' +
+            '\nГ. Вопросы к вашей позиции:\n' +
+            '13. Какова ваша цель: жильё для себя, инвестиция или продажа?\n' +
+            '14. Если ИЖС невозможно — какие альтернативы допустимы?\n' +
+            '15. Готовы ли вы оспаривать отказ в суде?\n' +
+            '16. Есть ли шанс пересмотреть решение суда 2020 года?';
+
+        fields.critical.value = 'Формальное право на строительство (уведомление 2020 года) вступает в прямое противоречие с материальным запретом (нахождение участка в промышленной зоне, где ИЖС не разрешён). Строительство не начато, участок не освоен, но время работает против вас — с 01.09.2026 старые формы уведомлений утрачивают силу.';
+
+        fields.steps.value = '1. Направить официальный запрос в Управление архитектуры и градостроительства г. Геленджик:\n' +
+            '   - с вопросами о законности уведомления № 732 от 21.10.2020\n' +
+            '   - о соответствии участка ПЗЗ и допустимости ИЖС\n' +
+            '   - о последствиях 01.09.2026 для данного уведомления\n' +
+            '   - с требованием письменного мотивированного ответа\n' +
+            '2. Получить актуальную выписку из ЕГРН с точным ВРИ участка\n' +
+            '3. Проверить ПЗЗ г. Геленджика (опубликован на сайте администрации)\n' +
+            '4. На основе полученных ответов:\n' +
+            '   - если ИЖС разрешён → принять решение о начале строительства\n' +
+            '   - если запрещён → оценить альтернативы использования или судебное обжалование';
+
+        updateCounter();
+        document.getElementById('previewBlock').classList.remove('visible');
+        showToast('📋 Пример загружен!', 'success');
     }
 
-    function autoLoad() {
-        try {
-            var raw = localStorage.getItem('klyuch_data');
-            if (!raw) return;
-            var data = JSON.parse(raw);
-            for (var key in data) {
-                if (fields[key]) fields[key].value = data[key];
-            }
-            if (data.aiResponses) {
-                aiResponses = data.aiResponses;
-            }
-        } catch (e) {}
-    }
+    // ============================================
+    // 9. TOAST-УВЕДОМЛЕНИЕ
+    // ============================================
 
-    for (var key in fields) {
-        if (fields.hasOwnProperty(key)) {
-            fields[key].addEventListener('input', autoSave);
-        }
+    var toastTimer = null;
+
+    function showToast(message, type) {
+        var toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast';
+        if (type === 'success') toast.classList.add('success');
+        if (type === 'error') toast.classList.add('error');
+        toast.classList.add('show');
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+            toast.classList.remove('show');
+        }, 3500);
     }
 
     // ============================================
-    // 11. ИНИЦИАЛИЗАЦИЯ
+    // 10. ИНИЦИАЛИЗАЦИЯ
     // ============================================
-    
-    autoLoad();
-    goToStep(0);
 
+    updateCounter();
+
+    // Telegram Web App
     if (window.Telegram && window.Telegram.WebApp) {
         var tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
     }
 
-    navBtns.forEach(function(btn, i) {
-        btn.addEventListener('click', function() { goToStep(i); });
-    });
-
-    console.log('🗝️ Ключ к действию + AI загружен');
-    console.log('🤖 AI режим: ' + (DEMO_MODE ? 'УМНЫЙ ДЕМО' : 'РЕАЛЬНЫЙ API'));
+    console.log('📋 Множества Ключа загружены');
+    console.log('💡 Заполните поля и нажмите "Экспортировать" для сохранения в .txt');
 </script>
 </body>
 </html>
