@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный курс: Административные процедуры в землепользовании</title>
+    <style>
+        /* === ГЛОБАЛЬНЫЕ СТИЛИ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f2eb;
+            color: #1c1c1c;
+            line-height: 1.6;
+            padding: 16px;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            padding: 24px 20px 40px;
+        }
+
+        /* === ШАПКА === */
+        .course-header {
+            border-bottom: 2px solid #e8e2d8;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .course-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2c2c2c;
+        }
+
+        .course-header h1 span {
+            color: #2980b9;
+        }
+
+        .course-header .sub {
+            font-size: 15px;
+            color: #7a7a7a;
+            margin-top: 4px;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #8a8a8a;
+        }
+
+        .course-meta span {
+            background: #f0ece4;
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        /* === ПРОГРЕСС === */
+        .progress-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .progress-dot {
+            flex: 1;
+            min-width: 20px;
+            height: 6px;
+            border-radius: 6px;
+            background: #e0dcd2;
+            transition: background 0.4s;
+            cursor: pointer;
+        }
+
+        .progress-dot.completed {
+            background: #2980b9;
+        }
+
+        .progress-dot.active {
+            background: #6a9ec4;
+            height: 8px;
+        }
+
+        /* === НАВИГАЦИЯ === */
+        .nav-modules {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee9e0;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 30px;
+            background: #f0ece4;
+            color: #5a5a5a;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover {
+            background: #e4ddd0;
+        }
+
+        .nav-btn.active {
+            background: #2980b9;
+            color: #fff;
+        }
+
+        .nav-btn.completed {
+            background: #d4e0ec;
+        }
+
+        .nav-btn.glossary-btn {
+            background: #6a4e9b;
+            color: #fff;
+        }
+
+        .nav-btn.glossary-btn:hover {
+            background: #5a3e8a;
+        }
+
+        /* === МОДУЛИ === */
+        .module {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 4px;
+        }
+
+        .module-sub {
+            font-size: 15px;
+            color: #6a6a6a;
+            margin-bottom: 20px;
+        }
+
+        .module-content h2,
+        .module-content h3 {
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .module-content h2 {
+            font-size: 20px;
+            color: #2c2c2c;
+        }
+
+        .module-content h3 {
+            font-size: 17px;
+            color: #3a3a3a;
+        }
+
+        .module-content p {
+            margin-bottom: 12px;
+            color: #3a3a3a;
+        }
+
+        .module-content ul,
+        .module-content ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .module-content li {
+            margin-bottom: 6px;
+            color: #3a3a3a;
+        }
+
+        .module-content blockquote {
+            background: #f8f5ef;
+            border-left: 4px solid #2980b9;
+            padding: 12px 18px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #4a4a4a;
+        }
+
+        .module-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .module-content table th {
+            background: #f0ece4;
+            text-align: left;
+            padding: 8px 12px;
+            border: 1px solid #ddd8ce;
+        }
+
+        .module-content table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd8ce;
+        }
+
+        .module-content .highlight-box {
+            background: #f0f5fa;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #2980b9;
+        }
+
+        .module-content .highlight-box strong {
+            color: #1a5276;
+        }
+
+        .module-content .danger-box {
+            background: #fde8e8;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .module-content .success-box {
+            background: #dff0df;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #27ae60;
+        }
+
+        /* === ГЛОССАРИЙ === */
+        .glossary-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .glossary-section.active {
+            display: block;
+        }
+
+        .glossary-item {
+            background: #f8f5ef;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #6a4e9b;
+        }
+
+        .glossary-item .term {
+            font-weight: 700;
+            font-size: 16px;
+            color: #2c2c2c;
+            cursor: pointer;
+        }
+
+        .glossary-item .definition {
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .glossary-item .definition.open {
+            display: block;
+        }
+
+        .glossary-item .term-toggle {
+            background: none;
+            border: none;
+            color: #6a4e9b;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+
+        .glossary-item .term-toggle:hover {
+            background: #e8e4dc;
+        }
+
+        .glossary-search {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            background: #fdfdfb;
+        }
+
+        .glossary-search:focus {
+            outline: none;
+            border-color: #6a4e9b;
+        }
+
+        /* === ЗАДАНИЯ === */
+        .task {
+            background: #f8f5ef;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin: 20px 0;
+            border: 2px dashed #c4b8a0;
+        }
+
+        .task-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4a3a2a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-body {
+            margin-top: 8px;
+            color: #4a4a4a;
+        }
+
+        .task-body textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px 12px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fdfdfb;
+            resize: vertical;
+            margin-top: 8px;
+        }
+
+        .task-body textarea:focus {
+            outline: none;
+            border-color: #2980b9;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .task-btn {
+            background: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn:hover {
+            background: #1a6a8a;
+        }
+
+        .task-btn-hint {
+            background: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn-hint:hover {
+            background: #d68910;
+        }
+
+        .task-btn-save {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn-save:hover {
+            background: #1e8449;
+        }
+
+        .task-feedback {
+            margin-top: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: #e8f0e8;
+            display: none;
+            font-size: 14px;
+        }
+
+        .task-feedback.show {
+            display: block;
+        }
+
+        .task-feedback.success {
+            background: #dff0df;
+            color: #2a6a3a;
+        }
+
+        .task-feedback.error {
+            background: #fde8e8;
+            color: #a33;
+        }
+
+        .task-feedback.hint {
+            background: #fef9e7;
+            color: #7d6608;
+            border-left: 4px solid #f39c12;
+        }
+
+        /* === КНОПКИ НАВИГАЦИИ ПО МОДУЛЯМ === */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #eee9e0;
+            flex-wrap: wrap;
+        }
+
+        .module-nav .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .module-nav .btn-prev {
+            background: #f0ece4;
+            color: #5a5a5a;
+        }
+
+        .module-nav .btn-prev:hover {
+            background: #e4ddd0;
+        }
+
+        .module-nav .btn-next {
+            background: #2980b9;
+            color: #fff;
+        }
+
+        .module-nav .btn-next:hover {
+            background: #1a6a8a;
+        }
+
+        .module-nav .btn-finish {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .module-nav .btn-finish:hover {
+            background: #1e8449;
+        }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                padding-bottom: 80px;
+            }
+            .container {
+                padding: 16px 14px;
+            }
+            .course-header h1 {
+                font-size: 20px;
+            }
+            .module-title {
+                font-size: 18px;
+            }
+            .nav-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .module-nav .btn {
+                font-size: 13px;
+                padding: 8px 16px;
+                min-width: 80px;
+            }
+            .module-content table {
+                font-size: 12px;
+            }
+            .module-content table th,
+            .module-content table td {
+                padding: 4px 8px;
+            }
+            .task-actions {
+                flex-direction: column;
+            }
+            .task-actions .task-btn,
+            .task-actions .task-btn-hint,
+            .task-actions .task-btn-save {
+                width: 100%;
+                text-align: center;
+            }
+            .glossary-item {
+                padding: 12px 14px;
+            }
+        }
+
+        /* === ПОДВАЛ === */
+        .course-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #eee9e0;
+            text-align: center;
+            font-size: 13px;
+            color: #8a8a8a;
+        }
+
+        .glossary-count {
+            font-size: 13px;
+            color: #6a6a6a;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <!-- ШАПКА -->
+    <div class="course-header">
+        <h1>📋 <span>Административные процедуры</span> в землепользовании</h1>
+        <div class="sub">Интерактивный курс для самостоятельного изучения</div>
+        <div class="course-meta">
+            <span>📚 5 модулей</span>
+            <span>📝 Задания для самопроверки</span>
+            <span>📖 Глоссарий: <span id="glossaryCount">0</span> терминов</span>
+            <span>🎯 Прогресс: <span id="progressPercent">0</span>%</span>
+        </div>
+    </div>
+
+    <!-- ПРОГРЕСС -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- НАВИГАЦИЯ ПО МОДУЛЯМ -->
+    <div class="nav-modules" id="navModules">
+        <!-- Кнопки модулей будут добавлены скриптом -->
+        <button class="nav-btn glossary-btn" onclick="showGlossary()">📖 Глоссарий</button>
+    </div>
+
+    <!-- КОНТЕЙНЕР МОДУЛЕЙ -->
+    <div id="modulesContainer"></div>
+
+    <!-- ГЛОССАРИЙ -->
+    <div class="glossary-section" id="glossarySection">
+        <div class="module-title">📖 Глоссарий</div>
+        <div class="module-sub">Основные термины курса «Административные процедуры в землепользовании»</div>
+        <div class="glossary-count" id="glossaryCountDisplay"></div>
+        <input type="text" class="glossary-search" id="glossarySearch" placeholder="🔍 Поиск по глоссарию..." oninput="filterGlossary(this.value)">
+        <div id="glossaryList"></div>
+        <div style="margin-top:20px;">
+            <button class="btn btn-next" onclick="showModule(0)" style="width:100%;">← Вернуться к курсу</button>
+        </div>
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <div class="course-footer">
+        <span>🗝️ Ключ к действию — <a href="#" style="color: #2980b9; text-decoration: none;">kadinfo.ru</a></span>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // ДАННЫЕ КУРСА
+    // ============================================================
+
+    const courseData = {
+        title: "Административные процедуры в землепользовании",
+        modules: [
+            {
+                id: 0,
+                title: "Введение. Бумажная работа как правовая стратегия",
+                subtitle: "Как говорить с государством на его языке",
+                content: `
+                    <h3>1. Основное заблуждение: устные договорённости как способ решения проблемы</h3>
+                    <p>Практика взаимодействия землепользователя с органами власти часто разворачивается по следующей схеме. Заявитель собирает документы, лично посещает администрацию в приёмные часы и излагает ситуацию в устной форме. Сотрудник органа власти даёт устные заверения. По истечении некоторого времени выясняется, что фактического изменения ситуации не произошло.</p>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Ключевой принцип:</strong> Для суда, прокурорской проверки или вышестоящего должностного лица устное общение доказательственной силы не имеет. Юридическим фактом признаётся исключительно информация, зафиксированная на материальном носителе.
+                    </div>
+
+                    <blockquote>«Я лично встречался с главой, он сказал, что вопрос решаемый» — это типичная ошибка заявителя.</blockquote>
+
+                    <h3>2. Сравнительная характеристика «жалобщика» и подготовленного заявителя</h3>
+                    <table>
+                        <thead><tr><th>Действие</th><th>«Жалобщик»</th><th>Подготовленный заявитель</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Первый шаг</strong></td><td>Личный приём, устное выражение несогласия</td><td>Письменный запрос со ссылкой на ФЗ № 59-ФЗ</td></tr>
+                            <tr><td><strong>Реакция на отказ</strong></td><td>Обращение в прокуратуру в эмоциональной форме</td><td>Анализ ответа, подача жалобы с чётким требованием</td></tr>
+                            <tr><td><strong>Документооборот</strong></td><td>Отсутствие фиксации, опора на память</td><td>Сохранение каждой бумаги с отметками о получении</td></tr>
+                            <tr><td><strong>Позиция в суде</strong></td><td>Апелляция к устным заявлениям</td><td>Указание на конкретный пункт регламента</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>3. Конвейер: Запрос → Заявление → Жалоба → Иск</h3>
+                    <div class="highlight-box">
+                        <strong>Единая последовательность действий:</strong>
+                        <p><strong>Запрос</strong> — сбор информации → <strong>Заявление</strong> — инициирование процедуры → <strong>Жалоба</strong> — досудебное обжалование → <strong>Иск</strong> — судебная защита</p>
+                    </div>
+
+                    <div class="success-box">
+                        <strong>Результат следования схеме:</strong>
+                        <ul>
+                            <li><strong>Доказательства.</strong> Каждый шаг оставляет документальный след.</li>
+                            <li><strong>Давление на чиновника.</strong> Каждый новый документ запускает новый виток контроля.</li>
+                            <li><strong>Контроль над сроками.</strong> Каждый шаг имеет жёсткий срок, установленный законом.</li>
+                            <li><strong>Переворот бремени доказывания.</strong> В суде обязанность доказывания законности лежит на чиновнике.</li>
+                        </ul>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Анализ типичной ошибки",
+                        prompt: "Опишите ситуацию из вашей практики, когда устная договорённость с чиновником не привела к результату. Как можно было бы поступить иначе, используя письменную форму?",
+                        placeholder: "Опишите ситуацию и предложите альтернативный подход с использованием письменных запросов и заявлений...",
+                        hint: "Пример: Я обратился в администрацию устно по вопросу предоставления земельного участка. Сотрудник сказал, что «вопрос решаемый», но через месяц ничего не изменилось. Альтернатива: подать письменный запрос о предоставлении информации и заявление по административному регламенту с фиксацией даты подачи."
+                    }
+                ]
+            },
+            {
+                id: 1,
+                title: "Модуль 1. Состав землепользования",
+                subtitle: "Что скрывается за кадастровым номером",
+                content: `
+                    <h3>1.1. Ограниченность анализа единственным кадастровым объектом</h3>
+                    <p>Типичный подход землепользователя: открыть выписку из ЕГРН, увидеть описание своего участка и полагать, что его права и обязанности ограничиваются территорией внутри указанных границ. Это не соответствует действительности.</p>
+
+                    <h3>1.2. Элементы землепользования</h3>
+                    <table>
+                        <thead><tr><th>Элемент</th><th>Пример</th><th>Порядок оформления</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Земельные участки</strong></td><td>Участок под ИЖС, поле в аренде</td><td>ЕГРН, договор аренды</td></tr>
+                            <tr><td><strong>Земли без образования участка</strong></td><td>Сенокос, выпас скота</td><td>Договор аренды или разрешение</td></tr>
+                            <tr><td><strong>Территории общего пользования</strong></td><td>Дороги, парки</td><td>Не оформляются, использование бесплатное</td></tr>
+                            <tr><td><strong>Неразграниченные земли</strong></td><td>Пустошь за забором</td><td>Заявление о предоставлении</td></tr>
+                            <tr><td><strong>Лесные участки</strong></td><td>Сбор грибов, аренда под охотхозяйство</td><td>Для собственных нужд — без оформления</td></tr>
+                            <tr><td><strong>Водные объекты</strong></td><td>Пруд, река</td><td>Пруд — собственность, река — федеральная</td></tr>
+                            <tr><td><strong>Сервитуты</strong></td><td>Право проезда через соседний участок</td><td>Соглашение с соседом или решение суда</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>1.3. Ограниченность сведений ЕГРН</h3>
+                    <div class="danger-box">
+                        <strong>⚠️ Выписка из ЕГРН не содержит:</strong>
+                        <ul>
+                            <li>Охранные зоны ЛЭП, газопроводов, дорог</li>
+                            <li>Водоохранные зоны и береговые полосы</li>
+                            <li>Пересечение с землями лесного фонда</li>
+                            <li>Границы территориальных зон и красные линии</li>
+                            <li>Фактические обременения (сервитуты)</li>
+                            <li>Геологические условия, уровень грунтовых вод</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>Правило:</strong> Выписка из ЕГРН — начальный, но не достаточный источник сведений. Перед любыми действиями необходимо проверить все перечисленные источники.
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Анализ состава землепользования",
+                        prompt: "Опишите состав вашего фактического землепользования. Какие элементы входят в него помимо зарегистрированного участка? Для каждого элемента укажите правовое основание и возможные риски.",
+                        placeholder: "1. Собственный участок — право собственности, рисков нет\n2. Арендованное поле — договор аренды, риск — истечение срока...",
+                        hint: "Пример: Я являюсь собственником земельного участка с кадастровым номером 50:08:0050201:15. Также я арендую у администрации прилегающее поле для выпаса скота (договор аренды на 5 лет). Использую пруд для полива (находится в границах моего участка — частная собственность). Регулярно проезжаю через соседний участок — сервитут не оформлен (риск)."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Модуль 2. Запрос",
+                subtitle: "Механизм получения информации и фиксации доказательств",
+                content: `
+                    <h3>2.1. Информационная недостаточность как первопричина проблем</h3>
+                    <p>Любой землепользователь может провести самодиагностику, ответив на вопросы:</p>
+                    <ul>
+                        <li>Какова охранная зона газопровода или ЛЭП?</li>
+                        <li>Где проходит береговая линия водотока?</li>
+                        <li>Имеются ли планы по строительству дороги через участок?</li>
+                        <li>Каков уровень грунтовых вод?</li>
+                    </ul>
+                    <p>Если хотя бы на один вопрос нет официального ответа — вы в состоянии информационной недостаточности.</p>
+
+                    <h3>2.2. Три категории информации</h3>
+                    <table>
+                        <thead><tr><th>Категория</th><th>Что проверяется</th><th>Источник</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Физические свойства</strong></td><td>Геология, грунты, подтопление</td><td>Инженерные изыскания, Минэкологии</td></tr>
+                            <tr><td><strong>Градостроительные ограничения</strong></td><td>ПЗЗ, ЗОУИТ, красные линии</td><td>Администрация, сетевые организации</td></tr>
+                            <tr><td><strong>Права и обременения</strong></td><td>Выписка ЕГРН, реестровое дело</td><td>Росреестр</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>2.3. Структура юридически корректного запроса</h3>
+                    <div class="highlight-box">
+                        <strong>Шестиэлементная структура запроса:</strong>
+                        <ol>
+                            <li><strong>Шапка</strong> — наименование органа, адрес заявителя</li>
+                            <li><strong>Суть</strong> — сведения о заявителе, кадастровый номер</li>
+                            <li><strong>Ключевой вопрос</strong> — «прошу предоставить сведения о...»</li>
+                            <li><strong>Правовое обоснование</strong> — ссылка на ФЗ № 59-ФЗ и специальную норму</li>
+                            <li><strong>Просительная часть</strong> — конкретный перечень запрашиваемых сведений</li>
+                            <li><strong>Приложение</strong> — копия выписки из ЕГРН</li>
+                        </ol>
+                    </div>
+
+                    <div class="success-box">
+                        <strong>Правило формулирования:</strong>
+                        <p>Открытый вопрос: «Является ли водоём рекой?» → Закрытый вопрос: «Прошу предоставить сведения из водного реестра о типе водного объекта (водоток или водоём) с указанием наименования»</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Составление запроса",
+                        prompt: "Составьте запрос в Министерство экологии для установления статуса водного объекта на вашем участке. Используйте структуру из модуля.",
+                        placeholder: "Шапка: ...\nСуть: ...\nКлючевой вопрос: ...\nПравовое обоснование: ...\nПросительная часть: ...",
+                        hint: "Пример запроса в Минэкологии:\n\nШапка: Министру экологии Московской области\n\nСуть: Я являюсь собственником земельного участка с кадастровым номером 50:08:0050201:15. На участке расположен водный объект.\n\nКлючевой вопрос: Прошу предоставить сведения из государственного водного реестра о водном объекте, расположенном в границах указанного участка, с указанием его типа (водоток или водоём), наименования и принадлежности к федеральной собственности.\n\nПравовое обоснование: В соответствии со ст. 31 Водного кодекса РФ и ФЗ № 59-ФЗ...\n\nПросительная часть: Прошу предоставить запрошенные сведения в 30-дневный срок."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Модуль 3. Заявление",
+                subtitle: "Инициирование административной процедуры",
+                content: `
+                    <h3>3.1. Юридическая природа заявления</h3>
+                    <div class="highlight-box">
+                        <strong>Основное правило:</strong>
+                        <p>Заявление является не просьбой, а юридическим фактом, влекущим возникновение административной процедуры. Правильно составленное заявление обязывает должностное лицо совершить предусмотренные регламентом действия.</p>
+                    </div>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Неправильная формулировка:</strong>
+                        <p>«Убедительно прошу Вас рассмотреть возможность предоставления мне в аренду земельного участка»</p>
+                        <strong>✅ Правильная формулировка:</strong>
+                        <p>«В соответствии со статьёй 39.15 Земельного кодекса РФ прошу осуществить предварительное согласование предоставления земельного участка»</p>
+                    </div>
+
+                    <h3>3.2. Административный регламент</h3>
+                    <p>Любая государственная услуга предоставляется в соответствии с административным регламентом, который содержит:</p>
+                    <ul>
+                        <li>Исчерпывающий перечень документов</li>
+                        <li>Исчерпывающий перечень оснований для отказа</li>
+                        <li>Сроки совершения каждого этапа</li>
+                        <li>Требования к форме заявления</li>
+                    </ul>
+
+                    <h3>3.3. Алгоритм подготовки заявления</h3>
+                    <ol>
+                        <li><strong>Поиск и изучение административного регламента</strong> — на сайте администрации или портале «Госуслуги»</li>
+                        <li><strong>Проверка статуса надлежащего заявителя</strong> — входите ли вы в установленный круг</li>
+                        <li><strong>Формирование перечня документов</strong> — по регламенту</li>
+                        <li><strong>Проверка оснований для отказа</strong> — изучите раздел регламента</li>
+                        <li><strong>Составление заявления по форме регламента</strong></li>
+                    </ol>
+
+                    <div class="success-box">
+                        <strong>Ключевое приложение:</strong> Схема расположения земельного участка на кадастровом плане территории (СПЗУ) — подготавливается кадастровым инженером. Без неё заявление не рассматривается.
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Составление заявления",
+                        prompt: "Составьте заявление о предварительном согласовании предоставления земельного участка для индивидуального жилищного строительства. Укажите все необходимые реквизиты и приложения.",
+                        placeholder: "Шапка: ...\nТекст заявления: ...\nПриложения: ...",
+                        hint: "Пример заявления:\n\nШапка: Главе администрации г.о. Истра от Иванова И.И.\n\nТекст: В соответствии со статьёй 39.15 Земельного кодекса РФ прошу осуществить предварительное согласование предоставления мне земельного участка в аренду на основании пп. 15 п. 2 ст. 39.6 ЗК РФ для индивидуального жилищного строительства. Утвердить схему расположения земельного участка на кадастровом плане территории согласно приложению.\n\nПриложения: 1) Копия паспорта, 2) Схема расположения на КПТ, 3) Выписка из ЕГРН."
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Модуль 4. Жалоба",
+                subtitle: "Механизм досудебного обжалования",
+                content: `
+                    <h3>4.1. Основания для перехода к жалобе</h3>
+                    <p>После подачи заявления возможны три варианта:</p>
+                    <ul>
+                        <li><strong>Зелёный</strong> — заявление удовлетворено</li>
+                        <li><strong>Жёлтый</strong> — получен отказ или бездействие → подача жалобы</li>
+                        <li><strong>Красный</strong> — отказ незаконен → административный иск</li>
+                    </ul>
+
+                    <h3>4.2. Юридическая природа жалобы</h3>
+                    <div class="danger-box">
+                        <strong>⚠️ Некорректная жалоба:</strong>
+                        <p>«Главе администрации! ЖАЛОБА на беспредел сотрудников земельного отдела! Эти бюрократы замучили меня!»</p>
+                    </div>
+                    <div class="success-box">
+                        <strong>✅ Корректная жалоба:</strong>
+                        <p>«Прошу отменить решение администрации № 567 от 10.07.2025 об отказе в предварительном согласовании, как противоречащее пункту 8 статьи 39.15 Земельного кодекса РФ, и обязать администрацию повторно рассмотреть моё заявление»</p>
+                    </div>
+
+                    <h3>4.3. Два уровня обжалования</h3>
+                    <table>
+                        <thead><tr><th>Уровень</th><th>Адресат</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Первый</strong></td><td>Вышестоящее должностное лицо (начальник отдела, глава администрации)</td></tr>
+                            <tr><td><strong>Второй</strong></td><td>Вышестоящий орган (Министерство имущественных отношений, Правительство субъекта)</td></tr>
+                            <tr><td><strong>Прокуратура</strong></td><td>Проверка соблюдения процедур (не разрешает спор по существу)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>4.4. Пять элементов жалобы</h3>
+                    <ol>
+                        <li><strong>Указание на нарушителя и обжалуемый акт</strong> — дата, номер, наименование органа</li>
+                        <li><strong>Ссылки на нарушенные нормы</strong> — конкретные пункты регламента, статьи закона</li>
+                        <li><strong>Описание нарушенного интереса</strong> — каким образом нарушены права</li>
+                        <li><strong>Чёткое требование</strong> — «отменить решение» и «обязать повторно рассмотреть»</li>
+                        <li><strong>Приложение доказательств</strong> — копии всех документов</li>
+                    </ol>
+
+                    <div class="highlight-box">
+                        <strong>Важно:</strong> Даже отклонённая жалоба формирует доказательственную базу для суда. Судья видит не «жалобщика», а системного заявителя, исчерпавшего все досудебные способы.
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Составление жалобы",
+                        prompt: "Составьте жалобу в вышестоящий орган на отказ администрации в перераспределении земельного участка. Включите все пять обязательных элементов.",
+                        placeholder: "Указание на акт: ...\nСсылки на нормы: ...\nНарушенный интерес: ...\nТребование: ...\nПриложения: ...",
+                        hint: "Пример жалобы:\n\nУказание на акт: Решение администрации № 567 от 10.07.2025 об отказе в перераспределении земельного участка.\nСсылки на нормы: Нарушен п. 2 ст. 42 Градостроительного кодекса РФ — красные линии утверждаются ППТ, который не разработан.\nНарушенный интерес: Отказ лишает меня возможности оформить единое землепользование и начать строительство.\nТребование: Отменить решение № 567 и обязать администрацию повторно рассмотреть заявление.\nПриложения: Копия заявления, копия отказа, копия ответа на запрос об отсутствии ППТ."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Модуль 5. Административный иск",
+                subtitle: "Судебная стадия защиты прав",
+                content: `
+                    <h3>5.1. Основания для перехода к иску</h3>
+                    <ul>
+                        <li>Жалоба отклонена или проигнорирована</li>
+                        <li>Нарушение закона очевидно</li>
+                        <li>Получены формальные ответы (отписки)</li>
+                    </ul>
+
+                    <h3>5.2. Принцип распределения бремени доказывания</h3>
+                    <div class="highlight-box">
+                        <strong>Статья 62 КАС РФ, часть 2:</strong>
+                        <p>«Обязанность доказывания законности оспариваемых решений, действий (бездействия) органов, организаций и должностных лиц, наделённых государственными или иными публичными полномочиями, возлагается на соответствующие орган, организацию и должностное лицо».</p>
+                    </div>
+
+                    <div class="success-box">
+                        <strong>Содержание принципа:</strong>
+                        <p>Заявитель не обязан доказывать незаконность решения чиновника. Чиновник обязан доказать суду, что его решение является законным.</p>
+                    </div>
+
+                    <h3>5.3. Структура административного иска</h3>
+                    <table>
+                        <thead><tr><th>Часть иска</th><th>Содержание</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Шапка</strong></td><td>Наименование суда, сведения об истце и ответчике</td></tr>
+                            <tr><td><strong>Вводная</strong></td><td>Когда, по какому поводу обращались, какой ответ получен</td></tr>
+                            <tr><td><strong>Описательная</strong></td><td>Хронология: запрос → ответ → заявление → отказ → жалоба → ответ на жалобу</td></tr>
+                            <tr><td><strong>Правовое обоснование</strong></td><td>Перечень нарушенных норм</td></tr>
+                            <tr><td><strong>Просительная часть</strong></td><td>Признать решение незаконным + обязать повторно рассмотреть</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Некорректное требование:</strong>
+                        <p>«Обязать администрацию предоставить мне земельный участок» — суд не может подменять административный орган.</p>
+                        <strong>✅ Корректное требование:</strong>
+                        <p>«Обязать администрацию повторно рассмотреть моё заявление в установленный законом срок» — требование исполнимо.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Составление административного иска",
+                        prompt: "Составьте административное исковое заявление об обжаловании отказа в перераспределении земельного участка. Используйте структуру из модуля.",
+                        placeholder: "Шапка: ...\nВводная: ...\nОписательная: ...\nПравовое обоснование: ...\nПросительная часть: ...",
+                        hint: "Пример административного иска:\n\nШапка: В Истринский городской суд Московской области. Истец: Иванов И.И. Ответчик: Администрация г.о. Истра.\n\nВводная: 01.06.2025 я обратился в администрацию с заявлением о перераспределении земельного участка. 10.07.2025 получен отказ № 567.\n\nОписательная: Заявление подано с приложением схемы на КПТ. Отказ мотивирован красными линиями. Однако ППТ для данной территории не разработан (ответ № 123 от 20.06.2025). Жалоба в Министерство отклонена (ответ № 789).\n\nПравовое обоснование: Нарушен п. 2 ст. 42 ГрК РФ — красные линии утверждаются ППТ, который отсутствует. В силу ч. 2 ст. 62 КАС РФ ответчик должен доказать законность отказа.\n\nПросительная часть: 1) Признать решение № 567 незаконным. 2) Обязать администрацию повторно рассмотреть заявление."
+                    }
+                ]
+            }
+        ]
+    };
+
+    // ============================================================
+    // ГЛОССАРИЙ
+    // ============================================================
+
+    const glossaryData = [
+        { term: "Административный регламент", definition: "Нормативный правовой акт, устанавливающий порядок предоставления государственной или муниципальной услуги. Содержит исчерпывающий перечень документов, оснований для отказа, сроки рассмотрения и требования к форме заявления." },
+        { term: "Административный иск", definition: "Исковое заявление, подаваемое в суд по правилам КАС РФ для оспаривания решений, действий или бездействия органов власти. Отличается тем, что обязанность доказывания законности решения лежит на органе власти (ч. 2 ст. 62 КАС РФ)." },
+        { term: "Береговая полоса", definition: "Полоса земли вдоль береговой линии водного объекта шириной 20 метров (для рек длиной до 10 км — 5 метров). Находится в федеральной собственности, не подлежит приватизации и огораживанию. Каждый гражданин имеет право свободного доступа." },
+        { term: "Бумажная работа", definition: "Система правовых действий, зафиксированных документально. Каждый запрос, заявление или жалоба — юридический акт, инициирующий административные процедуры и формирующий доказательственную базу для суда." },
+        { term: "Вид разрешённого использования (ВРИ)", definition: "Характеристика земельного участка, определяющая разрешённые виды деятельности. Устанавливается ПЗЗ и фиксируется в ЕГРН. Примеры: «индивидуальное жилищное строительство», «ведение крестьянско-фермерского хозяйства»." },
+        { term: "Водный объект", definition: "Природный или искусственный водоём, водоток либо иной объект с сосредоточением вод. Различаются водотоки (реки — в федеральной собственности) и водоёмы (пруды — могут быть в частной собственности по ст. 8 ВК РФ)." },
+        { term: "Водоохранная зона", definition: "Зона с особыми условиями использования территории (ЗОУИТ), устанавливаемая вдоль водных объектов шириной от 50 до 200 метров. В ней запрещены строительство без согласования, использование удобрений и пестицидов, мойка транспорта." },
+        { term: "Генеральный план", definition: "Документ территориального планирования, определяющий функциональные зоны, границы населённых пунктов, планируемые дороги и объекты инфраструктуры. Не устанавливает красные линии — это функция ППТ." },
+        { term: "Градостроительный план земельного участка (ГПЗУ)", definition: "Документ, содержащий сведения о границах участка, территориальной зоне, градостроительном регламенте, красных линиях, ЗОУИТ. Обязателен для получения разрешения на строительство (ст. 57 ГрК РФ)." },
+        { term: "Градостроительный регламент", definition: "Совокупность правил для территориальной зоны: виды разрешённого использования, предельные параметры строительства (высота, отступы, процент застройки), ограничения. Содержится в ПЗЗ." },
+        { term: "Дачная амнистия", definition: "Упрощённый порядок регистрации прав на земельные участки и дома, предоставленные до введения ЗК РФ (до 1998–2001 годов). Позволяет оформить право без разрешения на строительство. Основание — ФЗ № 137-ФЗ." },
+        { term: "Досудебное обжалование", definition: "Подача жалобы в вышестоящий орган до обращения в суд. Для большинства споров с органами власти является обязательным условием принятия иска (ст. 218 КАС РФ). Позволяет разрешить спор без суда или сформировать доказательственную базу." },
+        { term: "Жалоба", definition: "Письменное обращение в вышестоящий орган или прокуратуру с требованием отменить незаконное решение или признать бездействие незаконным. Содержит: реквизиты акта, ссылки на нормы, чёткое требование." },
+        { term: "Заявление", definition: "Письменное обращение в орган власти, инициирующее административную процедуру. В отличие от «письма с просьбой» имеет правовую силу и обязывает должностное лицо действовать по регламенту." },
+        { term: "Запрос", definition: "Письменное обращение с требованием предоставить информацию. Правовое основание — ФЗ № 59-ФЗ (срок ответа 30 дней). Ответ (включая отписку) приобретает доказательственную силу в суде." },
+        { term: "Землепользование", definition: "Совокупность всех земель и объектов, которые лицо фактически использует. Не ограничивается зарегистрированным участком и включает арендованные поля, лесные и водные объекты, земли без образования участка, сервитуты." },
+        { term: "Зоны с особыми условиями использования территории (ЗОУИТ)", definition: "Охранные, санитарно-защитные, водоохранные зоны, зоны затопления с ограничениями на деятельность. Многие ЗОУИТ не внесены в ЕГРН — их наличие проверяется запросами в эксплуатирующие организации." },
+        { term: "Кадастровый инженер", definition: "Специалист с квалификационным аттестатом на кадастровую деятельность. Выполняет межевание, подготавливает межевые и технические планы, акты обследования, схемы расположения на КПТ." },
+        { term: "Категория земель", definition: "Правовой статус территории, определяющий целевое назначение. Категории: земли населённых пунктов, сельхозназначения, промышленности, лесного фонда, водного фонда, особо охраняемых территорий, запаса." },
+        { term: "Кодекс административного судопроизводства (КАС РФ)", definition: "Процессуальный закон для споров граждан с органами власти. Главная особенность — ч. 2 ст. 62: обязанность доказывания законности действий лежит на органе власти." },
+        { term: "Конвейер «Запрос → Заявление → Жалоба → Иск»", definition: "Последовательность действий подготовленного заявителя при взаимодействии с органами власти по вопросам землепользования. Каждый шаг оставляет документальный след и повышает цену неправомерных действий для должностного лица." },
+        { term: "Красные линии", definition: "Границы, отделяющие территории общего пользования (дороги, тротуары, парки) от территорий застройки. Утверждаются ППТ. Строительство за красными линиями запрещено (ст. 42 ГрК РФ)." },
+        { term: "Негаторный иск", definition: "Иск собственника об устранении нарушений, не связанных с лишением владения (например, сосед перегородил проезд). Рассматривается по ГПК РФ или АПК РФ в зависимости от субъектного состава." },
+        { term: "Неразграниченные земли", definition: "Земли, не переданные ни в частную, ни в муниципальную собственность. Находятся в государственной собственности, распоряжение осуществляет администрация. Могут быть предоставлены в аренду или собственность." },
+        { term: "Объект капитального строительства (ОКС)", definition: "Здание, строение, сооружение с прочной связью с землёй. Для возведения требуется разрешение на строительство, для завершённого объекта — регистрация права в ЕГРН." },
+        { term: "Переворот бремени доказывания", definition: "Ключевой принцип КАС РФ (ч. 2 ст. 62): обязанность доказывания законности решений органов власти возлагается на орган власти, а не на заявителя. Заявитель не обязан доказывать незаконность решения чиновника." },
+        { term: "Перераспределение земельных участков", definition: "Правовой механизм присоединения к частному участку прилегающей государственной или муниципальной земли либо перераспределения границ между смежными участками. Основание — ст. 39.27–39.29 ЗК РФ." },
+        { term: "Правила землепользования и застройки (ПЗЗ)", definition: "Документ градостроительного зонирования, утверждаемый муниципалитетом. Содержит карту территориальных зон и градостроительные регламенты. Основной источник сведений о градостроительных ограничениях." },
+        { term: "Предварительное согласование", definition: "Административная процедура, предшествующая предоставлению участка в аренду или собственность. Включает утверждение схемы расположения на КПТ. Основание — ст. 39.15 ЗК РФ." },
+        { term: "Проект планировки территории (ППТ)", definition: "Документ, устанавливающий красные линии, зоны размещения объектов, транспортную инфраструктуру. Именно ППТ, а не генплан, утверждает красные линии (ст. 42 ГрК РФ)." },
+        { term: "Публичный сервитут", definition: "Право ограниченного пользования чужим участком для государственных или муниципальных нужд (проход, проезд, прокладка коммуникаций). Устанавливается решением органа власти (ст. 23 ЗК РФ)." },
+        { term: "Самовольная постройка", definition: "Объект, возведённый на участке, не предоставленном в установленном порядке, или без разрешения, или с нарушением норм. Подлежит сносу за счёт застройщика (ст. 222 ГК РФ)." },
+        { term: "Сервитут", definition: "Право ограниченного пользования чужим участком. Частный — по соглашению или решению суда. Публичный — решением органа власти (ст. 23 ЗК РФ, ст. 274 ГК РФ)." },
+        { term: "Схема расположения на КПТ (СПЗУ)", definition: "Графический документ, подготавливаемый кадастровым инженером, отображающий границы образуемого участка. Является обязательным приложением к заявлению о предварительном согласовании." },
+        { term: "Территориальная зона", definition: "Зона на карте ПЗЗ, для которой установлен градостроительный регламент. Типы: жилые (Ж-1), общественно-деловые (О-1), производственные (П-1), сельхоз (СХ-1), рекреационные (Р-1), инфраструктурные (И-1)." },
+        { term: "Территории общего пользования", definition: "Территории с бесплатным доступом неограниченного круга лиц: дороги, тротуары, парки, скверы, набережные, пляжи. Не принадлежат частным лицам." },
+        { term: "Федеральный закон № 59-ФЗ", definition: "ФЗ от 02.05.2006 «О порядке рассмотрения обращений граждан». Устанавливает право на письменное обращение в госорганы, 30-дневный срок ответа, право на обжалование бездействия." },
+        { term: "Федеральный закон № 210-ФЗ", definition: "ФЗ от 27.07.2010 «Об организации предоставления государственных и муниципальных услуг». Закрепляет принцип «одного окна», порядок досудебного обжалования." },
+        { term: "Частный сервитут", definition: "Право ограниченного пользования соседним участком для прохода, проезда, прокладки коммуникаций. Устанавливается по соглашению или решением суда (ст. 23 ЗК РФ, ст. 274 ГК РФ)." },
+        { term: "Элементы землепользования", definition: "Семь типов объектов, входящих в землепользование: 1) земельные участки, 2) земли без образования участка, 3) территории общего пользования, 4) неразграниченные земли, 5) лесные участки, 6) транспортные коридоры, 7) водные объекты." }
+    ];
+
+    // ============================================================
+    // ЛОГИКА ПРИЛОЖЕНИЯ
+    // ============================================================
+
+    let currentModule = 0;
+    const totalModules = courseData.modules.length;
+    let progress = new Array(totalModules).fill(false);
+
+    // Загрузка сохранённого прогресса
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('admin_course_progress');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed) && parsed.length === totalModules) {
+                    progress = parsed;
+                }
+            }
+        } catch (e) {}
+    }
+
+    function saveProgress() {
+        try {
+            localStorage.setItem('admin_course_progress', JSON.stringify(progress));
+        } catch (e) {}
+    }
+
+    // Рендеринг
+    function render() {
+        renderProgressBar();
+        renderNavModules();
+        renderModule(currentModule);
+        updateProgressPercent();
+        renderGlossaryCount();
+    }
+
+    function renderProgressBar() {
+        const container = document.getElementById('progressBar');
+        container.innerHTML = '';
+        for (let i = 0; i < totalModules; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'progress-dot';
+            if (progress[i]) dot.classList.add('completed');
+            if (i === currentModule) dot.classList.add('active');
+            dot.addEventListener('click', () => showModule(i));
+            container.appendChild(dot);
+        }
+    }
+
+    function renderNavModules() {
+        const container = document.getElementById('navModules');
+        // Удаляем старые кнопки модулей, оставляя только кнопку глоссария
+        const glossaryBtn = container.querySelector('.glossary-btn');
+        container.innerHTML = '';
+        courseData.modules.forEach((mod, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'nav-btn';
+            if (i === currentModule) btn.classList.add('active');
+            if (progress[i]) btn.classList.add('completed');
+            btn.textContent = `М${i+1}`;
+            btn.title = mod.title;
+            btn.addEventListener('click', () => showModule(i));
+            container.appendChild(btn);
+        });
+        // Добавляем кнопку глоссария
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn glossary-btn';
+        btn.textContent = '📖 Глоссарий';
+        btn.addEventListener('click', showGlossary);
+        container.appendChild(btn);
+    }
+
+    function renderModule(index) {
+        const container = document.getElementById('modulesContainer');
+        const mod = courseData.modules[index];
+        
+        let tasksHtml = '';
+        if (mod.tasks && mod.tasks.length > 0) {
+            tasksHtml = mod.tasks.map((task, ti) => `
+                <div class="task" id="task-${index}-${ti}">
+                    <div class="task-title">${task.title}</div>
+                    <div class="task-body">
+                        <p>${task.prompt}</p>
+                        <textarea id="task-input-${index}-${ti}" placeholder="${task.placeholder || 'Введите ваш ответ...'}"></textarea>
+                        <div class="task-actions">
+                            <button class="task-btn" onclick="checkTask(${index}, ${ti})">✅ Готово</button>
+                            <button class="task-btn-hint" onclick="showHint(${index}, ${ti})">💡 Подсказка</button>
+                            <button class="task-btn-save" onclick="saveTask(${index}, ${ti})">💾 Сохранить ответ</button>
+                        </div>
+                        <div class="task-feedback" id="task-feedback-${index}-${ti}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        let contentHtml = mod.content;
+
+        container.innerHTML = `
+            <div class="module active">
+                <div class="module-title">${mod.title}</div>
+                <div class="module-sub">${mod.subtitle}</div>
+                <div class="module-content">
+                    ${contentHtml}
+                </div>
+                ${tasksHtml}
+                <div class="module-nav">
+                    <button class="btn btn-prev" onclick="showModule(${index-1})" ${index === 0 ? 'disabled style="opacity:0.4;"' : ''}>← Назад</button>
+                    ${index === totalModules - 1 ? `
+                        <button class="btn btn-finish" onclick="finishCourse()">🎉 Завершить курс</button>
+                    ` : `
+                        <button class="btn btn-next" onclick="showModule(${index+1})">Далее →</button>
+                    `}
+                </div>
+            </div>
+        `;
+
+        // Скрываем глоссарий
+        document.getElementById('glossarySection').classList.remove('active');
+
+        // Отмечаем модуль как просмотренный
+        if (!progress[index]) {
+            progress[index] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+        }
+
+        // Восстанавливаем сохранённые ответы
+        if (mod.tasks) {
+            mod.tasks.forEach((task, ti) => {
+                const saved = localStorage.getItem(`admin_task_${index}_${ti}`);
+                const textarea = document.getElementById(`task-input-${index}-${ti}`);
+                if (saved && textarea) {
+                    textarea.value = saved;
+                }
+                if (textarea) {
+                    textarea.addEventListener('input', function() {
+                        localStorage.setItem(`admin_task_${index}_${ti}`, this.value);
+                    });
+                }
+            });
+        }
+
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showModule(index) {
+        if (index < 0 || index >= totalModules) return;
+        currentModule = index;
+        render();
+        if (!progress[index]) {
+            progress[index] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+        }
+    }
+
+    function updateProgressPercent() {
+        const done = progress.filter(p => p).length;
+        const pct = Math.round((done / totalModules) * 100);
+        document.getElementById('progressPercent').textContent = pct;
+    }
+
+    function renderGlossaryCount() {
+        document.getElementById('glossaryCount').textContent = glossaryData.length;
+        document.getElementById('glossaryCountDisplay').textContent = `Всего терминов: ${glossaryData.length}`;
+    }
+
+    // ============================================================
+    // ГЛОССАРИЙ
+    // ============================================================
+
+    function showGlossary() {
+        // Скрываем модули
+        document.querySelectorAll('.module').forEach(el => el.classList.remove('active'));
+        document.getElementById('modulesContainer').innerHTML = '';
+        
+        // Показываем глоссарий
+        const section = document.getElementById('glossarySection');
+        section.classList.add('active');
+        
+        // Снимаем активность с кнопок модулей
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.progress-dot').forEach(dot => dot.classList.remove('active'));
+        
+        renderGlossaryList();
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderGlossaryList(filter) {
+        const container = document.getElementById('glossaryList');
+        const search = filter || document.getElementById('glossarySearch').value || '';
+        const filtered = glossaryData.filter(item => 
+            item.term.toLowerCase().includes(search.toLowerCase()) ||
+            item.definition.toLowerCase().includes(search.toLowerCase())
+        );
+        
+        container.innerHTML = filtered.map((item, index) => `
+            <div class="glossary-item" id="glossary-item-${index}">
+                <div class="term" onclick="toggleGlossaryTerm(${index})">
+                    ${item.term}
+                    <button class="term-toggle">▼</button>
+                </div>
+                <div class="definition" id="glossary-def-${index}">
+                    ${item.definition}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterGlossary(value) {
+        renderGlossaryList(value);
+    }
+
+    function toggleGlossaryTerm(index) {
+        const def = document.getElementById(`glossary-def-${index}`);
+        if (def) {
+            def.classList.toggle('open');
+            const btn = document.querySelector(`#glossary-item-${index} .term-toggle`);
+            if (btn) btn.textContent = def.classList.contains('open') ? '▲' : '▼';
+        }
+    }
+
+    // ============================================================
+    // ЗАДАНИЯ
+    // ============================================================
+
+    function showHint(moduleIdx, taskIdx) {
+        const mod = courseData.modules[moduleIdx];
+        const task = mod.tasks[taskIdx];
+        const textarea = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+
+        if (!task.hint) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Для этого задания подсказка не подготовлена.';
+            return;
+        }
+
+        textarea.value = task.hint;
+        textarea.style.background = '#fef9e7';
+        textarea.style.borderColor = '#f39c12';
+
+        feedback.className = 'task-feedback show hint';
+        feedback.textContent = '💡 Подсказка загружена. Это пример правильного ответа. Вы можете отредактировать его под свою ситуацию.';
+
+        localStorage.setItem(`admin_task_${moduleIdx}_${taskIdx}`, task.hint);
+    }
+
+    function saveTask(moduleIdx, taskIdx) {
+        const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+        const answer = input ? input.value : '';
+
+        if (!answer.trim()) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Поле пустое. Напишите ответ перед сохранением.';
+            return;
+        }
+
+        const mod = courseData.modules[moduleIdx];
+        const task = mod.tasks[taskIdx];
+        const date = new Date().toLocaleString('ru-RU');
+        
+        const content = [
+            '═══════════════════════════════════════════',
+            `  📝 Ответ на задание: ${task.title}`,
+            `  📚 Модуль: ${mod.title}`,
+            `  📅 Дата: ${date}`,
+            '═══════════════════════════════════════════',
+            '',
+            '📌 ЗАДАНИЕ:',
+            task.prompt,
+            '',
+            '📝 ОТВЕТ:',
+            answer,
+            '',
+            '═══════════════════════════════════════════',
+            '  ✍️ Сохранено с помощью интерактивного курса',
+            '  Административные процедуры в землепользовании',
+            '═══════════════════════════════════════════'
+        ].join('\n');
+
+        try {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            const filename = `otvet_modul${moduleIdx+1}_zadanie${taskIdx+1}.txt`;
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+
+            feedback.className = 'task-feedback show success';
+            feedback.textContent = `💾 Ответ сохранён в файл "${filename}"`;
+        } catch (e) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '❌ Ошибка сохранения: ' + e.message;
+        }
+    }
+
+    function checkTask(moduleIdx, taskIdx) {
+        const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+        const answer = input ? input.value.trim() : '';
+
+        if (answer.length === 0) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Пожалуйста, напишите ответ перед проверкой.';
+            return;
+        }
+
+        if (answer.length < 10) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Ответ слишком короткий. Попробуйте развернуть мысль.';
+            return;
+        }
+
+        const taskKey = `admin_task_done_${moduleIdx}_${taskIdx}`;
+        localStorage.setItem(taskKey, 'true');
+
+        feedback.className = 'task-feedback show success';
+        feedback.textContent = '✅ Сохраните ваш ответ.';
+        
+        checkModuleCompletion(moduleIdx);
+    }
+
+    function checkModuleCompletion(moduleIdx) {
+        const mod = courseData.modules[moduleIdx];
+        if (!mod.tasks) return;
+        
+        let allDone = true;
+        mod.tasks.forEach((task, ti) => {
+            const key = `admin_task_done_${moduleIdx}_${ti}`;
+            if (!localStorage.getItem(key)) {
+                allDone = false;
+            }
+        });
+
+        if (allDone && mod.tasks.length > 0) {
+            progress[moduleIdx] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+            
+            const feedbacks = document.querySelectorAll(`#task-feedback-${moduleIdx}-0`);
+            if (feedbacks.length > 0) {
+                const lastFeedback = feedbacks[feedbacks.length - 1];
+                if (lastFeedback) {
+                    const msg = document.createElement('div');
+                    msg.style.marginTop = '12px';
+                    msg.style.padding = '12px 16px';
+                    msg.style.background = '#dff0df';
+                    msg.style.borderRadius = '10px';
+                    msg.style.color = '#2a6a3a';
+                    msg.style.fontWeight = '600';
+                    msg.textContent = '🎉 Все задания модуля выполнены! Вы можете переходить к следующему модулю.';
+                    lastFeedback.parentNode.appendChild(msg);
+                }
+            }
+        }
+    }
+
+    function finishCourse() {
+        const allDone = progress.every(p => p === true);
+        if (!allDone) {
+            alert('Вы ещё не прошли все модули. Продолжайте изучение!');
+            return;
+        }
+
+        if (confirm('🎉 Поздравляем! Вы завершили курс "Административные процедуры в землепользовании".\n\nХотите сбросить прогресс и пройти заново?')) {
+            let allAnswers = '';
+            for (let m = 0; m < totalModules; m++) {
+                const mod = courseData.modules[m];
+                if (mod.tasks) {
+                    mod.tasks.forEach((task, ti) => {
+                        const saved = localStorage.getItem(`admin_task_${m}_${ti}`);
+                        if (saved) {
+                            allAnswers += `\n--- Модуль ${m+1}, Задание ${ti+1} ---\n${saved}\n`;
+                        }
+                    });
+                }
+            }
+            if (allAnswers) {
+                const blob = new Blob(['ВСЕ ОТВЕТЫ НА КУРС\n' + '='.repeat(40) + '\n' + allAnswers], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'vse_otvety_admin_kursa.txt';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            }
+            
+            localStorage.clear();
+            progress = new Array(totalModules).fill(false);
+            saveProgress();
+            render();
+            alert('Прогресс сброшен. Можете начать заново!');
+        }
+    }
+
+    // ============================================================
+    // ИНИЦИАЛИЗАЦИЯ
+    // ============================================================
+
+    loadProgress();
+    render();
+
+    console.log('📚 Курс "Административные процедуры в землепользовании" загружен');
+    console.log(`📖 Всего модулей: ${totalModules}`);
+    console.log(`📝 Выполнено: ${progress.filter(p => p).length}/${totalModules}`);
+    console.log(`📖 Глоссарий: ${glossaryData.length} терминов`);
+</script>
+
+</body>
+</html>
