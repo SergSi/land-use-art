@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивный курс: Судебная защита прав на землю</title>
+    <!-- Mermaid.js для визуализации -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         /* === ГЛОБАЛЬНЫЕ СТИЛИ === */
         * {
@@ -22,7 +24,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: #ffffff;
             border-radius: 24px;
@@ -129,6 +131,55 @@
 
         .nav-btn.completed {
             background: #d4c8e8;
+        }
+
+        /* === ТЕРМИНЫ === */
+        .term {
+            color: #6a4e9b;
+            border-bottom: 2px dashed #b8a8d0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .term:hover {
+            background: #f0ece4;
+            border-bottom-color: #6a4e9b;
+        }
+
+        .term-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c2c2c;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            min-width: 220px;
+            max-width: 320px;
+            z-index: 1000;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            text-align: left;
+            pointer-events: none;
+        }
+
+        .term-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #2c2c2c;
+        }
+
+        .term:hover .term-tooltip {
+            display: block;
         }
 
         /* === МОДУЛИ === */
@@ -366,6 +417,99 @@
             border-left: 4px solid #f39c12;
         }
 
+        /* === ГЛОССАРИЙ === */
+        .glossary-header {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .glossary-toggle {
+            background: #6a4e9b;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+
+        .glossary-toggle:hover {
+            background: #5a3e8a;
+        }
+
+        .glossary-export {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+
+        .glossary-export:hover {
+            background: #1e8449;
+        }
+
+        .glossary-panel {
+            display: none;
+            background: #f8f5ef;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            border: 2px solid #ddd8ce;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .glossary-panel.show {
+            display: block;
+        }
+
+        .glossary-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0dcd2;
+        }
+
+        .glossary-item:last-child {
+            border-bottom: none;
+        }
+
+        .glossary-term {
+            font-weight: 700;
+            color: #4a2e7b;
+            font-size: 15px;
+        }
+
+        .glossary-definition {
+            color: #4a4a4a;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        /* === СХЕМА ИЕРАРХИИ === */
+        .hierarchy-container {
+            background: #f8f5ef;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            border: 2px solid #ddd8ce;
+            overflow-x: auto;
+        }
+
+        .hierarchy-container .mermaid {
+            text-align: center;
+        }
+
         /* === КНОПКИ НАВИГАЦИИ ПО МОДУЛЯМ === */
         .module-nav {
             display: flex;
@@ -458,6 +602,20 @@
                 width: 100%;
                 text-align: center;
             }
+            .term-tooltip {
+                min-width: 160px;
+                max-width: 240px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            .glossary-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .glossary-header button {
+                width: 100%;
+                text-align: center;
+            }
         }
 
         /* === ПОДВАЛ === */
@@ -468,6 +626,29 @@
             text-align: center;
             font-size: 13px;
             color: #8a8a8a;
+        }
+
+        /* === УВЕДОМЛЕНИЕ ОБ ЭКСПОРТЕ === */
+        .export-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2c2c2c;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .export-notification.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -491,6 +672,13 @@
     <!-- НАВИГАЦИЯ ПО МОДУЛЯМ -->
     <div class="nav-modules" id="navModules"></div>
 
+    <!-- ГЛОССАРИЙ (всегда доступен) -->
+    <div class="glossary-header">
+        <button class="glossary-toggle" onclick="toggleGlossary()">📖 Глоссарий терминов</button>
+        <button class="glossary-export" onclick="exportGlossary()">📥 Экспорт глоссария (TXT)</button>
+    </div>
+    <div class="glossary-panel" id="glossaryPanel"></div>
+
     <!-- КОНТЕЙНЕР МОДУЛЕЙ -->
     <div id="modulesContainer"></div>
 
@@ -500,7 +688,55 @@
     </div>
 </div>
 
+<!-- Уведомление об экспорте -->
+<div class="export-notification" id="exportNotification">📥 Глоссарий экспортирован!</div>
+
 <script>
+    // ============================================================
+    // ГЛОССАРИЙ ТЕРМИНОВ
+    // ============================================================
+
+    const glossary = {
+        'виндикация': 'Способ защиты права собственности, при котором собственник истребует своё имущество из чужого незаконного владения (ст. 301 ГК РФ).',
+        'виндикационный': 'Относящийся к виндикации — истребованию имущества из чужого незаконного владения.',
+        'негаторный': 'Способ защиты права собственности, при котором собственник требует устранения препятствий в пользовании имуществом, не связанных с лишением владения (ст. 304 ГК РФ).',
+        'сервитут': 'Право ограниченного пользования чужим земельным участком (ст. 274 ГК РФ). Устанавливается для проезда, прохода, прокладки коммуникаций и т.д.',
+        'ЕГРН': 'Единый государственный реестр недвижимости — федеральная база данных о правах на недвижимость.',
+        'межевание': 'Процесс установления и закрепления границ земельного участка на местности.',
+        'кадастровый инженер': 'Специалист, уполномоченный на проведение кадастровых работ (межевание, подготовка документов для постановки на учёт).',
+        'самострой': 'Объект капитального строительства, возведённый без разрешения или на земельном участке, не предназначенном для этих целей (ст. 222 ГК РФ).',
+        'апелляция': 'Обжалование судебного решения, не вступившего в силу, в вышестоящий суд.',
+        'кассация': 'Обжалование судебного решения, вступившего в силу, в кассационный суд.',
+        'исполнительный лист': 'Документ, выдаваемый судом после вступления решения в силу, для принудительного исполнения решения.',
+        'бремя доказывания': 'Обязанность стороны представить доказательства своих утверждений. Истец доказывает основания иска, ответчик — свои возражения.',
+        'правовая позиция': 'Система юридических утверждений, из которых неизбежно следует определённый вывод. Состоит из нормы закона, факта и вывода.',
+        'исковая давность': 'Срок, в течение которого лицо может обратиться в суд за защитой нарушенного права. По земельным спорам — 3 года (ст. 196 ГК РФ).',
+        'приватизация': 'Передача государственной или муниципальной собственности в частные руки в порядке, установленном законом.',
+        'земли сельхозназначения': 'Земли, предназначенные для ведения сельского хозяйства (ст. 77 ЗК РФ). Имеют особый правовой режим.',
+        'водный объект': 'Природный или искусственный водоём (река, озеро, пруд). В зависимости от типа может находиться в государственной или частной собственности.',
+        'пруд': 'Искусственный водоём, созданный для хранения воды. В границах участка юридического лица может быть в частной собственности (ст. 8 ВК РФ).',
+        'река': 'Естественный водный поток. Находится в федеральной собственности (ст. 6 ВК РФ).',
+        'ГТС': 'Гидротехническое сооружение — плотина, шлюз, дамба, используемые для управления водными ресурсами.',
+        'кворум': 'Минимальное количество участников собрания, необходимое для признания его решений законными.',
+        'СНТ': 'Садоводческое некоммерческое товарищество — объединение собственников садовых участков.',
+        'УК СНТ': 'Устав СНТ — основной документ, регулирующий деятельность товарищества.',
+        'кадастровый номер': 'Уникальный номер земельного участка или объекта недвижимости в ЕГРН.',
+        'госпошлина': 'Государственная пошлина — обязательный платёж при подаче иска в суд.',
+        'мотивированное решение': 'Полный текст судебного решения с обоснованием всех выводов. Изготавливается в течение 5-10 дней после оглашения.',
+        'резолютивная часть': 'Краткая часть судебного решения, содержащая только выводы суда (что удовлетворено, что отклонено).',
+        'экспертиза': 'Исследование, проводимое специалистом в определённой области для получения доказательств по делу.',
+        'гидрология': 'Наука о водных объектах, их происхождении, режиме и использовании.',
+        'ГК РФ': 'Гражданский кодекс Российской Федерации — основной закон о частном праве.',
+        'ЗК РФ': 'Земельный кодекс Российской Федерации — основной закон о земле и землепользовании.',
+        'ВК РФ': 'Водный кодекс Российской Федерации — основной закон о водных объектах.',
+        'ГПК РФ': 'Гражданский процессуальный кодекс Российской Федерации — закон о порядке судопроизводства.',
+        'ФЗ-137': 'Федеральный закон № 137-ФЗ «О введении в действие Земельного кодекса РФ» — регулирует переходные положения в земельном праве.',
+        'ФЗ-217': 'Федеральный закон № 217-ФЗ «О ведении гражданами садоводства и огородничества» — регулирует деятельность СНТ.'
+    };
+
+    // Список терминов для подсветки (в порядке убывания длины для корректной замены)
+    const termList = Object.keys(glossary).sort((a, b) => b.length - a.length);
+
     // ============================================================
     // ДАННЫЕ КУРСА
     // ============================================================
@@ -1015,6 +1251,36 @@
                         <strong>Итоговая формула курса:</strong>
                         <p>Судебный спор выигрывается не только фактами и статьями. Он выигрывается ясностью позиции, качеством доказательств, правильными документами и умением видеть поле целиком.</p>
                     </div>
+
+                    <div class="hierarchy-container">
+                        <h3>📊 Схема иерархии законов</h3>
+                        <div class="mermaid">
+                            graph TD
+                                A[Конституция РФ] --> B[Кодексы]
+                                A --> C[Федеральные законы]
+                                B --> D[ЗК РФ]
+                                B --> E[ВК РФ]
+                                B --> F[ГК РФ]
+                                B --> G[ГПК РФ]
+                                C --> H[ФЗ-137]
+                                C --> I[ФЗ-217]
+                                J[Подзаконные акты]
+                                H --> J
+                                I --> J
+                                J --> K[Ведомственные письма]
+                                style A fill:#6a4e9b,color:#fff
+                                style B fill:#8a6eb0,color:#fff
+                                style C fill:#8a6eb0,color:#fff
+                                style D fill:#b8a8d0
+                                style E fill:#b8a8d0
+                                style F fill:#b8a8d0
+                                style G fill:#b8a8d0
+                                style H fill:#d4c8e8
+                                style I fill:#d4c8e8
+                                style J fill:#e8e0f0
+                                style K fill:#f0ece4
+                        </div>
+                    </div>
                 `,
                 tasks: [
                     {
@@ -1055,12 +1321,26 @@
         } catch (e) {}
     }
 
+    // Подсветка терминов в тексте
+    function highlightTerms(text) {
+        let result = text;
+        termList.forEach(term => {
+            const regex = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+            result = result.replace(regex, (match) => {
+                const definition = glossary[term.toLowerCase()];
+                return `<span class="term">${match}<span class="term-tooltip">${definition}</span></span>`;
+            });
+        });
+        return result;
+    }
+
     // Рендеринг
     function render() {
         renderProgressBar();
         renderNavModules();
         renderModule(currentModule);
         updateProgressPercent();
+        renderGlossary();
     }
 
     function renderProgressBar() {
@@ -1091,10 +1371,115 @@
         });
     }
 
+    function renderGlossary() {
+        const container = document.getElementById('glossaryPanel');
+        container.innerHTML = '';
+        Object.keys(glossary).sort().forEach(term => {
+            const item = document.createElement('div');
+            item.className = 'glossary-item';
+            item.innerHTML = `
+                <div class="glossary-term">${term}</div>
+                <div class="glossary-definition">${glossary[term]}</div>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    function toggleGlossary() {
+        const panel = document.getElementById('glossaryPanel');
+        panel.classList.toggle('show');
+    }
+
+    function exportGlossary() {
+        const lines = ['═══════════════════════════════════════════'];
+        lines.push('  📖 ГЛОССАРИЙ ЮРИДИЧЕСКИХ ТЕРМИНОВ');
+        lines.push('  Судебная защита прав на землю');
+        lines.push(`  📅 Дата экспорта: ${new Date().toLocaleString('ru-RU')}`);
+        lines.push('═══════════════════════════════════════════');
+        lines.push('');
+        
+        const sortedTerms = Object.keys(glossary).sort();
+        sortedTerms.forEach(term => {
+            lines.push(`📌 ${term}`);
+            lines.push(`   ${glossary[term]}`);
+            lines.push('');
+        });
+        
+        lines.push('═══════════════════════════════════════════');
+        lines.push(`  📊 Всего терминов: ${Object.keys(glossary).length}`);
+        lines.push('═══════════════════════════════════════════');
+
+        const content = lines.join('\n');
+        
+        try {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            const filename = `glossariy_${new Date().toISOString().slice(0,10)}.txt`;
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+
+            // Показываем уведомление
+            showExportNotification(`📥 Глоссарий экспортирован в файл "${filename}"`);
+        } catch (e) {
+            alert('❌ Ошибка при экспорте глоссария: ' + e.message);
+        }
+    }
+
+    function showExportNotification(message) {
+        const el = document.getElementById('exportNotification');
+        el.textContent = message;
+        el.classList.add('show');
+        setTimeout(() => {
+            el.classList.remove('show');
+        }, 3000);
+    }
+
     function renderModule(index) {
         const container = document.getElementById('modulesContainer');
         const mod = courseData.modules[index];
         
+        // Подсвечиваем термины в контенте
+        let contentHtml = highlightTerms(mod.content);
+
+        // Добавляем схему иерархии в последний модуль, если её ещё нет
+        if (index === totalModules - 1 && !contentHtml.includes('hierarchy-container')) {
+            contentHtml += `
+                <div class="hierarchy-container">
+                    <h3>📊 Схема иерархии законов</h3>
+                    <div class="mermaid">
+                        graph TD
+                            A[Конституция РФ] --> B[Кодексы]
+                            A --> C[Федеральные законы]
+                            B --> D[ЗК РФ]
+                            B --> E[ВК РФ]
+                            B --> F[ГК РФ]
+                            B --> G[ГПК РФ]
+                            C --> H[ФЗ-137]
+                            C --> I[ФЗ-217]
+                            D --> J[Подзаконные акты]
+                            H --> J
+                            I --> J                            
+                            J --> K[Ведомственные письма]
+                            style A fill:#6a4e9b,color:#fff
+                            style B fill:#8a6eb0,color:#fff
+                            style C fill:#8a6eb0,color:#fff
+                            style D fill:#b8a8d0
+                            style E fill:#b8a8d0
+                            style F fill:#b8a8d0
+                            style G fill:#b8a8d0
+                            style H fill:#d4c8e8
+                            style I fill:#d4c8e8
+                            style J fill:#e8e0f0
+                            style K fill:#f0ece4
+                    </div>
+                </div>
+            `;
+        }
+
         let tasksHtml = '';
         if (mod.tasks && mod.tasks.length > 0) {
             tasksHtml = mod.tasks.map((task, ti) => `
@@ -1114,8 +1499,6 @@
             `).join('');
         }
 
-        let contentHtml = mod.content;
-
         container.innerHTML = `
             <div class="module active">
                 <div class="module-title">${mod.title}</div>
@@ -1134,6 +1517,13 @@
                 </div>
             </div>
         `;
+
+        // Инициализируем Mermaid после рендера
+        setTimeout(() => {
+            mermaid.run({
+                nodes: document.querySelectorAll('.mermaid')
+            });
+        }, 100);
 
         if (!progress[index]) {
             progress[index] = true;
@@ -1193,14 +1583,10 @@
             return;
         }
 
-        // Заполняем текстовое поле подсказкой
         textarea.value = task.hint;
         textarea.classList.add('hint-filled');
-
-        // Сохраняем в localStorage
         localStorage.setItem(`task_${moduleIdx}_${taskIdx}`, task.hint);
 
-        // Показываем уведомление
         feedback.className = 'task-feedback show hint';
         feedback.textContent = '💡 Подсказка загружена. Это пример правильного ответа. Вы можете отредактировать его под свою ситуацию.';
     }
@@ -1281,7 +1667,7 @@
         localStorage.setItem(taskKey, 'true');
 
         feedback.className = 'task-feedback show success';
-        feedback.textContent = '✅ Сохраните ваш ответ.';
+        feedback.textContent = '✅ Задание выполнено! Сохраните ваш ответ.';
         
         checkModuleCompletion(moduleIdx);
     }
@@ -1369,9 +1755,21 @@
     loadProgress();
     render();
 
+    // Инициализация Mermaid
+    mermaid.initialize({
+        theme: 'neutral',
+        maxTextSize: 100000,
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        }
+    });
+
     console.log('📚 Курс "Судебная защита прав на землю" загружен');
     console.log(`📖 Всего модулей: ${totalModules}`);
     console.log(`📝 Выполнено: ${progress.filter(p => p).length}/${totalModules}`);
+    console.log(`📖 Глоссарий содержит ${Object.keys(glossary).length} терминов`);
 </script>
 
 </body>
