@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный курс: Организация землепользования</title>
+    <style>
+        /* === ГЛОБАЛЬНЫЕ СТИЛИ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f2eb;
+            color: #1c1c1c;
+            line-height: 1.6;
+            padding: 16px;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            padding: 24px 20px 40px;
+        }
+
+        /* === ШАПКА === */
+        .course-header {
+            border-bottom: 2px solid #e8e2d8;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .course-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2c2c2c;
+        }
+
+        .course-header h1 span {
+            color: #27ae60;
+        }
+
+        .course-header .sub {
+            font-size: 15px;
+            color: #7a7a7a;
+            margin-top: 4px;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #8a8a8a;
+        }
+
+        .course-meta span {
+            background: #f0ece4;
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        /* === ПРОГРЕСС === */
+        .progress-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .progress-dot {
+            flex: 1;
+            min-width: 20px;
+            height: 6px;
+            border-radius: 6px;
+            background: #e0dcd2;
+            transition: background 0.4s;
+            cursor: pointer;
+        }
+
+        .progress-dot.completed {
+            background: #27ae60;
+        }
+
+        .progress-dot.active {
+            background: #6fbf8a;
+            height: 8px;
+        }
+
+        /* === НАВИГАЦИЯ === */
+        .nav-modules {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee9e0;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 30px;
+            background: #f0ece4;
+            color: #5a5a5a;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover {
+            background: #e4ddd0;
+        }
+
+        .nav-btn.active {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .nav-btn.completed {
+            background: #d4ecdd;
+        }
+
+        .nav-btn.glossary-btn {
+            background: #6a4e9b;
+            color: #fff;
+        }
+
+        .nav-btn.glossary-btn:hover {
+            background: #5a3e8a;
+        }
+
+        /* === МОДУЛИ === */
+        .module {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 4px;
+        }
+
+        .module-sub {
+            font-size: 15px;
+            color: #6a6a6a;
+            margin-bottom: 20px;
+        }
+
+        .module-content h2,
+        .module-content h3 {
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .module-content h2 {
+            font-size: 20px;
+            color: #2c2c2c;
+        }
+
+        .module-content h3 {
+            font-size: 17px;
+            color: #3a3a3a;
+        }
+
+        .module-content p {
+            margin-bottom: 12px;
+            color: #3a3a3a;
+        }
+
+        .module-content ul,
+        .module-content ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .module-content li {
+            margin-bottom: 6px;
+            color: #3a3a3a;
+        }
+
+        .module-content blockquote {
+            background: #f8f5ef;
+            border-left: 4px solid #27ae60;
+            padding: 12px 18px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #4a4a4a;
+        }
+
+        .module-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .module-content table th {
+            background: #f0ece4;
+            text-align: left;
+            padding: 8px 12px;
+            border: 1px solid #ddd8ce;
+        }
+
+        .module-content table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd8ce;
+        }
+
+        .module-content .highlight-box {
+            background: #e8f5ee;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #27ae60;
+        }
+
+        .module-content .highlight-box strong {
+            color: #1a6a3a;
+        }
+
+        .module-content .danger-box {
+            background: #fde8e8;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .module-content .success-box {
+            background: #dff0df;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #27ae60;
+        }
+
+        /* === ГЛОССАРИЙ === */
+        .glossary-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .glossary-section.active {
+            display: block;
+        }
+
+        .glossary-item {
+            background: #f8f5ef;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #6a4e9b;
+        }
+
+        .glossary-item .term {
+            font-weight: 700;
+            font-size: 16px;
+            color: #2c2c2c;
+            cursor: pointer;
+        }
+
+        .glossary-item .definition {
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .glossary-item .definition.open {
+            display: block;
+        }
+
+        .glossary-item .term-toggle {
+            background: none;
+            border: none;
+            color: #6a4e9b;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+
+        .glossary-item .term-toggle:hover {
+            background: #e8e4dc;
+        }
+
+        .glossary-search {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            background: #fdfdfb;
+        }
+
+        .glossary-search:focus {
+            outline: none;
+            border-color: #6a4e9b;
+        }
+
+        /* === ЗАДАНИЯ === */
+        .task {
+            background: #f8f5ef;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin: 20px 0;
+            border: 2px dashed #c4b8a0;
+        }
+
+        .task-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4a3a2a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-body {
+            margin-top: 8px;
+            color: #4a4a4a;
+        }
+
+        .task-body textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px 12px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fdfdfb;
+            resize: vertical;
+            margin-top: 8px;
+        }
+
+        .task-body textarea:focus {
+            outline: none;
+            border-color: #27ae60;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .task-btn {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn:hover {
+            background: #1e8449;
+        }
+
+        .task-btn-hint {
+            background: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn-hint:hover {
+            background: #d68910;
+        }
+
+        .task-btn-save {
+            background: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn-save:hover {
+            background: #1a6a8a;
+        }
+
+        .task-feedback {
+            margin-top: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: #e8f0e8;
+            display: none;
+            font-size: 14px;
+        }
+
+        .task-feedback.show {
+            display: block;
+        }
+
+        .task-feedback.success {
+            background: #dff0df;
+            color: #2a6a3a;
+        }
+
+        .task-feedback.error {
+            background: #fde8e8;
+            color: #a33;
+        }
+
+        .task-feedback.hint {
+            background: #fef9e7;
+            color: #7d6608;
+            border-left: 4px solid #f39c12;
+        }
+
+        /* === КНОПКИ НАВИГАЦИИ ПО МОДУЛЯМ === */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #eee9e0;
+            flex-wrap: wrap;
+        }
+
+        .module-nav .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .module-nav .btn-prev {
+            background: #f0ece4;
+            color: #5a5a5a;
+        }
+
+        .module-nav .btn-prev:hover {
+            background: #e4ddd0;
+        }
+
+        .module-nav .btn-next {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .module-nav .btn-next:hover {
+            background: #1e8449;
+        }
+
+        .module-nav .btn-finish {
+            background: #2980b9;
+            color: #fff;
+        }
+
+        .module-nav .btn-finish:hover {
+            background: #1a6a8a;
+        }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                padding-bottom: 80px;
+            }
+            .container {
+                padding: 16px 14px;
+            }
+            .course-header h1 {
+                font-size: 20px;
+            }
+            .module-title {
+                font-size: 18px;
+            }
+            .nav-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .module-nav .btn {
+                font-size: 13px;
+                padding: 8px 16px;
+                min-width: 80px;
+            }
+            .module-content table {
+                font-size: 12px;
+            }
+            .module-content table th,
+            .module-content table td {
+                padding: 4px 8px;
+            }
+            .task-actions {
+                flex-direction: column;
+            }
+            .task-actions .task-btn,
+            .task-actions .task-btn-hint,
+            .task-actions .task-btn-save {
+                width: 100%;
+                text-align: center;
+            }
+            .glossary-item {
+                padding: 12px 14px;
+            }
+        }
+
+        /* === ПОДВАЛ === */
+        .course-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #eee9e0;
+            text-align: center;
+            font-size: 13px;
+            color: #8a8a8a;
+        }
+
+        .glossary-count {
+            font-size: 13px;
+            color: #6a6a6a;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <!-- ШАПКА -->
+    <div class="course-header">
+        <h1>🌱 <span>Организация землепользования</span></h1>
+        <div class="sub">Интерактивный курс для самостоятельного изучения</div>
+        <div class="course-meta">
+            <span>📚 8 модулей</span>
+            <span>📝 Задания для самопроверки</span>
+            <span>📖 Глоссарий: <span id="glossaryCount">0</span> терминов</span>
+            <span>🎯 Прогресс: <span id="progressPercent">0</span>%</span>
+        </div>
+    </div>
+
+    <!-- ПРОГРЕСС -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- НАВИГАЦИЯ ПО МОДУЛЯМ -->
+    <div class="nav-modules" id="navModules">
+        <!-- Кнопки модулей будут добавлены скриптом -->
+        <button class="nav-btn glossary-btn" onclick="showGlossary()">📖 Глоссарий</button>
+    </div>
+
+    <!-- КОНТЕЙНЕР МОДУЛЕЙ -->
+    <div id="modulesContainer"></div>
+
+    <!-- ГЛОССАРИЙ -->
+    <div class="glossary-section" id="glossarySection">
+        <div class="module-title">📖 Глоссарий</div>
+        <div class="module-sub">Основные термины курса «Организация землепользования»</div>
+        <div class="glossary-count" id="glossaryCountDisplay"></div>
+        <input type="text" class="glossary-search" id="glossarySearch" placeholder="🔍 Поиск по глоссарию..." oninput="filterGlossary(this.value)">
+        <div id="glossaryList"></div>
+        <div style="margin-top:20px;">
+            <button class="btn btn-next" onclick="showModule(0)" style="width:100%;">← Вернуться к курсу</button>
+        </div>
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <div class="course-footer">
+        <span>🗝️ Ключ к действию — <a href="#" style="color: #27ae60; text-decoration: none;">kadinfo.ru</a></span>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // ДАННЫЕ КУРСА
+    // ============================================================
+
+    const courseData = {
+        title: "Организация землепользования",
+        modules: [
+            {
+                id: 0,
+                title: "Введение",
+                subtitle: "Земельный участок как система",
+                content: `
+                    <p>Земельный участок — это не только красный прямоугольник на кадастровой карте и не только выписка из ЕГРН. Это система, в которой переплетены физические свойства территории, градостроительные правила и юридически оформленные права. Ошибка в понимании хотя бы одного из этих слоёв может привести к покупке непригодного участка, отказу в строительстве, судебным спорам с соседями или даже изъятию земли.</p>
+
+                    <div class="highlight-box">
+                        <strong>Лейтмотив курса:</strong>
+                        <p>Организация землепользования — это не борьба и не «продавливание» своей воли. Это искусство настройки. Вы не строите в вакууме. Вы входите в существующую систему прав, правил, физических свойств, человеческих намерений и юридических норм. Чем точнее ваши действия резонируют с каждым из этих элементов, включая закон, тем больше шансов, что задуманное состоится.</p>
+                    </div>
+
+                    <h3>Структура курса</h3>
+                    <table>
+                        <thead><tr><th>Модуль</th><th>Содержание</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>1. Элементы землепользования</strong></td><td>Семь типов элементов землепользования</td></tr>
+                            <tr><td><strong>2. Три слоя землепользования</strong></td><td>Физика, правила, права</td></tr>
+                            <tr><td><strong>3. Льготы при приобретении</strong></td><td>Категории льгот и порядок получения</td></tr>
+                            <tr><td><strong>4. Оценка пригодности участка</strong></td><td>Нерегулируемые и регулируемые условия</td></tr>
+                            <tr><td><strong>5. Правовые механизмы</strong></td><td>Инструменты ЗК РФ и смежных законов</td></tr>
+                            <tr><td><strong>6. Комбинирование ВРИ</strong></td><td>Налоговая оптимизация через ВРИ</td></tr>
+                            <tr><td><strong>7. Практический алгоритм</strong></td><td>От цели до регистрации прав</td></tr>
+                            <tr><td><strong>8. Кооперативное землепользование</strong></td><td>Особенности СНТ, КФХ, кооперативов</td></tr>
+                        </tbody>
+                    </table>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Определение ваших целей",
+                        prompt: "Сформулируйте вашу цель в землепользовании. Что вы хотите сделать на земле? Какой результат вам нужен?",
+                        placeholder: "Например: построить жилой дом, организовать фермерское хозяйство, приобрести участок для инвестиций...",
+                        hint: "Пример цели: «Я хочу построить жилой дом площадью 150 м² с возможностью ведения огородничества на прилегающем участке; нужен подъезд круглый год, электричество 15 кВт, водоснабжение от скважины»."
+                    }
+                ]
+            },
+            {
+                id: 1,
+                title: "Модуль 1. Элементы землепользования",
+                subtitle: "Что входит в реальное землепользование",
+                content: `
+                    <h3>1.1. Ограниченность подхода «один участок — одно землепользование»</h3>
+                    <p>Типичная ошибка владельца земельного участка — отождествление своего землепользования с одним зарегистрированным земельным участком, границы которого обозначены на Публичной кадастровой карте. Такой подход не учитывает, что реальная деятельность почти всегда выходит за пределы одного кадастрового прямоугольника.</p>
+
+                    <div class="highlight-box">
+                        <strong>Ключевая идея:</strong>
+                        <p>Землепользование — это не кадастровый прямоугольник, а совокупность (набор) различных видов земель и объектов, которые лицо использует в своей деятельности.</p>
+                    </div>
+
+                    <h3>1.2. Полный перечень элементов землепользования</h3>
+                    <table>
+                        <thead><tr><th>Элемент</th><th>Пример</th><th>Порядок оформления</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Земельные участки</strong></td><td>Участок под ИЖС, поле в аренде</td><td>ЕГРН, договор аренды</td></tr>
+                            <tr><td><strong>Земли без образования участка</strong></td><td>Сенокос, выпас скота</td><td>Договор аренды или разрешение</td></tr>
+                            <tr><td><strong>Территории общего пользования</strong></td><td>Дороги, парки</td><td>Не оформляются, использование бесплатное</td></tr>
+                            <tr><td><strong>Неразграниченные земли</strong></td><td>Пустошь за забором</td><td>Заявление о предоставлении</td></tr>
+                            <tr><td><strong>Лесные участки</strong></td><td>Сбор грибов, аренда под охотхозяйство</td><td>Для собственных нужд — без оформления</td></tr>
+                            <tr><td><strong>Водные объекты</strong></td><td>Пруд, река</td><td>Пруд — собственность, река — федеральная</td></tr>
+                            <tr><td><strong>Сервитуты</strong></td><td>Право проезда через соседний участок</td><td>Соглашение с соседом или решение суда</td></tr>
+                        </tbody>
+                    </table>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Анализ вашего землепользования",
+                        prompt: "Составьте перечень элементов вашего фактического землепользования. Для каждого элемента укажите правовое основание использования.",
+                        placeholder: "1. Собственный участок — право собственности\n2. Арендованное поле — договор аренды...",
+                        hint: "Пример: Я являюсь собственником земельного участка с кадастровым номером 50:08:0050201:15. Также я арендую у администрации прилегающее поле для выпаса скота (договор аренды на 5 лет). Использую пруд для полива (находится в границах моего участка)."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Модуль 2. Три слоя землепользования",
+                subtitle: "Физика, правила, права",
+                content: `
+                    <h3>2.1. Почему необходима систематизация по слоям</h3>
+                    <p>Информация о земельном участке и его элементах поступает из разных источников: выписки из ЕГРН, ПЗЗ, Генеральный план, ответы на запросы в сетевые организации, данные инженерных изысканий. Смешивание разнородных данных в один список приводит к хаосу.</p>
+
+                    <h3>2.2. Три слоя землепользования</h3>
+                    <div class="highlight-box">
+                        <strong>Слой 1. Физические свойства</strong>
+                        <p>Фактическое состояние элемента, существующее независимо от документов. Рельеф, геология, гидрология, почвы, растительность.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>Слой 2. Градостроительные условия и ограничения</strong>
+                        <p>Правила, установленные государством для всей территории: территориальная зона, градостроительный регламент, красные линии, ЗОУИТ.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>Слой 3. Юридическое оформление прав и обременений</strong>
+                        <p>Права, зарегистрированные в установленном порядке: категория земель, ВРИ, право собственности, обременения, границы.</p>
+                    </div>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Важное предупреждение:</strong>
+                        <p>Многие ЗОУИТ (охранные зоны ЛЭП, газопроводов, дорог) не внесены в ЕГРН. Отсутствие записи в реестре не означает отсутствия зоны. Запросы о ЗОУИТ необходимо направлять не только в Росреестр, но и в эксплуатирующие организации.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Анализ трёх слоёв вашего участка",
+                        prompt: "Для вашего участка (реального или выбранного) заполните таблицу: по каждому элементу определите, что известно по физике, правилам и правам. Выявите пробелы.",
+                        placeholder: "Элемент: Участок\nФизика: ...\nПравила: ...\nПрава: ...\nПробелы: ...",
+                        hint: "Пример: Участок в населённом пункте. Физика: рельеф ровный, УГВ 3 м. Правила: зона Ж-1, ИЖС, красных линий нет. Права: собственность. Пробелы: нет информации о ЗОУИТ."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Модуль 3. Льготы при приобретении земельных участков",
+                subtitle: "Как сэкономить на земле",
+                content: `
+                    <h3>3.1. Категории льготополучателей</h3>
+                    <table>
+                        <thead><tr><th>Категория</th><th>Льгота</th><th>Норма</th></tr></thead>
+                        <tbody>
+                            <tr><td>Многодетные семьи</td><td>Бесплатный участок под ИЖС/ЛПХ</td><td>Ст. 39.5 ЗК РФ</td></tr>
+                            <tr><td>Герои РФ, участники СВО</td><td>Получение земли без торгов</td><td>Ст. 39.5 ЗК РФ</td></tr>
+                            <tr><td>Пенсионеры, инвалиды</td><td>Льгота по налогу (6 соток — налоговый вычет)</td><td>Ст. 391 НК РФ</td></tr>
+                            <tr><td>Сельхозпроизводители (КФХ)</td><td>Льготная аренда 0,01% от кадастровой стоимости</td><td>Ст. 39.7 ЗК РФ</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>3.2. Практический алгоритм получения льгот</h3>
+                    <ol>
+                        <li><strong>Определить свой льготный статус</strong> — проверьте, входите ли вы в одну из категорий.</li>
+                        <li><strong>Изучить региональные особенности</strong> — субъекты РФ устанавливают дополнительные льготы.</li>
+                        <li><strong>Подготовить пакет документов</strong> — заявление, документы, подтверждающие статус.</li>
+                        <li><strong>Подать заявление</strong> в администрацию или МФЦ с указанием льготного основания.</li>
+                        <li><strong>Контролировать процесс</strong> рассмотрения заявления.</li>
+                    </ol>
+
+                    <div class="success-box">
+                        <strong>Региональные примеры:</strong>
+                        <ul>
+                            <li>Московская область — многодетные семьи могут получить до 15 соток без торгов</li>
+                            <li>Краснодарский край — скидка 50% на аренду земель под виноградники</li>
+                            <li>Дальний Восток — программа «Дальневосточный гектар»</li>
+                        </ul>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Проверка льготного статуса",
+                        prompt: "Проверьте, входите ли вы в одну из льготных категорий. Если да — какой пакет документов вам потребуется для получения льготы?",
+                        placeholder: "Категория: ...\nДокументы для подтверждения: ...\nКуда обращаться: ...",
+                        hint: "Пример: Я — многодетная семья (3 детей). Документы: удостоверение многодетной семьи, паспорт, заявление. Обращаться в администрацию района."
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Модуль 4. Оценка пригодности земельного участка",
+                subtitle: "Как понять, подходит ли участок",
+                content: `
+                    <h3>4.1. Классификация условий использования земель</h3>
+                    <table>
+                        <thead><tr><th>Группа</th><th>Характер влияния</th><th>Стратегия</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Нерегулируемые условия</strong></td><td>Объективные факторы (климат, рельеф, геология)</td><td>Выявить и компенсировать</td></tr>
+                            <tr><td><strong>Регулируемые условия</strong></td><td>Нормативные ограничения (ВРИ, ПЗЗ)</td><td>Изменить через административные процедуры</td></tr>
+                            <tr><td><strong>Компенсационные возможности</strong></td><td>Ресурсы для преодоления ограничений</td><td>Оценить и привлечь</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>4.2. Нерегулируемые условия</h3>
+                    <ul>
+                        <li><strong>Климат</strong> — температура, осадки, вегетационный период</li>
+                        <li><strong>Рельеф</strong> — уклон, перепады высот</li>
+                        <li><strong>Геология</strong> — тип грунтов, глубина залегания прочных пород</li>
+                        <li><strong>Гидрология</strong> — уровень грунтовых вод, подтопление</li>
+                        <li><strong>Почвы</strong> — тип, плодородие, кислотность</li>
+                    </ul>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Типичная ошибка:</strong>
+                        <p>Игнорирование физических свойств. Покупка участка без инженерно-геологических изысканий — риск обнаружить высокие грунтовые воды, слабые грунты или карсты после начала строительства.</p>
+                    </div>
+
+                    <h3>4.3. Регулируемые условия</h3>
+                    <ul>
+                        <li><strong>Градостроительный регламент</strong> — параметры застройки, этажность, отступы</li>
+                        <li><strong>Вид разрешённого использования</strong> — допустимые виды деятельности</li>
+                        <li><strong>Планировочная организация</strong> — красные линии, ППТ, ПМТ</li>
+                        <li><strong>Инженерная инфраструктура</strong> — подключение к электричеству, воде, газу</li>
+                    </ul>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Оценка участка",
+                        prompt: "Оцените выбранный участок по трём группам факторов. Заполните таблицу: нерегулируемые условия, регулируемые условия, компенсационные возможности.",
+                        placeholder: "Нерегулируемые: ...\nРегулируемые: ...\nКомпенсационные возможности: ...\nКласс пригодности: ...",
+                        hint: "Пример: Участок в населённом пункте, 10 соток. Нерегулируемые: рельеф ровный, УГВ 4 м. Регулируемые: зона Ж-1, ИЖС, красных линий нет. Компенсационные: бюджет 1 млн руб. Класс: А (пригоден)."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Модуль 5. Правовые механизмы организации землепользования",
+                subtitle: "Инструменты Земельного кодекса РФ",
+                content: `
+                    <h3>5.1. Образование новых земельных участков</h3>
+                    <p>Образование земельного участка — это создание нового участка из земель, находящихся в государственной или муниципальной собственности.</p>
+                    <p><strong>Документы-основания:</strong> проект межевания территории (ПМТ), схема расположения на КПТ (наиболее распространённый).</p>
+
+                    <h3>5.2. Преобразование существующих участков</h3>
+                    <table>
+                        <thead><tr><th>Вид преобразования</th><th>Суть</th><th>Норма</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Раздел</strong></td><td>Один участок → несколько</td><td>Ст. 11.4 ЗК РФ</td></tr>
+                            <tr><td><strong>Объединение</strong></td><td>Несколько участков → один</td><td>Ст. 11.6 ЗК РФ</td></tr>
+                            <tr><td><strong>Выдел</strong></td><td>Из одного участка выделяется новый</td><td>Ст. 11.5 ЗК РФ</td></tr>
+                            <tr><td><strong>Перераспределение</strong></td><td>Обмен частями между смежными участками</td><td>Ст. 11.7 ЗК РФ</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>5.3. Предоставление земельных участков</h3>
+                    <div class="highlight-box">
+                        <strong>Виды прав:</strong>
+                        <ul>
+                            <li><strong>Собственность</strong> — бессрочно, для граждан и юрлиц</li>
+                            <li><strong>Аренда</strong> — до 49 лет</li>
+                            <li><strong>Постоянное (бессрочное) пользование</strong> — только для госучреждений</li>
+                            <li><strong>Безвозмездное пользование</strong> — для НКО, религиозных организаций</li>
+                        </ul>
+                    </div>
+
+                    <div class="success-box">
+                        <strong>Предоставление без торгов (ст. 39.18 ЗК РФ):</strong>
+                        <p>Для ИЖС, ЛПХ, садоводства — администрация публикует извещение; если в течение 30 дней нет других заявок — участок предоставляется заявителю.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Выбор правового механизма",
+                        prompt: "Опишите вашу ситуацию и выберите подходящий правовой механизм из числа предусмотренных ЗК РФ.",
+                        placeholder: "Ситуация: ...\nЦель: ...\nПодходящий механизм: ...\nНорма: ...",
+                        hint: "Пример: У меня есть участок в собственности с ВРИ «ИЖС», хочу присоединить соседнюю пустующую землю. Механизм: перераспределение (ст. 39.28–39.29 ЗК РФ)."
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Модуль 6. Комбинирование видов разрешённого использования",
+                subtitle: "Налоговая оптимизация через ВРИ",
+                content: `
+                    <h3>6.1. Ставки земельного налога</h3>
+                    <table>
+                        <thead><tr><th>Категория земель / ВРИ</th><th>Максимальная ставка</th></tr></thead>
+                        <tbody>
+                            <tr><td>Земли сельхозназначения (сенокос, огородничество, животноводство)</td><td>0,3%</td></tr>
+                            <tr><td>Земли населённых пунктов под ИЖС, ЛПХ, садоводство</td><td>0,3%</td></tr>
+                            <tr><td>Земли населённых пунктов с коммерческими ВРИ</td><td>1,5%</td></tr>
+                            <tr><td>Прочие земельные участки</td><td>1,5%</td></tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Разница в 5 раз.</strong> Сельскохозяйственные ВРИ и ВРИ ИЖС/ЛПХ/садоводство облагаются по ставке 0,3%.</p>
+
+                    <h3>6.2. Выгодные комбинации ВРИ</h3>
+                    <ul>
+                        <li><strong>ИЖС + огородничество</strong> — жилой дом + огород, ставка 0,3%</li>
+                        <li><strong>ЛПХ + сенокос</strong> — приусадебное хозяйство, ставка 0,3%</li>
+                        <li><strong>КФХ + пастбище</strong> — фермерство с правом строительства жилья, ставка 0,3%</li>
+                        <li><strong>Садоводство + сенокос</strong> — дача, ставка 0,3%</li>
+                    </ul>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Риски:</strong>
+                        <ul>
+                            <li>Доначисление налога при коммерческом использовании сельхозВРИ</li>
+                            <li>Переквалификация ВРИ налоговой</li>
+                            <li>Утрата льгот при нецелевом использовании</li>
+                        </ul>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Подбор оптимальной комбинации ВРИ",
+                        prompt: "Для вашего участка подберите оптимальную комбинацию ВРИ для снижения налоговой нагрузки. Рассчитайте экономию.",
+                        placeholder: "Текущий ВРИ: ...\nСтавка: ...\nНалог сейчас: ...\nПредлагаемая комбинация: ...\nНалог после: ...\nЭкономия: ...",
+                        hint: "Пример: Текущий ВРИ: магазины (ставка 1,5%, налог 75 000 руб.). Предлагаемая комбинация: ИЖС + огородничество (ставка 0,3%, налог 15 000 руб.). Экономия: 60 000 руб./год."
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Модуль 7. Практический алгоритм организации землепользования",
+                subtitle: "От цели до регистрации прав",
+                content: `
+                    <h3>7.1. Полный цикл организации землепользования</h3>
+                    <ol>
+                        <li><strong>Определение целей и требований</strong> — чёткое описание того, что вы хотите делать</li>
+                        <li><strong>Определение льготного статуса</strong> — проверка права на льготы</li>
+                        <li><strong>Выбор и предварительная оценка территории</strong> — сужение круга участков</li>
+                        <li><strong>Сбор информации по трём слоям</strong> — полная «карта» участка</li>
+                        <li><strong>Оценка пригодности и принятие решения</strong> — класс пригодности</li>
+                        <li><strong>Выбор правового механизма</strong> — способ оформления прав</li>
+                        <li><strong>Регистрация прав и постановка на учёт</strong> — зарегистрированное право в ЕГРН</li>
+                        <li><strong>Реализация проекта и мониторинг</strong> — использование участка</li>
+                    </ol>
+
+                    <h3>7.2. Классификация участков по пригодности</h3>
+                    <table>
+                        <thead><tr><th>Класс</th><th>Описание</th><th>Решение</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>А (пригоден)</strong></td><td>Все обязательные требования выполнены</td><td>Включить в финальный список</td></tr>
+                            <tr><td><strong>Б (пригоден с ограничениями)</strong></td><td>Ограничения, требующие компенсации (до 30% бюджета)</td><td>Включить, заложить затраты</td></tr>
+                            <tr><td><strong>В (условно пригоден)</strong></td><td>Ограничения могут быть сняты через административные процедуры</td><td>Включить, если сроки приемлемы</td></tr>
+                            <tr><td><strong>Г (непригоден)</strong></td><td>Непреодолимые ограничения</td><td>Исключить</td></tr>
+                        </tbody>
+                    </table>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Разработка плана организации землепользования",
+                        prompt: "Разработайте план организации землепользования для вашей ситуации по 8 этапам.",
+                        placeholder: "1. Цели: ...\n2. Льготы: ...\n3. Участки: ...\n4. Три слоя: ...\n5. Оценка: ...\n6. Механизм: ...\n7. Регистрация: ...\n8. Реализация: ...",
+                        hint: "Пример плана см. в модуле 7 курса."
+                    }
+                ]
+            },
+            {
+                id: 8,
+                title: "Модуль 8. Кооперативное землепользование",
+                subtitle: "Особенности СНТ, КФХ и кооперативов",
+                content: `
+                    <h3>8.1. Понятие и виды кооперативов</h3>
+                    <p>Кооператив — это добровольное объединение граждан или юридических лиц на основе членства для совместной деятельности, направленной на удовлетворение материальных и иных потребностей членов.</p>
+
+                    <table>
+                        <thead><tr><th>Вид кооператива</th><th>Нормативная основа</th><th>Основная деятельность</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Потребительский кооператив</strong></td><td>ФЗ № 3085-1</td><td>Удовлетворение потребностей членов</td></tr>
+                            <tr><td><strong>Сельскохозяйственный кооператив</strong></td><td>ФЗ № 193-ФЗ</td><td>Производство, переработка, сбыт продукции</td></tr>
+                            <tr><td><strong>СНТ (садоводческое)</strong></td><td>ФЗ № 217-ФЗ</td><td>Ведение садоводства</td></tr>
+                            <tr><td><strong>ОНТ (огородническое)</strong></td><td>ФЗ № 217-ФЗ</td><td>Ведение огородничества (без жилых строений)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>8.2. Ключевые нормы ФЗ № 217-ФЗ</h3>
+                    <ul>
+                        <li><strong>Ст. 3</strong> — в СНТ можно строить жилые дома, в ОНТ — только хозяйственные постройки</li>
+                        <li><strong>Ст. 10</strong> — ВРИ участков в СНТ — «ведение садоводства» (код 13.2)</li>
+                        <li><strong>Ст. 14</strong> — имущество общего пользования принадлежит кооперативу на праве собственности</li>
+                        <li><strong>Ст. 24</strong> — земельные участки общего назначения предоставляются бесплатно в собственность СНТ</li>
+                        <li><strong>Ст. 54</strong> — «дачная амнистия» — упрощённый порядок регистрации прав до 1 марта 2031 года</li>
+                    </ul>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Ключевое правило:</strong>
+                        <p>Земельные участки общего назначения в СНТ не могут быть в частной собственности физических лиц или коммерческих организаций. Они находятся в собственности СНТ как юридического лица, в муниципальной собственности или в неразграниченной государственной собственности.</p>
+                    </div>
+
+                    <h3>8.3. Льготы для кооперативов</h3>
+                    <ul>
+                        <li><strong>Финансовая поддержка</strong> — субсидии из региональных бюджетов</li>
+                        <li><strong>Имущественная поддержка</strong> — передача государственного имущества на льготных условиях</li>
+                        <li><strong>Льготная аренда без конкурсов</strong> — для социально значимых проектов</li>
+                        <li><strong>Предоставление без торгов</strong> — для ведения садоводства, сельхозпроизводства</li>
+                    </ul>
+
+                    <h3>8.4. Типичные проблемы кооперативов</h3>
+                    <ul>
+                        <li><strong>Незаконное оформление земель общего пользования на УК или председателя</strong> — решение: иск о признании права общей долевой собственности</li>
+                        <li><strong>Нецелевое использование участка членом кооператива</strong> — решение: предупреждение, исключение из кооператива</li>
+                        <li><strong>Отказ в предоставлении земельного участка</strong> — решение: обжалование в вышестоящий орган или суд</li>
+                        <li><strong>Конфликт между членами кооператива</strong> — решение: регламент пользования общим имуществом</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <strong>Правовая основа для защиты:</strong>
+                        <ul>
+                            <li>Ст. 14 ФЗ № 217-ФЗ — имущество общего пользования принадлежит кооперативу</li>
+                            <li>Ст. 301, 304 ГК РФ — виндикационный и негаторный иски</li>
+                        </ul>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Анализ кооперативной ситуации",
+                        prompt: "Опишите ситуацию в вашем СНТ или кооперативе (реальную или смоделированную). Определите тип проблемы и предложите решение с использованием правовых механизмов.",
+                        placeholder: "Ситуация: ...\nТип проблемы: ...\nПравовое основание: ...\nПредлагаемое решение: ...",
+                        hint: "Пример: В нашем СНТ председатель оформил дороги общего пользования на себя. Проблема: незаконное оформление земель общего пользования. Основание: ст. 14 ФЗ № 217-ФЗ. Решение: иск о признании права общей долевой собственности и истребовании имущества."
+                    }
+                ]
+            }
+        ]
+    };
+
+    // ============================================================
+    // ГЛОССАРИЙ
+    // ============================================================
+
+    const glossaryData = [
+        { term: "Анти-манифест", definition: "Перечень проектных табу, которые сознательно исключаются из среды. В отличие от обычного манифеста (декларирующего ценности), анти-манифест определяет границы через запреты, что психологически эффективнее для проектной команды и будущих резидентов." },
+        { term: "Береговая полоса", definition: "Полоса земли вдоль береговой линии водного объекта шириной 20 метров (для рек длиной до 10 км — 5 метров). Находится в федеральной собственности, не подлежит приватизации и огораживанию." },
+        { term: "Безвозмездное пользование", definition: "Право пользования земельным участком без внесения платы на установленный законом срок. Предоставляется отдельным категориям лиц: гражданам для ИЖС (до 6 лет), НКО (до 10 лет)." },
+        { term: "Вид разрешённого использования (ВРИ)", definition: "Характеристика земельного участка, определяющая разрешённые виды деятельности. Устанавливается ПЗЗ и фиксируется в ЕГРН. Примеры: «ИЖС», «ведение КФХ», «магазины»." },
+        { term: "Водный объект", definition: "Природный или искусственный водоём, водоток либо иной объект с сосредоточением вод. Различаются водотоки (реки — федеральная собственность) и водоёмы (пруды — частная собственность по ст. 8 ВК РФ)." },
+        { term: "Водоохранная зона", definition: "Зона с особыми условиями использования территории (ЗОУИТ), устанавливаемая вдоль водных объектов шириной от 50 до 200 метров. В ней запрещены строительство без согласования, использование удобрений и пестицидов." },
+        { term: "Генеральный план", definition: "Документ территориального планирования, определяющий функциональные зоны, границы населённых пунктов, планируемые дороги и объекты инфраструктуры. Не устанавливает красные линии — это функция ППТ." },
+        { term: "Градостроительный план земельного участка (ГПЗУ)", definition: "Документ, содержащий сведения о границах участка, территориальной зоне, градостроительном регламенте, красных линиях, ЗОУИТ. Обязателен для получения разрешения на строительство (ст. 57 ГрК РФ)." },
+        { term: "Градостроительный регламент", definition: "Совокупность правил для территориальной зоны: виды разрешённого использования, предельные параметры строительства (высота, отступы, процент застройки), ограничения. Содержится в ПЗЗ." },
+        { term: "Дачная амнистия", definition: "Упрощённый порядок регистрации прав на земельные участки и дома, предоставленные до введения ЗК РФ (до 1998–2001 годов). Позволяет оформить право без разрешения на строительство (ФЗ № 137-ФЗ, ФЗ № 218-ФЗ)." },
+        { term: "Договор водопользования", definition: "Документ, дающий право на забор воды из рек и озёр в коммерческих целях (для орошения, рыбоводства). Срок — до 20 лет. Не требуется для пруда в границах собственного участка (ст. 8 ВК РФ)." },
+        { term: "Земельный налог", definition: "Местный налог, уплачиваемый собственниками земельных участков. Ставка: 0,3% для сельхозземель и земель под ИЖС/ЛПХ/садоводство; 1,5% для коммерческих ВРИ и прочих." },
+        { term: "Земли без образования участка", definition: "Земли, используемые для размещения некапитальных объектов (киосков, кафе), для сенокошения, выпаса скота, без регистрации права на отдельный участок." },
+        { term: "Землепользование", definition: "Совокупность всех земель и объектов, которые лицо фактически использует. Не ограничивается зарегистрированным участком и включает арендованные поля, лесные и водные объекты, земли без образования участка, сервитуты." },
+        { term: "Зоны с особыми условиями использования (ЗОУИТ)", definition: "Охранные, санитарно-защитные, водоохранные зоны, зоны затопления с ограничениями на деятельность. Многие ЗОУИТ не внесены в ЕГРН." },
+        { term: "Имущество общего пользования СНТ", definition: "Дороги, проезды, детские площадки, инженерные сети, административные здания — принадлежат кооперативу на праве собственности (ст. 14 ФЗ № 217-ФЗ). Не могут быть в частной собственности." },
+        { term: "Кадастровый инженер", definition: "Специалист с квалификационным аттестатом на кадастровую деятельность. Выполняет межевание, подготавливает межевые и технические планы, акты обследования, схемы расположения на КПТ." },
+        { term: "Категория земель", definition: "Правовой статус территории, определяющий целевое назначение. Категории: земли населённых пунктов, сельхозназначения, промышленности, лесного фонда, водного фонда, особо охраняемых территорий." },
+        { term: "Класс пригодности участка", definition: "Оценка участка по шкале А-Г: А (пригоден), Б (пригоден с ограничениями), В (условно пригоден), Г (непригоден). Определяет стратегию освоения." },
+        { term: "Кооператив", definition: "Добровольное объединение граждан или юридических лиц на основе членства для совместной деятельности, направленной на удовлетворение материальных и иных потребностей членов (ст. 123.2 ГК РФ)." },
+        { term: "Красные линии", definition: "Границы, отделяющие территории общего пользования (дороги, тротуары, парки) от территорий застройки. Утверждаются ППТ. Строительство за красными линиями запрещено." },
+        { term: "Льготы при приобретении земли", definition: "Преференции для отдельных категорий: бесплатное предоставление, льготная аренда (0,01%), налоговые льготы, упрощённое оформление. Для многодетных, участников СВО, фермеров, пенсионеров." },
+        { term: "Нейрокомфорт", definition: "Свойство среды снижать эмоциональную нагрузку и когнитивное утомление. Достигается через природную палитру, визуальное скольжение, акустический комфорт, природные ароматы." },
+        { term: "Неразграниченные земли", definition: "Земли, не переданные ни в частную, ни в муниципальную собственность. Находятся в государственной собственности, распоряжение осуществляет администрация." },
+        { term: "Перераспределение земельных участков", definition: "Правовой механизм присоединения к частному участку прилегающей государственной или муниципальной земли либо перераспределения границ между смежными участками (ст. 39.27–39.29 ЗК РФ)." },
+        { term: "Правила землепользования и застройки (ПЗЗ)", definition: "Документ градостроительного зонирования, утверждаемый муниципалитетом. Содержит карту территориальных зон и градостроительные регламенты." },
+        { term: "Предварительное согласование", definition: "Административная процедура, предшествующая предоставлению участка в аренду или собственность. Включает утверждение схемы расположения на КПТ (ст. 39.15 ЗК РФ)." },
+        { term: "Проект планировки территории (ППТ)", definition: "Документ, устанавливающий красные линии, зоны размещения объектов, транспортную инфраструктуру. Именно ППТ, а не генплан, утверждает красные линии." },
+        { term: "Публичный сервитут", definition: "Право ограниченного пользования чужим участком для государственных или муниципальных нужд (проход, проезд, прокладка коммуникаций). Устанавливается без согласия правообладателя." },
+        { term: "Самовольная постройка", definition: "Объект, возведённый на участке, не предоставленном в установленном порядке, или без разрешения, или с нарушением норм. Подлежит сносу за счёт застройщика (ст. 222 ГК РФ)." },
+        { term: "Сервитут", definition: "Право ограниченного пользования чужим участком. Частный — по соглашению или решению суда. Публичный — решением органа власти (ст. 23 ЗК РФ, ст. 274 ГК РФ)." },
+        { term: "Схема расположения на КПТ (СПЗУ)", definition: "Графический документ, подготавливаемый кадастровым инженером, отображающий границы образуемого участка. Обязательное приложение к заявлению о предварительном согласовании." },
+        { term: "Территориальная зона", definition: "Зона на карте ПЗЗ, для которой установлен градостроительный регламент. Типы: жилые (Ж-1), общественно-деловые (О-1), производственные (П-1), сельхоз (СХ-1), рекреационные (Р-1)." },
+        { term: "Территории общего пользования", definition: "Территории с бесплатным доступом неограниченного круга лиц: дороги, тротуары, парки, скверы, набережные, пляжи. Не принадлежат частным лицам." },
+        { term: "Условно разрешённый ВРИ", definition: "Вид использования, который не является основным для территориальной зоны, но может быть разрешён при соблюдении условий. Требует публичных слушаний (ст. 39 ГрК РФ)." },
+        { term: "Федеральный закон № 217-ФЗ", definition: "Закон «О ведении гражданами садоводства и огородничества». Регулирует создание и деятельность СНТ и ОНТ, имущество общего пользования, «дачную амнистию»." },
+        { term: "Элементы землепользования", definition: "Семь типов объектов, входящих в землепользование: 1) земельные участки, 2) земли без образования участка, 3) территории общего пользования, 4) неразграниченные земли, 5) лесные участки, 6) транспортные коридоры, 7) водные объекты." },
+        { term: "Эмоциональная карта", definition: "Метод зонирования территории не по функциональным типам, а по психоэмоциональным состояниям: зоны «Тишина и покой», «Созидательное соприкосновение», «Дикая природа», «Технологический хаб»." }
+    ];
+
+    // ============================================================
+    // ЛОГИКА ПРИЛОЖЕНИЯ
+    // ============================================================
+
+    let currentModule = 0;
+    const totalModules = courseData.modules.length;
+    let progress = new Array(totalModules).fill(false);
+
+    // Загрузка сохранённого прогресса
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('zem_course_progress');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed) && parsed.length === totalModules) {
+                    progress = parsed;
+                }
+            }
+        } catch (e) {}
+    }
+
+    function saveProgress() {
+        try {
+            localStorage.setItem('zem_course_progress', JSON.stringify(progress));
+        } catch (e) {}
+    }
+
+    // Рендеринг
+    function render() {
+        renderProgressBar();
+        renderNavModules();
+        renderModule(currentModule);
+        updateProgressPercent();
+        renderGlossaryCount();
+    }
+
+    function renderProgressBar() {
+        const container = document.getElementById('progressBar');
+        container.innerHTML = '';
+        for (let i = 0; i < totalModules; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'progress-dot';
+            if (progress[i]) dot.classList.add('completed');
+            if (i === currentModule) dot.classList.add('active');
+            dot.addEventListener('click', () => showModule(i));
+            container.appendChild(dot);
+        }
+    }
+
+    function renderNavModules() {
+        const container = document.getElementById('navModules');
+        const glossaryBtn = container.querySelector('.glossary-btn');
+        container.innerHTML = '';
+        courseData.modules.forEach((mod, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'nav-btn';
+            if (i === currentModule) btn.classList.add('active');
+            if (progress[i]) btn.classList.add('completed');
+            btn.textContent = `М${i+1}`;
+            btn.title = mod.title;
+            btn.addEventListener('click', () => showModule(i));
+            container.appendChild(btn);
+        });
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn glossary-btn';
+        btn.textContent = '📖 Глоссарий';
+        btn.addEventListener('click', showGlossary);
+        container.appendChild(btn);
+    }
+
+    function renderModule(index) {
+        const container = document.getElementById('modulesContainer');
+        const mod = courseData.modules[index];
+        
+        let tasksHtml = '';
+        if (mod.tasks && mod.tasks.length > 0) {
+            tasksHtml = mod.tasks.map((task, ti) => `
+                <div class="task" id="task-${index}-${ti}">
+                    <div class="task-title">${task.title}</div>
+                    <div class="task-body">
+                        <p>${task.prompt}</p>
+                        <textarea id="task-input-${index}-${ti}" placeholder="${task.placeholder || 'Введите ваш ответ...'}"></textarea>
+                        <div class="task-actions">
+                            <button class="task-btn" onclick="checkTask(${index}, ${ti})">✅ Готово</button>
+                            <button class="task-btn-hint" onclick="showHint(${index}, ${ti})">💡 Подсказка</button>
+                            <button class="task-btn-save" onclick="saveTask(${index}, ${ti})">💾 Сохранить ответ</button>
+                        </div>
+                        <div class="task-feedback" id="task-feedback-${index}-${ti}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        let contentHtml = mod.content;
+
+        container.innerHTML = `
+            <div class="module active">
+                <div class="module-title">${mod.title}</div>
+                <div class="module-sub">${mod.subtitle}</div>
+                <div class="module-content">
+                    ${contentHtml}
+                </div>
+                ${tasksHtml}
+                <div class="module-nav">
+                    <button class="btn btn-prev" onclick="showModule(${index-1})" ${index === 0 ? 'disabled style="opacity:0.4;"' : ''}>← Назад</button>
+                    ${index === totalModules - 1 ? `
+                        <button class="btn btn-finish" onclick="finishCourse()">🎉 Завершить курс</button>
+                    ` : `
+                        <button class="btn btn-next" onclick="showModule(${index+1})">Далее →</button>
+                    `}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('glossarySection').classList.remove('active');
+
+        if (!progress[index]) {
+            progress[index] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+        }
+
+        if (mod.tasks) {
+            mod.tasks.forEach((task, ti) => {
+                const saved = localStorage.getItem(`zem_task_${index}_${ti}`);
+                const textarea = document.getElementById(`task-input-${index}-${ti}`);
+                if (saved && textarea) {
+                    textarea.value = saved;
+                }
+                if (textarea) {
+                    textarea.addEventListener('input', function() {
+                        localStorage.setItem(`zem_task_${index}_${ti}`, this.value);
+                    });
+                }
+            });
+        }
+
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showModule(index) {
+        if (index < 0 || index >= totalModules) return;
+        currentModule = index;
+        render();
+        if (!progress[index]) {
+            progress[index] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+        }
+    }
+
+    function updateProgressPercent() {
+        const done = progress.filter(p => p).length;
+        const pct = Math.round((done / totalModules) * 100);
+        document.getElementById('progressPercent').textContent = pct;
+    }
+
+    function renderGlossaryCount() {
+        document.getElementById('glossaryCount').textContent = glossaryData.length;
+        document.getElementById('glossaryCountDisplay').textContent = `Всего терминов: ${glossaryData.length}`;
+    }
+
+    // ============================================================
+    // ГЛОССАРИЙ
+    // ============================================================
+
+    function showGlossary() {
+        document.querySelectorAll('.module').forEach(el => el.classList.remove('active'));
+        document.getElementById('modulesContainer').innerHTML = '';
+        
+        const section = document.getElementById('glossarySection');
+        section.classList.add('active');
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.progress-dot').forEach(dot => dot.classList.remove('active'));
+        
+        renderGlossaryList();
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderGlossaryList(filter) {
+        const container = document.getElementById('glossaryList');
+        const search = filter || document.getElementById('glossarySearch').value || '';
+        const filtered = glossaryData.filter(item => 
+            item.term.toLowerCase().includes(search.toLowerCase()) ||
+            item.definition.toLowerCase().includes(search.toLowerCase())
+        );
+        
+        container.innerHTML = filtered.map((item, index) => `
+            <div class="glossary-item" id="glossary-item-${index}">
+                <div class="term" onclick="toggleGlossaryTerm(${index})">
+                    ${item.term}
+                    <button class="term-toggle">▼</button>
+                </div>
+                <div class="definition" id="glossary-def-${index}">
+                    ${item.definition}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterGlossary(value) {
+        renderGlossaryList(value);
+    }
+
+    function toggleGlossaryTerm(index) {
+        const def = document.getElementById(`glossary-def-${index}`);
+        if (def) {
+            def.classList.toggle('open');
+            const btn = document.querySelector(`#glossary-item-${index} .term-toggle`);
+            if (btn) btn.textContent = def.classList.contains('open') ? '▲' : '▼';
+        }
+    }
+
+    // ============================================================
+    // ЗАДАНИЯ
+    // ============================================================
+
+    function showHint(moduleIdx, taskIdx) {
+        const mod = courseData.modules[moduleIdx];
+        const task = mod.tasks[taskIdx];
+        const textarea = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+
+        if (!task.hint) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Для этого задания подсказка не подготовлена.';
+            return;
+        }
+
+        textarea.value = task.hint;
+        textarea.style.background = '#fef9e7';
+        textarea.style.borderColor = '#f39c12';
+
+        feedback.className = 'task-feedback show hint';
+        feedback.textContent = '💡 Подсказка загружена. Это пример правильного ответа.';
+
+        localStorage.setItem(`zem_task_${moduleIdx}_${taskIdx}`, task.hint);
+    }
+
+    function saveTask(moduleIdx, taskIdx) {
+        const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+        const answer = input ? input.value : '';
+
+        if (!answer.trim()) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Поле пустое. Напишите ответ перед сохранением.';
+            return;
+        }
+
+        const mod = courseData.modules[moduleIdx];
+        const task = mod.tasks[taskIdx];
+        const date = new Date().toLocaleString('ru-RU');
+        
+        const content = [
+            '═══════════════════════════════════════════',
+            `  📝 Ответ на задание: ${task.title}`,
+            `  📚 Модуль: ${mod.title}`,
+            `  📅 Дата: ${date}`,
+            '═══════════════════════════════════════════',
+            '',
+            '📌 ЗАДАНИЕ:',
+            task.prompt,
+            '',
+            '📝 ОТВЕТ:',
+            answer,
+            '',
+            '═══════════════════════════════════════════',
+            '  ✍️ Сохранено с помощью интерактивного курса',
+            '  Организация землепользования',
+            '═══════════════════════════════════════════'
+        ].join('\n');
+
+        try {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            const filename = `otvet_modul${moduleIdx+1}_zadanie${taskIdx+1}.txt`;
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+
+            feedback.className = 'task-feedback show success';
+            feedback.textContent = `💾 Ответ сохранён в файл "${filename}"`;
+        } catch (e) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '❌ Ошибка сохранения: ' + e.message;
+        }
+    }
+
+    function checkTask(moduleIdx, taskIdx) {
+        const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+        const answer = input ? input.value.trim() : '';
+
+        if (answer.length === 0) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Пожалуйста, напишите ответ перед проверкой.';
+            return;
+        }
+
+        if (answer.length < 10) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Ответ слишком короткий. Попробуйте развернуть мысль.';
+            return;
+        }
+
+        const taskKey = `zem_task_done_${moduleIdx}_${taskIdx}`;
+        localStorage.setItem(taskKey, 'true');
+
+        feedback.className = 'task-feedback show success';
+        feedback.textContent = '✅ Сохраните ваш ответ.';
+        
+        checkModuleCompletion(moduleIdx);
+    }
+
+    function checkModuleCompletion(moduleIdx) {
+        const mod = courseData.modules[moduleIdx];
+        if (!mod.tasks) return;
+        
+        let allDone = true;
+        mod.tasks.forEach((task, ti) => {
+            const key = `zem_task_done_${moduleIdx}_${ti}`;
+            if (!localStorage.getItem(key)) {
+                allDone = false;
+            }
+        });
+
+        if (allDone && mod.tasks.length > 0) {
+            progress[moduleIdx] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+            
+            const feedbacks = document.querySelectorAll(`#task-feedback-${moduleIdx}-0`);
+            if (feedbacks.length > 0) {
+                const lastFeedback = feedbacks[feedbacks.length - 1];
+                if (lastFeedback) {
+                    const msg = document.createElement('div');
+                    msg.style.marginTop = '12px';
+                    msg.style.padding = '12px 16px';
+                    msg.style.background = '#dff0df';
+                    msg.style.borderRadius = '10px';
+                    msg.style.color = '#2a6a3a';
+                    msg.style.fontWeight = '600';
+                    msg.textContent = '🎉 Все задания модуля выполнены! Переходите к следующему.';
+                    lastFeedback.parentNode.appendChild(msg);
+                }
+            }
+        }
+    }
+
+    function finishCourse() {
+        const allDone = progress.every(p => p === true);
+        if (!allDone) {
+            alert('Вы ещё не прошли все модули. Продолжайте изучение!');
+            return;
+        }
+
+        if (confirm('🎉 Поздравляем! Вы завершили курс "Организация землепользования".\n\nХотите сбросить прогресс и пройти заново?')) {
+            let allAnswers = '';
+            for (let m = 0; m < totalModules; m++) {
+                const mod = courseData.modules[m];
+                if (mod.tasks) {
+                    mod.tasks.forEach((task, ti) => {
+                        const saved = localStorage.getItem(`zem_task_${m}_${ti}`);
+                        if (saved) {
+                            allAnswers += `\n--- Модуль ${m+1}, Задание ${ti+1} ---\n${saved}\n`;
+                        }
+                    });
+                }
+            }
+            if (allAnswers) {
+                const blob = new Blob(['ВСЕ ОТВЕТЫ НА КУРС\n' + '='.repeat(40) + '\n' + allAnswers], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'vse_otvety_zem_kursa.txt';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            }
+            
+            localStorage.clear();
+            progress = new Array(totalModules).fill(false);
+            saveProgress();
+            render();
+            alert('Прогресс сброшен. Можете начать заново!');
+        }
+    }
+
+    // ============================================================
+    // ИНИЦИАЛИЗАЦИЯ
+    // ============================================================
+
+    loadProgress();
+    render();
+
+    console.log('📚 Курс "Организация землепользования" загружен');
+    console.log(`📖 Всего модулей: ${totalModules}`);
+    console.log(`📝 Выполнено: ${progress.filter(p => p).length}/${totalModules}`);
+    console.log(`📖 Глоссарий: ${glossaryData.length} терминов`);
+</script>
+
+</body>
+</html>
