@@ -91,6 +91,10 @@
         transition: all 0.2s;
     }
 
+    .set-card.diagnosis {
+        border-left-color: #e67e22;
+    }
+
     .set-card.opory {
         border-left-color: #6a4e9b;
     }
@@ -557,35 +561,29 @@
         </div>
     </div>
 
-    <!-- КАРТОЧКА: ЧТО ОСТАНАВЛИВАЕТ -->
-    <div class="set-card">
+    <!-- НОВАЯ КАРТОЧКА: ДИАГНОЗ СИТУАЦИИ (Статья 8, 11) -->
+    <div class="set-card diagnosis">
         <div class="set-label">
             <span>ШАГ 4</span>
-            <span class="set-icon">⚠️</span>
+            <span class="set-icon">🩺</span>
         </div>
-        <div class="set-title">Что вас останавливает или смущает</div>
-        <div class="set-desc">В чём вы видите проблему, риск, неопределённость?</div>
+        <div class="set-title">Диагноз ситуации</div>
+        <div class="set-desc">Ответ на вопрос: «Какой уже совершённый выбор привёл в исходную ситуацию и каковы были обстоятельства этого выбора?»</div>
         <div class="field-group">
-            <label for="s-obstacles">Остановки и риски:</label>
-            <textarea id="s-obstacles" class="small" placeholder="Что вас смущает? Какие риски вы видите?"></textarea>
+            <label for="s-diagnosis">Диагноз:</label>
+            <textarea id="s-diagnosis" class="medium" placeholder="Опишите, как ситуация стала возможной. Какой выбор был сделан ранее? В каких обстоятельствах?"></textarea>
         </div>
         <div class="examples">
-            <strong>⚠️ Примеры остановок и рисков:</strong>
-            <span class="tag">противоречие в документах</span>
-            <span class="tag">неопределённость правового статуса</span>
-            <span class="tag">риск судебного оспаривания</span>
-            <span class="tag">отсутствие согласия сторон</span>
-            <span class="tag">неполные или устаревшие документы</span>
-            <span class="tag">истекающие сроки</span>
+            <strong>🩺 Примеры диагноза:</strong>
+            <span class="tag">выбор был сделан в условиях неполноты сведений</span>
+            <span class="tag">решение принято под давлением</span>
+            <span class="tag">последствия не были оценены</span>
+            <span class="tag">ситуация возникла из-за противоречия в документах</span>
         </div>
-        <button class="hint-toggle" onclick="toggleHint('obstacles-hint')">💡 Показать подсказку</button>
-        <div class="hint" id="obstacles-hint">
-            <strong>Пример заполнения:</strong><br>
-            • Участок в промышленной зоне — ИЖС там не разрешён<br>
-            • Уведомление формально есть, но может быть признано недействительным<br>
-            • С 01.09.2026 старые уведомления утрачивают силу<br>
-            • Если начать строить, дом могут признать самостроем и обязать снести<br>
-            • Администрация даёт устные ответы, письменной позиции нет
+        <button class="hint-toggle" onclick="toggleHint('diagnosis-hint')">💡 Показать пример</button>
+        <div class="hint" id="diagnosis-hint">
+            <strong>Пример диагноза:</strong><br>
+            В 2020 году суд обязал администрацию выдать уведомление о соответствии, основываясь на представленных документах. Однако на тот момент не было учтено зонирование участка — он находился в промышленной зоне, где ИЖС не разрешён. Выбор был сделан в условиях неполноты сведений о градостроительных ограничениях. Теперь это противоречие стало явным, и ситуация требует разрешения.
         </div>
     </div>
 
@@ -640,7 +638,7 @@
             <span class="set-icon">❓</span>
         </div>
         <div class="set-title">Вопросы</div>
-        <div class="set-desc">Что нужно прояснить, чтобы замысел получил опору в условиях.</div>
+        <div class="set-desc">Что нужно прояснить, чтобы замысел получил опору в условиях. Вопросы проверяются критерием: «Приближает ли ответ на этот вопрос к пониманию главного противоречия?»</div>
         <div class="field-group">
             <label for="s-questions">Вопросы:</label>
             <textarea id="s-questions" class="large" placeholder="Что нужно проверить, уточнить, выяснить?"></textarea>
@@ -701,18 +699,17 @@
             <span class="set-icon">⚡</span>
         </div>
         <div class="set-title">Шаги</div>
-        <div class="set-desc">Первые действия, которые надо совершить, исходя из Критического остатка.</div>
+        <div class="set-desc">Первые действия, которые надо совершить, исходя из Критического остатка. Шаги — это гипотеза, а не обязательство.</div>
         <div class="field-group">
             <label for="s-steps">Шаги:</label>
             <textarea id="s-steps" class="large" placeholder="Что делать прямо сейчас?"></textarea>
         </div>
         <div class="examples">
-            <strong>🔴 Примеры критических остатков:</strong>
-            <span class="tag">противоречие между правом и фактическим статусом</span>
-            <span class="tag">неопределённость статуса объекта</span>
-            <span class="tag">несоответствие документов реальному положению</span>
-            <span class="tag">ключевое решение заблокировано</span>
-            <span class="tag">отсутствие опоры для следующего шага</span>
+            <strong>⚡ Примеры шагов:</strong>
+            <span class="tag">направить официальный запрос</span>
+            <span class="tag">получить выписку из ЕГРН</span>
+            <span class="tag">провести сверку с ПЗЗ</span>
+            <span class="tag">принять решение</span>
         </div>
         <button class="hint-toggle" onclick="toggleHint('steps-hint')">💡 Показать пример</button>
         <div class="hint" id="steps-hint">
@@ -730,7 +727,7 @@
 
     <div class="counter">
         <span>📊 Заполнено:</span>
-        <span><span class="num" id="fieldCounter">0</span> из <span class="num">8</span> полей</span>
+        <span><span class="num" id="fieldCounter">0</span> из <span class="num">9</span> полей</span>
     </div>
 
     <!-- КНОПКИ УПРАВЛЕНИЯ -->
@@ -781,21 +778,21 @@
         intent: document.getElementById('s-intent'),
         conditions: document.getElementById('s-conditions'),
         done: document.getElementById('s-done'),
-        obstacles: document.getElementById('s-obstacles'),
+        diagnosis: document.getElementById('s-diagnosis'),
         supports: document.getElementById('s-supports'),
         questions: document.getElementById('s-questions'),
         critical: document.getElementById('s-critical'),
         steps: document.getElementById('s-steps'),
     };
 
-    var sourceFields = ['intent', 'conditions', 'done', 'obstacles'];
+    var sourceFields = ['intent', 'conditions', 'done', 'diagnosis'];
     var resultFields = ['supports', 'questions', 'critical', 'steps'];
 
     var fieldLabels = {
         intent: '🎯 Замысел',
         conditions: '📌 Условия',
         done: '🔄 Что уже было сделано',
-        obstacles: '⚠️ Что останавливает / смущает',
+        diagnosis: '🩺 Диагноз ситуации',
         supports: '⚓ Опоры',
         questions: '❓ Вопросы',
         critical: '🔴 Критический остаток',
@@ -806,7 +803,7 @@
         intent: 'Что вы хотите сделать или получить в итоге?',
         conditions: 'Документы, решения, статусы, права, сроки, зонирование, позиции сторон',
         done: 'Какие действия вы предпринимали ранее и какой был результат?',
-        obstacles: 'В чём вы видите проблему, риск, неопределённость?',
+        diagnosis: 'Как ситуация стала возможной? Какой выбор был сделан?',
         supports: 'Что из объективного порядка — законов, практик, понятий, прецедентов — может быть приложено к условиям?',
         questions: 'Что нужно прояснить, чтобы замысел получил опору в условиях?',
         critical: 'Главное противоречие — диагноз ситуации',
@@ -830,6 +827,7 @@
 
     function updateCounter() {
         var count = 0;
+        var totalFields = Object.keys(fields).length;
         for (var key in fields) {
             if (fields.hasOwnProperty(key) && fields[key].value.trim().length > 0) {
                 count++;
@@ -1080,12 +1078,7 @@
             '5. 2025 г. — устное обращение в Управление архитектуры: ответ, что уведомление выдано законно\n' +
             '6. 2026 г. — изучение изменений в ГрК РФ с 01.09.2026';
 
-        fields.obstacles.value = '1. Противоречие между уведомлением (ИЖС) и зонированием участка (промышленная зона)\n' +
-            '2. Риск: если начать строительство, объект может быть признан самовольной постройкой (ст. 222 ГК РФ)\n' +
-            '3. С 01.09.2026 уведомление может утратить силу автоматически\n' +
-            '4. Нет письменного подтверждения от администрации о законности уведомления\n' +
-            '5. Неизвестно, можно ли обжаловать решение суда 2020 года по вновь открывшимся обстоятельствам\n' +
-            '6. Непонятно, есть ли судебная практика по аналогичным делам в Геленджике';
+        fields.diagnosis.value = 'В 2020 году суд обязал администрацию выдать уведомление о соответствии, основываясь на представленных документах. Однако на тот момент не было учтено зонирование участка — он находился в промышленной зоне, где ИЖС не разрешён. Выбор был сделан в условиях неполноты сведений о градостроительных ограничениях. Теперь это противоречие стало явным, и ситуация требует разрешения.';
 
         fields.supports.value = 'А. Нормы прямого действия:\n' +
             '• ГрК РФ ст. 51.1 — порядок получения уведомления о соответствии\n' +
