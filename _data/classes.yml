@@ -4,6 +4,7 @@ names:
   admin: Управление землепользованием
   analitika: Аналитика
   practice: Практика
+  info: Контакты
 
 document_types:
   training: Учебный курс
@@ -11,6 +12,7 @@ document_types:
   admin: Методический материал
   analitika: Аналитический материал
   practice: Практический пример
+  info: Контактная информация
 
 order:
   - training
@@ -18,4 +20,5 @@ order:
   - admin
   - analitika
   - practice
+  - info
   
