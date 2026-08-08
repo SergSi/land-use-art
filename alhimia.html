@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическая система: Алхимия, Ключ, Инструменты</title>
+    <style>
+        /* === ГЛОБАЛЬНЫЕ СТИЛИ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f2eb;
+            color: #1c1c1c;
+            line-height: 1.6;
+            padding: 16px;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            padding: 24px 20px 40px;
+        }
+
+        /* === ШАПКА === */
+        .course-header {
+            border-bottom: 2px solid #e8e2d8;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .course-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2c2c2c;
+        }
+
+        .course-header h1 .accent1 { color: #6a4e9b; }
+        .course-header h1 .accent2 { color: #2980b9; }
+        .course-header h1 .accent3 { color: #27ae60; }
+
+        .course-header .sub {
+            font-size: 15px;
+            color: #7a7a7a;
+            margin-top: 4px;
+        }
+
+        .course-header .sub .level {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .level-1 { background: #e8e0f0; color: #6a4e9b; }
+        .level-2 { background: #d4e6f1; color: #2980b9; }
+        .level-3 { background: #d5f5e3; color: #27ae60; }
+
+        .course-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #8a8a8a;
+        }
+
+        .course-meta span {
+            background: #f0ece4;
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        /* === ПРОГРЕСС === */
+        .progress-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .progress-dot {
+            flex: 1;
+            min-width: 20px;
+            height: 6px;
+            border-radius: 6px;
+            background: #e0dcd2;
+            transition: background 0.4s;
+            cursor: pointer;
+        }
+
+        .progress-dot.completed {
+            background: #6a4e9b;
+        }
+
+        .progress-dot.active {
+            background: #b8a8d0;
+            height: 8px;
+        }
+
+        /* === НАВИГАЦИЯ === */
+        .nav-modules {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee9e0;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 30px;
+            background: #f0ece4;
+            color: #5a5a5a;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover {
+            background: #e4ddd0;
+        }
+
+        .nav-btn.active {
+            background: #6a4e9b;
+            color: #fff;
+        }
+
+        .nav-btn.completed {
+            background: #d4c8e8;
+        }
+
+        .nav-btn.glossary-btn {
+            background: #6a4e9b;
+            color: #fff;
+        }
+
+        .nav-btn.glossary-btn:hover {
+            background: #5a3e8a;
+        }
+
+        .nav-btn .badge {
+            display: inline-block;
+            font-size: 10px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.3);
+            margin-left: 4px;
+        }
+
+        /* === МОДУЛИ === */
+        .module {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 4px;
+        }
+
+        .module-title .level-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .module-sub {
+            font-size: 15px;
+            color: #6a6a6a;
+            margin-bottom: 20px;
+        }
+
+        .module-content h2,
+        .module-content h3 {
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .module-content h2 {
+            font-size: 20px;
+            color: #2c2c2c;
+            border-bottom: 2px solid #eee9e0;
+            padding-bottom: 6px;
+        }
+
+        .module-content h3 {
+            font-size: 17px;
+            color: #3a3a3a;
+        }
+
+        .module-content p {
+            margin-bottom: 12px;
+            color: #3a3a3a;
+        }
+
+        .module-content ul,
+        .module-content ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .module-content li {
+            margin-bottom: 6px;
+            color: #3a3a3a;
+        }
+
+        .module-content blockquote {
+            background: #f8f5ef;
+            border-left: 4px solid #6a4e9b;
+            padding: 12px 18px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #4a4a4a;
+        }
+
+        .module-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .module-content table th {
+            background: #f0ece4;
+            text-align: left;
+            padding: 8px 12px;
+            border: 1px solid #ddd8ce;
+        }
+
+        .module-content table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd8ce;
+        }
+
+        .module-content .highlight-box {
+            background: #f4f0e8;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #6a4e9b;
+        }
+
+        .module-content .highlight-box strong {
+            color: #4a2e7b;
+        }
+
+        .module-content .success-box {
+            background: #e8f5ee;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #27ae60;
+        }
+
+        .module-content .danger-box {
+            background: #fde8e8;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .module-content .level-indicator {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+
+        .module-content .level-indicator .pill {
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* === ГЛОССАРИЙ === */
+        .glossary-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .glossary-section.active {
+            display: block;
+        }
+
+        .glossary-item {
+            background: #f8f5ef;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #6a4e9b;
+        }
+
+        .glossary-item .term {
+            font-weight: 700;
+            font-size: 16px;
+            color: #2c2c2c;
+            cursor: pointer;
+        }
+
+        .glossary-item .definition {
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .glossary-item .definition.open {
+            display: block;
+        }
+
+        .glossary-item .term-toggle {
+            background: none;
+            border: none;
+            color: #6a4e9b;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+
+        .glossary-item .term-toggle:hover {
+            background: #e8e4dc;
+        }
+
+        .glossary-search {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            background: #fdfdfb;
+        }
+
+        .glossary-search:focus {
+            outline: none;
+            border-color: #6a4e9b;
+        }
+
+        /* === ЗАДАНИЯ === */
+        .task {
+            background: #f8f5ef;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin: 20px 0;
+            border: 2px dashed #c4b8a0;
+        }
+
+        .task-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4a3a2a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-body {
+            margin-top: 8px;
+            color: #4a4a4a;
+        }
+
+        .task-body textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px 12px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fdfdfb;
+            resize: vertical;
+            margin-top: 8px;
+        }
+
+        .task-body textarea:focus {
+            outline: none;
+            border-color: #6a4e9b;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .task-btn {
+            background: #6a4e9b;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn:hover {
+            background: #5a3e8a;
+        }
+
+        .task-btn-hint {
+            background: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn-hint:hover {
+            background: #d68910;
+        }
+
+        .task-btn-save {
+            background: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .task-btn-save:hover {
+            background: #1a6a8a;
+        }
+
+        .task-feedback {
+            margin-top: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: #e8f0e8;
+            display: none;
+            font-size: 14px;
+        }
+
+        .task-feedback.show {
+            display: block;
+        }
+
+        .task-feedback.success {
+            background: #dff0df;
+            color: #2a6a3a;
+        }
+
+        .task-feedback.error {
+            background: #fde8e8;
+            color: #a33;
+        }
+
+        .task-feedback.hint {
+            background: #fef9e7;
+            color: #7d6608;
+            border-left: 4px solid #f39c12;
+        }
+
+        /* === КНОПКИ НАВИГАЦИИ === */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #eee9e0;
+            flex-wrap: wrap;
+        }
+
+        .module-nav .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .module-nav .btn-prev {
+            background: #f0ece4;
+            color: #5a5a5a;
+        }
+
+        .module-nav .btn-prev:hover {
+            background: #e4ddd0;
+        }
+
+        .module-nav .btn-next {
+            background: #6a4e9b;
+            color: #fff;
+        }
+
+        .module-nav .btn-next:hover {
+            background: #5a3e8a;
+        }
+
+        .module-nav .btn-finish {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .module-nav .btn-finish:hover {
+            background: #1e8449;
+        }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                padding-bottom: 80px;
+            }
+            .container {
+                padding: 16px 14px;
+            }
+            .course-header h1 {
+                font-size: 20px;
+            }
+            .module-title {
+                font-size: 18px;
+            }
+            .nav-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .module-nav .btn {
+                font-size: 13px;
+                padding: 8px 16px;
+                min-width: 80px;
+            }
+            .module-content table {
+                font-size: 12px;
+            }
+            .module-content table th,
+            .module-content table td {
+                padding: 4px 8px;
+            }
+            .task-actions {
+                flex-direction: column;
+            }
+            .task-actions .task-btn,
+            .task-actions .task-btn-hint,
+            .task-actions .task-btn-save {
+                width: 100%;
+                text-align: center;
+            }
+            .glossary-item {
+                padding: 12px 14px;
+            }
+        }
+
+        /* === ПОДВАЛ === */
+        .course-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #eee9e0;
+            text-align: center;
+            font-size: 13px;
+            color: #8a8a8a;
+        }
+
+        .glossary-count {
+            font-size: 13px;
+            color: #6a6a6a;
+            margin-bottom: 12px;
+        }
+
+        .structure-diagram {
+            background: #f8f5ef;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            border: 2px solid #ddd8ce;
+            text-align: center;
+        }
+
+        .structure-diagram .level {
+            display: block;
+            padding: 12px;
+            margin: 6px 0;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .structure-diagram .level-1 { background: #e8e0f0; color: #4a2e7b; border-left: 4px solid #6a4e9b; }
+        .structure-diagram .level-2 { background: #d4e6f1; color: #1a5276; border-left: 4px solid #2980b9; }
+        .structure-diagram .level-3 { background: #d5f5e3; color: #1a6a3a; border-left: 4px solid #27ae60; }
+        .structure-diagram .arrow { color: #8a8a8a; font-size: 20px; padding: 2px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <!-- ШАПКА -->
+    <div class="course-header">
+        <h1>
+            🗝️ <span class="accent1">Алхимия</span>
+            <span class="accent2">· Ключ</span>
+            <span class="accent3">· Инструменты</span>
+        </h1>
+        <div class="sub">
+            Трёхуровневая практическая система для работы с землёй, правом и управлением
+            <br>
+            <span class="level level-1">Уровень 1: Онтология</span>
+            <span class="level level-2">Уровень 2: Операция</span>
+            <span class="level level-3">Уровень 3: Тактика</span>
+        </div>
+        <div class="course-meta">
+            <span>📚 12 модулей</span>
+            <span>📝 Задания для самопроверки</span>
+            <span>📖 Глоссарий: <span id="glossaryCount">0</span> терминов</span>
+            <span>🎯 Прогресс: <span id="progressPercent">0</span>%</span>
+        </div>
+    </div>
+
+    <!-- ПРОГРЕСС -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="nav-modules" id="navModules">
+        <button class="nav-btn glossary-btn" onclick="showGlossary()">📖 Глоссарий</button>
+    </div>
+
+    <!-- КОНТЕЙНЕР МОДУЛЕЙ -->
+    <div id="modulesContainer"></div>
+
+    <!-- ГЛОССАРИЙ -->
+    <div class="glossary-section" id="glossarySection">
+        <div class="module-title">📖 Глоссарий</div>
+        <div class="module-sub">Основные термины трёхуровневой системы</div>
+        <div class="glossary-count" id="glossaryCountDisplay"></div>
+        <input type="text" class="glossary-search" id="glossarySearch" placeholder="🔍 Поиск по глоссарию..." oninput="filterGlossary(this.value)">
+        <div id="glossaryList"></div>
+        <div style="margin-top:20px;">
+            <button class="btn btn-next" onclick="showModule(0)" style="width:100%;">← Вернуться к курсу</button>
+        </div>
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <div class="course-footer">
+        <span>🗝️ Ключ к действию — <a href="#" style="color: #6a4e9b; text-decoration: none;">kadinfo.ru</a></span>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // ДАННЫЕ КУРСА
+    // ============================================================
+
+    const courseData = {
+        title: "Алхимия · Ключ · Инструменты",
+        modules: [
+            // ===== УРОВЕНЬ 1: ОНТОЛОГИЯ (Алхимический метод) =====
+            {
+                id: 0,
+                level: 1,
+                title: "Введение в трёхуровневую систему",
+                subtitle: "Обзор онтологии, операции и тактики",
+                content: `
+                    <div class="structure-diagram">
+                        <div class="level level-1">🔮 УРОВЕНЬ 1: ОНТОЛОГИЯ — <a href="https://kadinfo.ru/2026/02/23/alhimia/">Алхимический метод</a></div>
+                        <div class="arrow">⬇️</div>
+                        <div class="level level-2">⚙️ УРОВЕНЬ 2: ОПЕРАЦИЯ — <a href="https://kadinfo.ru/2026/06/24/key/">Ключ к действию</a></div>
+                        <div class="arrow">⬇️</div>
+                        <div class="level level-3">🛠️ УРОВЕНЬ 3: ТАКТИКА — <a href="https://kadinfo.ru/2026/07/17/tools/">Набор инструментов</a></div>
+                    </div>
+
+                    <p><strong>Три уровня — одна практика.</strong></p>
+
+                    <p>Система построена так, что каждый уровень отвечает на свой вопрос:</p>
+
+                    <ul>
+                        <li><strong>Уровень 1 (Онтология):</strong> «Как понять суть ситуации?» — Алхимический метод даёт различéния: Верх/Низ, Желание/Замысел, Единая Вещь/Осадок.</li>
+                        <li><strong>Уровень 2 (Операция):</strong> «Как двигаться от неопределённости к действию?» — Ключ даёт три множества: опоры, вопросы, шаги.</li>
+                        <li><strong>Уровень 3 (Тактика):</strong> «Какие конкретные инструменты использовать?» — Набор инструментов даёт матрицы, карты, протоколы, чек-листы.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Как пользоваться курсом:</strong>
+                        <p>Изучайте последовательно — от уровня 1 к уровню 3. Каждый уровень опирается на предыдущий. Выполняйте задания для закрепления. Используйте глоссарий для уточнения терминов.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Определение вашего текущего уровня",
+                        prompt: "Оцените, на каком уровне вы находитесь в своей практике: (1) понимаете суть, но не знаете, как действовать; (2) действуете, но хаотично; (3) используете инструменты, но без системы. Опишите свою ситуацию.",
+                        placeholder: "Мой текущий уровень: ...\nЧто я хочу изменить: ...",
+                        hint: "Пример: Я нахожусь на уровне 2 — у меня есть опыт, но я часто действую интуитивно, без чёткой системы. Хочу научиться структурировать процесс от замысла до результата."
+                    }
+                ]
+            },
+            {
+                id: 1,
+                level: 1,
+                title: "Алхимия. Различения: Верх и Низ",
+                subtitle: "Объективный порядок и конкретные условия",
+                content: `
+                    <h3>Что такое Верх и Низ</h3>
+
+                    <p>Всякое Делание имеет два полюса. Один — то, что должно быть воплощено. Другой — то, во что оно воплощается.</p>
+
+                    <div class="highlight-box">
+                        <strong>Верх</strong> — это объективный порядок мира: законы, нормы, правила, практики, прецеденты. Он существует независимо от вашего желания.
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>Низ</strong> — это конкретные условия ситуации: факты, документы, ресурсы, обстоятельства, люди.
+                    </div>
+
+                    <p><strong>Золотое правило:</strong> Не смешивайте Верх и Низ. Закон — это Верх. Ваше желание — это не Верх. Ваш участок — это Низ. Документы — это Низ.</p>
+
+                    <h3>Как работать с различением</h3>
+
+                    <p>Входя в ситуацию, спросите себя:</p>
+                    <ul>
+                        <li>«Что здесь принадлежит Верху?» — законы, нормы, правила</li>
+                        <li>«Что здесь принадлежит Низу?» — факты, документы, ресурсы</li>
+                        <li>«Что из Верха можно приложить к Низу?» — это и есть ваша задача</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <strong>Пример из земельной практики:</strong>
+                        <p><strong>Верх:</strong> ст. 8 ВК РФ — пруд в границах участка юрлица является его собственностью.</p>
+                        <p><strong>Низ:</strong> Участок с кадастровым номером 50:08:0000000:15, на нём есть пруд.</p>
+                        <p><strong>Задача:</strong> Приложить ст. 8 ВК РФ к факту наличия пруда на участке.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Разделение Верха и Низа в вашей ситуации",
+                        prompt: "Возьмите вашу ситуацию. Выпишите отдельно: что относится к Верху (законы, нормы, правила), а что — к Низу (факты, документы, ресурсы).",
+                        placeholder: "Верх: ...\nНиз: ...",
+                        hint: "Пример:\nВерх: ЗК РФ (ст. 77 — земли сельхозназначения), ВК РФ (ст. 8 — пруды в частной собственности), ФЗ № 137-ФЗ (приватизация).\nНиз: Участок 4 043 489 кв.м, ВРИ «для сельхозпроизводства», пруды построены в 1971 году, выписка ЕГРН, договор аренды."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                level: 1,
+                title: "Алхимия. Желание и Замысел",
+                subtitle: "От сырого импульса к оформленной гипотезе",
+                content: `
+                    <h3>Различение желания и замысла</h3>
+
+                    <p><strong>Желание</strong> — это сырой импульс. Он может быть смутным или ясным, но в нём ещё нет формы, нет отбора, нет соразмерности.</p>
+
+                    <p><strong>Замысел</strong> — это оформленная гипотеза о том, какую часть Верха и какую часть Низа нужно отобрать для соединения.</p>
+
+                    <div class="highlight-box">
+                        <strong>Процесс очищения:</strong>
+                        <p>Из желания уходит несбыточное — и рождается замысел.</p>
+                        <p>Из Верха уходит мнимое — остаётся только то, что имеет корень.</p>
+                        <p>Из Низа уходит непригодное — остаётся то, что способно принять форму.</p>
+                    </div>
+
+                    <h3>Вопросы для очищения желания</h3>
+
+                    <ul>
+                        <li>«Что в моём желании — зерно, а что — шелуха?»</li>
+                        <li>«Какой Верх откликается на моё желание?»</li>
+                        <li>«Достаточен ли мой жар для соединения?»</li>
+                        <li>«Что я готов отложить, чтобы замысел стал чистым?»</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <strong>Пример:</strong>
+                        <p><strong>Желание:</strong> «Хочу построить дом на своём участке!»</p>
+                        <p><strong>Замысел:</strong> «Получить право на размещение объекта капитального строительства в зоне СХЗ, соответствующего нормам СП 53.13330, с последующей регистрацией права.»</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Очищение желания до замысла",
+                        prompt: "Сформулируйте ваше желание, а затем проведите его через очищение. Запишите, что ушло (шелуха) и что осталось (зерно).",
+                        placeholder: "Желание: ...\nШелуха: ...\nЗерно (замысел): ...",
+                        hint: "Пример:\nЖелание: «Хочу, чтобы администрация наконец-то дала мне разрешение на строительство!»\nШелуха: ожидание, что администрация «наконец-то» изменится; надежда на чудо.\nЗерно (замысел): «Подать уведомление о строительстве в соответствии со ст. 51.1 ГрК РФ, а при отказе — обжаловать его в суде.»"
+                    }
+                ]
+            },
+            {
+                id: 3,
+                level: 1,
+                title: "Алхимия. Единая Вещь и Осадок",
+                subtitle: "Результат и неизбежный побочный продукт",
+                content: `
+                    <h3>Что такое Единая Вещь</h3>
+
+                    <p><strong>Единая Вещь</strong> — это результат Соединения. Не просто «решение», а новое качество, рождающееся в точке, где отобранные части Верха и Низа соединяются через искусный отбор и соразмерный жар.</p>
+
+                    <p>В Единой Вещи — корень Верха и плоть Низа. Замысел и жар не входят в неё как части, но делают её возможной.</p>
+
+                    <h3>Что такое Осадок</h3>
+
+                    <p><strong>Осадок</strong> — это побочный продукт, неизбежно появляющийся в ходе нагрева. Это плата за трансформацию.</p>
+
+                    <div class="highlight-box">
+                        <strong>Отношение к осадку:</strong>
+                        <ul>
+                            <li>Осадок — не ошибка и не прокол. Это плата за трансформацию.</li>
+                            <li>Искусность Делателя определяется не отсутствием осадка, а умением с ним обращаться.</li>
+                            <li>Осадок не входит в результат, но входит в опыт.</li>
+                        </ul>
+                    </div>
+
+                    <div class="success-box">
+                        <strong>Пример из практики:</strong>
+                        <p><strong>Единая Вещь:</strong> Зарегистрированное право собственности на здание.</p>
+                        <p><strong>Осадок:</strong> Испорченные отношения с соседом, потраченное время, судебные издержки, моральная усталость.</p>
+                        <p><strong>Умение:</strong> Признать осадок, извлечь из него урок и использовать в следующем круге.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Оценка осадка в вашей ситуации",
+                        prompt: "Представьте, что вы достигли своей цели. Какой осадок неизбежно возникнет? Что вы готовы принять как плату за результат?",
+                        placeholder: "Цель: ...\nОсадок (неизбежные потери): ...\nЧто я готов принять: ...",
+                        hint: "Пример:\nЦель: Получить разрешение на строительство.\nОсадок: Потеря времени на суды (6–12 месяцев), испорченные отношения с администрацией, финансовые затраты на юристов и экспертизы.\nЧто я готов принять: Я готов потратить до 200 000 ₽ и до 1 года на судебный процесс. Отношения с администрацией меня не волнуют."
+                    }
+                ]
+            },
+            // ===== УРОВЕНЬ 2: ОПЕРАЦИЯ (Ключ к действию) =====
+            {
+                id: 4,
+                level: 2,
+                title: "Ключ. Три множества",
+                subtitle: "Опоры, вопросы, шаги",
+                content: `
+                    <h3>Что такое Ключ</h3>
+
+                    <p><strong>Ключ</strong> — это орудие ума, соединяющее объективный порядок с условиями и позволяющее переходить от замысла к результату.</p>
+
+                    <p>Всякий Ключ для всякой ситуации есть <strong>три множества</strong>, собранные делателем:</p>
+
+                    <div class="highlight-box">
+                        <strong>1. Опоры</strong> — законы, понятия, практики, прецеденты, на которых может быть построено движение.
+                    </div>
+                    <div class="highlight-box">
+                        <strong>2. Вопросы</strong> — всё, что должно быть прояснено, прежде чем действие обретёт уверенность.
+                    </div>
+                    <div class="highlight-box">
+                        <strong>3. Шаги</strong> — всё, что может быть сделано здесь и сейчас для воплощения замысла.
+                    </div>
+
+                    <h3>Как собираются множества</h3>
+
+                    <p>Множества собираются не последовательно, а в одном движении внимания — наложением друг на друга.</p>
+
+                    <blockquote>Бери любую опору или любое условие. Это тотчас порождает вопросы. Ответы на вопросы выявляют Критический остаток. Критический остаток определяет шаги. Сделанные шаги проявляют новые опоры. Круг замкнут.</blockquote>
+
+                    <h3>Что такое Критический остаток</h3>
+
+                    <p><strong>Критический остаток</strong> — это главное противоречие, которое держит ситуацию. Это диагноз.</p>
+
+                    <div class="success-box">
+                        <strong>Пример:</strong>
+                        <p><strong>Опоры:</strong> ст. 8 ВК РФ, ст. 77 ЗК РФ, судебная практика по аналогичным делам.</p>
+                        <p><strong>Вопросы:</strong> «Является ли водный объект прудом или рекой?», «Есть ли гидравлическая связь?»</p>
+                        <p><strong>Критический остаток:</strong> Истец не доказал, что водный объект является рекой (федеральной собственностью), поэтому ст. 6 ВК РФ не применима.</p>
+                        <p><strong>Шаги:</strong> Заказать гидрологическую экспертизу, подать ходатайство о назначении экспертизы.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Сбор трёх множеств",
+                        prompt: "Для вашей ситуации соберите три множества: опоры, вопросы, критический остаток. Затем определите первый шаг.",
+                        placeholder: "Опоры: ...\nВопросы: ...\nКритический остаток: ...\nПервый шаг: ...",
+                        hint: "Пример:\nОпоры: ст. 8 ВК РФ, ст. 77 ЗК РФ, ФЗ № 137-ФЗ, выписка ЕГРН.\nВопросы: «Доказано ли, что водный объект — река?», «Есть ли доказательства государственной собственности?»\nКритический остаток: Истец не представил доказательств того, что водный объект является рекой, а не прудом.\nПервый шаг: Запросить гидрологическое заключение у аккредитованной организации."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                level: 2,
+                title: "Ключ. Завершение круга",
+                subtitle: "Улучшение, отказ, ясность, достоинство",
+                content: `
+                    <h3>Как завершить круг</h3>
+
+                    <p>Круг завершён, когда делатель достигает одного из четырёх состояний:</p>
+
+                    <div class="highlight-box">
+                        <strong>1. Улучшение</strong> — ситуация изменилась к лучшему.
+                    </div>
+                    <div class="highlight-box">
+                        <strong>2. Отказ или отложение</strong> — замысел не нашёл опоры.
+                    </div>
+                    <div class="highlight-box">
+                        <strong>3. Ясность</strong> — понимание, которое становится опорой для следующего круга.
+                    </div>
+                    <div class="highlight-box">
+                        <strong>4. Достоинство</strong> — способность действовать как субъект, а не жертва.
+                    </div>
+
+                    <h3>Два обязательных акта завершения</h3>
+
+                    <p>Завершение не наступает, пока делатель:</p>
+
+                    <ol>
+                        <li><strong>Не оглянется</strong> на тех, кому стало хуже — признает потери, которые возникли в результате Делания.</li>
+                        <li><strong>Не зафиксирует</strong>, что он понял об объективном порядке в результате этого круга. Это понимание становится опорой для следующего круга.</li>
+                    </ol>
+
+                    <div class="success-box">
+                        <strong>Пример завершения круга:</strong>
+                        <p><strong>Ситуация:</strong> Судебный процесс по легализации границ.</p>
+                        <p><strong>Результат:</strong> Решение суда в пользу ответчика — границы установлены по фактическому пользованию.</p>
+                        <p><strong>Улучшение:</strong> Границы легализованы, предписание снято.</p>
+                        <p><strong>Оглянуться:</strong> Сосед Иванов проиграл спор — его претензии на 150 м² отклонены. Он остался с тем же, что имел.</p>
+                        <p><strong>Опыт:</strong> В следующий раз нужно начинать с досудебного урегулирования и предлагать соседу компенсацию, чтобы избежать судебных издержек.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Завершение круга",
+                        prompt: "Представьте, что вы завершили ваше дело. Опишите: какое улучшение достигнуто, кому стало хуже, и какой опыт вы получили.",
+                        placeholder: "Улучшение: ...\nКому стало хуже: ...\nМой опыт: ...",
+                        hint: "Пример:\nУлучшение: Я получил разрешение на строительство после 8 месяцев судов.\nКому стало хуже: Администрация потеряла время и ресурсы на судебный процесс; соседи потратили нервы на переговоры.\nМой опыт: В следующий раз я начну с досудебной претензии и буду более настойчив в сборе доказательств на раннем этапе."
+                    }
+                ]
+            },
+            // ===== УРОВЕНЬ 3: ТАКТИКА (Набор инструментов) =====
+            {
+                id: 6,
+                level: 3,
+                title: "Инструменты. Матрица источников",
+                subtitle: "Систематизация собираемых данных",
+                content: `
+                    <h3>Что такое Матрица источников</h3>
+
+                    <p><strong>Матрица источников информации</strong> — инструмент для систематизации собираемых данных. Она структурирует информацию по двум осям: «официальные — неофициальные» и «документальные — полевые».</p>
+
+                    <h3>Структура матрицы</h3>
+
+                    <table>
+                        <thead><tr><th>Тип источника</th><th>Документальные</th><th>Полевые (физические)</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Официальные</strong></td><td>Данные ЕГРН, кадастровые планы, решения администрации, судебные акты</td><td>Акты выноса границ, акты проверок, геодезическая съёмка</td></tr>
+                            <tr><td><strong>Неофициальные</strong></td><td>Старые свидетельства, проектная документация, переписка, похозяйственные книги</td><td>Фотофиксация, свидетельские показания, личный осмотр</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Как применять</h3>
+
+                    <p>На этапе сбора данных заполните все четыре ячейки. Это гарантирует, что вы не пропустите ни одного типа информации.</p>
+
+                    <div class="highlight-box">
+                        <strong>Золотое правило:</strong>
+                        <p>Сопоставляйте данные из разных ячеек. Расхождения между ними — это точки, требующие дополнительной проверки.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Заполнение матрицы",
+                        prompt: "Для вашей ситуации заполните матрицу источников информации. Что у вас есть из каждой ячейки?",
+                        placeholder: "Официальные-документальные: ...\nОфициальные-полевые: ...\nНеофициальные-документальные: ...\nНеофициальные-полевые: ...",
+                        hint: "Пример:\nОфициальные-документальные: выписка ЕГРН, кадастровый план, решение администрации.\nОфициальные-полевые: акт выноса границ, геодезическая съёмка.\nНеофициальные-документальные: старая похозяйственная книга, свидетельство 1995 года.\nНеофициальные-полевые: фотографии участка, показания соседей."
+                    }
+                ]
+            },
+            {
+                id: 7,
+                level: 3,
+                title: "Инструменты. Карта заинтересованных сторон",
+                subtitle: "Анализ социального поля",
+                content: `
+                    <h3>Что такое Карта заинтересованных сторон</h3>
+
+                    <p><strong>Карта заинтересованных сторон</strong> — инструмент для анализа социального поля. Она фиксирует всех участников ситуации, их формальные роли, существенные интересы, ресурсы и решимость.</p>
+
+                    <h3>Структура карты</h3>
+
+                    <p>Для каждой стороны фиксируются:</p>
+
+                    <ul>
+                        <li><strong>Формальный статус</strong> — собственник, арендатор, орган власти, сосед, надзорный орган.</li>
+                        <li><strong>Существенный интерес</strong> — что сторона хочет получить или сохранить (явные и неявные интересы).</li>
+                        <li><strong>Ключевой ресурс</strong> — что сторона может использовать: право подписи, информация, административный ресурс, деньги, время.</li>
+                        <li><strong>Решимость</strong> — высокая, средняя, низкая (готовность стороны действовать, тратить ресурсы, идти на конфликт).</li>
+                    </ul>
+
+                    <h3>Как применять</h3>
+
+                    <p>Заполните карту на начальном этапе работы. В ходе проекта регулярно обновляйте её: интересы и решимость сторон могут меняться.</p>
+
+                    <div class="danger-box">
+                        <strong>⚠️ Особое внимание:</strong>
+                        <p>Уделите сторонам с высокой решимостью и высокими ресурсами — они требуют активного вовлечения.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Анализ сторон",
+                        prompt: "Для вашей ситуации составьте карту заинтересованных сторон. Для каждой стороны укажите статус, интерес, ресурс и решимость.",
+                        placeholder: "Сторона 1: ...\nСторона 2: ...\nСторона 3: ...",
+                        hint: "Пример:\n1. Собственник (я): статус — собственник, интерес — сохранить участок, ресурс — право собственности, решимость — высокая.\n2. Администрация: статус — орган власти, интерес — соблюдение правил, ресурс — право подписи, решимость — средняя.\n3. Сосед Иванов: статус — смежный собственник, интерес — спорная граница, ресурс — юридические знания, решимость — высокая."
+                    }
+                ]
+            },
+            {
+                id: 8,
+                level: 3,
+                title: "Инструменты. Исходная и Проектная карты",
+                subtitle: "От «как есть» к «как должно быть»",
+                content: `
+                    <h3>Исходная карта землепользования</h3>
+
+                    <p><strong>Исходная карта</strong> — это пространственная модель ситуации «как есть». Она содержит три наложенных слоя:</p>
+
+                    <ul>
+                        <li><strong>Юридический слой</strong> — границы по ЕГРН, категории земель, ВРИ, обременения, ЗОУИТ.</li>
+                        <li><strong>Физический слой</strong> — фактические границы, постройки, коммуникации, рельеф, дороги.</li>
+                        <li><strong>Человеческий слой</strong> — зоны конфликтов интересов, территории с особыми ожиданиями сторон.</li>
+                    </ul>
+
+                    <h3>Проектная карта землепользования</h3>
+
+                    <p><strong>Проектная карта</strong> — это пространственная модель целевого состояния «как должно быть». Она содержит:</p>
+
+                    <ul>
+                        <li><strong>Проектные границы</strong> — новые границы участков после преобразований.</li>
+                        <li><strong>Планируемое изменение ВРИ</strong> — новое разрешённое использование.</li>
+                        <li><strong>Расположение объектов</strong> — проектные параметры зданий и сооружений.</li>
+                        <li><strong>Схему обременений и ограничений</strong> — сохраняющиеся или вновь возникающие ЗОУИТ.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Ключевое правило:</strong>
+                        <p>Исходная карта — это диагноз. Проектная карта — это рецепт. Без диагноза рецепт слеп. Без рецепта диагноз бесполезен.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Построение карт",
+                        prompt: "Для вашей ситуации опишите: что содержит исходная карта (три слоя) и что содержит проектная карта (целевое состояние).",
+                        placeholder: "Исходная карта (юридический): ...\nИсходная карта (физический): ...\nИсходная карта (человеческий): ...\nПроектная карта: ...",
+                        hint: "Пример:\nИсходная карта (юридический): Участок 50:08:0000000:15, ВРИ «для сельхозпроизводства», категория «земли сельхозназначения», границы по ЕГРН — 4 043 489 кв.м.\nИсходная карта (физический): Фактические границы — 3 172 076 кв.м, внутри пруды, здания, дороги.\nИсходная карта (человеческий): Спор с прокуратурой о статусе водных объектов, конфликт с соседом по границе.\nПроектная карта: Признание права на пруды (ст. 8 ВК РФ), установление границ по фактическому пользованию, снятие предписания."
+                    }
+                ]
+            },
+            {
+                id: 9,
+                level: 3,
+                title: "Инструменты. Протокол задачи и Протокол шага",
+                subtitle: "Формализация запроса и планирование действия",
+                content: `
+                    <h3>Протокол задачи</h3>
+
+                    <p><strong>Протокол задачи</strong> — инструмент для формализации запроса на начальной стадии работы.</p>
+
+                    <p><strong>Структура:</strong></p>
+
+                    <ul>
+                        <li><strong>Цель</strong> — что мы хотим изменить.</li>
+                        <li><strong>Границы задачи</strong> — что входит в работу, а что остаётся за её пределами.</li>
+                        <li><strong>Критерии успеха</strong> — как мы узнаем, что цель достигнута.</li>
+                        <li><strong>Формат результата</strong> — что мы получим в итоге.</li>
+                        <li><strong>Сроки</strong> — ориентировочные временные рамки.</li>
+                        <li><strong>Участники</strong> — кто участвует в работе.</li>
+                    </ul>
+
+                    <h3>Протокол шага</h3>
+
+                    <p><strong>Протокол шага</strong> — инструмент для фиксации планируемого действия перед его совершением.</p>
+
+                    <p><strong>Структура:</strong></p>
+
+                    <ul>
+                        <li><strong>Цель шага</strong> — что мы хотим получить.</li>
+                        <li><strong>Действие</strong> — что именно мы делаем.</li>
+                        <li><strong>Обоснование</strong> — почему этот шаг выбран.</li>
+                        <li><strong>Ожидаемый результат</strong> — как мы узнаем, что шаг удался.</li>
+                        <li><strong>Альтернативные исходы</strong> — что может пойти не так.</li>
+                        <li><strong>Исполнитель</strong> — кто совершает действие.</li>
+                        <li><strong>Срок</strong> — когда действие должно быть совершено.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Правило:</strong>
+                        <p>Протокол шага заполняется перед совершением шага. После шага вернитесь к нему и оцените, что произошло.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Составление протоколов",
+                        prompt: "Составьте протокол задачи для вашей ситуации и протокол одного конкретного шага.",
+                        placeholder: "Протокол задачи:\nЦель: ...\nГраницы: ...\nКритерии успеха: ...\n\nПротокол шага:\nЦель шага: ...\nДействие: ...\nОбоснование: ...",
+                        hint: "Пример:\nПротокол задачи:\nЦель: Легализовать фактические границы участка.\nГраницы: Только участок 50:08:0000000:15, вопросы водных объектов не входят.\nКритерии успеха: Новая выписка ЕГРН с уточнёнными границами.\n\nПротокол шага:\nЦель шага: Получить гидрологическое заключение.\nДействие: Заказать экспертизу в ООО «Гидролайн».\nОбоснование: Для доказательства, что водные объекты — пруды, а не река.\nОжидаемый результат: Заключение о происхождении и природе водных объектов.\nАльтернативные исходы: Экспертиза может быть неоднозначной — тогда потребуется дополнительная.\nИсполнитель: Кадастровый инженер Иванов И.И.\nСрок: до 30 ноября 2026."
+                    }
+                ]
+            },
+            {
+                id: 10,
+                level: 3,
+                title: "Инструменты. Журнал обратной связи",
+                subtitle: "Фиксация проявленного в результате шагов",
+                content: `
+                    <h3>Что такое Журнал обратной связи</h3>
+
+                    <p><strong>Журнал обратной связи</strong> — инструмент для фиксации того, что проявилось в результате каждого шага. Он позволяет удерживать информацию о реакции среды, корректировках замысла и принятых решениях.</p>
+
+                    <h3>Структура записи в Журнале</h3>
+
+                    <p>Для каждого шага фиксируются:</p>
+
+                    <ul>
+                        <li><strong>Дата</strong> — дата совершения шага.</li>
+                        <li><strong>Шаг</strong> — краткое описание действия.</li>
+                        <li><strong>Что сделано</strong> — детали действия.</li>
+                        <li><strong>Что проявилось</strong> — реакция среды: ответ, позиция стороны, новый факт.</li>
+                        <li><strong>Что изменилось в понимании</strong> — какие предположения подтвердились или опроверглись.</li>
+                        <li><strong>Корректировка</strong> — какие изменения внесены в замысел или следующий шаг.</li>
+                        <li><strong>Следующий шаг</strong> — что планируется сделать дальше.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Золотое правило:</strong>
+                        <p>Журнал заполняется после каждого шага. Он позволяет видеть траекторию движения, не терять информацию и возвращаться к предыдущим решениям при необходимости.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Запись в Журнал",
+                        prompt: "Опишите один из ваших последних шагов в формате журнала обратной связи.",
+                        placeholder: "Дата: ...\nШаг: ...\nЧто сделано: ...\nЧто проявилось: ...\nЧто изменилось в понимании: ...\nКорректировка: ...\nСледующий шаг: ...",
+                        hint: "Пример:\nДата: 15.06.2026\nШаг: Подача ходатайства о назначении гидрологической экспертизы.\nЧто сделано: Направлено ходатайство в суд с приложением 3 экспертных организаций.\nЧто проявилось: Суд удовлетворил ходатайство, назначил экспертизу в ООО «Гидролайн».\nЧто изменилось в понимании: Судья склонна доверять экспертным заключениям, это наш шанс.\nКорректировка: Усилить взаимодействие с экспертами — предоставить все имеющиеся документы.\nСледующий шаг: Направить экспертам пакет документов."
+                    }
+                ]
+            },
+            {
+                id: 11,
+                level: 3,
+                title: "Инструменты. Метод выделения критического остатка",
+                subtitle: "Последовательное исключение слоёв интерпретаций",
+                content: `
+                    <h3>Что такое Критический остаток</h3>
+
+                    <p><strong>Критический остаток</strong> — это главное противоречие, которое держит ситуацию. Метод его выявления заключается в последовательном исключении слоёв интерпретаций до обнаружения неразрешимого остатка.</p>
+
+                    <h3>Процедура метода</h3>
+
+                    <p><strong>Шаг 1. Сбор слоёв.</strong> Запишите все аргументы, объяснения и интерпретации ситуации от всех сторон.</p>
+
+                    <p><strong>Шаг 2. Первичное разделение.</strong> Отделите факты (что произошло объективно) от интерпретаций (как это объясняют стороны).</p>
+
+                    <p><strong>Шаг 3. Последовательное исключение.</strong> Возьмите первый слой интерпретаций и проверьте: если убрать эту интерпретацию, меняется ли суть спора? Исключайте каждый слой, пока не останется утверждение, без которого спор теряет смысл.</p>
+
+                    <p><strong>Шаг 4. Работа с остатком.</strong> Признав критический остаток, спросите: «Что можно сделать с этим утверждением?»</p>
+
+                    <div class="success-box">
+                        <strong>Пример:</strong>
+                        <p><strong>Спор:</strong> Соседи спорят о границе участков.</p>
+                        <p><strong>Слои интерпретаций:</strong> «Сосед передвинул забор» → «В документах у меня площадь больше» → «Я помню, как ставили забор в 1995 году».</p>
+                        <p><strong>Критический остаток:</strong> Ни одна сторона не может документально подтвердить, где проходила межа на момент установки забора.</p>
+                        <p><strong>Стратегия:</strong> Признать фактическое землепользование и заключить соглашение.</p>
+                    </div>
+                `,
+                tasks: [
+                    {
+                        title: "📝 Задание. Выделение критического остатка",
+                        prompt: "Примените метод последовательного исключения к вашей ситуации. Запишите все слои интерпретаций и выявите критический остаток.",
+                        placeholder: "Слои интерпретаций: ...\nКритический остаток: ...\nСтратегия работы: ...",
+                        hint: "Пример:\nСлои интерпретаций:\n1. «Прокуратура действует по указанию администрации» — нет доказательств\n2. «Водный объект — река, это федеральная собственность» — не доказано\n3. «Участок — земли населённых пунктов, поэтому ст. 85 ЗК РФ» — не соответствует ст. 77 ЗК РФ\n\nКритический остаток: Истец не доказал, что водный объект в границах участка является рекой, а не прудом, и что участок относится к землям населённых пунктов.\n\nСтратегия: Сосредоточиться на доказательстве того, что водный объект — пруд (ст. 8 ВК РФ) и участок — земли сельхозназначения (ст. 77 ЗК РФ)."
+                    }
+                ]
+            }
+        ]
+    };
+
+    // ============================================================
+    // ГЛОССАРИЙ
+    // ============================================================
+
+    const glossaryData = [
+        { term: "Алхимический метод", definition: "Онтологический уровень системы. Основан на герметической традиции (Изумрудная Скрижаль). Работает с различéниями: Верх/Низ, Желание/Замысел, Единая Вещь/Осадок." },
+        { term: "Великое Делание", definition: "Циклический процесс алхимического метода: Разделение → Очищение → Соединение → Возвращение отложенного → Выход в мир → Завершение." },
+        { term: "Верх", definition: "Объективный порядок мира: законы, нормы, правила, практики, прецеденты. Существует независимо от желания делателя." },
+        { term: "Низ", definition: "Конкретные условия ситуации: факты, документы, ресурсы, обстоятельства, люди. Изменчив, с ним нужно работать." },
+        { term: "Желание", definition: "Сырой импульс, предтеча замысла. Не имеет формы и соразмерности. Требует очищения." },
+        { term: "Замысел", definition: "Оформленная гипотеза о соединении Верха и Низа. Инструмент отбора." },
+        { term: "Единая Вещь", definition: "Результат Соединения Верха и Низа. Новое качество, устойчивое и живое." },
+        { term: "Осадок", definition: "Побочный продукт Делания. Неизбежная плата за трансформацию. Не входит в результат, но входит в опыт." },
+        { term: "Ключ к действию", definition: "Операциональный уровень системы. Орудие ума, соединяющее объективный порядок с условиями. Три множества: опоры, вопросы, шаги." },
+        { term: "Опоры", definition: "Законы, понятия, практики, прецеденты, на которых строится движение. Явленное, что уже существует." },
+        { term: "Вопросы", definition: "То, что должно быть прояснено для движения. Рождаются из опор и условий. Ведут к критическому остатку." },
+        { term: "Шаги", definition: "Действия, направленные на применение объективного порядка к условиям. Гипотезы, а не обязательства." },
+        { term: "Критический остаток", definition: "Главное противоречие, которое держит ситуацию. Выявляется через последовательное исключение слоёв интерпретаций." },
+        { term: "Набор инструментов", definition: "Тактический уровень системы. Конкретные инструменты: матрицы, карты, протоколы, чек-листы, каталоги операций." },
+        { term: "Матрица источников", definition: "Инструмент систематизации данных по двум осям: официальные/неофициальные и документальные/полевые." },
+        { term: "Карта заинтересованных сторон", definition: "Инструмент анализа социального поля: статусы, интересы, ресурсы, решимость участников ситуации." },
+        { term: "Исходная карта", definition: "Пространственная модель «как есть». Три слоя: юридический, физический, человеческий." },
+        { term: "Проектная карта", definition: "Пространственная модель «как должно быть». Проектные границы, ВРИ, объекты, обременения." },
+        { term: "Протокол задачи", definition: "Инструмент формализации запроса: цель, границы, критерии успеха, формат результата, сроки, участники." },
+        { term: "Протокол шага", definition: "Инструмент планирования действия: цель, действие, обоснование, ожидаемый результат, альтернативы, исполнитель, срок." },
+        { term: "Журнал обратной связи", definition: "Инструмент фиксации проявленного после каждого шага: реакция среды, корректировка замысла, следующий шаг." }
+    ];
+
+    // ============================================================
+    // ЛОГИКА ПРИЛОЖЕНИЯ
+    // ============================================================
+
+    let currentModule = 0;
+    const totalModules = courseData.modules.length;
+    let progress = new Array(totalModules).fill(false);
+
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('system_course_progress');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed) && parsed.length === totalModules) {
+                    progress = parsed;
+                }
+            }
+        } catch (e) {}
+    }
+
+    function saveProgress() {
+        try {
+            localStorage.setItem('system_course_progress', JSON.stringify(progress));
+        } catch (e) {}
+    }
+
+    function render() {
+        renderProgressBar();
+        renderNavModules();
+        renderModule(currentModule);
+        updateProgressPercent();
+        renderGlossaryCount();
+    }
+
+    function renderProgressBar() {
+        const container = document.getElementById('progressBar');
+        container.innerHTML = '';
+        for (let i = 0; i < totalModules; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'progress-dot';
+            if (progress[i]) dot.classList.add('completed');
+            if (i === currentModule) dot.classList.add('active');
+            dot.addEventListener('click', () => showModule(i));
+            container.appendChild(dot);
+        }
+    }
+
+    function renderNavModules() {
+        const container = document.getElementById('navModules');
+        const glossaryBtn = container.querySelector('.glossary-btn');
+        container.innerHTML = '';
+        courseData.modules.forEach((mod, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'nav-btn';
+            if (i === currentModule) btn.classList.add('active');
+            if (progress[i]) btn.classList.add('completed');
+            const levelLabel = mod.level === 1 ? '🔮' : mod.level === 2 ? '⚙️' : '🛠️';
+            btn.textContent = `${levelLabel} М${i+1}`;
+            btn.title = mod.title;
+            btn.addEventListener('click', () => showModule(i));
+            container.appendChild(btn);
+        });
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn glossary-btn';
+        btn.textContent = '📖 Глоссарий';
+        btn.addEventListener('click', showGlossary);
+        container.appendChild(btn);
+    }
+
+    function renderModule(index) {
+        const container = document.getElementById('modulesContainer');
+        const mod = courseData.modules[index];
+
+        const levelNames = { 1: 'Уровень 1: Онтология (Алхимия)', 2: 'Уровень 2: Операция (Ключ)', 3: 'Уровень 3: Тактика (Инструменты)' };
+        const levelColors = { 1: '#6a4e9b', 2: '#2980b9', 3: '#27ae60' };
+
+        let tasksHtml = '';
+        if (mod.tasks && mod.tasks.length > 0) {
+            tasksHtml = mod.tasks.map((task, ti) => `
+                <div class="task" id="task-${index}-${ti}">
+                    <div class="task-title">${task.title}</div>
+                    <div class="task-body">
+                        <p>${task.prompt}</p>
+                        <textarea id="task-input-${index}-${ti}" placeholder="${task.placeholder || 'Введите ваш ответ...'}"></textarea>
+                        <div class="task-actions">
+                            <button class="task-btn" onclick="checkTask(${index}, ${ti})">✅ Готово</button>
+                            <button class="task-btn-hint" onclick="showHint(${index}, ${ti})">💡 Подсказка</button>
+                            <button class="task-btn-save" onclick="saveTask(${index}, ${ti})">💾 Сохранить ответ</button>
+                        </div>
+                        <div class="task-feedback" id="task-feedback-${index}-${ti}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        let contentHtml = mod.content;
+
+        const levelTag = `<span class="level-tag" style="background:${levelColors[mod.level]}20;color:${levelColors[mod.level]};">${levelNames[mod.level]}</span>`;
+
+        container.innerHTML = `
+            <div class="module active">
+                <div class="module-title">${mod.title} ${levelTag}</div>
+                <div class="module-sub">${mod.subtitle}</div>
+                <div class="module-content">
+                    ${contentHtml}
+                </div>
+                ${tasksHtml}
+                <div class="module-nav">
+                    <button class="btn btn-prev" onclick="showModule(${index-1})" ${index === 0 ? 'disabled style="opacity:0.4;"' : ''}>← Назад</button>
+                    ${index === totalModules - 1 ? `
+                        <button class="btn btn-finish" onclick="finishCourse()">🎉 Завершить курс</button>
+                    ` : `
+                        <button class="btn btn-next" onclick="showModule(${index+1})">Далее →</button>
+                    `}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('glossarySection').classList.remove('active');
+
+        if (!progress[index]) {
+            progress[index] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+        }
+
+        if (mod.tasks) {
+            mod.tasks.forEach((task, ti) => {
+                const saved = localStorage.getItem(`sys_task_${index}_${ti}`);
+                const textarea = document.getElementById(`task-input-${index}-${ti}`);
+                if (saved && textarea) {
+                    textarea.value = saved;
+                }
+                if (textarea) {
+                    textarea.addEventListener('input', function() {
+                        localStorage.setItem(`sys_task_${index}_${ti}`, this.value);
+                    });
+                }
+            });
+        }
+
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showModule(index) {
+        if (index < 0 || index >= totalModules) return;
+        currentModule = index;
+        render();
+        if (!progress[index]) {
+            progress[index] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+        }
+    }
+
+    function updateProgressPercent() {
+        const done = progress.filter(p => p).length;
+        const pct = Math.round((done / totalModules) * 100);
+        document.getElementById('progressPercent').textContent = pct;
+    }
+
+    function renderGlossaryCount() {
+        document.getElementById('glossaryCount').textContent = glossaryData.length;
+        document.getElementById('glossaryCountDisplay').textContent = `Всего терминов: ${glossaryData.length}`;
+    }
+
+    // ============================================================
+    // ГЛОССАРИЙ
+    // ============================================================
+
+    function showGlossary() {
+        document.querySelectorAll('.module').forEach(el => el.classList.remove('active'));
+        document.getElementById('modulesContainer').innerHTML = '';
+        const section = document.getElementById('glossarySection');
+        section.classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.progress-dot').forEach(dot => dot.classList.remove('active'));
+        renderGlossaryList();
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderGlossaryList(filter) {
+        const container = document.getElementById('glossaryList');
+        const search = filter || document.getElementById('glossarySearch').value || '';
+        const filtered = glossaryData.filter(item =>
+            item.term.toLowerCase().includes(search.toLowerCase()) ||
+            item.definition.toLowerCase().includes(search.toLowerCase())
+        );
+        container.innerHTML = filtered.map((item, index) => `
+            <div class="glossary-item" id="glossary-item-${index}">
+                <div class="term" onclick="toggleGlossaryTerm(${index})">
+                    ${item.term}
+                    <button class="term-toggle">▼</button>
+                </div>
+                <div class="definition" id="glossary-def-${index}">
+                    ${item.definition}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterGlossary(value) {
+        renderGlossaryList(value);
+    }
+
+    function toggleGlossaryTerm(index) {
+        const def = document.getElementById(`glossary-def-${index}`);
+        if (def) {
+            def.classList.toggle('open');
+            const btn = document.querySelector(`#glossary-item-${index} .term-toggle`);
+            if (btn) btn.textContent = def.classList.contains('open') ? '▲' : '▼';
+        }
+    }
+
+    // ============================================================
+    // ЗАДАНИЯ
+    // ============================================================
+
+    function showHint(moduleIdx, taskIdx) {
+        const mod = courseData.modules[moduleIdx];
+        const task = mod.tasks[taskIdx];
+        const textarea = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+
+        if (!task.hint) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Для этого задания подсказка не подготовлена.';
+            return;
+        }
+
+        textarea.value = task.hint;
+        textarea.style.background = '#fef9e7';
+        textarea.style.borderColor = '#f39c12';
+
+        feedback.className = 'task-feedback show hint';
+        feedback.textContent = '💡 Подсказка загружена. Это пример правильного ответа.';
+
+        localStorage.setItem(`sys_task_${moduleIdx}_${taskIdx}`, task.hint);
+    }
+
+    function saveTask(moduleIdx, taskIdx) {
+        const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+        const answer = input ? input.value : '';
+
+        if (!answer.trim()) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Поле пустое. Напишите ответ перед сохранением.';
+            return;
+        }
+
+        const mod = courseData.modules[moduleIdx];
+        const task = mod.tasks[taskIdx];
+        const date = new Date().toLocaleString('ru-RU');
+
+        const content = [
+            '═══════════════════════════════════════════',
+            `  📝 Ответ на задание: ${task.title}`,
+            `  📚 Модуль: ${mod.title}`,
+            `  📅 Дата: ${date}`,
+            '═══════════════════════════════════════════',
+            '',
+            '📌 ЗАДАНИЕ:',
+            task.prompt,
+            '',
+            '📝 ОТВЕТ:',
+            answer,
+            '',
+            '═══════════════════════════════════════════',
+            '  ✍️ Сохранено с помощью интерактивного курса',
+            '  Алхимия · Ключ · Инструменты',
+            '═══════════════════════════════════════════'
+        ].join('\n');
+
+        try {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            const filename = `otvet_modul${moduleIdx+1}_zadanie${taskIdx+1}.txt`;
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+
+            feedback.className = 'task-feedback show success';
+            feedback.textContent = `💾 Ответ сохранён в файл "${filename}"`;
+        } catch (e) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '❌ Ошибка сохранения: ' + e.message;
+        }
+    }
+
+    function checkTask(moduleIdx, taskIdx) {
+        const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
+        const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
+        const answer = input ? input.value.trim() : '';
+
+        if (answer.length === 0) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Пожалуйста, напишите ответ перед проверкой.';
+            return;
+        }
+
+        if (answer.length < 10) {
+            feedback.className = 'task-feedback show error';
+            feedback.textContent = '⚠️ Ответ слишком короткий. Попробуйте развернуть мысль.';
+            return;
+        }
+
+        const taskKey = `sys_task_done_${moduleIdx}_${taskIdx}`;
+        localStorage.setItem(taskKey, 'true');
+
+        feedback.className = 'task-feedback show success';
+        feedback.textContent = '✅ Сохраните ваш ответ.';
+
+        checkModuleCompletion(moduleIdx);
+    }
+
+    function checkModuleCompletion(moduleIdx) {
+        const mod = courseData.modules[moduleIdx];
+        if (!mod.tasks) return;
+
+        let allDone = true;
+        mod.tasks.forEach((task, ti) => {
+            const key = `sys_task_done_${moduleIdx}_${ti}`;
+            if (!localStorage.getItem(key)) {
+                allDone = false;
+            }
+        });
+
+        if (allDone && mod.tasks.length > 0) {
+            progress[moduleIdx] = true;
+            saveProgress();
+            renderProgressBar();
+            renderNavModules();
+            updateProgressPercent();
+
+            const feedbacks = document.querySelectorAll(`#task-feedback-${moduleIdx}-0`);
+            if (feedbacks.length > 0) {
+                const lastFeedback = feedbacks[feedbacks.length - 1];
+                if (lastFeedback) {
+                    const msg = document.createElement('div');
+                    msg.style.marginTop = '12px';
+                    msg.style.padding = '12px 16px';
+                    msg.style.background = '#dff0df';
+                    msg.style.borderRadius = '10px';
+                    msg.style.color = '#2a6a3a';
+                    msg.style.fontWeight = '600';
+                    msg.textContent = '🎉 Все задания модуля выполнены! Переходите к следующему.';
+                    lastFeedback.parentNode.appendChild(msg);
+                }
+            }
+        }
+    }
+
+    function finishCourse() {
+        const allDone = progress.every(p => p === true);
+        if (!allDone) {
+            alert('Вы ещё не прошли все модули. Продолжайте изучение!');
+            return;
+        }
+
+        if (confirm('🎉 Поздравляем! Вы завершили курс "Алхимия · Ключ · Инструменты".\n\nХотите сбросить прогресс и пройти заново?')) {
+            let allAnswers = '';
+            for (let m = 0; m < totalModules; m++) {
+                const mod = courseData.modules[m];
+                if (mod.tasks) {
+                    mod.tasks.forEach((task, ti) => {
+                        const saved = localStorage.getItem(`sys_task_${m}_${ti}`);
+                        if (saved) {
+                            allAnswers += `\n--- Модуль ${m+1}, Задание ${ti+1} ---\n${saved}\n`;
+                        }
+                    });
+                }
+            }
+            if (allAnswers) {
+                const blob = new Blob(['ВСЕ ОТВЕТЫ НА КУРС\n' + '='.repeat(40) + '\n' + allAnswers], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'vse_otvety_system_kursa.txt';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            }
+
+            localStorage.clear();
+            progress = new Array(totalModules).fill(false);
+            saveProgress();
+            render();
+            alert('Прогресс сброшен. Можете начать заново!');
+        }
+    }
+
+    // ============================================================
+    // ИНИЦИАЛИЗАЦИЯ
+    // ============================================================
+
+    loadProgress();
+    render();
+
+    console.log('📚 Курс "Алхимия · Ключ · Инструменты" загружен');
+    console.log(`📖 Всего модулей: ${totalModules}`);
+    console.log(`📝 Выполнено: ${progress.filter(p => p).length}/${totalModules}`);
+    console.log(`📖 Глоссарий: ${glossaryData.length} терминов`);
+</script>
+
+</body>
+</html>
