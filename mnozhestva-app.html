@@ -95,6 +95,10 @@
         border-left-color: #e67e22;
     }
 
+    .set-card.intent {
+        border-left-color: #9b59b6;
+    }
+
     .set-card.opory {
         border-left-color: #6a4e9b;
     }
@@ -109,6 +113,14 @@
 
     .set-card.critical {
         border-left-color: #e74c3c;
+    }
+
+    .set-card.done {
+        border-left-color: #f39c12;
+    }
+
+    .set-card.conditions {
+        border-left-color: #1abc9c;
     }
 
     .set-card .set-label {
@@ -172,6 +184,10 @@
 
     .set-card .field-group textarea.small {
         min-height: 56px;
+    }
+
+    .set-card .field-group textarea.medium {
+        min-height: 90px;
     }
 
     .set-card .field-group textarea.large {
@@ -472,36 +488,41 @@
     </div>
     <div class="section-sub">опишите ситуацию подробно — чем больше деталей, тем точнее будет анализ</div>
 
-    <!-- КАРТОЧКА: ЗАМЫСЕЛ -->
-    <div class="set-card">
+    <!-- КАРТОЧКА: ЗАМЫСЕЛ (ШАГ 1) -->
+    <div class="set-card intent">
         <div class="set-label">
             <span>ШАГ 1</span>
             <span class="set-icon">🎯</span>
         </div>
-        <div class="set-title">Ваш замысел</div>
-        <div class="set-desc">Что вы хотите сделать или получить в итоге?</div>
+        <div class="set-title">Замысел</div>
+        <div class="set-desc">Что вы намерены воплотить? Замысел задаёт направление для сбора всех остальных множеств.</div>
         <div class="field-group">
             <label for="s-intent">Замысел:</label>
             <textarea id="s-intent" class="small" placeholder="Например: построить жилой дом на участке..."></textarea>
         </div>
         <div class="examples">
-            <strong>💡 Примеры:</strong>
+            <strong>💡 Примеры замыслов:</strong>
                 <span class="tag">оформить право на объект</span>
                 <span class="tag">устранить неопределённость</span>
                 <span class="tag">подтвердить право использования</span>
                 <span class="tag">создать условия для сделки</span>
                 <span class="tag">получить ясность по статусу</span>
         </div>
+        <button class="hint-toggle" onclick="toggleHint('intent-hint')">💡 Показать пример</button>
+        <div class="hint" id="intent-hint">
+            <strong>Пример замысла:</strong><br>
+            Получить разрешение на строительство жилого дома на земельном участке в г. Геленджик.
+        </div>
     </div>
 
-    <!-- КАРТОЧКА: УСЛОВИЯ -->
-    <div class="set-card">
+    <!-- КАРТОЧКА: УСЛОВИЯ (ШАГ 2) -->
+    <div class="set-card conditions">
         <div class="set-label">
             <span>ШАГ 2</span>
             <span class="set-icon">📌</span>
         </div>
         <div class="set-title">Условия</div>
-        <div class="set-desc">Все документы, решения, статусы, права, сроки, зонирование, позиции сторон.</div>
+        <div class="set-desc">Конкретные обстоятельства ситуации: документы, решения, статусы, права, сроки, зонирование, позиции сторон. Условия — это контекст, в котором предстоит действовать.</div>
         <div class="field-group">
             <label for="s-conditions">Условия:</label>
             <textarea id="s-conditions" class="large" placeholder="Перечислите: документы (даты, номера, органы), статус объекта, позиции сторон..."></textarea>
@@ -529,14 +550,14 @@
         </div>
     </div>
 
-    <!-- КАРТОЧКА: ЧТО УЖЕ БЫЛО СДЕЛАНО -->
-    <div class="set-card">
+    <!-- КАРТОЧКА: ЧТО УЖЕ БЫЛО СДЕЛАНО (ШАГ 3) -->
+    <div class="set-card done">
         <div class="set-label">
             <span>ШАГ 3</span>
             <span class="set-icon">🔄</span>
         </div>
         <div class="set-title">Что уже было сделано</div>
-        <div class="set-desc">Какие действия вы предпринимали ранее и какой был результат?</div>
+        <div class="set-desc">Какие действия вы предпринимали ранее и какой был результат? Это помогает увидеть, где порядок уже был приложен к условиям.</div>
         <div class="field-group">
             <label for="s-done">Сделанные действия:</label>
             <textarea id="s-done" class="small" placeholder="Что вы уже делали и что из этого получилось?"></textarea>
@@ -561,7 +582,7 @@
         </div>
     </div>
 
-    <!-- НОВАЯ КАРТОЧКА: ДИАГНОЗ СИТУАЦИИ (Статья 8, 11) -->
+    <!-- КАРТОЧКА: ДИАГНОЗ СИТУАЦИИ (ШАГ 4) -->
     <div class="set-card diagnosis">
         <div class="set-label">
             <span>ШАГ 4</span>
@@ -596,14 +617,14 @@
     </div>
     <div class="section-sub">на основе исходных данных — что можно приложить, что прояснить, в чём главное противоречие и что делать</div>
 
-    <!-- КАРТОЧКА: ОПОРЫ -->
+    <!-- КАРТОЧКА: ОПОРЫ (ШАГ 5) -->
     <div class="set-card opory">
         <div class="set-label">
             <span>ШАГ 5</span>
             <span class="set-icon">⚓</span>
         </div>
         <div class="set-title">Опоры</div>
-        <div class="set-desc">Что из объективного порядка — законов, практик, понятий, прецедентов — может быть приложено к условиям вашей ситуации.</div>
+        <div class="set-desc">Элементы объективного порядка, которые могут быть приложены к условиям для воплощения замысла: законы, понятия, практики, прецеденты.</div>
         <div class="field-group">
             <label for="s-supports">Опоры:</label>
             <textarea id="s-supports" class="large" placeholder="Законы, нормы, практики, прецеденты..."></textarea>
@@ -631,14 +652,14 @@
         </div>
     </div>
 
-    <!-- КАРТОЧКА: ВОПРОСЫ -->
+    <!-- КАРТОЧКА: ВОПРОСЫ (ШАГ 6) -->
     <div class="set-card voprosy">
         <div class="set-label">
             <span>ШАГ 6</span>
             <span class="set-icon">❓</span>
         </div>
         <div class="set-title">Вопросы</div>
-        <div class="set-desc">Что нужно прояснить, чтобы замысел получил опору в условиях. Вопросы проверяются критерием: «Приближает ли ответ на этот вопрос к пониманию главного противоречия?»</div>
+        <div class="set-desc">Всё, что должно быть прояснено на границе между опорами и условиями. Вопросы проверяются критерием: «Приближает ли прояснение этого вопроса к пониманию главного противоречия?»</div>
         <div class="field-group">
             <label for="s-questions">Вопросы:</label>
             <textarea id="s-questions" class="large" placeholder="Что нужно проверить, уточнить, выяснить?"></textarea>
@@ -665,17 +686,17 @@
         </div>
     </div>
 
-    <!-- КАРТОЧКА: КРИТИЧЕСКИЙ ОСТАТОК -->
+    <!-- КАРТОЧКА: КРИТИЧЕСКИЙ ОСТАТОК (ШАГ 7) -->
     <div class="set-card critical">
         <div class="set-label">
             <span>ШАГ 7</span>
             <span class="set-icon">🔴</span>
         </div>
         <div class="set-title">Критический остаток</div>
-        <div class="set-desc">Главное противоречие — диагноз ситуации. Устранение этого остатка разрешает большинство производных проблем.</div>
+        <div class="set-desc">Главное противоречие, которое держит ситуацию и мешает воплощению замысла. Это диагноз, сформулированный как противоречие. Устранение этого остатка разрешает большинство производных проблем.</div>
         <div class="field-group">
             <label for="s-critical">Критический остаток:</label>
-            <textarea id="s-critical" class="small" placeholder="Главное противоречие в 1-3 предложениях"></textarea>
+            <textarea id="s-critical" class="medium" placeholder="Главное противоречие в 1-3 предложениях"></textarea>
         </div>
         <div class="examples">
             <strong>🔴 Примеры критических остатков:</strong>
@@ -692,14 +713,14 @@
         </div>
     </div>
 
-    <!-- КАРТОЧКА: ШАГИ -->
+    <!-- КАРТОЧКА: ШАГИ (ШАГ 8) -->
     <div class="set-card shagi">
         <div class="set-label">
             <span>ШАГ 8</span>
             <span class="set-icon">⚡</span>
         </div>
         <div class="set-title">Шаги</div>
-        <div class="set-desc">Первые действия, которые надо совершить, исходя из Критического остатка. Шаги — это гипотеза, а не обязательство.</div>
+        <div class="set-desc">Результат преобразования Критического остатка. Первые действия, которые надо совершить. Шаги — это гипотеза, а не обязательство.</div>
         <div class="field-group">
             <label for="s-steps">Шаги:</label>
             <textarea id="s-steps" class="large" placeholder="Что делать прямо сейчас?"></textarea>
@@ -727,7 +748,7 @@
 
     <div class="counter">
         <span>📊 Заполнено:</span>
-        <span><span class="num" id="fieldCounter">0</span> из <span class="num">9</span> полей</span>
+        <span><span class="num" id="fieldCounter">0</span> из <span class="num">8</span> полей</span>
     </div>
 
     <!-- КНОПКИ УПРАВЛЕНИЯ -->
@@ -739,13 +760,13 @@
     <!-- КНОПКИ ЭКСПОРТА -->
     <div class="btn-group-export">
         <button class="btn btn-export" onclick="exportTxt('source')">
-            <span class="icon">📤</span> Экспорт исходных данных
+            <span class="icon">📤</span> Исходные данные
         </button>
         <button class="btn btn-export" onclick="exportTxt('results')">
-            <span class="icon">📤</span> Экспорт результатов
+            <span class="icon">📤</span> Результаты
         </button>
         <button class="btn btn-export" onclick="exportTxt('all')" style="background: linear-gradient(135deg, #27ae60, #2980b9);">
-            <span class="icon">📤</span> Экспорт всё вместе
+            <span class="icon">📤</span> Всё вместе
         </button>
     </div>
 
@@ -799,17 +820,6 @@
         steps: '⚡ Шаги'
     };
 
-    var fieldHints = {
-        intent: 'Что вы хотите сделать или получить в итоге?',
-        conditions: 'Документы, решения, статусы, права, сроки, зонирование, позиции сторон',
-        done: 'Какие действия вы предпринимали ранее и какой был результат?',
-        diagnosis: 'Как ситуация стала возможной? Какой выбор был сделан?',
-        supports: 'Что из объективного порядка — законов, практик, понятий, прецедентов — может быть приложено к условиям?',
-        questions: 'Что нужно прояснить, чтобы замысел получил опору в условиях?',
-        critical: 'Главное противоречие — диагноз ситуации',
-        steps: 'Первые действия, которые надо совершить'
-    };
-
     // ============================================
     // 2. ПОДСКАЗКИ
     // ============================================
@@ -857,7 +867,6 @@
 
         var hasData = false;
 
-        // Определяем, какие поля включать
         var keysToInclude = [];
         if (mode === 'source') {
             keysToInclude = sourceFields;
@@ -867,7 +876,6 @@
             keysToInclude = Object.keys(fieldLabels);
         }
 
-        // Проверяем, есть ли данные
         for (var i = 0; i < keysToInclude.length; i++) {
             var val = getFieldValue(keysToInclude[i]);
             if (val.length > 0) {
@@ -910,7 +918,6 @@
         lines.push('═══════════════════════════════════════════');
         lines.push('');
 
-        // Разделы
         if (mode === 'source' || mode === 'all') {
             if (mode === 'all') {
                 lines.push('─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─═─');
@@ -959,7 +966,6 @@
             }
         }
 
-        // Подвал
         lines.push('═══════════════════════════════════════════');
         lines.push('  ✍️ Создано с помощью "Множества Ключа"');
         lines.push('  https://kadinfo.ru/klyuch');
@@ -975,7 +981,6 @@
     function exportTxt(mode) {
         var text = generateTxt(mode);
 
-        // Проверяем, есть ли данные
         var hasData = false;
         var keysToCheck = mode === 'source' ? sourceFields : (mode === 'results' ? resultFields : Object.keys(fieldLabels));
         for (var i = 0; i < keysToCheck.length; i++) {
@@ -1020,8 +1025,6 @@
     // 6. ПРЕДПРОСМОТР
     // ============================================
 
-    var previewMode = 'all';
-
     function togglePreview() {
         var block = document.getElementById('previewBlock');
         var content = document.getElementById('previewContent');
@@ -1054,7 +1057,7 @@
     }
 
     // ============================================
-    // 8. ЗАПОЛНИТЬ ПРИМЕР (на основе материала из файла)
+    // 8. ЗАПОЛНИТЬ ПРИМЕР
     // ============================================
 
     function loadExample() {
@@ -1166,7 +1169,6 @@
 
     updateCounter();
 
-    // Telegram Web App
     if (window.Telegram && window.Telegram.WebApp) {
         var tg = window.Telegram.WebApp;
         tg.ready();
@@ -1174,7 +1176,10 @@
     }
 
     console.log('📋 Множества Ключа загружены');
-    console.log('💡 Заполните поля и нажмите "Экспортировать" для сохранения в .txt');
+    console.log('💡 Заполните поля в порядке:');
+    console.log('   1. Замысел → 2. Условия → 3. Что сделано → 4. Диагноз');
+    console.log('   5. Опоры → 6. Вопросы → 7. Критический остаток → 8. Шаги');
+    console.log('📤 Экспорт в .txt — кнопки внизу');
 </script>
 </body>
 </html>
