@@ -284,6 +284,100 @@
             color: #4a2e7b;
         }
 
+        /* === ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ === */
+        .interactive-calc {
+            background: linear-gradient(135deg, #faf8f5 0%, #f4f0e8 100%);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            border: 2px solid #ddd8ce;
+        }
+
+        .interactive-calc h3 {
+            margin-top: 0;
+            color: #4a2e7b;
+            font-size: 18px;
+        }
+
+        .interactive-calc label {
+            display: block;
+            margin: 12px 0 4px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #4a4a4a;
+        }
+
+        .interactive-calc input[type="number"],
+        .interactive-calc input[type="text"],
+        .interactive-calc input[type="date"],
+        .interactive-calc select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd8ce;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fdfdfb;
+            margin-bottom: 4px;
+        }
+
+        .interactive-calc input:focus,
+        .interactive-calc select:focus {
+            outline: none;
+            border-color: #6a4e9b;
+            box-shadow: 0 0 0 3px rgba(106, 78, 155, 0.1);
+        }
+
+        .interactive-calc details {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e0dcd2;
+            cursor: pointer;
+        }
+
+        .interactive-calc details summary {
+            font-weight: 600;
+            color: #6a4e9b;
+        }
+
+        .interactive-calc .task-btn {
+            margin-top: 14px;
+        }
+
+        /* === ТЕСТ === */
+        .quiz-question {
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid #e0dcd2;
+            transition: background 0.3s;
+        }
+
+        .quiz-question p {
+            margin-bottom: 8px;
+        }
+
+        .quiz-question label {
+            display: block;
+            font-weight: 400;
+            margin: 6px 0;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .quiz-question label:hover {
+            background: #f0ece4;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin-right: 8px;
+        }
+
         /* === ЗАДАНИЯ === */
         .task {
             background: #f8f5ef;
@@ -616,6 +710,9 @@
                 width: 100%;
                 text-align: center;
             }
+            .interactive-calc {
+                padding: 16px 14px;
+            }
         }
 
         /* === ПОДВАЛ === */
@@ -662,6 +759,7 @@
         <div class="course-meta">
             <span>📚 11 модулей</span>
             <span>📝 Задания для самопроверки</span>
+            <span>🧮 Интерактивные калькуляторы</span>
             <span>🎯 Прогресс: <span id="progressPercent">0</span>%</span>
         </div>
     </div>
@@ -734,7 +832,6 @@
         'ФЗ-217': 'Федеральный закон № 217-ФЗ «О ведении гражданами садоводства и огородничества» — регулирует деятельность СНТ.'
     };
 
-    // Список терминов для подсветки (в порядке убывания длины для корректной замены)
     const termList = Object.keys(glossary).sort((a, b) => b.length - a.length);
 
     // ============================================================
@@ -746,7 +843,7 @@
         modules: [
             {
                 id: 0,
-                title: "Модуль 1. Как устроен земельной спор",
+                title: "Модуль 1. Как устроен земельный спор",
                 subtitle: "Основные понятия и логика судебной защиты",
                 content: `
                     <p><strong>Цель модуля:</strong> понять логику суда и механизмы судебной защиты. Научиться отличать правовую позицию от эмоционального несогласия.</p>
@@ -766,6 +863,30 @@
                             <li><strong>Факт</strong> — подтверждённое доказательством обстоятельство</li>
                             <li><strong>Вывод</strong> — логическое соединение нормы и факта</li>
                         </ul>
+                    </div>
+
+                    <!-- ИНТЕРАКТИВ: Конструктор правовой позиции -->
+                    <div class="interactive-calc" id="calc-position">
+                        <h3>🛠️ Конструктор правовой позиции</h3>
+                        <p>Заполните три поля — схема построится автоматически.</p>
+
+                        <label>📖 Норма закона:</label>
+                        <input type="text" id="pos-norm" value="ч. 2 ст. 8 ВК РФ" placeholder="например: ст. 301 ГК РФ">
+
+                        <label>📌 Факт:</label>
+                        <input type="text" id="pos-fact" value="Пруды созданы искусственно в 1971 году" placeholder="например: участок находится в моём владении с 2004 года">
+
+                        <label>✅ Вывод:</label>
+                        <input type="text" id="pos-conclusion" value="Пруды принадлежат ООО на праве собственности" placeholder="например: иск не подлежит удовлетворению">
+
+                        <button class="task-btn" onclick="buildPosition()">Построить схему</button>
+
+                        <div class="hierarchy-container" style="margin-top:16px;">
+                            <div class="mermaid" id="pos-diagram">
+                                graph TD
+                                    A["Заполните поля"] --> B["и нажмите кнопку"]
+                            </div>
+                        </div>
                     </div>
 
                     <h3>1.2. Структура любого земельного спора</h3>
@@ -1016,6 +1137,41 @@
                         <li>Есть судебная практика в вашу пользу</li>
                     </ul>
 
+                    <!-- ИНТЕРАКТИВ: Калькулятор госпошлины -->
+                    <div class="interactive-calc" id="calc-fee">
+                        <h3>🧮 Калькулятор госпошлины</h3>
+                        <p>Рассчитайте госпошлину по вашему иску (ст. 333.19 НК РФ).</p>
+
+                        <label>Цена иска, руб.:</label>
+                        <input type="number" id="fee-price" value="1000000" min="0" step="10000">
+
+                        <label>Тип иска:</label>
+                        <select id="fee-type">
+                            <option value="property">Имущественный (подлежит оценке)</option>
+                            <option value="non-property">Неимущественный</option>
+                            <option value="non-property-org">Неимущественный (для организаций)</option>
+                        </select>
+
+                        <button class="task-btn" onclick="calcFee()">Рассчитать</button>
+
+                        <div class="task-feedback" id="fee-result"></div>
+
+                        <details>
+                            <summary>📐 Формула расчёта</summary>
+                            <div style="padding:8px 0; font-size:14px; color:#4a4a4a;">
+                                <p>При цене иска:</p>
+                                <ul>
+                                    <li>до 100 000 ₽ — 4% (мин. 2 000 ₽)</li>
+                                    <li>100 001–300 000 ₽ — 4 000 ₽ + 3% от суммы свыше 100 000 ₽</li>
+                                    <li>300 001–500 000 ₽ — 10 000 ₽ + 2% свыше 300 000 ₽</li>
+                                    <li>500 001–1 000 000 ₽ — 14 000 ₽ + 1% свыше 500 000 ₽</li>
+                                    <li>свыше 1 000 000 ₽ — 19 000 ₽ + 0,5% свыше 1 000 000 ₽ (макс. 60 000 ₽)</li>
+                                </ul>
+                                <p><em>Неимущественный иск — 3 000 ₽ (физлицо), 6 000 ₽ (организация).</em></p>
+                            </div>
+                        </details>
+                    </div>
+
                     <h3>6.2. Структура искового заявления</h3>
                     <ol>
                         <li><strong>Шапка</strong> — суд, истец, ответчик, цена иска</li>
@@ -1145,6 +1301,27 @@
                         </tbody>
                     </table>
 
+                    <!-- ИНТЕРАКТИВ: Калькулятор сроков исковой давности -->
+                    <div class="interactive-calc" id="calc-deadline">
+                        <h3>⏳ Калькулятор срока исковой давности</h3>
+                        <p>Общий срок — 3 года (ст. 196 ГК РФ). Срок исчисляется со дня, когда лицо узнало о нарушении.</p>
+
+                        <label>Когда вы узнали о нарушении права?</label>
+                        <input type="date" id="deadline-date">
+
+                        <label>Категория спора:</label>
+                        <select id="deadline-type">
+                            <option value="3">Общий срок — 3 года (ст. 196 ГК РФ)</option>
+                            <option value="1">Специальный — 1 год (оспоримые сделки, ст. 181 ГК РФ)</option>
+                            <option value="10">Специальный — 10 лет (ничтожные сделки, ст. 181 ГК РФ)</option>
+                            <option value="none">Не применяется (негаторный иск, ст. 208 ГК РФ)</option>
+                        </select>
+
+                        <button class="task-btn" onclick="calcDeadline()">Рассчитать</button>
+
+                        <div class="task-feedback" id="deadline-result"></div>
+                    </div>
+
                     <h3>9.2. Срок подачи апелляционной жалобы</h3>
                     <p><strong>Главное правило:</strong> срок на апелляцию исчисляется со дня принятия решения суда в окончательной форме, а не со дня оглашения резолютивной части.</p>
                     <p>Пример: решение оглашено 10 марта, мотивированное решение изготовлено 15 марта. Срок на апелляцию истекает 15 апреля.</p>
@@ -1252,6 +1429,50 @@
                         <p>Судебный спор выигрывается не только фактами и статьями. Он выигрывается ясностью позиции, качеством доказательств, правильными документами и умением видеть поле целиком.</p>
                     </div>
 
+                    <!-- ИНТЕРАКТИВ: Мини-тест -->
+                    <div class="interactive-calc" id="quiz-final">
+                        <h3>🎯 Финальный тест: проверьте себя</h3>
+                        <p>Ответьте на 5 вопросов по всему курсу.</p>
+
+                        <div class="quiz-question" data-correct="b">
+                            <p><strong>1. Какой срок исковой давности по общему правилу?</strong></p>
+                            <label><input type="radio" name="q1" value="a"> 1 год</label>
+                            <label><input type="radio" name="q1" value="b"> 3 года</label>
+                            <label><input type="radio" name="q1" value="c"> 10 лет</label>
+                        </div>
+
+                        <div class="quiz-question" data-correct="c">
+                            <p><strong>2. Какая норма защищает пруд в границах участка юрлица?</strong></p>
+                            <label><input type="radio" name="q2" value="a"> ст. 6 ВК РФ</label>
+                            <label><input type="radio" name="q2" value="b"> ст. 85 ЗК РФ</label>
+                            <label><input type="radio" name="q2" value="c"> ч. 2 ст. 8 ВК РФ</label>
+                        </div>
+
+                        <div class="quiz-question" data-correct="a">
+                            <p><strong>3. Кто доказывает основания иска?</strong></p>
+                            <label><input type="radio" name="q3" value="a"> Истец</label>
+                            <label><input type="radio" name="q3" value="b"> Ответчик</label>
+                            <label><input type="radio" name="q3" value="c"> Суд</label>
+                        </div>
+
+                        <div class="quiz-question" data-correct="b">
+                            <p><strong>4. Со дня чего исчисляется срок на апелляцию?</strong></p>
+                            <label><input type="radio" name="q4" value="a"> Со дня оглашения резолютивной части</label>
+                            <label><input type="radio" name="q4" value="b"> Со дня изготовления мотивированного решения</label>
+                            <label><input type="radio" name="q4" value="c"> Со дня получения копии решения</label>
+                        </div>
+
+                        <div class="quiz-question" data-correct="a">
+                            <p><strong>5. Что такое негаторный иск?</strong></p>
+                            <label><input type="radio" name="q5" value="a"> Требование устранить помехи в пользовании имуществом</label>
+                            <label><input type="radio" name="q5" value="b"> Требование вернуть имущество из чужого владения</label>
+                            <label><input type="radio" name="q5" value="c"> Требование признать сделку недействительной</label>
+                        </div>
+
+                        <button class="task-btn" onclick="checkQuiz()">Проверить ответы</button>
+                        <div class="task-feedback" id="quiz-result"></div>
+                    </div>
+
                     <div class="hierarchy-container">
                         <h3>📊 Схема иерархии законов</h3>
                         <div class="mermaid">
@@ -1302,7 +1523,6 @@
     const totalModules = courseData.modules.length;
     let progress = new Array(totalModules).fill(false);
 
-    // Загрузка сохранённого прогресса
     function loadProgress() {
         try {
             const saved = localStorage.getItem('klyuch_course_progress');
@@ -1321,7 +1541,6 @@
         } catch (e) {}
     }
 
-    // Подсветка терминов в тексте
     function highlightTerms(text) {
         let result = text;
         termList.forEach(term => {
@@ -1334,7 +1553,6 @@
         return result;
     }
 
-    // Рендеринг
     function render() {
         renderProgressBar();
         renderNavModules();
@@ -1421,8 +1639,6 @@
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
-
-            // Показываем уведомление
             showExportNotification(`📥 Глоссарий экспортирован в файл "${filename}"`);
         } catch (e) {
             alert('❌ Ошибка при экспорте глоссария: ' + e.message);
@@ -1442,10 +1658,8 @@
         const container = document.getElementById('modulesContainer');
         const mod = courseData.modules[index];
         
-        // Подсвечиваем термины в контенте
         let contentHtml = highlightTerms(mod.content);
 
-        // Добавляем схему иерархии в последний модуль, если её ещё нет
         if (index === totalModules - 1 && !contentHtml.includes('hierarchy-container')) {
             contentHtml += `
                 <div class="hierarchy-container">
@@ -1518,11 +1732,15 @@
             </div>
         `;
 
-        // Инициализируем Mermaid после рендера
+        // Инициализация Mermaid
         setTimeout(() => {
-            mermaid.run({
-                nodes: document.querySelectorAll('.mermaid')
-            });
+            try {
+                mermaid.run({
+                    nodes: document.querySelectorAll('.mermaid:not([data-processed])')
+                });
+            } catch (e) {
+                console.warn('Mermaid run error:', e);
+            }
         }, 100);
 
         if (!progress[index]) {
@@ -1570,7 +1788,6 @@
         document.getElementById('progressPercent').textContent = pct;
     }
 
-    // === ПОДСКАЗКИ ===
     function showHint(moduleIdx, taskIdx) {
         const mod = courseData.modules[moduleIdx];
         const task = mod.tasks[taskIdx];
@@ -1591,7 +1808,6 @@
         feedback.textContent = '💡 Подсказка загружена. Это пример правильного ответа. Вы можете отредактировать его под свою ситуацию.';
     }
 
-    // Сохранение ответа в текстовый файл
     function saveTask(moduleIdx, taskIdx) {
         const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
         const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
@@ -1645,7 +1861,6 @@
         }
     }
 
-    // Проверка заданий
     function checkTask(moduleIdx, taskIdx) {
         const input = document.getElementById(`task-input-${moduleIdx}-${taskIdx}`);
         const feedback = document.getElementById(`task-feedback-${moduleIdx}-${taskIdx}`);
@@ -1709,6 +1924,152 @@
         }
     }
 
+    // === ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ ===
+
+    // 1. Конструктор правовой позиции
+    function buildPosition() {
+        const norm = document.getElementById('pos-norm').value || '—';
+        const fact = document.getElementById('pos-fact').value || '—';
+        const conclusion = document.getElementById('pos-conclusion').value || '—';
+
+        const diagram = document.getElementById('pos-diagram');
+        diagram.removeAttribute('data-processed');
+        diagram.innerHTML = `
+            graph TD
+                N["📖 Норма: ${norm.replace(/"/g, "'")}"] --> F["📌 Факт: ${fact.replace(/"/g, "'")}"]
+                F --> C["✅ Вывод: ${conclusion.replace(/"/g, "'")}"]
+                style N fill:#6a4e9b,color:#fff
+                style F fill:#b8a8d0
+                style C fill:#dff0df,color:#2a6a3a
+        `;
+
+        try {
+            mermaid.run({ nodes: [diagram] });
+        } catch (e) {
+            console.warn('Mermaid build error:', e);
+        }
+    }
+
+    // 2. Калькулятор госпошлины
+    function calcFee() {
+        const price = parseFloat(document.getElementById('fee-price').value) || 0;
+        const type = document.getElementById('fee-type').value;
+        let fee = 0;
+        let formula = '';
+
+        if (type === 'non-property') {
+            fee = 3000;
+            formula = 'Неимущественный иск — фиксированная ставка 3 000 ₽';
+        } else if (type === 'non-property-org') {
+            fee = 6000;
+            formula = 'Неимущественный иск для организаций — 6 000 ₽';
+        } else {
+            if (price <= 100000) {
+                fee = Math.max(price * 0.04, 2000);
+                formula = `4% от ${price.toLocaleString('ru-RU')} ₽ = ${(price * 0.04).toLocaleString('ru-RU')} ₽ (мин. 2 000 ₽)`;
+            } else if (price <= 300000) {
+                fee = 4000 + (price - 100000) * 0.03;
+                formula = `4 000 ₽ + 3% от ${(price - 100000).toLocaleString('ru-RU')} ₽`;
+            } else if (price <= 500000) {
+                fee = 10000 + (price - 300000) * 0.02;
+                formula = `10 000 ₽ + 2% от ${(price - 300000).toLocaleString('ru-RU')} ₽`;
+            } else if (price <= 1000000) {
+                fee = 14000 + (price - 500000) * 0.01;
+                formula = `14 000 ₽ + 1% от ${(price - 500000).toLocaleString('ru-RU')} ₽`;
+            } else {
+                fee = Math.min(19000 + (price - 1000000) * 0.005, 60000);
+                formula = `19 000 ₽ + 0,5% от ${(price - 1000000).toLocaleString('ru-RU')} ₽ (макс. 60 000 ₽)`;
+            }
+        }
+
+        const result = document.getElementById('fee-result');
+        result.className = 'task-feedback show success';
+        result.innerHTML = `
+            💰 <strong>Госпошлина: ${fee.toLocaleString('ru-RU', {maximumFractionDigits: 0})} ₽</strong><br>
+            <small>${formula}</small>
+        `;
+    }
+
+    // 3. Калькулятор сроков исковой давности
+    function calcDeadline() {
+        const dateStr = document.getElementById('deadline-date').value;
+        const type = document.getElementById('deadline-type').value;
+        const result = document.getElementById('deadline-result');
+
+        if (!dateStr) {
+            result.className = 'task-feedback show error';
+            result.textContent = '⚠️ Укажите дату, когда вы узнали о нарушении.';
+            return;
+        }
+
+        if (type === 'none') {
+            result.className = 'task-feedback show success';
+            result.innerHTML = '✅ По негаторным искам (ст. 304 ГК РФ) исковая давность <strong>не применяется</strong> (ст. 208 ГК РФ). Можно подавать в любое время, пока длится нарушение.';
+            return;
+        }
+
+        const years = parseInt(type);
+        const start = new Date(dateStr);
+        const deadline = new Date(start);
+        deadline.setFullYear(deadline.getFullYear() + years);
+
+        const today = new Date();
+        const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+
+        let status, cls;
+        if (daysLeft < 0) {
+            status = '❌ Срок пропущен! Можно подать иск с заявлением о восстановлении срока (ст. 205 ГК РФ), но только по уважительным причинам.';
+            cls = 'error';
+        } else if (daysLeft < 180) {
+            status = `⚠️ Срок истекает через <strong>${daysLeft} дней</strong>. Срочно готовьте иск!`;
+            cls = 'hint';
+        } else {
+            status = `✅ Срок истекает <strong>${deadline.toLocaleDateString('ru-RU')}</strong> — осталось ${daysLeft} дней.`;
+            cls = 'success';
+        }
+
+        result.className = 'task-feedback show ' + cls;
+        result.innerHTML = `
+            Дата нарушения: ${start.toLocaleDateString('ru-RU')}<br>
+            Срок давности: ${years} год(а)<br>
+            Крайняя дата: <strong>${deadline.toLocaleDateString('ru-RU')}</strong><br>
+            ${status}
+        `;
+    }
+
+    // 4. Мини-тест
+    function checkQuiz() {
+        const questions = document.querySelectorAll('.quiz-question');
+        let correct = 0;
+
+        questions.forEach((q) => {
+            const selected = q.querySelector('input:checked');
+            const correctVal = q.dataset.correct;
+            q.style.background = '';
+
+            if (selected && selected.value === correctVal) {
+                q.style.background = '#e8f5e9';
+                correct++;
+            } else {
+                q.style.background = '#fde8e8';
+            }
+        });
+
+        const result = document.getElementById('quiz-result');
+        const pct = Math.round((correct / questions.length) * 100);
+
+        if (pct === 100) {
+            result.className = 'task-feedback show success';
+            result.textContent = `🎉 Отлично! ${correct}/${questions.length} — все ответы верны!`;
+        } else if (pct >= 60) {
+            result.className = 'task-feedback show hint';
+            result.textContent = `👍 ${correct}/${questions.length} (${pct}%). Неплохо, но есть что повторить.`;
+        } else {
+            result.className = 'task-feedback show error';
+            result.textContent = `📚 ${correct}/${questions.length} (${pct}%). Вернитесь к теории и попробуйте снова.`;
+        }
+    }
+
     function finishCourse() {
         const allDone = progress.every(p => p === true);
         if (!allDone) {
@@ -1755,7 +2116,6 @@
     loadProgress();
     render();
 
-    // Инициализация Mermaid
     mermaid.initialize({
         theme: 'neutral',
         maxTextSize: 100000,
