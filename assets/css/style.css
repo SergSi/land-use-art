@@ -554,8 +554,8 @@ blockquote p {
 }
 
 .passe-partout {
-  background: Silver;
-  border-color: rgb(155, 155, 155) grey grey grey;
+  background: var(--surface-th);
+  border-color: var(--rule-color) var(--shadow-color) var(--shadow-color) var(--rule-color);
   border-radius: 0.3em;
   border-style: solid;
   border-width: 1px;
@@ -566,11 +566,7 @@ blockquote p {
 }
 
 .passe-partout img {
-  border: 1px solid #666;
-}
-
-.right {
-  text-align: right;
+  border: 1px solid var(--shadow-color);
 }
 
 .right-foto {
@@ -594,7 +590,7 @@ blockquote p {
 }
 
 .shadow {
-  border-color: rgba(211, 211, 211, 0.719) grey grey rgba(211, 211, 211, 0.719);
+  border-color: rgba(201, 187, 166, 0.719) var(--shadow-color) var(--shadow-color) rgba(201, 187, 166, 0.719);
   border-radius: 0.3em;
   border-style: solid;
   border-width: 1px;
@@ -870,8 +866,12 @@ figcaption {
 }
 
 /* Карточки */
+
 .card {
-  background: linear-gradient(rgba(74, 46, 26, 0.01), rgba(74, 46, 26, 0.07));
+  background: linear-gradient(
+    rgba(74, 46, 26, 0.01),
+    rgba(74, 46, 26, 0.08)
+  ), var(--page-color);
   border: 1px solid var(--rule-color);
   border-radius: 8px;
   box-sizing: border-box;
