@@ -15,6 +15,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
+  /* Отступы */
   --space-default: 1rem;
   --space-l1-lg: 4rem;
   --space-l2-lg: 3rem;
@@ -31,11 +32,48 @@
   --space-l6-sm: calc(var(--space-l6-lg) / 2);
 
   --space-list-items: 0.5rem;
-  --background-color: #FDF5E6;
-  --page-color: #FFF5EE;
-  --font-color: #030202;
-  --a-color: #3a3535;
-  --shadow-color: #696969;
+
+  /* ====== БАЗОВАЯ ПАЛИТРА «СТАРАЯ БИБЛИОТЕКА» ====== */
+  --background-color: #F5EFE4;   /* состаренная бумага */
+  --page-color:       #FBF6EC;   /* тёплый пергамент */
+  --font-color:       #2B2620;   /* тёплый уголь */
+  --a-color:          #4A3F35;   /* тёплый тёмно-коричневый */
+  --shadow-color:     #8A7A66;   /* тёплая тень */
+
+  /* ====== АКЦЕНТЫ ====== */
+  --accent-primary:   #8C3A2E;   /* марсала — заголовки h1–h2 */
+  --accent-secondary: #A0522D;   /* сиенна — заголовки h3 */
+  --accent-tertiary:  #6B5B3E;   /* бронза/олива — h4–h6, декор */
+  --link-color:       #7A4A2B;   /* медный */
+  --link-hover:       #4A2E1A;   /* тёмный шоколад */
+  --muted-text:       #6E655A;   /* приглушённый текст */
+  --rule-color:       #C9BBA6;   /* тёплая линия */
+
+  /* ====== ПОВЕРХНОСТИ / БЛОКИ ====== */
+  --surface-th:       #E8DECE;   /* заголовки таблиц */
+  --surface-even:     #F0E8DA;   /* чётные строки */
+  --surface-odd:      #E5D9C7;   /* нечётные строки */
+  --surface-code:     #F0E8DA;   /* подложка кода */
+  --surface-selection:#E0D2BE;   /* выделение текста */
+
+  /* ====== КОД ====== */
+  --code-inline:      #7A4A5A;   /* сливовый */
+  --code-block:       #3E4A3A;   /* тёмная олива */
+
+  /* ====== КАНБАН ====== */
+  --kanban-board-bg:  #F0E8DA;
+  --kanban-th-bg:     #6E4A55;
+  --kanban-th-border: #4E3540;
+  --kanban-td-border: #D6C8B4;
+  --kanban-card-base: #A0522D;
+  --kanban-card-warn: #B8860B;
+  --kanban-card-ok:   #6B7A4A;
+  --kanban-card-bad:  #8C3A2E;
+  --kanban-card-alt:  #6E4A55;
+  --kanban-badge-bg:  #E0D2BE;
+  --kanban-badge-fg:  #4A3F35;
+  --kanban-arrow:     #B8A48A;
+  --kanban-stage-bg:  #E5D9C7;
 }
 
 /* Глобальные стили */
@@ -49,10 +87,10 @@ body {
   color: var(--font-color);
   font-family: "Literata", serif;
   font-optical-sizing: auto;
-  font-size: clamp(1.531rem, 1.531rem + ((1vw - 0.6rem) * 0.324), 1.871rem);  font-weight: 400;
+  font-size: clamp(1.531rem, 1.531rem + ((1vw - 0.6rem) * 0.324), 1.871rem);
+  font-weight: 400;
   line-height: clamp(1.5rem, 1.286rem + 0.571vw, 1.8rem);
 }
-
 
 .literata-<uniquifier> {
   font-family: "Literata", serif;
@@ -63,7 +101,7 @@ body {
 
 /* Основные разделы */
 .back {
-  background: rgba(253, 251, 238, 0.7);
+  background: rgba(245, 239, 228, 0.7);
 }
 
 .container {
@@ -148,12 +186,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, h2 {
-  color: FireBrick;
-  font-weight: normal;
+  color: var(--accent-primary);
+  font-weight: 500;
 }
 
-h3, h2 {
-  color: FireBrick;
+h3 {
+  color: var(--accent-secondary);
+}
+
+h4, h5, h6 {
+  color: var(--accent-tertiary);
 }
 
 h1 {
@@ -201,12 +243,10 @@ h5 + h6 {
   margin-top: var(--space-l6-sm);
 }
 
-
 h6 {
   margin-bottom: var(--space-l6-sm);
   margin-top: var(--space-l6-lg);
 }
-
 
 /* Общие стили для списков */
 ol, ul {
@@ -215,29 +255,25 @@ ol, ul {
   margin-bottom: var(--space-default);
 }
 
-/* Специфичные стили для нумерованных списков */
 ol {
   counter-reset: li;
   margin-bottom: 1.5rem;
 }
 
-/* Общие стили для элементов списка */
 ol > li, ul > li {
   padding-left: 2.5em;
   position: relative;
 }
 
-/* Общие стили для маркеров списка */
 ol > li::before, ul > li::before {
   left: 0;
   margin-right: 1em;
   position: absolute;
   text-align: right;
   width: 2em;
-    text-indent: 0;
+  text-indent: 0;
 }
 
-/* Специфичные стили для маркеров */
 ol > li::before {
   content: counter(li) ".";
   counter-increment: li;
@@ -247,7 +283,6 @@ ul > li::before {
   content: "–";
 }
 
-/* Вложенные списки */
 ol ol {
   counter-reset: li;
 }
@@ -256,14 +291,13 @@ ol ol > li::before {
   content: counters(li, ".") " ";
 }
 
-/* Отступы для вложенных списков */
 ol ul, ul ol, ol ol, ul ul {
   margin-bottom: 0.5em;
   margin-top: 0.5em;
   padding-left: 0;
 }
 
-/* Стили для параграфов */
+/* Параграфы */
 p {
   hyphens: auto;
   hyphenate-limit-chars: 8 4 4;
@@ -271,39 +305,36 @@ p {
 }
 
 p::selection {
-  background: lightgrey;
+  background: var(--surface-selection);
 }
 
-/*математические колды*/
-
+/* Математические коды */
 code {
-    background-color: none;
-    padding: 2px 6px;
-    border-radius: 0px;
-    font-family: "Libertinus Math", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1.1em;
-    color: #6e1b43;
+  background-color: none;
+  padding: 2px 6px;
+  border-radius: 0px;
+  font-family: "Libertinus Math", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.1em;
+  color: var(--code-inline);
 }
 
 pre code {
-    display: block;
-    padding: 1rem;
-    margin: 1rem 0 2rem 0; /* Отступ снизу больше */
-    background-color: none;
-    border: 0px solid #e9ecef;
-    border-radius: 6px;
-    overflow-x: auto;
-    color: #0f2841;
-    line-height: 1.5;
+  display: block;
+  padding: 1rem;
+  margin: 1rem 0 2rem 0;
+  background-color: var(--surface-code);
+  border: 0px solid #e9ecef;
+  border-radius: 6px;
+  overflow-x: auto;
+  color: var(--code-block);
+  line-height: 1.5;
 }
 
-/* Дополнительный отступ после блоков кода */
 pre {
-    margin-bottom: 2rem !important;
+  margin-bottom: 2rem !important;
 }
-
 
 /* Дополнительные отступы */
 li + li {
@@ -319,12 +350,10 @@ li :is(ul, ol) {
   margin-top: var(--space-list-items);
 }
 
-/* Специфичные отступы после заголовков */
 h3 + ul, h3 + ol, h4 + ul, h4 + ol {
   margin-top: 0.5em;
 }
 
-/* Коррекция отступа для маркированных списков */
 ul {
   margin-top: -1rem;
 }
@@ -338,7 +367,7 @@ ul {
 }
 
 #toc + div {
-  margin-top: 1.5rem; 
+  margin-top: 1.5rem;
 }
 
 .toc ul li:before,
@@ -347,7 +376,7 @@ ul {
 }
 
 .toc-item {
-  color: purple;
+  color: var(--accent-primary);
 }
 
 /* Оформление */
@@ -359,8 +388,8 @@ ul {
 }
 
 blockquote {
-  border-left: thick solid Lightgray;
-  color: DarkSlateGray;
+  border-left: thick solid var(--rule-color);
+  color: #4A4038;
   font-weight: 300;
   margin: 0;
   margin-bottom: 10px;
@@ -384,18 +413,17 @@ blockquote p {
   text-transform: uppercase;
 }
 
-/* Стили для заголовка документа */
+/* Заголовок документа */
 .doc-head {
   color: var(--font-color);
   font-size: clamp(2rem, 1.7500rem + 1.2500vw, 3rem);
   font-weight: 600;
-  margin-bottom: {% if page.subtitle %}12px{% else %}24px{% endif %}; /* Динамический отступ */
+  margin-bottom: {% if page.subtitle %}12px{% else %}24px{% endif %};
   padding-bottom: 0px;
   padding-top: 0;
   letter-spacing: 0.03em;
 }
 
-/* Стили для подзаголовка - продолжение заголовка */
 .docsubtitle {
   color: var(--font-color);
   font-family: 'PT Serif', serif;
@@ -408,7 +436,6 @@ blockquote p {
   position: relative;
 }
 
-/* Разделитель перед подзаголовком - только когда есть подзаголовок */
 .docsubtitle:before {
   border-top: 1px solid var(--font-color);
   content: '';
@@ -419,7 +446,6 @@ blockquote p {
   opacity: 0.7;
 }
 
-/* Разделитель после подзаголовка - только когда есть подзаголовок */
 .docsubtitle:after {
   border-bottom: 1px solid var(--font-color);
   content: '';
@@ -430,11 +456,10 @@ blockquote p {
   opacity: 0.7;
 }
 
-/* Стили для краткого описания */
 .summary {
-  color: #555;
+  color: var(--muted-text);
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: clamp(1.4rem, 1.25rem + 0.5vw, 1.7rem);
+  font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
   font-weight: 400;
   font-style: normal;
   margin: 0 auto 30px auto;
@@ -442,15 +467,12 @@ blockquote p {
   line-height: 1.5;
   letter-spacing: 0.02em;
   width: 100%;
-  text-align: center;
 }
 
-/* Если summary идет сразу после заголовка (без subtitle) */
 .doc-head + .summary {
   margin-top: 16px;
 }
 
-/* Если summary идет после subtitle */
 .docsubtitle + .summary {
   margin-top: 8px;
 }
@@ -483,6 +505,7 @@ blockquote p {
   float: left;
   margin: 10px 20px 2px 0px;
   max-width: 40%;
+  border-radius: 4px;
 }
 
 .linetitle {
@@ -492,7 +515,7 @@ blockquote p {
 
 .linetitle:before,
 .linetitle:after {
-  background-color: lightgrey;
+  background-color: var(--rule-color);
   content: "";
   display: inline-block;
   height: 2px;
@@ -548,6 +571,7 @@ blockquote p {
   float: right;
   margin: 10px 0px 2px 20px;
   max-width: 40%;
+  border-radius: 4px;
 }
 
 .sans-serif {
@@ -568,7 +592,7 @@ blockquote p {
   border-radius: 0.3em;
   border-style: solid;
   border-width: 1px;
-  box-shadow: 0.1em 0.4em 0.7em 0.1em #696969;
+  box-shadow: 0.1em 0.4em 0.7em 0.1em var(--shadow-color);
   margin-bottom: 1rem;
   padding: 3% 3% 3% 3%;
 }
@@ -605,7 +629,7 @@ td:last-child {
 }
 
 th {
-  background-color: rgb(236, 236, 236);
+  background-color: var(--surface-th);
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 0.8em;
   padding: 10px 10px;
@@ -621,11 +645,11 @@ th:last-child {
 }
 
 tbody tr:nth-child(even) {
-  background-color: rgb(236, 236, 236);
+  background-color: var(--surface-even);
 }
 
 tbody tr:nth-child(odd) {
-  background-color: Gainsboro;
+  background-color: var(--surface-odd);
 }
 
 /* Переносы текста */
@@ -675,7 +699,7 @@ tbody tr:nth-child(odd) {
 }
 
 .global-caption {
-  color: #666;
+  color: var(--muted-text);
   font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
   font-weight: bold;
   margin-bottom: 2rem;
@@ -683,13 +707,14 @@ tbody tr:nth-child(odd) {
 
 /* Ссылки */
 a {
-  color: purple;
+  color: var(--link-color);
+  text-decoration-color: rgba(122, 74, 43, 0.4);
   transition: 0.5s;
 }
 
 a:hover {
-  color: rgb(57, 57, 65);
-  text-shadow: 3px 3px 1px rgba(47, 47, 47, 0.2);
+  color: var(--link-hover);
+  text-shadow: 3px 3px 1px rgba(74, 46, 26, 0.15);
 }
 
 .gain-center {
@@ -697,7 +722,7 @@ a:hover {
 }
 
 .gain-center:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(74, 46, 26, 0.05);
   transform: scale(1.05);
 }
 
@@ -728,6 +753,7 @@ a:hover {
 }
 
 .caption {
+  color: var(--muted-text);
   font-size: 90%;
   font-weight: bold;
   margin-bottom: 2rem;
@@ -761,50 +787,6 @@ figure {
   border-radius: 4px;
 }
 
-.left-foto {
-  float: left;
-  margin: 10px 20px 2px 0px;
-  max-width: 40%;
-  border-radius: 4px;
-}
-
-.passe-partout {
-  background: Silver;
-  border-color: rgb(155, 155, 155) grey grey grey;
-  border-radius: 0.3em;
-  border-style: solid;
-  border-width: 1px;
-  box-shadow: 0.1em 0.4em 0.7em 0.1em var(--shadow-color);
-  display: inline-block;
-  margin: 0;
-  padding: 40px;
-}
-
-.passe-partout img {
-  border: 1px solid #666;
-}
-
-.right-foto {
-  float: right;
-  margin: 10px 0px 2px 20px;
-  max-width: 40%;
-  border-radius: 4px;
-}
-
-.sepia {
-  filter: sepia(0.7);
-}
-
-.shadow {
-  border-color: rgba(211, 211, 211, 0.719) grey grey rgba(211, 211, 211, 0.719);
-  border-radius: 0.3em;
-  border-style: solid;
-  border-width: 1px;
-  box-shadow: 0.1em 0.4em 0.7em 0.1em #696969;
-  margin-bottom: 1rem;
-  padding: 3% 3% 3% 3%;
-}
-
 #timeout {
   animation: ani 1.6s forwards;
   opacity: 0;
@@ -831,21 +813,19 @@ figure {
   width: 40%;
 }
 
-
 figure img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 4px; /* Закругления для изображений в figure */
+  border-radius: 4px;
 }
 
 figcaption {
   font-style: italic;
-  font-size: 0.9em;
+  font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
   font-weight: bold;
   margin-top: 0.5em;
-  font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
-  color: #666;
+  color: var(--muted-text);
   text-align: center;
   line-height: 1.4;
 }
@@ -866,7 +846,6 @@ figcaption {
   margin: 0 auto;
 }
 
-
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .float-left,
@@ -886,8 +865,8 @@ figcaption {
 
 /* Карточки */
 .card {
-  background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.07));
-  border: 1px solid #ddd;
+  background: linear-gradient(rgba(74, 46, 26, 0.01), rgba(74, 46, 26, 0.07));
+  border: 1px solid var(--rule-color);
   border-radius: 8px;
   box-sizing: border-box;
   flex: 1 1 calc(16.666% - 1rem);
@@ -917,20 +896,19 @@ figcaption {
 
 .card-title {
   font-family: 'Roboto', sans-serif;
-  font-size: clamp(1.2rem, 1.021rem + 0.476vw, 1.45rem);  
+  font-size: clamp(1.2rem, 1.021rem + 0.476vw, 1.45rem);
   font-weight: bold;
   letter-spacing: 0.03em;
   margin: 0 0 0.5rem 0;
   text-decoration: none;
   text-transform: uppercase;
-  min-height: auto; /* Убираем фиксированную высоту, она будет устанавливаться JS */
+  min-height: auto;
   word-wrap: break-word;
   hyphens: auto;
 }
 
-/* Остальные стили остаются без изменений */
 .card-date {
-  color: #666;
+  color: var(--muted-text);
   font-family: "Fira Sans", sans-serif;
   font-size: clamp(1.2rem, 0.986rem + 0.571vw, 1.5rem);
   margin: 0 0 0.5rem 0;
@@ -949,7 +927,7 @@ figcaption {
 }
 
 .card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(74, 46, 26, 0.2);
   transform: translateY(-5px);
 }
 
@@ -960,23 +938,13 @@ figcaption {
 }
 
 .card-summary {
-  color: #444;
+  color: #4A4038;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: clamp(1.4rem, 1.35rem + 0.25vw, 1.6rem);
   font-style: normal;
   margin: 0;
   text-align: left;
   flex-grow: 1;
-}
-
-.summary {
-  color: #444;
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: clamp(1.6rem, 1.314rem + 0.762vw, 2rem);
-  font-style: normal;
-  margin: 0;
-  margin-bottom: 30px;
-  text-align: center;
 }
 
 /* Вертикальные вкладки */
@@ -1011,7 +979,7 @@ figcaption {
   opacity: 0;
   transition: max-height 0.7s ease, opacity 0.7s ease, padding 0.7s ease;
   padding: 0 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--rule-color);
   border-radius: 5px;
 }
 
@@ -1023,9 +991,9 @@ figcaption {
 }
 
 .example {
-  background: #f4f4f4;
+  background: var(--surface-even);
   padding: 10px;
-  border-left: 5px solid #3498db;
+  border-left: 5px solid var(--accent-secondary);
   margin: 20px 0;
 }
 
@@ -1039,8 +1007,8 @@ figcaption {
 
 /* Модальное окно */
 #openModalBtn {
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--accent-secondary);
+  color: #FBF6EC;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -1050,7 +1018,7 @@ figcaption {
 }
 
 #openModalBtn:hover {
-  background-color: #45a049;
+  background-color: var(--accent-primary);
 }
 
 .modal {
@@ -1061,7 +1029,7 @@ figcaption {
   top: 0;
   width: 100%;
   height: auto%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(43, 38, 32, 0.5);
   opacity: 0;
   transition: opacity 0.7s ease;
 }
@@ -1071,14 +1039,14 @@ figcaption {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: var(--page-color);
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid var(--rule-color);
   width: 50%;
   max-width: 600px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(74, 46, 26, 0.3);
   transform: translateY(-50px);
   opacity: 0;
   transition: transform 0.7s ease, opacity 0.7s ease;
@@ -1104,12 +1072,13 @@ figcaption {
 
 .modal-content ul li a {
   text-decoration: none;
-  color: #4CAF50;
+  color: var(--link-color);
   font-size: 18px;
 }
 
 .modal-content ul li a:hover {
   text-decoration: underline;
+  color: var(--link-hover);
 }
 
 #closeModalBtn {
@@ -1120,53 +1089,46 @@ figcaption {
 }
 
 #closeModalBtn:hover {
-  color: #f00;
+  color: var(--accent-primary);
 }
 
-/*КАНБАН*/
+/* КАНБАН */
 .kanban-board {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
   border-collapse: collapse;
-  /* background: #f4f6f8; */ /* СТАРЫЙ ЦВЕТ */
-  background: #faf3eb; /* НОВЫЙ — тёплый кремовый */
+  background: var(--kanban-board-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(74, 46, 26, 0.1);
 }
 
 .kanban-board th {
-  /* background: #2c3e50; */ /* СТАРЫЙ ЦВЕТ */
-  /* background: #8b6b4f; */ /* ПРЕДЫДУЩИЙ ВАРИАНТ */
-  background: #7a5a6e; /* НОВЫЙ — благородный тёплый сливовый */
-  color: white;
+  background: var(--kanban-th-bg);
+  color: #FBF6EC;
   padding: 16px;
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  /* border: 1px solid #1a2630; */ /* СТАРЫЙ ЦВЕТ */
-  border: 1px solid #5a4050; /* НОВЫЙ — под цвет заголовка */
+  border: 1px solid var(--kanban-th-border);
 }
 
 .kanban-board td {
   vertical-align: top;
   padding: 12px;
-  /* background: #ecf0f1; */ /* СТАРЫЙ ЦВЕТ */
-  background: #f5ede4; /* НОВЫЙ — тёплый светло-бежевый */
-  /* border: 1px solid #d5d8dc; */ /* СТАРЫЙ ЦВЕТ */
-  border: 1px solid #dccfc4; /* НОВЫЙ — тёплый серо-бежевый */
+  background: var(--kanban-board-bg);
+  border: 1px solid var(--kanban-td-border);
   width: 20%;
   min-height: 300px;
 }
 
 .kanban-card {
-  background: white;
+  background: var(--page-color);
   border-radius: 8px;
   padding: 12px 14px;
   margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  /* border-left: 4px solid #3498db; */ /* СТАРЫЙ ЦВЕТ */
-  border-left: 4px solid #c47c5a; /* НОВЫЙ — тёплый терракотовый (базовый) */
+  box-shadow: 0 2px 6px rgba(74, 46, 26, 0.08);
+  border-left: 4px solid var(--kanban-card-base);
   font-size: 14px;
   line-height: 1.5;
   transition: transform 0.2s;
@@ -1174,56 +1136,47 @@ figcaption {
 
 .kanban-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(74, 46, 26, 0.15);
 }
 
 .kanban-card.warning {
-  /* border-left-color: #f39c12; */ /* СТАРЫЙ ЦВЕТ */
-  border-left-color: #d4833a; /* НОВЫЙ — тёплый оранжево-коричневый */
+  border-left-color: var(--kanban-card-warn);
 }
 
 .kanban-card.success {
-  /* border-left-color: #2ecc71; */ /* СТАРЫЙ ЦВЕТ */
-  border-left-color: #7ba05b; /* НОВЫЙ — тёплый оливково-зелёный */
+  border-left-color: var(--kanban-card-ok);
 }
 
 .kanban-card.danger {
-  /* border-left-color: #e74c3c; */ /* СТАРЫЙ ЦВЕТ */
-  border-left-color: #b85a4a; /* НОВЫЙ — тёплый красно-коричневый */
+  border-left-color: var(--kanban-card-bad);
 }
 
 .kanban-card.purple {
-  /* border-left-color: #9b59b6; */ /* СТАРЫЙ ЦВЕТ */
-  border-left-color: #a67c6b; /* НОВЫЙ — тёплый серо-коричневый с фиолетовым оттенком */
+  border-left-color: var(--kanban-card-alt);
 }
 
 .kanban-card .badge {
   display: inline-block;
-  /* background: #ecf0f1; */ /* СТАРЫЙ ЦВЕТ */
-  background: #e8dbd0; /* НОВЫЙ — тёплый светло-бежевый */
+  background: var(--kanban-badge-bg);
   padding: 2px 10px;
   border-radius: 12px;
   font-size: 11px;
   font-weight: 600;
-  /* color: #2c3e50; */ /* СТАРЫЙ ЦВЕТ */
-  color: #5a4033; /* НОВЫЙ — тёплый тёмно-коричневый */
+  color: var(--kanban-badge-fg);
   margin-top: 6px;
 }
 
 .kanban-arrow {
   text-align: center;
   font-size: 28px;
-  /* color: #7f8c8d; */ /* СТАРЫЙ ЦВЕТ */
-  color: #b09582; /* НОВЫЙ — тёплый серо-бежевый */
+  color: var(--kanban-arrow);
   padding: 4px 0;
 }
 
 .kanban-stage-title {
   font-weight: 700;
-  /* color: #2c3e50; */ /* СТАРЫЙ ЦВЕТ */
-  color: #4d3a2e; /* НОВЫЙ — тёплый тёмно-коричневый */
-  /* background: #d5d8dc; */ /* СТАРЫЙ ЦВЕТ */
-  background: #e2d3c6; /* НОВЫЙ — тёплый светло-бежевый */
+  color: var(--kanban-badge-fg);
+  background: var(--kanban-stage-bg);
   padding: 8px 12px;
   border-radius: 6px;
   margin-bottom: 14px;
@@ -1270,4 +1223,3 @@ figcaption {
     max-width: calc(100% - 1rem);
   }
 }
-
