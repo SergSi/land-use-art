@@ -39,6 +39,7 @@
   --font-color:       #2B2620;   /* тёплый уголь */
   --a-color:          #4A3F35;   /* тёплый тёмно-коричневый */
   --shadow-color:     #8A7A66;   /* тёплая тень */
+  --bold-color: #4A4038;
 
   /* ====== АКЦЕНТЫ ====== */
   --accent-primary:   #8C3A2E;   /* марсала — заголовки h1–h2 */
@@ -183,6 +184,11 @@ header {
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.02em;
   line-height: 1.2;
+}
+
+strong, b {
+  color: var(--bold-color, #4A4038);
+  font-weight: 600;
 }
 
 h1, h2 {
