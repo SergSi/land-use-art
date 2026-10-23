@@ -4,8 +4,7 @@ subtitle: База знаний землепользователей
 location: Москва
 date: true
 count_post: 6
-new_materials_months: 2  # 1, 2 или 3
-
+new_materials_months: 2.5  # 1, 2 или 3
 
 logo: /assets/img/logo.png
 
@@ -20,14 +19,17 @@ defaults:
       type: "pages"
     values:
       permalink: /:path/
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
 
 author:
   name      : С. И. Ивасюк
-  email     : cgles@yandex.ru
+  email     : a1457780@yandex.ru
 
-social:
-  - username: https://t.me/serge_si
-  - links: https://t.me/land_use_art
+telegram: https://t.me/land_use_58
 
 organization:
   name      : Национальный союз землепользователей
@@ -37,13 +39,6 @@ collections:
   info:
     output: true
     sort_by: order
-
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: post   
 
 # Build settings
 exclude: 
@@ -61,3 +56,9 @@ plugins:
 
 include:
   - assets/img
+
+feed:
+  path: feed.xml
+
+sitemap:
+  path: sitemap.xml
