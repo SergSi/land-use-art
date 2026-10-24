@@ -1,0 +1,30 @@
+{% if site.telegram or site.telegram_chat %}
+<div class="telegram-join">
+  <p class="telegram-join-title">Присоединяйтесь к нам в Telegram</p>
+
+  <div class="telegram-join-buttons">
+    {% if site.telegram %}
+    <a href="{{ site.telegram }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="telegram-btn telegram-btn-channel">
+      📰 Канал
+    </a>
+    {% endif %}
+
+    {% if site.telegram_chat %}
+    <a href="{{ site.telegram_chat }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="telegram-btn telegram-btn-group">
+      💬 Группа
+    </a>
+    {% endif %}
+  </div>
+
+  <p class="telegram-join-note">
+    <strong>Канал</strong> — информация от экспертов.
+    <strong>Группа</strong> — живые обсуждения и помощь.
+  </p>
+</div>
+{% endif %}

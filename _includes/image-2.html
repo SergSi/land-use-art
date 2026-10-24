@@ -3,7 +3,7 @@
       {% if include.file-1 %}
         <figure>
           <a href="/assets/img/{{ include.file-1 }}"><img src="/assets/img/{{ include.file-1 }}" alt="{{ include.caption-1 }}"></a>
-          <figcaption>{{ include.caption-1 }}</figcaption>
+          <figcaption style="text-align: center;">{{ include.caption-1 }}</figcaption>
         </figure>
       {% endif %}
     </div>
@@ -11,7 +11,7 @@
       {% if include.file-2 %}
         <figure>
           <a href="/assets/img/{{ include.file-2 }}"><img src="/assets/img/{{ include.file-2 }}" alt="{{ include.caption-2 }}"></a>
-          <figcaption>{{ include.caption-2 }}</figcaption>
+          <figcaption style="text-align: center;">{{ include.caption-2 }}</figcaption>
         </figure>
       {% endif %}
     </div>
@@ -21,3 +21,4 @@
     <figcaption class="global-caption">{{ include.caption }}</figcaption>
   {% endif %}
   </div>
+
