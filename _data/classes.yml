@@ -1,4 +1,5 @@
 names:
+  qa: Вопросы и ответы
   training: Учебные курсы
   lib: Библиотека землепользователя
   admin: Управление землепользованием
@@ -13,12 +14,14 @@ document_types:
   analitika: Аналитический материал
   practice: Практический пример
   info: Контактная информация
+  qa: Вопросы и ответы
 
 order:
+  - qa
   - training
   - lib
-  - admin
-  - analitika
+  - admin 
   - practice
+  - analitika
   - info
   
